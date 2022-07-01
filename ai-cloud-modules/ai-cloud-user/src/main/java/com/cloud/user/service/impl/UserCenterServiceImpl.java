@@ -100,7 +100,7 @@ public class UserCenterServiceImpl implements IUserCenterService {
     public String wallet() {
         //获取userId
         String userId = SecurityUtils.getUserId();
-        BigDecimal balance = userAccountMapper.selectAvailableBalanceByUserIdType(userId, UserAccountConstants.ACCOUNT_TYPE_BALANCE);
+        BigDecimal balance = userAccountMapper.selectByAvailableBalanceUserIdType(userId, UserAccountConstants.ACCOUNT_TYPE_BALANCE);
         return StringUtils.isNull(balance) ? "0.000" : balance.toString();
     }
 
@@ -142,7 +142,7 @@ public class UserCenterServiceImpl implements IUserCenterService {
             throw new ServiceException("提现方式错误!");
         }
         //验证支付密码是否正确
-        Map map = userAccountMapper.selectPasswordByUserId(userId);
+        Map map = userAccountMapper.selectByPasswordUserId(userId);
         if (StringUtils.isNull(map)) {
             throw new ServiceException("支付密码未设置!");
         }
@@ -169,7 +169,7 @@ public class UserCenterServiceImpl implements IUserCenterService {
             userWithdrawApply.setBankCard(bind.getBankCard());
         }
         //减少某个账户余额
-        userAccountMapper.updateAvailableBalance(userId, NumberUtil.sub(userAccount.getAvailableBalance(), param.getAmount()), UserAccountConstants.ACCOUNT_TYPE_BALANCE);
+        userAccountMapper.updateByAvailableBalance(userId, NumberUtil.sub(userAccount.getAvailableBalance(), param.getAmount()), UserAccountConstants.ACCOUNT_TYPE_BALANCE);
 
         UserAccountDetail userAccountDetail = new UserAccountDetail();
         userAccountDetail.setId(IdUtils.fastSimpleUUID());
@@ -347,7 +347,7 @@ public class UserCenterServiceImpl implements IUserCenterService {
     public boolean walletIsSetPassword() {
         //获取userId
         String userId = SecurityUtils.getUserId();
-        Map map = userAccountMapper.selectPasswordByUserId(userId);
+        Map map = userAccountMapper.selectByPasswordUserId(userId);
         if (ObjectUtil.isEmpty(map)) {
             return false;
         } else {
@@ -368,11 +368,11 @@ public class UserCenterServiceImpl implements IUserCenterService {
         }
         //获取userId
         String userId = SecurityUtils.getUserId();
-        Integer count = userAccountMapper.selectCountByUserId(userId);
+        Integer count = userAccountMapper.selectByCountUserId(userId);
         if (count == 0) {
             throw new ServiceException("账户不存在，请联系客服!");
         }
-        Map map = userAccountMapper.selectPasswordByUserId(userId);
+        Map map = userAccountMapper.selectByPasswordUserId(userId);
         //存在旧密码，验证
         if (ObjectUtil.isNotEmpty(map)) {
             String password = (String) map.get("password");
@@ -386,7 +386,39 @@ public class UserCenterServiceImpl implements IUserCenterService {
         //修改密码
         String salt = MathUtil.get(8, MathUtil.UPPERCASE_SEED);
         String password = Md5Util.getMD5ofStr(param.getPassword() + salt);
-        userAccountMapper.updatePasswordSaltByUserId(password, salt, userId);
+        userAccountMapper.updateByPasswordSaltUserId(password, salt, userId);
+    }
+
+    /**
+     * 验证支付密码
+     *
+     * @param param
+     * @return
+     */
+    @Override
+    public boolean walletVerifyPassword(WalletVerifyPasswordParam param) {
+        if (StringUtils.isNull(param.getPassword())) {
+            throw new ServiceException("密码不能为空!");
+        }
+        //获取userId
+        String userId = SecurityUtils.getUserId();
+        Integer count = userAccountMapper.selectByCountUserId(userId);
+        if (count == 0) {
+            throw new ServiceException("账户不存在，请联系客服!");
+        }
+        Map map = userAccountMapper.selectByPasswordUserId(userId);
+        if (ObjectUtil.isNotEmpty(map)) {
+            String password = (String) map.get("password");
+            String salt = (String) map.get("salt");
+            String md5ofStr = Md5Util.getMD5ofStr(param.getPassword() + salt);
+            if (StringUtils.equalsIgnoreCase(password, md5ofStr)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            throw new ServiceException("未设置密码!");
+        }
     }
 
 

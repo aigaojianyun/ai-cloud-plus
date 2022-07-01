@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 /**
  * 用户信息Service业务层处理
@@ -79,11 +78,10 @@ public class UserServiceImpl implements IUserService {
         //创建用户
         user.setId(IdUtils.fastSimpleUUID());
         //创建随机用户昵称
-        List<UserMockData> dataNickName = userMockDataMapper.selectUserMockDataList(1);
-        List<String> NickNameList = dataNickName.stream().map(UserMockData::getValue).collect(Collectors.toList());
+        List<UserMockData> dataNickName = userMockDataMapper.selectByMockData(1);
         Random randomNickName = new Random();
         //创建随机用户头像
-        List<UserMockData> dataHeadImg = userMockDataMapper.selectUserMockDataList(2);
+        List<UserMockData> dataHeadImg = userMockDataMapper.selectByMockData(2);
         Random randomHeadImg = new Random();
         //创建人和时间
         user.setCreateBy(user.getId());

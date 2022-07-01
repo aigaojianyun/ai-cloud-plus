@@ -33,7 +33,7 @@
         </where>
     </sql>
 
-    <select id="selectConfig" resultMap="UserConfigResult">
+    <select id="selectByConfig" resultMap="UserConfigResult">
         <include refid="selectConfigVo"/>
         <include refid="sqlwhereSearch"/>
     </select>

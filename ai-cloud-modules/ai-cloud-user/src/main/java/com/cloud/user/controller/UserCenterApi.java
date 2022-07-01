@@ -184,5 +184,19 @@ public class UserCenterApi {
         return Response.ok();
     }
 
+    /**
+     * 验证支付密码
+     *
+     * @param param
+     * @return
+     */
+    @Log(title = "验证支付密码", businessType = BusinessType.QUERY)
+    @PostMapping("wallet/verifyPassword")
+    @ApiOperation(value = "验证支付密码")
+    public Response walletVerifyPassword(@RequestBody WalletVerifyPasswordParam param) {
+        userCenterService.walletVerifyPassword(param);
+        return Response.ok();
+    }
+
 
 }

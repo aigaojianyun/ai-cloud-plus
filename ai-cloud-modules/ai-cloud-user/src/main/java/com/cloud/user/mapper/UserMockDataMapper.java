@@ -21,6 +21,6 @@ public interface UserMockDataMapper extends BaseMapper<UserMockData> {
      * @param type 类型：1：昵称 2：头像
      * @return 用户随机信息集合
      */
-    public List<UserMockData> selectUserMockDataList(@Param("type") Integer type);
+    public List<UserMockData> selectByMockData(@Param("type") Integer type);
 
 }

@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 //@Primary
 @Service
-public class LocalFileServiceImpl implements IFileService {
+public class LocaFileServiceImpl implements IFileService {
     /**
      * 资源映射路径 前缀
      */

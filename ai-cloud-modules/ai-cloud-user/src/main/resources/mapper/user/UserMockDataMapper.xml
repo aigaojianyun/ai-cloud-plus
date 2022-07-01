@@ -16,7 +16,7 @@
         <result property="updateTime" column="update_time"/>
     </resultMap>
 
-    <select id="selectUserMockDataList" resultType="com.cloud.user.domain.UserMockData">
+    <select id="selectByMockData" resultType="com.cloud.user.domain.UserMockData">
         SELECT id,
                type,
                `value`

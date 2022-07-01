@@ -17,7 +17,7 @@ public class MathUtil {
     private MathUtil() {
     }
 
-    public static String getUUID() {
+    public static String getUuid() {
         return UUID.randomUUID().toString().replaceAll("-", "");
     }
 

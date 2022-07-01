@@ -13,7 +13,7 @@ public interface IUserConfigService {
      * @param configKey 参数键名
      * @return 参数键值
      */
-    public String selectConfigByKey(String configKey);
+    public String selectByConfigKey(String configKey);
 
 
 }

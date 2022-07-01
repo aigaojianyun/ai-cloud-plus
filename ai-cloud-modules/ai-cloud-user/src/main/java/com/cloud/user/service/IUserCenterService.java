@@ -110,4 +110,12 @@ public interface IUserCenterService {
      */
     public void walletSetPassword(WalletSetPasswordParam param);
 
+    /**
+     * 验证支付密码
+     *
+     * @param param
+     * @return
+     */
+    public boolean walletVerifyPassword(WalletVerifyPasswordParam param);
+
 }

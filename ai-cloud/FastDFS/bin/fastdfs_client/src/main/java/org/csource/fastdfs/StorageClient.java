@@ -32,6 +32,7 @@ public class StorageClient {
     protected TrackerServer trackerServer;
     protected StorageServer storageServer;
     protected byte errno;
+
     /**
      * constructor using global settings in class ClientGlobal
      */

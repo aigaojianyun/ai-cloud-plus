@@ -18,6 +18,6 @@ public interface UserConfigMapper extends BaseMapper<UserConfig> {
      * @param userConfig 参数配置信息
      * @return 参数配置信息
      */
-    public UserConfig selectConfig(UserConfig userConfig);
+    public UserConfig selectByConfig(UserConfig userConfig);
 
 }

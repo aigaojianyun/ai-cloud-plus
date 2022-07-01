@@ -23,7 +23,7 @@ public interface UserAccountMapper extends BaseMapper<UserAccount> {
      * @param type   账户类型
      * @return 可用余额
      */
-    public BigDecimal selectAvailableBalanceByUserIdType(@Param("userId") String userId, @Param("type") String type);
+    public BigDecimal selectByAvailableBalanceUserIdType(@Param("userId") String userId, @Param("type") String type);
 
     /**
      * 查询用户存在账户数
@@ -31,7 +31,7 @@ public interface UserAccountMapper extends BaseMapper<UserAccount> {
      * @param userId 用户id
      * @return
      */
-    public Integer selectCountByUserId(@Param("userId") String userId);
+    public Integer selectByCountUserId(@Param("userId") String userId);
 
     /**
      * 查询是否设置支付密码
@@ -48,7 +48,7 @@ public interface UserAccountMapper extends BaseMapper<UserAccount> {
      * @param userId 用户id
      * @return
      */
-    public Map selectPasswordByUserId(@Param("userId") String userId);
+    public Map selectByPasswordUserId(@Param("userId") String userId);
 
     /**
      * 修改支付密码
@@ -58,7 +58,7 @@ public interface UserAccountMapper extends BaseMapper<UserAccount> {
      * @param userId   用户id
      * @return
      */
-    public void updatePasswordSaltByUserId(@Param("password") String password, @Param("salt") String salt, @Param("userId") String userId);
+    public void updateByPasswordSaltUserId(@Param("password") String password, @Param("salt") String salt, @Param("userId") String userId);
 
     /**
      * 减少账户余额
@@ -68,6 +68,6 @@ public interface UserAccountMapper extends BaseMapper<UserAccount> {
      * @param type   账户类型
      * @return
      */
-    public void updateAvailableBalance(@Param("userId") String userId, @Param("amount") BigDecimal amount, @Param("type") String type);
+    public void updateByAvailableBalance(@Param("userId") String userId, @Param("amount") BigDecimal amount, @Param("type") String type);
 
 }

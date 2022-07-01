@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Primary
 @Service
-public class FastDfsIFileServiceImpl implements IFileService {
+public class FastDfsFileServiceImpl implements IFileService {
     /**
      * 域名或本机访问地址
      */

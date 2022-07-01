@@ -31,14 +31,14 @@ public class UserConfigServiceImpl implements IUserConfigService {
      * @return 参数键值
      */
     @Override
-    public String selectConfigByKey(String configKey) {
+    public String selectByConfigKey(String configKey) {
         String configValue = Convert.toStr(redisService.getCacheObject(getCacheKey(configKey)));
         if (StringUtils.isNotEmpty(configValue)) {
             return configValue;
         }
         UserConfig userConfig = new UserConfig();
         userConfig.setConfigKey(configKey);
-        UserConfig retConfig = userConfigMapper.selectConfig(userConfig);
+        UserConfig retConfig = userConfigMapper.selectByConfig(userConfig);
         if (StringUtils.isNotNull(retConfig)) {
             redisService.setCacheObject(getCacheKey(configKey), retConfig.getConfigValue());
             return retConfig.getConfigValue();

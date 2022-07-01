@@ -40,7 +40,7 @@ public class UserApi {
     @ApiOperation("注册用户信息")
     public Response<Boolean> register(@RequestBody User user) {
         String username = user.getUserName();
-        if (!("true".equals(userConfigService.selectConfigByKey("user.account.registerUser")))) {
+        if (!("true".equals(userConfigService.selectByConfigKey("user.account.registerUser")))) {
             return Response.fail("当前系统没有开启注册功能！");
         }
         if (UserConstants.NOT_UNIQUE.equals(userService.checkUserNameUnique(username))) {
