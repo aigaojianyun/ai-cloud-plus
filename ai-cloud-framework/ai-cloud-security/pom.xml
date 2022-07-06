@@ -8,33 +8,33 @@
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    
     <artifactId>ai-cloud-security</artifactId>
-
+    
     <description>
         cloud-security安全模块
     </description>
-
+    
     <dependencies>
-
+        
         <!-- Spring Web -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
         </dependency>
-
+        
         <!-- 通用工具-->
         <dependency>
             <groupId>com.cloud</groupId>
             <artifactId>ai-cloud-common</artifactId>
         </dependency>
-
+        
         <!-- auth对内接口模块 -->
         <dependency>
             <groupId>com.cloud</groupId>
             <artifactId>ai-cloud-auth-api</artifactId>
         </dependency>
-
+    
     </dependencies>
 
 </project>

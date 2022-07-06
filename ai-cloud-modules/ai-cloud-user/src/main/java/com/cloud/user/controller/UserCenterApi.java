@@ -8,11 +8,9 @@ import com.cloud.user.param.*;
 import com.cloud.user.service.IUserCenterService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 我的信息
@@ -34,10 +32,24 @@ public class UserCenterApi {
      * @return 用户信息
      */
     @Log(title = "查询用户信息", businessType = BusinessType.QUERY)
-    @PostMapping(value = "/userInfo")
+    @PostMapping(value = "userInfo")
     @ApiOperation("查询用户信息")
     public Response userInfo() {
         return Response.ok(userCenterService.userInfo(), "查询成功!");
+    }
+
+    /**
+     * 设置签名
+     *
+     * @param sign 签名信息
+     * @return
+     */
+    @Log(title = "设置签名", businessType = BusinessType.UPDATE)
+    @PostMapping(value = "sign")
+    @ApiOperation(value = "设置签名")
+    public Response sign(@ApiParam(value = "签名", required = true) @RequestParam("sign") String sign) {
+        userCenterService.updateSign(sign);
+        return Response.ok();
     }
 
     /**
@@ -47,7 +59,7 @@ public class UserCenterApi {
      * @return
      */
     @Log(title = "保存我的信息", businessType = BusinessType.UPDATE)
-    @PostMapping(value = "/userSave")
+    @PostMapping(value = "userSave")
     @ApiOperation("保存我的信息")
     public Response userSave(@RequestBody UserParam param) {
         return Response.ok(userCenterService.userSave(param), "保存成功!");
@@ -60,7 +72,7 @@ public class UserCenterApi {
      * @return
      */
     @Log(title = "查询钱包余额", businessType = BusinessType.QUERY)
-    @PostMapping(value = "/wallet")
+    @PostMapping(value = "wallet")
     @ApiOperation(value = "查询钱包余额")
     public Response wallet() {
         return Response.ok(userCenterService.wallet(), "查询成功!");
@@ -73,7 +85,7 @@ public class UserCenterApi {
      * @return
      */
     @Log(title = "用户申请提现", businessType = BusinessType.QUERY)
-    @PostMapping(value = "/wallet/withdraw")
+    @PostMapping(value = "wallet/withdraw")
     @ApiOperation(value = "用户申请提现")
     public Response walletWithdraw(@RequestBody WalletWithdrawParam param) {
         return Response.ok(userCenterService.walletWithdraw(param), "申请成功!");
@@ -86,7 +98,7 @@ public class UserCenterApi {
      * @return
      */
     @Log(title = "查询钱包账单", businessType = BusinessType.QUERY)
-    @PostMapping(value = "/wallet/bill")
+    @PostMapping(value = "wallet/bill")
     @ApiOperation(value = "查询钱包账单")
     public Response walletBill(@RequestBody WalletBillParam param) {
         return Response.ok(userCenterService.walletBill(param), "查询成功!");
@@ -99,7 +111,7 @@ public class UserCenterApi {
      * @return
      */
     @Log(title = "查询账单明细", businessType = BusinessType.QUERY)
-    @PostMapping(value = "/wallet/bill/detail")
+    @PostMapping(value = "wallet/bill/detail")
     @ApiOperation(value = "查询账单明细")
     public Response walletBillDetail(@RequestBody WalletBillDetailParam param) {
         return Response.ok(userCenterService.walletBillDetail(param), "查询成功!");
@@ -112,7 +124,7 @@ public class UserCenterApi {
      * @return
      */
     @Log(title = "查询银行卡绑定信息", businessType = BusinessType.QUERY)
-    @PostMapping(value = "/wallet/bindBank/info")
+    @PostMapping(value = "wallet/bindBank/info")
     @ApiOperation(value = "查询银行卡绑定信息")
     public Response walletBindBankInfo() {
         return Response.ok(userCenterService.walletBindBankInfo(), "查询成功!");
@@ -125,7 +137,7 @@ public class UserCenterApi {
      * @return
      */
     @Log(title = "保存绑定银行卡信息", businessType = BusinessType.QUERY)
-    @PostMapping("/wallet/bindBank/save")
+    @PostMapping("wallet/bindBank/save")
     @ApiOperation(value = "保存绑定银行卡信息")
     public Response walletBindBankSave(@RequestBody BindBankParam param) {
         return Response.ok(userCenterService.walletBindBankSave(param), "保存成功!");
@@ -138,7 +150,7 @@ public class UserCenterApi {
      * @return
      */
     @Log(title = "查询支付宝绑定信息", businessType = BusinessType.QUERY)
-    @PostMapping("/wallet/bindAlipay/Info")
+    @PostMapping("wallet/bindAlipay/Info")
     @ApiOperation(value = "查询支付宝绑定信息")
     public Response walletBindAlipayInfo() {
         return Response.ok(userCenterService.walletBindAlipayInfo(), "查询成功!");
@@ -151,7 +163,7 @@ public class UserCenterApi {
      * @return
      */
     @Log(title = "保存绑定支付宝信息", businessType = BusinessType.QUERY)
-    @PostMapping("/wallet/bindAlipay/save")
+    @PostMapping("wallet/bindAlipay/save")
     @ApiOperation(value = "保存绑定支付宝信息")
     public Response walletBindAlipaySave(@RequestBody BindAlipayParam param) {
         return Response.ok(userCenterService.walletBindAlipaySave(param), "保存成功!");

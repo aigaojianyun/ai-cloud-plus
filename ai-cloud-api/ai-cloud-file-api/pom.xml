@@ -8,21 +8,21 @@
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    
     <artifactId>ai-cloud-file-api</artifactId>
-
+    
     <description>
         cloud-file-api对内接口模块
     </description>
-
+    
     <dependencies>
-
+        
         <!-- 通用工具-->
         <dependency>
             <groupId>com.cloud</groupId>
             <artifactId>ai-cloud-common</artifactId>
         </dependency>
-
+    
     </dependencies>
 
 </project>

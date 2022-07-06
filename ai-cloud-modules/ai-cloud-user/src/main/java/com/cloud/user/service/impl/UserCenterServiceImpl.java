@@ -69,6 +69,22 @@ public class UserCenterServiceImpl implements IUserCenterService {
     }
 
     /**
+     * 设置签名
+     *
+     * @param sign 签名信息
+     * @return
+     */
+    @Override
+    public void updateSign(String sign) {
+        if (StringUtils.isNull(sign)) {
+            throw new ServiceException("签名不能为空!");
+        }
+        //获取userId
+        String userId = SecurityUtils.getUserId();
+        userMapper.updateSign(userId, sign);
+    }
+
+    /**
      * 保存我的信息
      *
      * @param param
@@ -112,6 +128,9 @@ public class UserCenterServiceImpl implements IUserCenterService {
      */
     @Override
     public boolean walletWithdraw(WalletWithdrawParam param) {
+        if (StringUtils.isNull(param)) {
+            throw new ServiceException("参数不能为空!");
+        }
         if (StringUtils.isNull(param.getType())) {
             throw new ServiceException("提现方式不能为空!");
         }
@@ -258,6 +277,9 @@ public class UserCenterServiceImpl implements IUserCenterService {
      */
     @Override
     public boolean walletBindBankSave(BindBankParam param) {
+        if (StringUtils.isNull(param)) {
+            throw new ServiceException("参数不能为空!");
+        }
         if (StringUtils.isNull(param.getBankName())) {
             throw new ServiceException("银行卡名称不能为空!");
         }
@@ -310,6 +332,9 @@ public class UserCenterServiceImpl implements IUserCenterService {
      */
     @Override
     public boolean walletBindAlipaySave(BindAlipayParam param) {
+        if (StringUtils.isNull(param)) {
+            throw new ServiceException("参数不能为空!");
+        }
         if (StringUtils.isNull(param.getAlipayAccount())) {
             throw new ServiceException("支付宝账号不能为空!");
         }
@@ -363,6 +388,9 @@ public class UserCenterServiceImpl implements IUserCenterService {
      */
     @Override
     public void walletSetPassword(WalletSetPasswordParam param) {
+        if (StringUtils.isNull(param)) {
+            throw new ServiceException("参数不能为空!");
+        }
         if (StringUtils.isNull(param.getPassword())) {
             throw new ServiceException("密码不能为空!");
         }
@@ -397,6 +425,9 @@ public class UserCenterServiceImpl implements IUserCenterService {
      */
     @Override
     public boolean walletVerifyPassword(WalletVerifyPasswordParam param) {
+        if (StringUtils.isNull(param)) {
+            throw new ServiceException("参数不能为空!");
+        }
         if (StringUtils.isNull(param.getPassword())) {
             throw new ServiceException("密码不能为空!");
         }

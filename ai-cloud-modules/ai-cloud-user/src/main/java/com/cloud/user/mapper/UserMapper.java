@@ -22,7 +22,6 @@ public interface UserMapper extends BaseMapper<User> {
      */
     public int checkUserNameUnique(@Param("username") String username);
 
-
     /**
      * 校验手机号码是否唯一
      *
@@ -39,7 +38,6 @@ public interface UserMapper extends BaseMapper<User> {
      */
     public User selectByUserNamePhone(@Param("param") String param);
 
-
     /**
      * 查询用户信息
      *
@@ -47,6 +45,15 @@ public interface UserMapper extends BaseMapper<User> {
      * @return 用户对象信息
      */
     public UserInfoDto selectByUserInfo(@Param("userId") String userId);
+
+    /**
+     * 设置签名
+     *
+     * @param userId
+     * @param sign
+     * @return
+     */
+    public void updateSign(String userId, String sign);
 
 
 }

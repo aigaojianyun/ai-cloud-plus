@@ -8,71 +8,71 @@
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    
     <artifactId>ai-cloud-pay</artifactId>
-
+    
     <description>
         cloud-pay支付服务
     </description>
-
+    
     <dependencies>
-
+        
         <!-- SpringCloud Alibaba Nacos -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
-
+        
         <!-- SpringCloud Alibaba Nacos Config -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
-
+        
         <!-- SpringCloud Alibaba Sentinel -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
         </dependency>
-
+        
         <!-- SpringBoot Actuator -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-
+        
         <!-- Mysql Connector -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-
+        
         <!--mybatis-plus 依赖配置-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
-
+        
         <!-- Swagger UI -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
         </dependency>
-
+        
         <!-- 多数据源 -->
         <dependency>
             <groupId>com.cloud</groupId>
             <artifactId>ai-cloud-datasource</artifactId>
         </dependency>
-
+        
         <!-- 接口模块 -->
         <dependency>
             <groupId>com.cloud</groupId>
             <artifactId>ai-cloud-swagger</artifactId>
         </dependency>
-
+    
     </dependencies>
-
+    
     <build>
         <finalName>${project.artifactId}</finalName>
         <plugins>

@@ -8,10 +8,10 @@
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    
     <artifactId>ai-cloud-elk</artifactId>
     <packaging>pom</packaging>
-
+    
     <modules>
         <module>ai-cloud-elasticsearch</module>
         <module>ai-cloud-logstash</module>

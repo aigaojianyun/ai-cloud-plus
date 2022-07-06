@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cloud.user.mapper.UserAccountDetailMapper">
-
+    
     <resultMap type="com.cloud.user.domain.UserAccountDetail" id="UserAccountDetailResult">
         <result property="id" column="id"/>
         <result property="accountId" column="account_id"/>
@@ -33,7 +33,7 @@
         <result property="updateBy" column="update_by"/>
         <result property="updateTime" column="update_time"/>
     </resultMap>
-
+    
     <select id="selectByDealType" resultType="com.cloud.user.dto.BillDto">
         SELECT
         uad.id AS detailId,
@@ -62,7 +62,7 @@
         </if>
         order by uad.create_time desc
     </select>
-
+    
     <select id="selectByDetail" resultType="com.cloud.user.dto.BillDetailDto">
         SELECT uad.img,
                uad.order_price    AS amount,

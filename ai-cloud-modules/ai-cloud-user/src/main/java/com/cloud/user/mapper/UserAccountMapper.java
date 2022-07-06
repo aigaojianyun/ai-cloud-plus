@@ -61,7 +61,7 @@ public interface UserAccountMapper extends BaseMapper<UserAccount> {
     public void updateByPasswordSaltUserId(@Param("password") String password, @Param("salt") String salt, @Param("userId") String userId);
 
     /**
-     * 减少账户余额
+     * 增加减少账户余额
      *
      * @param userId 用户id
      * @param amount
@@ -69,5 +69,6 @@ public interface UserAccountMapper extends BaseMapper<UserAccount> {
      * @return
      */
     public void updateByAvailableBalance(@Param("userId") String userId, @Param("amount") BigDecimal amount, @Param("type") String type);
+
 
 }

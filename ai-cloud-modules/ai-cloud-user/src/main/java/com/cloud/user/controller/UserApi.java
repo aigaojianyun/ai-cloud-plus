@@ -57,7 +57,7 @@ public class UserApi {
      */
     @InnerAuth
     @PostMapping("/{param}")
-    @ApiOperation("通过用户名查询用户")
+    @ApiOperation("通过用户名或手机号查询用户")
     public Response<LoginUser> info(@PathVariable("param") String param) {
         User user = userService.selectByUserNamePhone(param);
         LoginUser userVo = new LoginUser();

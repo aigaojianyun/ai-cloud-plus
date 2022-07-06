@@ -22,6 +22,14 @@ public interface IUserCenterService {
     public UserInfoDto userInfo();
 
     /**
+     * 设置签名
+     *
+     * @param sign 签名信息
+     * @return
+     */
+    public void updateSign(String sign);
+
+    /**
      * 保存我的信息
      *
      * @param param

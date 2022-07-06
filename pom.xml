@@ -3,11 +3,11 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
+    
     <groupId>com.cloud</groupId>
     <artifactId>ai-cloud-app</artifactId>
     <version>1.0.0</version>
-
+    
     <properties>
         <ai-cloud.version>1.0.0</ai-cloud.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -35,11 +35,11 @@
         <druid.version>1.2.8</druid.version>
         <dynamic-ds.version>3.5.0</dynamic-ds.version>
     </properties>
-
+    
     <!-- 依赖声明 -->
     <dependencyManagement>
         <dependencies>
-
+            
             <!-- SpringCloud 微服务 -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
@@ -48,7 +48,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
+            
             <!-- SpringCloud Alibaba 微服务 -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
@@ -57,21 +57,21 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
+            
             <!-- Alibaba Nacos 配置 -->
             <dependency>
                 <groupId>com.alibaba.nacos</groupId>
                 <artifactId>nacos-client</artifactId>
                 <version>${alibaba.nacos.version}</version>
             </dependency>
-
+            
             <!-- Alibaba Seata 配置 -->
             <dependency>
                 <groupId>io.seata</groupId>
                 <artifactId>seata-spring-boot-starter</artifactId>
                 <version>${alibaba.seata.version}</version>
             </dependency>
-
+            
             <!-- SpringBoot 依赖配置 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -80,90 +80,90 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
+            
             <!-- FastDFS 分布式文件系统 -->
             <dependency>
                 <groupId>com.github.tobato</groupId>
                 <artifactId>fastdfs-client</artifactId>
                 <version>${tobato.version}</version>
             </dependency>
-
+            
             <!-- Minio -->
             <dependency>
                 <groupId>io.minio</groupId>
                 <artifactId>minio</artifactId>
                 <version>${minio.version}</version>
             </dependency>
-
+            
             <!--mybatis-plus 依赖配置-->
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${spring-boot.mybatis-plus}</version>
             </dependency>
-
+            
             <!-- 验证码 -->
             <dependency>
                 <groupId>com.github.penggle</groupId>
                 <artifactId>kaptcha</artifactId>
                 <version>${kaptcha.version}</version>
             </dependency>
-
+            
             <!-- io常用工具类 -->
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
                 <version>${commons.io.version}</version>
             </dependency>
-
+            
             <!-- Collection 增强Java集合框架 -->
             <dependency>
                 <groupId>commons-collections</groupId>
                 <artifactId>commons-collections</artifactId>
                 <version>${commons-collections.version}</version>
             </dependency>
-
+            
             <!-- pagehelper 分页插件 -->
             <dependency>
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
                 <version>${pagehelper.boot.version}</version>
             </dependency>
-
+            
             <!-- JSON 解析器和生成器 -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
             </dependency>
-
+            
             <!-- JWT -->
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt</artifactId>
                 <version>${jjwt.version}</version>
             </dependency>
-
+            
             <!-- 线程传递值 -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>transmittable-thread-local</artifactId>
                 <version>${transmittable-thread-local.version}</version>
             </dependency>
-
+            
             <!-- Swagger UI -->
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger-ui</artifactId>
                 <version>${swagger.fox.version}</version>
             </dependency>
-
+            
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger2</artifactId>
                 <version>${swagger.fox.version}</version>
             </dependency>
-
+            
             <!-- Swagger 依赖配置 -->
             <dependency>
                 <groupId>io.swagger</groupId>
@@ -175,87 +175,87 @@
                 <artifactId>swagger-annotations</artifactId>
                 <version>${swagger.core.version}</version>
             </dependency>
-
+            
             <!-- lombok -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
             </dependency>
-
+            
             <!--hutool 工具集合-->
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool-all.version}</version>
             </dependency>
-
+            
             <!-- Druid -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.version}</version>
             </dependency>
-
+            
             <!-- Dynamic DataSource -->
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
                 <version>${dynamic-ds.version}</version>
             </dependency>
-
+            
             <!-- 通用工具-->
             <dependency>
                 <groupId>com.cloud</groupId>
                 <artifactId>ai-cloud-common</artifactId>
                 <version>${ai-cloud.version}</version>
             </dependency>
-
+            
             <!-- 多数据源 -->
             <dependency>
                 <groupId>com.cloud</groupId>
                 <artifactId>ai-cloud-datasource</artifactId>
                 <version>${ai-cloud.version}</version>
             </dependency>
-
+            
             <!-- 日志记录 -->
             <dependency>
                 <groupId>com.cloud</groupId>
                 <artifactId>ai-cloud-log</artifactId>
                 <version>${ai-cloud.version}</version>
             </dependency>
-
+            
             <!-- 安全模块 -->
             <dependency>
                 <groupId>com.cloud</groupId>
                 <artifactId>ai-cloud-security</artifactId>
                 <version>${ai-cloud.version}</version>
             </dependency>
-
+            
             <!-- 接口模块 -->
             <dependency>
                 <groupId>com.cloud</groupId>
                 <artifactId>ai-cloud-swagger</artifactId>
                 <version>${ai-cloud.version}</version>
             </dependency>
-
+            
             <!-- auth对内接口模块 -->
             <dependency>
                 <groupId>com.cloud</groupId>
                 <artifactId>ai-cloud-auth-api</artifactId>
                 <version>${ai-cloud.version}</version>
             </dependency>
-
+            
             <!-- file对内接口模块 -->
             <dependency>
                 <groupId>com.cloud</groupId>
                 <artifactId>ai-cloud-file-api</artifactId>
                 <version>${ai-cloud.version}</version>
             </dependency>
-
+        
         </dependencies>
     </dependencyManagement>
-
+    
     <modules>
         <module>ai-cloud-gateway</module>
         <module>ai-cloud-auth</module>
@@ -266,7 +266,7 @@
         <module>ai-cloud-elk</module>
     </modules>
     <packaging>pom</packaging>
-
+    
     <dependencies>
         <!-- bootstrap 启动器 -->
         <dependency>
@@ -274,7 +274,7 @@
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
         </dependency>
     </dependencies>
-
+    
     <build>
         <plugins>
             <plugin>

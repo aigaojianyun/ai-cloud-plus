@@ -1,11 +1,3 @@
-<p align="center">
-
-[//]: # (	<img alt="logo" src="https://cdn.ayuanlmo.cn/lmo_loso_r.png">)
-</p>
-<p align="center">
-
-[//]: # (	Hi, there👋)
-</p>
 <h1 align="center" style="margin: 30px 0 30px; font-weight: bold;color:#409fee;">ai-cloud</h1>
 <p align="center">
     <img src="https://img.shields.io/badge/SpringBoot-2.6.8 -blue.svg" alt="SpringBoot">
@@ -66,17 +58,28 @@ ai-cloud-app
 <img src=""/>
 
 ## 演示图
-
 <table>
     <tr>
         <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/39ar122owskm3krqgdtj.png"/></td>
     </tr>
+</table>
+
+- 查看注册中心注册服务信息，访问地址：http://127.0.0.1:8848/nacos
+<table>
     <tr>
         <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/6lsbt9q4xfrh8yb1q3kx.png"/></td>
     </tr>
+</table>
+
+- 查看Sentinel流量控制台，访问地址：http://127.0.0.1:8718
+<table>
     <tr>
         <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/ic4v04rky5ut637jfkdq.png"/></td>
     </tr>
+</table>
+
+- API文档信息，访问地址：http://127.0.0.1:8088/swagger-ui/index.html
+<table>
     <tr>
         <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/pbx0raxv26uvpzrr5bvz.png"/></td>
     </tr>
@@ -85,15 +88,17 @@ ai-cloud-app
     </tr>
 </table>
 
+- 日志收集系统信息，访问地址：http://127.0.0.1:5601
+
+- 可视化容器管理，访问地址：http://127.0.0.1:9000
+
 ## sql表结构
-
-<img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/1jcfml1vgwy48q679yeh.png"/>
-
-## 接口文档地址
-
-http://127.0.0.1:8088/swagger-ui/index.html
+<table>
+    <tr>
+        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/1jcfml1vgwy48q679yeh.png"/></td>
+    </tr>
+</table>
 
 ## 微服务交流群
-
 QQ群: [![加入QQ群](https://img.shields.io/badge/679033812-blue.svg)](https://jq.qq.com/?_wv=1027&k=eW62TFzU) 点击按钮入群。
 
