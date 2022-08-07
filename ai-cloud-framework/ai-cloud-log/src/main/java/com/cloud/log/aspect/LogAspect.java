@@ -1,5 +1,6 @@
 package com.cloud.log.aspect;
 
+import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson2.JSON;
 import com.cloud.auth.api.domain.UserOperLog;
 import com.cloud.common.utils.ServletUtils;
@@ -10,6 +11,7 @@ import com.cloud.log.annotation.Log;
 import com.cloud.log.enums.BusinessStatus;
 import com.cloud.log.service.AsyncLogService;
 import com.cloud.security.utils.SecurityUtils;
+import net.logstash.logback.marker.Markers;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -25,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -90,6 +93,10 @@ public class LogAspect {
             getControllerMethodDescription(joinPoint, controllerLog, operLog, jsonResult);
             // 保存数据库
             asyncLogService.saveUserOperLog(operLog);
+            //记录请求信息(通过Logstash传入Elasticsearch)
+            Map<String, Object> logMap = new HashMap<>();
+            logMap.put("logMap", operLog);
+            log.info(Markers.appendEntries(logMap), JSONUtil.parse(operLog).toString());
         } catch (Exception exp) {
             // 记录本地异常日志
             log.error("==前置通知异常==");

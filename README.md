@@ -1,7 +1,7 @@
-<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;color:#409fee;">ai-cloud</h1>
+<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;color:#409fee;">ai-cloud v1.0.0</h1>
 <p align="center">
-    <img src="https://img.shields.io/badge/SpringBoot-2.6.8 -blue.svg" alt="SpringBoot">
-    <img src="https://img.shields.io/badge/SpringCloud-2021.0.1 -blue.svg" alt="SpringCloud">
+    <img src="https://img.shields.io/badge/SpringBoot-2.7.1 -blue.svg" alt="SpringBoot">
+    <img src="https://img.shields.io/badge/SpringCloud-2021.0.3 -blue.svg" alt="SpringCloud">
     <img src="https://img.shields.io/badge/Alibaba-2021.0.1.0 -blue.svg" alt="Alibaba">
     <img src="https://img.shields.io/badge/Nacos-2.1.0 -blue.svg" alt="Nacos">
     <img src="https://img.shields.io/badge/Sentinel-1.8.4 -blue.svg" alt="Sentinel">
@@ -48,7 +48,7 @@ ai-cloud-app
 │       └── ai-cloud-pay             --支付服务 [8803]
 │       └── ai-cloud-user            --用户服务 [8802]
 ├──ai-cloud-web         --前端模块
-│       └── ai-cloud-h5              --h5[]
+│       └── ai-cloud-app             --uniapp[9090]
 │       └── ai-cloud-wx              --微信小程序[]
 ├──pom.xml              --公共依赖
 ~~~
@@ -58,6 +58,7 @@ ai-cloud-app
 <img src=""/>
 
 ## 演示图
+
 <table>
     <tr>
         <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/39ar122owskm3krqgdtj.png"/></td>
@@ -65,6 +66,7 @@ ai-cloud-app
 </table>
 
 - 查看注册中心注册服务信息，访问地址：http://127.0.0.1:8848/nacos
+
 <table>
     <tr>
         <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/6lsbt9q4xfrh8yb1q3kx.png"/></td>
@@ -72,6 +74,7 @@ ai-cloud-app
 </table>
 
 - 查看Sentinel流量控制台，访问地址：http://127.0.0.1:8718
+
 <table>
     <tr>
         <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/ic4v04rky5ut637jfkdq.png"/></td>
@@ -79,6 +82,7 @@ ai-cloud-app
 </table>
 
 - API文档信息，访问地址：http://127.0.0.1:8088/swagger-ui/index.html
+
 <table>
     <tr>
         <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/pbx0raxv26uvpzrr5bvz.png"/></td>
@@ -93,6 +97,7 @@ ai-cloud-app
 - 可视化容器管理，访问地址：http://127.0.0.1:9000
 
 ## sql表结构
+
 <table>
     <tr>
         <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/1jcfml1vgwy48q679yeh.png"/></td>
@@ -100,5 +105,6 @@ ai-cloud-app
 </table>
 
 ## 微服务交流群
+
 QQ群: [![加入QQ群](https://img.shields.io/badge/679033812-blue.svg)](https://jq.qq.com/?_wv=1027&k=eW62TFzU) 点击按钮入群。
 
