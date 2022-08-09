@@ -2,7 +2,7 @@
   <view class="content">
     <image class="logo" src="/static/logo.png"></image>
     <view class="text-area">
-      <text class="title">欢迎来到我的世界</text>
+      <text >这个世界本就是平衡的，想要得到什么就要付出什么</text>
     </view>
   </view>
 </template>

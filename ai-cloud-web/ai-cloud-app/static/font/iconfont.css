@@ -12,82 +12,47 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-user:before {
-  content: "\e7ae";
+.icon-right:before {
+  content: "\e642";
 }
 
-.icon-password:before {
-  content: "\e8b2";
-}
-
-.icon-code:before {
-  content: "\e699";
-}
-
-.icon-setting:before {
-  content: "\e6cc";
-}
-
-.icon-share:before {
-  content: "\e739";
-}
-
-.icon-edit:before {
-  content: "\e60c";
-}
-
-.icon-version:before {
-  content: "\e63f";
+.icon-qianbao:before {
+  content: "\e63e";
 }
 
 .icon-service:before {
   content: "\e6ff";
 }
 
-.icon-friendfill:before {
-  content: "\e726";
+.icon-refresh:before {
+  content: "\e640";
 }
 
-.icon-community:before {
-  content: "\e741";
-}
-
-.icon-people:before {
-  content: "\e736";
-}
-
-.icon-dianzan:before {
-  content: "\ec7f";
-}
-
-.icon-right:before {
-  content: "\e7eb";
-}
-
-.icon-logout:before {
-  content: "\e61d";
-}
-
-.icon-help:before {
-  content: "\e616";
-}
-
-.icon-github:before {
-  content: "\e628";
-}
-
-.icon-aixin:before {
-  content: "\e601";
+.icon-user:before {
+  content: "\e7ae";
 }
 
 .icon-clean:before {
-  content: "\e607";
+  content: "\e7c5";
 }
 
-.icon-refresh:before {
-  content: "\e604";
+.icon-help:before {
+  content: "\e752";
 }
 
-.icon-qianbao:before {
-  content: "\e72b";
+.icon-password:before {
+  content: "\e75b";
 }
+
+.icon-setting:before {
+  content: "\e67d";
+}
+
+.icon-dianzan:before {
+  content: "\e608";
+}
+
+.icon-community:before {
+  content: "\e623";
+}
+

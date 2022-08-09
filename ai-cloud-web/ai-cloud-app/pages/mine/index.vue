@@ -14,7 +14,7 @@
           </view>
           <view v-if="name" class="user-info" @click="handleToInfo">
             <view class="u_title">
-              用户名：{{ name }}
+              {{ name }}
             </view>
           </view>
         </view>
@@ -28,8 +28,8 @@
     <view class="content-section">
       <view class="mine-actions grid col-4 text-center">
         <view class="action-item" @click="handleJiaoLiuQun">
-          <view class="iconfont icon-friendfill text-pink icon"></view>
-          <text class="text">钱包</text>
+          <view class="iconfont icon-qianbao text-pink icon"></view>
+          <text class="text">我的钱包</text>
         </view>
         <view class="action-item" @click="handleBuilding">
           <view class="iconfont icon-service text-blue icon"></view>
