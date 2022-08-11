@@ -44,8 +44,8 @@ public class TokenService {
         String userName = loginUser.getUser().getUserName();
         String deviceId = loginUser.getUser().getDeviceId();
         loginUser.setToken(token);
-        loginUser.setUserid(userId);
-        loginUser.setUsername(userName);
+        loginUser.setUserId(userId);
+        loginUser.setUserName(userName);
         loginUser.setDeviceId(deviceId);
         loginUser.setIpaddr(IpUtils.getIpAddr(ServletUtils.getRequest()));
         refreshToken(loginUser);

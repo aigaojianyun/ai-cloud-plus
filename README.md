@@ -32,7 +32,6 @@ ai-cloud-app
 ├── ai-cloud-auth       --认证服务 [8800]
 ├── ai-cloud-api        --内网接口
 │       └── ai-cloud-auth-api        --授权对内接口
-│       └── ai-cloud-elk-api         --日志对内接口
 │       └── ai-cloud-file-api        --文件对内接口
 ├── ai-cloud-elk        --elk日志管理模块
 │       └── ai-cloud-elasticsearch   --存储日志数据[8004]
@@ -63,12 +62,10 @@ ai-cloud-app
     <tr>
         <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/s83j4761d6pnndkkxyvn.png"/></td>
         <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/zv02c8pr5tr89bgtagwr.png"/></td>
-    </tr>
-    <tr>
         <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/l4zmbe54dl740m1me5rh.png"/></td>
-        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/i4jy6q7h3cvlhim0d2dx.png"/></td>
     </tr>
     <tr>
+        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/i4jy6q7h3cvlhim0d2dx.png"/></td>
         <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/hmd7jcehvibpyimfrdwe.png"/></td>
         <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/ivnfsatbz4oz3qcj7l8e.png"/></td>
     </tr>
@@ -76,36 +73,31 @@ ai-cloud-app
 
 ## 后端演示图
 
-<table>
-    <tr>
-        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/39ar122owskm3krqgdtj.png"/></td>
-    </tr>
-</table>
-
 - 查看注册中心注册服务信息，访问地址：http://127.0.0.1:8848/nacos
-
-<table>
-    <tr>
-        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/6lsbt9q4xfrh8yb1q3kx.png"/></td>
-    </tr>
-</table>
-
 - 查看Sentinel流量控制台，访问地址：http://127.0.0.1:8718
 
 <table>
     <tr>
+        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/6lsbt9q4xfrh8yb1q3kx.png"/></td>
         <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/ic4v04rky5ut637jfkdq.png"/></td>
     </tr>
 </table>
 
-- API文档信息，访问地址：http://127.0.0.1:8088/swagger-ui/index.html
+- Swagger文档信息，访问地址：http://127.0.0.1:8088/doc.html
 
 <table>
     <tr>
         <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/pbx0raxv26uvpzrr5bvz.png"/></td>
-    </tr>
-    <tr>
         <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/48n5t00klhs7bv45hday.png"/></td>
+    </tr>
+</table>
+
+- Knife4j文档信息，访问地址：http://127.0.0.1:8088/swagger-ui/index.html
+
+<table>
+    <tr>
+        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/r5kyqx7oxcems1ot7yd9.png"/></td>
+        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/d6oj7laecwopr17ne8dn.png"/></td>
     </tr>
 </table>
 

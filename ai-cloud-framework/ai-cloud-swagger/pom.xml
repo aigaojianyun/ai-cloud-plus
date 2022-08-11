@@ -28,6 +28,12 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
         </dependency>
+
+        <!--Knife4j-->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+        </dependency>
     
     </dependencies>
 

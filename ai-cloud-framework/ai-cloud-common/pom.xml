@@ -113,19 +113,19 @@
             <artifactId>swagger-annotations</artifactId>
         </dependency>
         
-        <!-- lombok -->
+        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
         
-        <!--hutool 工具集合-->
+        <!--Hutool 工具集合-->
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
         </dependency>
         
-        <!--logstash-->
+        <!--Logstash-->
         <dependency>
             <groupId>net.logstash.logback</groupId>
             <artifactId>logstash-logback-encoder</artifactId>

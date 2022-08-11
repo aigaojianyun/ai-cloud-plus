@@ -34,7 +34,8 @@
         <hutool-all.version>5.1.0</hutool-all.version>
         <druid.version>1.2.8</druid.version>
         <dynamic-ds.version>3.5.0</dynamic-ds.version>
-        <logstash-logback.version>5.3</logstash-logback.version>
+        <logstash.version>5.3</logstash.version>
+        <knife4j.version>3.0.3</knife4j.version>
     </properties>
     
     <!-- 依赖声明 -->
@@ -177,14 +178,14 @@
                 <version>${swagger.core.version}</version>
             </dependency>
             
-            <!-- lombok -->
+            <!-- Lombok -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
             </dependency>
             
-            <!--hutool 工具集合-->
+            <!--Hutool 工具集合-->
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
@@ -205,11 +206,25 @@
                 <version>${dynamic-ds.version}</version>
             </dependency>
             
-            <!--logstash-->
+            <!--Logstash-->
             <dependency>
                 <groupId>net.logstash.logback</groupId>
                 <artifactId>logstash-logback-encoder</artifactId>
-                <version>${logstash-logback.version}</version>
+                <version>${logstash.version}</version>
+            </dependency>
+
+            <!--Knife4j-->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+
+            <!--Knife4j-ui-->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-ui</artifactId>
+                <version>${knife4j.version}</version>
             </dependency>
             
             <!-- 通用工具-->

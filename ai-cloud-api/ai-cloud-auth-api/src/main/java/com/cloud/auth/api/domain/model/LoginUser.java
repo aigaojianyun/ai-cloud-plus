@@ -28,12 +28,12 @@ public class LoginUser implements Serializable {
     /**
      * 用户名id
      */
-    private String userid;
+    private String userId;
 
     /**
      * 用户名
      */
-    private String username;
+    private String userName;
 
 
     /**

@@ -82,10 +82,18 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
         </dependency>
-        
+
+        <!-- Swagger2 -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
+        </dependency>
+
+        <!--Knife4j-ui-->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-ui</artifactId>
+            <version>${knife4j.version}</version>
         </dependency>
     
     </dependencies>
