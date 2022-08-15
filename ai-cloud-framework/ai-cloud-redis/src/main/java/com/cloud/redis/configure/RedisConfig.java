@@ -1,4 +1,4 @@
-package com.cloud.common.redis.configure;
+package com.cloud.redis.configure;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

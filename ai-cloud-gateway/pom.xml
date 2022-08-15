@@ -70,11 +70,11 @@
             <groupId>com.github.penggle</groupId>
             <artifactId>kaptcha</artifactId>
         </dependency>
-        
-        <!-- 通用工具-->
+
+        <!-- 缓存服务-->
         <dependency>
             <groupId>com.cloud</groupId>
-            <artifactId>ai-cloud-common</artifactId>
+            <artifactId>ai-cloud-redis</artifactId>
         </dependency>
         
         <!-- Swagger -->

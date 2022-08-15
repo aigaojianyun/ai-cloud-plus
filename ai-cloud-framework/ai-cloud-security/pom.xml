@@ -22,17 +22,17 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
         </dependency>
-        
-        <!-- 通用工具-->
-        <dependency>
-            <groupId>com.cloud</groupId>
-            <artifactId>ai-cloud-common</artifactId>
-        </dependency>
-        
+
         <!-- auth对内接口模块 -->
         <dependency>
             <groupId>com.cloud</groupId>
             <artifactId>ai-cloud-auth-api</artifactId>
+        </dependency>
+
+        <!-- 缓存服务-->
+        <dependency>
+            <groupId>com.cloud</groupId>
+            <artifactId>ai-cloud-redis</artifactId>
         </dependency>
     
     </dependencies>

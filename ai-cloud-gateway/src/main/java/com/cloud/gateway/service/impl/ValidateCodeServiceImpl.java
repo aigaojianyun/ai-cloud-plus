@@ -2,13 +2,13 @@ package com.cloud.gateway.service.impl;
 
 import com.cloud.common.constant.Constants;
 import com.cloud.common.exception.CaptchaException;
-import com.cloud.common.redis.service.RedisService;
 import com.cloud.common.utils.StringUtils;
 import com.cloud.common.utils.sign.Base64;
 import com.cloud.common.utils.uuid.IdUtils;
 import com.cloud.common.web.domain.AjaxResult;
 import com.cloud.gateway.config.properties.CaptchaProperties;
 import com.cloud.gateway.service.ValidateCodeService;
+import com.cloud.redis.service.RedisService;
 import com.google.code.kaptcha.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

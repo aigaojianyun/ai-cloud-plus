@@ -1,4 +1,4 @@
-package com.cloud.common.redis.configure;
+package com.cloud.redis.configure;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONReader;

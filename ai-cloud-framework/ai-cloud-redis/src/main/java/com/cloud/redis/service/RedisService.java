@@ -1,4 +1,4 @@
-package com.cloud.common.redis.service;
+package com.cloud.redis.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundSetOperations;

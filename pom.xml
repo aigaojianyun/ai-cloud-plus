@@ -25,7 +25,7 @@
         <commons.io.version>2.11.0</commons.io.version>
         <commons-collections.version>3.2.2</commons-collections.version>
         <pagehelper.boot.version>1.4.1</pagehelper.boot.version>
-        <fastjson.version>2.0.4</fastjson.version>
+        <fastjson.version>2.0.9</fastjson.version>
         <jjwt.version>0.9.1</jjwt.version>
         <transmittable-thread-local.version>2.12.2</transmittable-thread-local.version>
         <swagger.fox.version>3.0.0</swagger.fox.version>
@@ -247,7 +247,14 @@
                 <artifactId>ai-cloud-log</artifactId>
                 <version>${ai-cloud.version}</version>
             </dependency>
-            
+
+            <!-- 缓存服务-->
+            <dependency>
+                <groupId>com.cloud</groupId>
+                <artifactId>ai-cloud-redis</artifactId>
+                <version>${ai-cloud.version}</version>
+            </dependency>
+
             <!-- 安全模块 -->
             <dependency>
                 <groupId>com.cloud</groupId>
@@ -287,6 +294,7 @@
         <module>ai-cloud-modules</module>
         <module>ai-cloud-web</module>
         <module>ai-cloud-elk</module>
+        <module>ai-cloud-framework/ai-cloud-redis</module>
     </modules>
     <packaging>pom</packaging>
     

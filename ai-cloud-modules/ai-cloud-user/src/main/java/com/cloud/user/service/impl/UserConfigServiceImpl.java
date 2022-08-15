@@ -2,7 +2,7 @@ package com.cloud.user.service.impl;
 
 import com.cloud.auth.api.domain.UserConfig;
 import com.cloud.common.constant.Constants;
-import com.cloud.common.redis.service.RedisService;
+import com.cloud.redis.service.RedisService;
 import com.cloud.common.text.Convert;
 import com.cloud.common.utils.StringUtils;
 import com.cloud.user.mapper.UserConfigMapper;

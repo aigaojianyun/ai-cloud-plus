@@ -41,6 +41,7 @@ ai-cloud-app
 │       └── ai-cloud-common          --通用模块
 │       └── ai-cloud-datasource      --多数据源
 │       └── ai-cloud-log             --日志记录
+│       └── ai-cloud-redis           --缓存服务
 │       └── ai-cloud-security        --安全模块
 │       └── ai-cloud-swagger         --接口模块
 ├── ai-cloud-modules    --业务模块

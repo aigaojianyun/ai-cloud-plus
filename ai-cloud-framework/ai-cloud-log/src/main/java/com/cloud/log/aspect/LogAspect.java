@@ -9,6 +9,7 @@ import com.cloud.common.utils.ip.IpUtils;
 import com.cloud.common.utils.uuid.IdUtils;
 import com.cloud.log.annotation.Log;
 import com.cloud.log.enums.BusinessStatus;
+import com.cloud.log.filter.PropertyPreExcludeFilter;
 import com.cloud.log.service.AsyncLogService;
 import com.cloud.security.utils.SecurityUtils;
 import org.aspectj.lang.JoinPoint;
@@ -37,6 +38,11 @@ import java.util.Map;
 @Component
 public class LogAspect {
     private static final Logger log = LoggerFactory.getLogger(LogAspect.class);
+
+    /**
+     * 排除敏感属性字段
+     */
+    public static final String[] EXCLUDE_PROPERTIES = {"password", "oldPassword", "newPassword", "confirmPassword"};
 
     @Autowired
     private AsyncLogService asyncLogService;
@@ -151,7 +157,7 @@ public class LogAspect {
             for (Object o : paramsArray) {
                 if (StringUtils.isNotNull(o) && !isFilterObject(o)) {
                     try {
-                        Object jsonObj = JSON.toJSON(o);
+                        String jsonObj = JSON.toJSONString(o, excludePropertyPreFilter());
                         params += jsonObj.toString() + " ";
                     } catch (Exception e) {
                     }
@@ -159,6 +165,13 @@ public class LogAspect {
             }
         }
         return params.trim();
+    }
+
+    /**
+     * 忽略敏感属性
+     */
+    public PropertyPreExcludeFilter excludePropertyPreFilter() {
+        return new PropertyPreExcludeFilter().addExcludes(EXCLUDE_PROPERTIES);
     }
 
     /**
