@@ -22,12 +22,12 @@ public class SerialNumberUtils {
     /**
      * 用户id和随机数总长度
      */
-    private static final int maxLength = 12;
+    private static final int MAX_LENGTH = 12;
 
     /**
      * 用户id和随机数总长度
      */
-    private static final int maxLengthCode = 6;
+    private static final int MAX_LENGTH_CODE = 6;
 
     /**
      * 生成固定长度随机码
@@ -54,7 +54,7 @@ public class SerialNumberUtils {
         /*for (int i = idStr.length() - 1; i >= 0; i--) {
             idsbs.append(r[idStr.charAt(i) - '0']);
         }*/
-        return idsbs.append(getRandom(maxLengthCode)).toString();
+        return idsbs.append(getRandom(MAX_LENGTH_CODE)).toString();
     }
 
     /**

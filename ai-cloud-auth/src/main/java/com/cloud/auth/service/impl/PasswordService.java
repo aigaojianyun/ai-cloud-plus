@@ -23,9 +23,9 @@ public class PasswordService {
     @Autowired
     private RedisService redisService;
 
-    private int maxRetryCount = CacheConstants.passwordMaxRetryCount;
+    private int maxRetryCount = CacheConstants.PASSWORD_MAX_RETRY_COUNT;
 
-    private Long lockTime = CacheConstants.passwordLockTime;
+    private Long lockTime = CacheConstants.PASSWORD_LOCK_TIME;
 
     @Autowired
     private RecordLogService recordLogService;

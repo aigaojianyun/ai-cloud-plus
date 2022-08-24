@@ -294,7 +294,6 @@
         <module>ai-cloud-modules</module>
         <module>ai-cloud-web</module>
         <module>ai-cloud-elk</module>
-        <module>ai-cloud-framework/ai-cloud-redis</module>
     </modules>
     <packaging>pom</packaging>
     

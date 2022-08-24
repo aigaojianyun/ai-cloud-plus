@@ -53,7 +53,7 @@ public class UserAccount extends BaseEntity {
      * 账户号
      */
     @ApiModelProperty(value = "账户号", example = "Long")
-    private Long number;
+    private String number;
 
     /**
      * 账户类型；1：余额账户 2：kb账户

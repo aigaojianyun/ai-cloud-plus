@@ -35,7 +35,7 @@ public class UserAccountDetail extends BaseEntity {
      * 账户号
      */
     @ApiModelProperty(value = "账户号", example = "Long")
-    private Long accountNumber;
+    private String accountNumber;
 
     /**
      * 账户类型；1：余额账户  2：kb账户
@@ -59,7 +59,7 @@ public class UserAccountDetail extends BaseEntity {
      * 收款方账户号
      */
     @ApiModelProperty(value = "收款方账户号", example = "Long")
-    private Long debitNumber;
+    private String debitNumber;
 
     /**
      * 收款方手机号
@@ -77,7 +77,7 @@ public class UserAccountDetail extends BaseEntity {
      * 付款方账户号
      */
     @ApiModelProperty(value = "付款方账户号", example = "Long")
-    private Long creditNumber;
+    private String creditNumber;
 
     /**
      * 付款方手机号

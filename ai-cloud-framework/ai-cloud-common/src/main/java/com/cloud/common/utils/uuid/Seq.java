@@ -15,27 +15,27 @@ public class Seq {
     /**
      * 通用序列类型
      */
-    public static final String commSeqType = "COMMON";
+    public static final String COMM_SEQ_TYPE = "COMMON";
 
     /**
      * 上传序列类型
      */
-    public static final String uploadSeqType = "UPLOAD";
+    public static final String UPLOAD_SEQ_TYPE = "UPLOAD";
 
     /**
      * 通用接口序列数
      */
-    private static AtomicInteger commSeq = new AtomicInteger(1);
+    private static AtomicInteger COMM_SEQ = new AtomicInteger(1);
 
     /**
      * 上传接口序列数
      */
-    private static AtomicInteger uploadSeq = new AtomicInteger(1);
+    private static AtomicInteger UPLOAD_SEQ = new AtomicInteger(1);
 
     /**
      * 机器标识
      */
-    private static String machineCode = "A";
+    private static String MACHINE_CODE = "A";
 
     /**
      * 获取通用序列号
@@ -43,7 +43,7 @@ public class Seq {
      * @return 序列值
      */
     public static String getId() {
-        return getId(commSeqType);
+        return getId(COMM_SEQ_TYPE);
     }
 
     /**
@@ -52,9 +52,9 @@ public class Seq {
      * @return 序列值
      */
     public static String getId(String type) {
-        AtomicInteger atomicInt = commSeq;
-        if (uploadSeqType.equals(type)) {
-            atomicInt = uploadSeq;
+        AtomicInteger atomicInt = COMM_SEQ;
+        if (UPLOAD_SEQ_TYPE.equals(type)) {
+            atomicInt = UPLOAD_SEQ;
         }
         return getId(atomicInt, 3);
     }
@@ -68,7 +68,7 @@ public class Seq {
      */
     public static String getId(AtomicInteger atomicInt, int length) {
         String result = DateUtils.dateTimeNow();
-        result += machineCode;
+        result += MACHINE_CODE;
         result += getSeq(atomicInt, length);
         return result;
     }

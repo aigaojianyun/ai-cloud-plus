@@ -15,10 +15,11 @@
     
     <modules>
         <module>ai-cloud-common</module>
-        <module>ai-cloud-swagger</module>
         <module>ai-cloud-datasource</module>
-        <module>ai-cloud-security</module>
         <module>ai-cloud-log</module>
+        <module>ai-cloud-security</module>
+        <module>ai-cloud-redis</module>
+        <module>ai-cloud-swagger</module>
     </modules>
 
 </project>

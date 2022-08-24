@@ -69,14 +69,12 @@ public class LoginServiceImpl implements LoginService {
         }
         // 查询用户信息
         Response<LoginUser> userResponse = remoteUserService.getUserInfo(username, SecurityConstants.INNER);
-
-        if (Response.FAIL == userResponse.getCode()) {
-            throw new ServiceException(userResponse.getMsg());
-        }
-
         if (StringUtils.isNull(userResponse) || StringUtils.isNull(userResponse.getData().getUser())) {
             recordLogService.recordLoginLog(username, deviceId, Constants.LOGIN_FAIL, "登录用户不存在");
             throw new ServiceException("登录用户：" + username + " 不存在");
+        }
+        if (Response.FAIL == userResponse.getCode()) {
+            throw new ServiceException(userResponse.getMsg());
         }
 
         LoginUser userInfo = userResponse.getData();
