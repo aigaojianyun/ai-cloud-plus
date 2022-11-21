@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.user.mapper.UserBindMapper">
+
+    <resultMap type="com.cloud.user.domain.UserBind" id="UserBindResult">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="uuid" column="uuid"/>
+        <result property="belongBank" column="belong_bank"/>
+        <result property="bankCard" column="bank_card"/>
+        <result property="bankName" column="bank_name"/>
+        <result property="bankAccount" column="bank_account"/>
+        <result property="alipayAccount" column="alipay_account"/>
+        <result property="alipayName" column="alipay_name"/>
+        <result property="bindTime" column="bind_time"/>
+        <result property="statusFlag" column="status_flag"/>
+        <result property="deleteFlag" column="delete_flag"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <select id="selectByBelongBankUserId" resultType="com.cloud.user.domain.UserBind">
+        SELECT *
+        FROM user_bind
+        WHERE status_flag = 0
+          AND delete_flag = 0
+          AND belong_bank = #{belongBank}
+          AND user_id = #{userId}
+    </select>
+
+    <select id="selectByWalletBindBankInfo" resultType="com.cloud.user.dto.BindBankDto">
+        SELECT bank_name    AS bankName,
+               bank_card    AS bankCard,
+               bank_account AS bankAccount
+        FROM user_bind
+        WHERE status_flag = 0
+          AND delete_flag = 0
+          AND belong_bank = 2
+          AND user_id = #{userId}
+    </select>
+
+    <select id="selectByWalletBindAlipayInfo" resultType="com.cloud.user.dto.BindAlipayDto">
+        SELECT alipay_account AS alipayAccount,
+               alipay_name    AS alipayName
+        FROM user_bind
+        WHERE status_flag = 0
+          AND delete_flag = 0
+          AND belong_bank = 1
+          AND user_id = #{userId}
+    </select>
+
+</mapper>

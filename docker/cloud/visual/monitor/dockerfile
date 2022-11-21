@@ -1,0 +1,15 @@
+# 基础镜像
+FROM  openjdk:8-jre
+# author
+MAINTAINER cloud
+
+# 挂载目录
+VOLUME /home/cloud
+# 创建目录
+RUN mkdir -p /home/cloud
+# 指定路径
+WORKDIR /home/cloud
+# 复制jar文件到路径
+COPY ./jar/ai-cloud-monitor.jar /home/cloud/ai-cloud-monitor.jar
+# 启动系统服务
+ENTRYPOINT ["java","-jar","ai-cloud-monitor.jar"]

@@ -6,35 +6,22 @@ import com.cloud.common.utils.StringUtils;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * 序列生成类
- *
- * @author ai-cloud
+ * @author ai-cloud 序列生成类
  */
 public class Seq {
-
-    /**
-     * 通用序列类型
-     */
+    // 通用序列类型
     public static final String COMM_SEQ_TYPE = "COMMON";
 
-    /**
-     * 上传序列类型
-     */
+    // 上传序列类型
     public static final String UPLOAD_SEQ_TYPE = "UPLOAD";
 
-    /**
-     * 通用接口序列数
-     */
+    // 通用接口序列数
     private static AtomicInteger COMM_SEQ = new AtomicInteger(1);
 
-    /**
-     * 上传接口序列数
-     */
+    // 上传接口序列数
     private static AtomicInteger UPLOAD_SEQ = new AtomicInteger(1);
 
-    /**
-     * 机器标识
-     */
+    // 机器标识
     private static String MACHINE_CODE = "A";
 
     /**

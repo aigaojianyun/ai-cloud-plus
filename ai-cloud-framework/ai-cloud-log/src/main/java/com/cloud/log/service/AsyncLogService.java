@@ -1,8 +1,8 @@
 package com.cloud.log.service;
 
-import com.cloud.auth.api.domain.UserOperLog;
-import com.cloud.auth.api.service.RemoteLogService;
 import com.cloud.common.constant.SecurityConstants;
+import com.cloud.system.api.domain.SysOperLog;
+import com.cloud.system.api.service.RemoteSysLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -14,16 +14,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AsyncLogService {
-
     @Autowired
-    private RemoteLogService remoteLogService;
+    private RemoteSysLogService remoteSysLogService;
 
     /**
      * 保存系统日志记录
      */
     @Async
-    public void saveUserOperLog(UserOperLog userOperLog) {
-        remoteLogService.saveUserOperLog(userOperLog, SecurityConstants.INNER);
+    public void saveSysLog(SysOperLog sysOperLog) {
+        remoteSysLogService.saveLog(sysOperLog, SecurityConstants.INNER);
     }
-
 }

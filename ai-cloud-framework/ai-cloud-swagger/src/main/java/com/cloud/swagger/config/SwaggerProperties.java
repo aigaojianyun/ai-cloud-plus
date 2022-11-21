@@ -6,11 +6,6 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * swagger 配置
- *
- * @author ai-cloud
- */
 @Component
 @ConfigurationProperties("swagger")
 public class SwaggerProperties {

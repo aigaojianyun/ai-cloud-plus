@@ -6,16 +6,15 @@ package com.cloud.log.enums;
  * @author ai-cloud
  */
 public enum OperatorType {
-
     /**
      * 其它
      */
     OTHER,
 
     /**
-     * 小程序用户
+     * 后台用户
      */
-    APPLET,
+    MANAGE,
 
     /**
      * 手机端用户

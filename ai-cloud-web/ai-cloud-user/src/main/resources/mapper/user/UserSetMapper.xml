@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.user.mapper.UserSetMapper">
+
+    <resultMap type="com.cloud.user.domain.UserSet" id="UserSetResult">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="headImg" column="head_img"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="uuid" column="uuid"/>
+        <result property="messageShake" column="message_shake"/>
+        <result property="messageAlarm" column="message_alarm"/>
+        <result property="likeRemind" column="like_remind"/>
+        <result property="attentionRemind" column="attention_remind"/>
+        <result property="notification" column="notification"/>
+        <result property="commentRemind" column="comment_remind"/>
+        <result property="statusFlag" column="status_flag"/>
+        <result property="deleteFlag" column="delete_flag"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <select id="selectByUserId" resultMap="UserSetResult">
+        SELECT *
+        FROM user_set
+        WHERE status_flag = 1
+          AND delete_flag = 0
+          AND user_id = #{userId}
+    </select>
+
+</mapper>

@@ -1,7 +1,7 @@
 package com.cloud.gateway.filter;
 
-import com.cloud.common.html.EscapeUtil;
 import com.cloud.common.utils.StringUtils;
+import com.cloud.common.utils.html.EscapeUtil;
 import com.cloud.gateway.config.properties.XssProperties;
 import io.netty.buffer.ByteBufAllocator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +30,7 @@ import java.nio.charset.StandardCharsets;
 @Component
 @ConditionalOnProperty(value = "security.xss.enabled", havingValue = "true")
 public class XssFilter implements GlobalFilter, Ordered {
-    /**
-     * 跨站脚本的 xss 配置，nacos自行添加
-     */
+    // 跨站脚本的 xss 配置，nacos自行添加
     @Autowired
     private XssProperties xss;
 
@@ -41,7 +39,7 @@ public class XssFilter implements GlobalFilter, Ordered {
         ServerHttpRequest request = exchange.getRequest();
         // GET DELETE 不过滤
         HttpMethod method = request.getMethod();
-        if (method == null || method.matches("GET") || method.matches("DELETE")) {
+        if (method == null || method == HttpMethod.GET || method == HttpMethod.DELETE) {
             return chain.filter(exchange);
         }
         // 非json类型，不过滤

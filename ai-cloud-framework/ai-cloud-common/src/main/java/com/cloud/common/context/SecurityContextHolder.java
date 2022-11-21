@@ -45,8 +45,8 @@ public class SecurityContextHolder {
         THREAD_LOCAL.set(threadLocalMap);
     }
 
-    public static String getUserId() {
-        return get(SecurityConstants.DETAILS_USER_ID);
+    public static Long getUserId() {
+        return Convert.toLong(get(SecurityConstants.DETAILS_USER_ID), 0L);
     }
 
     public static void setUserId(String account) {
@@ -67,6 +67,14 @@ public class SecurityContextHolder {
 
     public static void setUserKey(String userKey) {
         set(SecurityConstants.USER_KEY, userKey);
+    }
+
+    public static String getPermission() {
+        return get(SecurityConstants.ROLE_PERMISSION);
+    }
+
+    public static void setPermission(String permissions) {
+        set(SecurityConstants.ROLE_PERMISSION, permissions);
     }
 
     public static void remove() {

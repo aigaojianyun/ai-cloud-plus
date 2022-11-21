@@ -4,26 +4,30 @@ import com.cloud.common.constant.HttpStatus;
 import com.cloud.common.utils.StringUtils;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * 操作消息提醒
  *
  * @author ai-cloud
  */
-public class AjaxResult extends HashMap<String, Object> {
+public class AjaxResult<T> extends HashMap<String, Object> {
+    private static final long serialVersionUID = 1L;
+
     /**
      * 状态码
      */
     public static final String CODE_TAG = "code";
+
     /**
      * 返回内容
      */
     public static final String MSG_TAG = "msg";
+
     /**
      * 数据对象
      */
     public static final String DATA_TAG = "data";
-    private static final long serialVersionUID = 1L;
 
     /**
      * 初始化一个新创建的 AjaxResult 对象，使其表示一个空消息。
@@ -63,7 +67,7 @@ public class AjaxResult extends HashMap<String, Object> {
      * @return 成功消息
      */
     public static AjaxResult success() {
-        return AjaxResult.success("请求成功");
+        return AjaxResult.success("操作成功");
     }
 
     /**
@@ -72,7 +76,7 @@ public class AjaxResult extends HashMap<String, Object> {
      * @return 成功消息
      */
     public static AjaxResult success(Object data) {
-        return AjaxResult.success("请求成功", data);
+        return AjaxResult.success("操作成功", data);
     }
 
     /**
@@ -97,12 +101,33 @@ public class AjaxResult extends HashMap<String, Object> {
     }
 
     /**
+     * 返回警告消息
+     *
+     * @param msg 返回内容
+     * @return 警告消息
+     */
+    public static AjaxResult warn(String msg) {
+        return AjaxResult.warn(msg, null);
+    }
+
+    /**
+     * 返回警告消息
+     *
+     * @param msg  返回内容
+     * @param data 数据对象
+     * @return 警告消息
+     */
+    public static AjaxResult warn(String msg, Object data) {
+        return new AjaxResult(HttpStatus.WARN, msg, data);
+    }
+
+    /**
      * 返回错误消息
      *
      * @return
      */
     public static AjaxResult error() {
-        return AjaxResult.error("请求失败");
+        return AjaxResult.error("操作失败");
     }
 
     /**
@@ -138,6 +163,24 @@ public class AjaxResult extends HashMap<String, Object> {
     }
 
     /**
+     * 是否为成功消息
+     *
+     * @return 结果
+     */
+    public boolean isSuccess() {
+        return Objects.equals(HttpStatus.SUCCESS, this.get(CODE_TAG));
+    }
+
+    /**
+     * 是否为错误消息
+     *
+     * @return 结果
+     */
+    public boolean isError() {
+        return !isSuccess();
+    }
+
+    /**
      * 方便链式调用
      *
      * @param key
@@ -149,4 +192,5 @@ public class AjaxResult extends HashMap<String, Object> {
         super.put(key, value);
         return this;
     }
+
 }

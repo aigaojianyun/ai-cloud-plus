@@ -4,7 +4,7 @@ import com.cloud.common.constant.HttpStatus;
 import com.cloud.common.utils.DateUtils;
 import com.cloud.common.utils.PageUtils;
 import com.cloud.common.web.domain.AjaxResult;
-import com.cloud.common.web.page.PageList;
+import com.cloud.common.web.page.TableDataInfo;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,16 +45,65 @@ public class BaseController {
     }
 
     /**
+     * 清理分页的线程变量
+     */
+    protected void clearPage() {
+        PageUtils.clearPage();
+    }
+
+    /**
      * 响应请求分页数据
      */
     @SuppressWarnings({"rawtypes", "unchecked"})
-    protected PageList getDataTable(List<?> list) {
-        PageList rspData = new PageList();
+    protected TableDataInfo getDataTable(List<?> list) {
+        TableDataInfo rspData = new TableDataInfo();
         rspData.setCode(HttpStatus.SUCCESS);
         rspData.setRows(list);
         rspData.setMsg("查询成功");
         rspData.setTotal(new PageInfo(list).getTotal());
         return rspData;
+    }
+
+    /**
+     * 返回成功
+     */
+    public AjaxResult success() {
+        return AjaxResult.success();
+    }
+
+    /**
+     * 返回成功消息
+     */
+    public AjaxResult success(String message) {
+        return AjaxResult.success(message);
+    }
+
+    /**
+     * 返回成功消息
+     */
+    public AjaxResult success(Object data) {
+        return AjaxResult.success(data);
+    }
+
+    /**
+     * 返回失败消息
+     */
+    public AjaxResult error() {
+        return AjaxResult.error();
+    }
+
+    /**
+     * 返回失败消息
+     */
+    public AjaxResult error(String message) {
+        return AjaxResult.error(message);
+    }
+
+    /**
+     * 返回警告消息
+     */
+    public AjaxResult warn(String message) {
+        return AjaxResult.warn(message);
     }
 
     /**
@@ -75,33 +124,5 @@ public class BaseController {
      */
     protected AjaxResult toAjax(boolean result) {
         return result ? success() : error();
-    }
-
-    /**
-     * 返回成功
-     */
-    public AjaxResult success() {
-        return AjaxResult.success();
-    }
-
-    /**
-     * 返回失败消息
-     */
-    public AjaxResult error() {
-        return AjaxResult.error();
-    }
-
-    /**
-     * 返回成功消息
-     */
-    public AjaxResult success(String message) {
-        return AjaxResult.success(message);
-    }
-
-    /**
-     * 返回失败消息
-     */
-    public AjaxResult error(String message) {
-        return AjaxResult.error(message);
     }
 }

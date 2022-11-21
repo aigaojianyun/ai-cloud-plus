@@ -476,17 +476,12 @@ public class Convert {
         valueStr = valueStr.trim().toLowerCase();
         switch (valueStr) {
             case "true":
-                return true;
-            case "false":
-                return false;
             case "yes":
-                return true;
             case "ok":
-                return true;
-            case "no":
-                return false;
             case "1":
                 return true;
+            case "false":
+            case "no":
             case "0":
                 return false;
             default:
@@ -759,8 +754,8 @@ public class Convert {
      * @param input String.
      * @return 全角字符串.
      */
-    public static String toSbc(String input) {
-        return toSbc(input, null);
+    public static String toSBC(String input) {
+        return toSBC(input, null);
     }
 
     /**
@@ -770,7 +765,7 @@ public class Convert {
      * @param notConvertSet 不替换的字符集合
      * @return 全角字符串.
      */
-    public static String toSbc(String input, Set<Character> notConvertSet) {
+    public static String toSBC(String input, Set<Character> notConvertSet) {
         char[] c = input.toCharArray();
         for (int i = 0; i < c.length; i++) {
             if (null != notConvertSet && notConvertSet.contains(c[i])) {
@@ -794,8 +789,8 @@ public class Convert {
      * @param input String.
      * @return 半角字符串
      */
-    public static String toDbc(String input) {
-        return toDbc(input, null);
+    public static String toDBC(String input) {
+        return toDBC(input, null);
     }
 
     /**
@@ -805,7 +800,7 @@ public class Convert {
      * @param notConvertSet 不替换的字符集合
      * @return 替换后的字符
      */
-    public static String toDbc(String text, Set<Character> notConvertSet) {
+    public static String toDBC(String text, Set<Character> notConvertSet) {
         char[] c = text.toCharArray();
         for (int i = 0; i < c.length; i++) {
             if (null != notConvertSet && notConvertSet.contains(c[i])) {

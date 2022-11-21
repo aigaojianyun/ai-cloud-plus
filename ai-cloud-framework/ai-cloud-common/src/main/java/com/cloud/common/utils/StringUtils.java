@@ -1,5 +1,6 @@
 package com.cloud.common.utils;
 
+import cn.hutool.core.util.StrUtil;
 import com.cloud.common.constant.Constants;
 import com.cloud.common.text.StrFormatter;
 import org.springframework.util.AntPathMatcher;
@@ -23,6 +24,17 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      * 下划线
      */
     private static final char SEPARATOR = '_';
+
+
+    /**
+     * 获取参数不为空值
+     *
+     * @param str defaultValue 要判断的value
+     * @return value 返回值
+     */
+    public static String blankToDefault(String str, String defaultValue) {
+        return StrUtil.blankToDefault(str, defaultValue);
+    }
 
     /**
      * 获取参数不为空值
@@ -263,6 +275,26 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      */
     public static boolean ishttp(String link) {
         return StringUtils.startsWithAny(link, Constants.HTTP, Constants.HTTPS);
+    }
+
+    /**
+     * 判断给定的set列表中是否包含数组array 判断给定的数组array中是否包含给定的元素value
+     *
+     * @param set   给定的集合
+     * @param array 给定的数组
+     * @return boolean 结果
+     */
+    public static boolean containsAny(Collection<String> collection, String... array) {
+        if (isEmpty(collection) || isEmpty(array)) {
+            return false;
+        } else {
+            for (String str : array) {
+                if (collection.contains(str)) {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
     /**

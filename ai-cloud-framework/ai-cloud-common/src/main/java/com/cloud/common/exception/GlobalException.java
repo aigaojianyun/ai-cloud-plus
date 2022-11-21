@@ -6,7 +6,6 @@ package com.cloud.common.exception;
  * @author ai-cloud
  */
 public class GlobalException extends RuntimeException {
-
     private static final long serialVersionUID = 1L;
 
     /**

@@ -1,7 +1,7 @@
 package com.cloud.common.constant;
 
 /**
- * 用户相关通用常量
+ * 权限相关通用常量
  *
  * @author ai-cloud
  */
@@ -15,11 +15,6 @@ public class SecurityConstants {
      * 用户名字段
      */
     public static final String DETAILS_USERNAME = "username";
-
-    /**
-     * 用户设备唯一标识
-     */
-    public static final String DETAILS_DEVICEID = "deviceId";
 
     /**
      * 授权信息字段
@@ -45,4 +40,9 @@ public class SecurityConstants {
      * 登录用户
      */
     public static final String LOGIN_USER = "login_user";
+
+    /**
+     * 角色权限
+     */
+    public static final String ROLE_PERMISSION = "role_permission";
 }

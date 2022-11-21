@@ -1,17 +1,17 @@
 package com.cloud.security.utils;
 
-import com.cloud.auth.api.domain.model.LoginUser;
 import com.cloud.common.constant.SecurityConstants;
 import com.cloud.common.constant.TokenConstants;
 import com.cloud.common.context.SecurityContextHolder;
 import com.cloud.common.utils.ServletUtils;
 import com.cloud.common.utils.StringUtils;
+import com.cloud.system.api.model.LoginUser;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 用户获取工具类
+ * 权限获取工具类
  *
  * @author ai-cloud
  */
@@ -19,7 +19,7 @@ public class SecurityUtils {
     /**
      * 获取用户ID
      */
-    public static String getUserId() {
+    public static Long getUserId() {
         return SecurityContextHolder.getUserId();
     }
 
@@ -69,6 +69,16 @@ public class SecurityUtils {
             token = token.replaceFirst(TokenConstants.PREFIX, "");
         }
         return token;
+    }
+
+    /**
+     * 是否为管理员
+     *
+     * @param userId 用户ID
+     * @return 结果
+     */
+    public static boolean isAdmin(Long userId) {
+        return userId != null && 1L == userId;
     }
 
     /**

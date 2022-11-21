@@ -1,0 +1,2 @@
+com.cloud.log.service.AsyncLogService
+com.cloud.log.aspect.LogAspect

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.user.mapper.UserVipEquityMapper">
+
+    <resultMap type="com.cloud.user.domain.UserVipEquity" id="UserVipEquityResult">
+        <result property="id" column="id"/>
+        <result property="vipId" column="vip_id"/>
+        <result property="name" column="name"/>
+        <result property="introduce" column="introduce"/>
+        <result property="icon" column="icon"/>
+        <result property="weight" column="weight"/>
+        <result property="link" column="link"/>
+        <result property="statusFlag" column="status_flag"/>
+        <result property="deleteFlag" column="delete_flag"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+
+</mapper>

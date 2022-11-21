@@ -13,6 +13,6 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 public class CloudGatewayApplication {
     public static void main(String[] args) {
         SpringApplication.run(CloudGatewayApplication.class, args);
-        System.out.println("网关启动成功");
+        System.out.println("(♥◠‿◠)ﾉﾞ  网关启动成功   ლ(´ڡ`ლ)");
     }
 }

@@ -1,6 +1,7 @@
 package com.cloud.security.annotation;
 
 import com.cloud.security.config.ApplicationConfig;
+import com.cloud.security.config.MybatisPlusConfig;
 import com.cloud.security.feign.FeignAutoConfiguration;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -9,11 +10,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 import java.lang.annotation.*;
 
-/**
- * EnableCustomConfig
- *
- * @author ai-cloud
- */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
@@ -25,7 +21,7 @@ import java.lang.annotation.*;
 // 开启线程异步执行
 @EnableAsync
 // 自动加载类
-@Import({ApplicationConfig.class, FeignAutoConfiguration.class})
+@Import({ApplicationConfig.class, FeignAutoConfiguration.class, MybatisPlusConfig.class})
 public @interface EnableCustomConfig {
 
 }

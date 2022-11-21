@@ -3,76 +3,76 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>ai-cloud-modules</artifactId>
         <groupId>com.cloud</groupId>
+        <artifactId>ai-cloud-modules</artifactId>
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    
+
     <artifactId>ai-cloud-file</artifactId>
-    
+
     <description>
-        cloud-file文件服务
+        ai-cloud-file文件服务
     </description>
-    
+
     <dependencies>
-        
+
         <!-- SpringCloud Alibaba Nacos -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
-        
+
         <!-- SpringCloud Alibaba Nacos Config -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
-        
+
         <!-- SpringCloud Alibaba Sentinel -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
         </dependency>
-        
+
         <!-- SpringBoot Actuator -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        
+
         <!-- FastDFS -->
         <dependency>
             <groupId>com.github.tobato</groupId>
             <artifactId>fastdfs-client</artifactId>
         </dependency>
-        
+
         <!-- Minio -->
         <dependency>
             <groupId>io.minio</groupId>
             <artifactId>minio</artifactId>
         </dependency>
-        
-        <!-- Swagger UI -->
+
+        <!-- 阿里OSS -->
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
         </dependency>
-        
-        <!-- 接口模块 -->
-        <dependency>
-            <groupId>com.cloud</groupId>
-            <artifactId>ai-cloud-swagger</artifactId>
-        </dependency>
-        
-        <!-- file对内接口模块 -->
+
+        <!-- Api File -->
         <dependency>
             <groupId>com.cloud</groupId>
             <artifactId>ai-cloud-file-api</artifactId>
         </dependency>
-    
+
+        <!-- Swagger -->
+        <dependency>
+            <groupId>com.cloud</groupId>
+            <artifactId>ai-cloud-swagger</artifactId>
+        </dependency>
+
     </dependencies>
-    
+
     <build>
         <finalName>${project.artifactId}</finalName>
         <plugins>

@@ -30,9 +30,7 @@ import reactor.core.publisher.Mono;
 public class AuthFilter implements GlobalFilter, Ordered {
     private static final Logger log = LoggerFactory.getLogger(AuthFilter.class);
 
-    /**
-     * 排除过滤的 uri 地址，nacos自行添加
-     */
+    // 排除过滤的 uri 地址，nacos自行添加
     @Autowired
     private IgnoreWhiteProperties ignoreWhite;
 
@@ -52,21 +50,21 @@ public class AuthFilter implements GlobalFilter, Ordered {
         }
         String token = getToken(request);
         if (StringUtils.isEmpty(token)) {
-            return unauthorizedResponse(exchange, "token不能为空");
+            return unauthorizedResponse(exchange, "令牌不能为空");
         }
         Claims claims = JwtUtils.parseToken(token);
         if (claims == null) {
-            return unauthorizedResponse(exchange, "token已过期或验证不正确！");
+            return unauthorizedResponse(exchange, "令牌已过期或验证不正确！");
         }
         String userkey = JwtUtils.getUserKey(claims);
         boolean islogin = redisService.hasKey(getTokenKey(userkey));
         if (!islogin) {
-            return unauthorizedResponse(exchange, "登录状态已过期,请重新登录！");
+            return unauthorizedResponse(exchange, "令牌登录状态已过期");
         }
         String userid = JwtUtils.getUserId(claims);
         String username = JwtUtils.getUserName(claims);
         if (StringUtils.isEmpty(userid) || StringUtils.isEmpty(username)) {
-            return unauthorizedResponse(exchange, "token验证失败");
+            return unauthorizedResponse(exchange, "令牌验证失败");
         }
 
         // 设置用户信息到请求
@@ -108,7 +106,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
      */
     private String getToken(ServerHttpRequest request) {
         String token = request.getHeaders().getFirst(TokenConstants.AUTHENTICATION);
-        // 如果前端设置了token前缀，则裁剪掉前缀
+        // 如果前端设置了令牌前缀，则裁剪掉前缀
         if (StringUtils.isNotEmpty(token) && token.startsWith(TokenConstants.PREFIX)) {
             token = token.replaceFirst(TokenConstants.PREFIX, StringUtils.EMPTY);
         }

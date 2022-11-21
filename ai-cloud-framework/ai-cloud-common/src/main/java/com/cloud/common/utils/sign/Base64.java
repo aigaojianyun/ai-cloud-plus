@@ -6,19 +6,19 @@ package com.cloud.common.utils.sign;
  * @author ai-cloud
  */
 public final class Base64 {
-    static private final int BASE_LENGTH = 128;
-    static private final int LOOK_UP_LENGTH = 64;
+    static private final int BASELENGTH = 128;
+    static private final int LOOKUPLENGTH = 64;
     static private final int TWENTYFOURBITGROUP = 24;
-    static private final int EIGHT_BIT = 8;
-    static private final int SIXTEEN_BIT = 16;
-    static private final int FOUR_BYTE = 4;
+    static private final int EIGHTBIT = 8;
+    static private final int SIXTEENBIT = 16;
+    static private final int FOURBYTE = 4;
     static private final int SIGN = -128;
     static private final char PAD = '=';
-    static final private byte[] BASE64ALPHABET = new byte[BASE_LENGTH];
-    static final private char[] LOOK_UP_BASE64_ALPHABET = new char[LOOK_UP_LENGTH];
+    static final private byte[] BASE64ALPHABET = new byte[BASELENGTH];
+    static final private char[] LOOK_UP_BASE64_ALPHABET = new char[LOOKUPLENGTH];
 
     static {
-        for (int i = 0; i < BASE_LENGTH; ++i) {
+        for (int i = 0; i < BASELENGTH; ++i) {
             BASE64ALPHABET[i] = -1;
         }
         for (int i = 'Z'; i >= 'A'; i--) {
@@ -59,7 +59,7 @@ public final class Base64 {
     }
 
     private static boolean isData(char octect) {
-        return (octect < BASE_LENGTH && BASE64ALPHABET[octect] != -1);
+        return (octect < BASELENGTH && BASE64ALPHABET[octect] != -1);
     }
 
     /**
@@ -73,7 +73,7 @@ public final class Base64 {
             return null;
         }
 
-        int lengthDataBits = binaryData.length * EIGHT_BIT;
+        int lengthDataBits = binaryData.length * EIGHTBIT;
         if (lengthDataBits == 0) {
             return "";
         }
@@ -109,7 +109,7 @@ public final class Base64 {
         }
 
         // form integral number of 6-bit groups
-        if (fewerThan24bits == EIGHT_BIT) {
+        if (fewerThan24bits == EIGHTBIT) {
             b1 = binaryData[dataIndex];
             k = (byte) (b1 & 0x03);
             byte val1 = ((b1 & SIGN) == 0) ? (byte) (b1 >> 2) : (byte) ((b1) >> 2 ^ 0xc0);
@@ -117,7 +117,7 @@ public final class Base64 {
             encodedData[encodedIndex++] = LOOK_UP_BASE64_ALPHABET[k << 4];
             encodedData[encodedIndex++] = PAD;
             encodedData[encodedIndex++] = PAD;
-        } else if (fewerThan24bits == SIXTEEN_BIT) {
+        } else if (fewerThan24bits == SIXTEENBIT) {
             b1 = binaryData[dataIndex];
             b2 = binaryData[dataIndex + 1];
             l = (byte) (b2 & 0x0f);
@@ -149,12 +149,11 @@ public final class Base64 {
         // remove white spaces
         int len = removeWhiteSpace(base64Data);
 
-        if (len % FOUR_BYTE != 0) {
-            // should be divisible by four
-            return null;
+        if (len % FOURBYTE != 0) {
+            return null;// should be divisible by four
         }
 
-        int numberQuadruple = (len / FOUR_BYTE);
+        int numberQuadruple = (len / FOURBYTE);
 
         if (numberQuadruple == 0) {
             return new byte[0];
@@ -187,8 +186,7 @@ public final class Base64 {
         }
 
         if (!isData((d1 = base64Data[dataIndex++])) || !isData((d2 = base64Data[dataIndex++]))) {
-            // if found "no data" just return null
-            return null;
+            return null;// if found "no data" just return null
         }
 
         b1 = BASE64ALPHABET[d1];
@@ -196,11 +194,10 @@ public final class Base64 {
 
         d3 = base64Data[dataIndex++];
         d4 = base64Data[dataIndex++];
-        // Check if they are PAD characters
-        if (!isData((d3)) || !isData((d4))) {
+        if (!isData((d3)) || !isData((d4))) {// Check if they are PAD characters
             if (isPad(d3) && isPad(d4)) {
-                // last 4 bits should be zero
-                if ((b2 & 0xf) != 0) {
+                if ((b2 & 0xf) != 0)// last 4 bits should be zero
+                {
                     return null;
                 }
                 byte[] tmp = new byte[i * 3 + 1];
@@ -209,8 +206,8 @@ public final class Base64 {
                 return tmp;
             } else if (!isPad(d3) && isPad(d4)) {
                 b3 = BASE64ALPHABET[d3];
-                // last 2 bits should be zero
-                if ((b3 & 0x3) != 0) {
+                if ((b3 & 0x3) != 0)// last 2 bits should be zero
+                {
                     return null;
                 }
                 byte[] tmp = new byte[i * 3 + 2];

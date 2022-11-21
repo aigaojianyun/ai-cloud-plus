@@ -1,7 +1,7 @@
 package com.cloud.file.api.service;
 
 import com.cloud.common.constant.ServiceNameConstants;
-import com.cloud.common.model.Response;
+import com.cloud.common.domain.R;
 import com.cloud.file.api.domain.File;
 import com.cloud.file.api.factory.RemoteFileFallbackFactory;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
  *
  * @author ai-cloud
  */
-@FeignClient(contextId = "remoteFileService", value = ServiceNameConstants.FILE_SERVICE, fallbackFactory = RemoteFileFallbackFactory.class)
+@FeignClient(contextId = "remoteSysFileService", value = ServiceNameConstants.FILE_SERVICE, fallbackFactory = RemoteFileFallbackFactory.class)
 public interface RemoteFileService {
     /**
      * 上传文件
@@ -24,5 +24,5 @@ public interface RemoteFileService {
      * @return 结果
      */
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Response<File> upload(@RequestPart(value = "file") MultipartFile file);
+    public R<File> upload(@RequestPart(value = "file") MultipartFile file);
 }

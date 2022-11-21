@@ -11,19 +11,16 @@ import springfox.documentation.swagger.web.*;
 
 import java.util.Optional;
 
-/**
- * swagger ui配置
- *
- * @author ai-cloud
- */
 @RestController
 @RequestMapping("/swagger-resources")
 public class SwaggerHandler {
-    private final SwaggerResourcesProvider swaggerResources;
     @Autowired(required = false)
     private SecurityConfiguration securityConfiguration;
+
     @Autowired(required = false)
     private UiConfiguration uiConfiguration;
+
+    private final SwaggerResourcesProvider swaggerResources;
 
     @Autowired
     public SwaggerHandler(SwaggerResourcesProvider swaggerResources) {

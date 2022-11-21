@@ -1,6 +1,7 @@
 package com.cloud.gateway.filter;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
 import com.cloud.common.utils.ServletUtils;
 import com.cloud.common.utils.StringUtils;
 import com.cloud.gateway.config.properties.CaptchaProperties;
@@ -26,12 +27,16 @@ import java.util.concurrent.atomic.AtomicReference;
 @Component
 public class ValidateCodeFilter extends AbstractGatewayFilterFactory<Object> {
     private final static String[] VALIDATE_URL = new String[]{"/auth/login", "/auth/register"};
-    private static final String CODE = "code";
-    private static final String UUID = "uuid";
+
     @Autowired
     private ValidateCodeService validateCodeService;
+
     @Autowired
     private CaptchaProperties captchaProperties;
+
+    private static final String CODE = "code";
+
+    private static final String UUID = "uuid";
 
     @Override
     public GatewayFilter apply(Object config) {
@@ -45,7 +50,7 @@ public class ValidateCodeFilter extends AbstractGatewayFilterFactory<Object> {
 
             try {
                 String rspStr = resolveBodyFromRequest(request);
-                JSONObject obj = JSONObject.parseObject(rspStr);
+                JSONObject obj = JSON.parseObject(rspStr);
                 validateCodeService.checkCaptcha(obj.getString(CODE), obj.getString(UUID));
             } catch (Exception e) {
                 return ServletUtils.webFluxResponseWriter(exchange.getResponse(), e.getMessage());

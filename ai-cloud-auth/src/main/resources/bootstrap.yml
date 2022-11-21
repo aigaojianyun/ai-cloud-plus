@@ -1,12 +1,12 @@
 # Tomcat
 server:
-  port: 8800
+  port: 9101
 
 # Spring
 spring:
   application:
     # 应用名称
-    name: cloud-auth
+    name: ai-cloud-auth
   profiles:
     # 环境配置
     active: dev

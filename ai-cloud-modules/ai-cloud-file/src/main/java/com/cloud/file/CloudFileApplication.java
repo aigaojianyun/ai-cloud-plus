@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 /**
- * 文件中心
+ * 文件服务
  *
  * @author ai-cloud
  */
@@ -15,6 +15,6 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 public class CloudFileApplication {
     public static void main(String[] args) {
         SpringApplication.run(CloudFileApplication.class, args);
-        System.out.println("文件服务启动成功");
+        System.out.println("(♥◠‿◠)ﾉﾞ  文件服务模块启动成功   ლ(´ڡ`ლ)");
     }
 }

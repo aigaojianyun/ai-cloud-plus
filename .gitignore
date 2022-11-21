@@ -27,7 +27,6 @@ target/
 
 ### JRebel ###
 rebel.xml
-
 ### NetBeans ###
 nbproject/private/
 build/*
@@ -45,4 +44,9 @@ nbdist/
 !*/build/*.java
 !*/build/*.html
 !*/build/*.xml
-logs/*
+
+### Docker ###
+docker/cloud/**/jar/**.jar
+docker/cloud/modules/**/jar/**.jar
+docker/cloud/visual/**/jar/**.jar
+docker/cloud/web/**/jar/**.jar

@@ -3,8 +3,6 @@ package com.cloud.auth.param;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 手机验证码请求参数
@@ -12,8 +10,6 @@ import lombok.Setter;
  * @author ai-cloud
  */
 @Data
-@Getter
-@Setter
 @ApiModel("手机验证码请求参数")
 public class VerifyCodeParam extends BaseParam {
 

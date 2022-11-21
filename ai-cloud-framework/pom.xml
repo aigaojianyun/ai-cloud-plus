@@ -1,25 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>ai-cloud-app</artifactId>
         <groupId>com.cloud</groupId>
+        <artifactId>ai-cloud</artifactId>
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    
-    <artifactId>ai-cloud-framework</artifactId>
-    
-    <packaging>pom</packaging>
-    
+
     <modules>
         <module>ai-cloud-common</module>
+        <module>ai-cloud-datascope</module>
         <module>ai-cloud-datasource</module>
         <module>ai-cloud-log</module>
-        <module>ai-cloud-security</module>
         <module>ai-cloud-redis</module>
+        <module>ai-cloud-security</module>
         <module>ai-cloud-swagger</module>
+        <module>ai-cloud-sms</module>
+        <module>ai-cloud-mail</module>
+        <module>ai-cloud-seata</module>
     </modules>
+
+    <artifactId>ai-cloud-framework</artifactId>
+    <packaging>pom</packaging>
+
+    <description>
+        ai-cloud-framework通用模块
+    </description>
 
 </project>

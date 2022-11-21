@@ -1,6 +1,5 @@
 package com.cloud.log.annotation;
 
-
 import com.cloud.log.enums.BusinessType;
 import com.cloud.log.enums.OperatorType;
 
@@ -28,7 +27,7 @@ public @interface Log {
     /**
      * 操作人类别
      */
-    public OperatorType operatorType() default OperatorType.MOBILE;
+    public OperatorType operatorType() default OperatorType.MANAGE;
 
     /**
      * 是否保存请求的参数

@@ -6,21 +6,23 @@ package com.cloud.common.constant;
  * @author ai-cloud
  */
 public class ServiceNameConstants {
+    /**
+     * 认证服务的serviceid
+     */
+    public static final String AUTH_SERVICE = "ai-cloud-auth";
 
     /**
-     * 用户服务的serviceid
+     * 系统模块的serviceid
      */
-    public static final String USER_SERVICE = "cloud-user";
+    public static final String SYSTEM_SERVICE = "ai-cloud-system";
 
     /**
      * 文件服务的serviceid
      */
-    public static final String FILE_SERVICE = "cloud-file";
+    public static final String FILE_SERVICE = "ai-cloud-file";
 
     /**
-     * 支付服务的serviceid
+     * 用户服务的serviceid
      */
-    public static final String PAY_SERVICE = "cloud-pay";
-
+    public static final String USER_SERVICE = "ai-cloud-user";
 }
-

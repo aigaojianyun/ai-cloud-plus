@@ -17,6 +17,11 @@ public class Constants {
     public static final String GBK = "GBK";
 
     /**
+     * www主域
+     */
+    public static final String WWW = "www.";
+
+    /**
      * RMI 远程方法调用
      */
     public static final String LOOKUP_RMI = "rmi:";
@@ -102,20 +107,9 @@ public class Constants {
     public static final String IS_ASC = "isAsc";
 
     /**
-     * 验证码 redis key
-     */
-    public static final String CAPTCHA_CODE_KEY = "captcha_codes:";
-
-    /**
      * 验证码有效期（分钟）
      */
-    public static final long CAPTCHA_EXPIRATION = 2;
-
-
-    /**
-     * 参数管理 cache key
-     */
-    public static final String SYS_CONFIG_KEY = "user_config:";
+    public static final long CAPTCHA_EXPIRATION = 30;
 
     /**
      * 资源映射路径 前缀
@@ -131,5 +125,5 @@ public class Constants {
      * 定时任务违规的字符
      */
     public static final String[] JOB_ERROR_STR = {"java.net.URL", "javax.naming.InitialContext", "org.yaml.snakeyaml",
-            "org.springframework", "org.apache", "com.cloud.common.utils.file"};
+            "org.springframework", "org.apache", "com.cloud.common.core.utils.file"};
 }

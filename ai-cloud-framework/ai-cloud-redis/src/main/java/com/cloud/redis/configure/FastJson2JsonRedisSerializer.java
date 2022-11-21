@@ -3,12 +3,8 @@ package com.cloud.redis.configure;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONReader;
 import com.alibaba.fastjson2.JSONWriter;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationException;
-import org.springframework.util.Assert;
 
 import java.nio.charset.Charset;
 
@@ -19,8 +15,7 @@ import java.nio.charset.Charset;
  */
 public class FastJson2JsonRedisSerializer<T> implements RedisSerializer<T> {
     public static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
-    @SuppressWarnings("unused")
-    private ObjectMapper objectMapper = new ObjectMapper();
+
     private Class<T> clazz;
 
 
@@ -45,14 +40,5 @@ public class FastJson2JsonRedisSerializer<T> implements RedisSerializer<T> {
         String str = new String(bytes, DEFAULT_CHARSET);
 
         return JSON.parseObject(str, clazz, JSONReader.Feature.SupportAutoType);
-    }
-
-    public void setObjectMapper(ObjectMapper objectMapper) {
-        Assert.notNull(objectMapper, "'objectMapper' must not be null");
-        this.objectMapper = objectMapper;
-    }
-
-    protected JavaType getJavaType(Class<?> clazz) {
-        return TypeFactory.defaultInstance().constructType(clazz);
     }
 }

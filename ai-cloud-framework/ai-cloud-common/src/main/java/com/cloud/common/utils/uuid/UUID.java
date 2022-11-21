@@ -15,10 +15,19 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public final class UUID implements java.io.Serializable, Comparable<UUID> {
     private static final long serialVersionUID = -1185015143654744140L;
+
+    /**
+     * SecureRandom 的单例
+     */
+    private static class Holder {
+        static final SecureRandom NUMBER_GENERATOR = getSecureRandom();
+    }
+
     /**
      * 此UUID的最高64有效位
      */
     private final long mostSigBits;
+
     /**
      * 此UUID的最低64有效位
      */
@@ -83,14 +92,10 @@ public final class UUID implements java.io.Serializable, Comparable<UUID> {
 
         byte[] randomBytes = new byte[16];
         ng.nextBytes(randomBytes);
-        /* clear version */
-        randomBytes[6] &= 0x0f;
-        /* set to version 4 */
-        randomBytes[6] |= 0x40;
-        /* clear variant */
-        randomBytes[8] &= 0x3f;
-        /* set to IETF variant */
-        randomBytes[8] |= 0x80;
+        randomBytes[6] &= 0x0f; /* clear version */
+        randomBytes[6] |= 0x40; /* set to version 4 */
+        randomBytes[8] &= 0x3f; /* clear variant */
+        randomBytes[8] |= 0x80; /* set to IETF variant */
         return new UUID(randomBytes);
     }
 
@@ -108,14 +113,10 @@ public final class UUID implements java.io.Serializable, Comparable<UUID> {
             throw new InternalError("MD5 not supported");
         }
         byte[] md5Bytes = md.digest(name);
-        /* clear version */
-        md5Bytes[6] &= 0x0f;
-        /* set to version 3 */
-        md5Bytes[6] |= 0x30;
-        /* clear variant */
-        md5Bytes[8] &= 0x3f;
-        /* set to IETF variant */
-        md5Bytes[8] |= 0x80;
+        md5Bytes[6] &= 0x0f; /* clear version */
+        md5Bytes[6] |= 0x30; /* set to version 3 */
+        md5Bytes[8] &= 0x3f; /* clear variant */
+        md5Bytes[8] |= 0x80; /* set to IETF variant */
         return new UUID(md5Bytes);
     }
 
@@ -146,41 +147,6 @@ public final class UUID implements java.io.Serializable, Comparable<UUID> {
         leastSigBits |= Long.decode(components[4]).longValue();
 
         return new UUID(mostSigBits, leastSigBits);
-    }
-
-    /**
-     * 返回指定数字对应的hex值
-     *
-     * @param val    值
-     * @param digits 位
-     * @return 值
-     */
-    private static String digits(long val, int digits) {
-        long hi = 1L << (digits * 4);
-        return Long.toHexString(hi | (val & (hi - 1))).substring(1);
-    }
-
-    /**
-     * 获取{@link SecureRandom}，类提供加密的强随机数生成器 (RNG)
-     *
-     * @return {@link SecureRandom}
-     */
-    public static SecureRandom getSecureRandom() {
-        try {
-            return SecureRandom.getInstance("SHA1PRNG");
-        } catch (NoSuchAlgorithmException e) {
-            throw new UtilException(e);
-        }
-    }
-
-    /**
-     * 获取随机数生成器对象<br>
-     * ThreadLocalRandom是JDK 7之后提供并发产生随机数，能够解决多个线程发生的竞争争夺。
-     *
-     * @return {@link ThreadLocalRandom}
-     */
-    public static ThreadLocalRandom getRandom() {
-        return ThreadLocalRandom.current();
     }
 
     /**
@@ -256,8 +222,8 @@ public final class UUID implements java.io.Serializable, Comparable<UUID> {
      */
     public long timestamp() throws UnsupportedOperationException {
         checkTimeBase();
-        return (mostSigBits & 0x0FFFL) << 48
-                | ((mostSigBits >> 16) & 0x0FFFFL) << 32
+        return (mostSigBits & 0x0FFFL) << 48//
+                | ((mostSigBits >> 16) & 0x0FFFFL) << 32//
                 | mostSigBits >>> 32;
     }
 
@@ -376,8 +342,6 @@ public final class UUID implements java.io.Serializable, Comparable<UUID> {
         return builder.toString();
     }
 
-    // Comparison Operations
-
     /**
      * 返回此 UUID 的哈希码。
      *
@@ -388,9 +352,6 @@ public final class UUID implements java.io.Serializable, Comparable<UUID> {
         long hilo = mostSigBits ^ leastSigBits;
         return ((int) (hilo >> 32)) ^ (int) hilo;
     }
-
-    // -------------------------------------------------------------------------------------------------------------------
-    // Private method start
 
     /**
      * 将此对象与指定对象比较。
@@ -409,6 +370,8 @@ public final class UUID implements java.io.Serializable, Comparable<UUID> {
         return (mostSigBits == id.mostSigBits && leastSigBits == id.leastSigBits);
     }
 
+    // Comparison Operations
+
     /**
      * 将此 UUID 与指定的 UUID 比较。
      *
@@ -422,11 +385,26 @@ public final class UUID implements java.io.Serializable, Comparable<UUID> {
     public int compareTo(UUID val) {
         // The ordering is intentionally set up so that the UUIDs
         // can simply be numerically compared as two numbers
-        return (this.mostSigBits < val.mostSigBits ? -1 :
-                (this.mostSigBits > val.mostSigBits ? 1 :
-                        (this.leastSigBits < val.leastSigBits ? -1 :
-                                (this.leastSigBits > val.leastSigBits ? 1 :
+        return (this.mostSigBits < val.mostSigBits ? -1 : //
+                (this.mostSigBits > val.mostSigBits ? 1 : //
+                        (this.leastSigBits < val.leastSigBits ? -1 : //
+                                (this.leastSigBits > val.leastSigBits ? 1 : //
                                         0))));
+    }
+
+    // -------------------------------------------------------------------------------------------------------------------
+    // Private method start
+
+    /**
+     * 返回指定数字对应的hex值
+     *
+     * @param val    值
+     * @param digits 位
+     * @return 值
+     */
+    private static String digits(long val, int digits) {
+        long hi = 1L << (digits * 4);
+        return Long.toHexString(hi | (val & (hi - 1))).substring(1);
     }
 
     /**
@@ -439,9 +417,25 @@ public final class UUID implements java.io.Serializable, Comparable<UUID> {
     }
 
     /**
-     * SecureRandom 的单例
+     * 获取{@link SecureRandom}，类提供加密的强随机数生成器 (RNG)
+     *
+     * @return {@link SecureRandom}
      */
-    private static class Holder {
-        static final SecureRandom NUMBER_GENERATOR = getSecureRandom();
+    public static SecureRandom getSecureRandom() {
+        try {
+            return SecureRandom.getInstance("SHA1PRNG");
+        } catch (NoSuchAlgorithmException e) {
+            throw new UtilException(e);
+        }
+    }
+
+    /**
+     * 获取随机数生成器对象<br>
+     * ThreadLocalRandom是JDK 7之后提供并发产生随机数，能够解决多个线程发生的竞争争夺。
+     *
+     * @return {@link ThreadLocalRandom}
+     */
+    public static ThreadLocalRandom getRandom() {
+        return ThreadLocalRandom.current();
     }
 }

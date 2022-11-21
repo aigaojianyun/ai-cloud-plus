@@ -1,17 +1,15 @@
 package com.cloud.log.aspect;
 
-
 import com.alibaba.fastjson2.JSON;
-import com.cloud.auth.api.domain.UserOperLog;
 import com.cloud.common.utils.ServletUtils;
 import com.cloud.common.utils.StringUtils;
 import com.cloud.common.utils.ip.IpUtils;
-import com.cloud.common.utils.uuid.IdUtils;
 import com.cloud.log.annotation.Log;
 import com.cloud.log.enums.BusinessStatus;
 import com.cloud.log.filter.PropertyPreExcludeFilter;
 import com.cloud.log.service.AsyncLogService;
 import com.cloud.security.utils.SecurityUtils;
+import com.cloud.system.api.domain.SysOperLog;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -71,8 +69,7 @@ public class LogAspect {
     protected void handleLog(final JoinPoint joinPoint, Log controllerLog, final Exception e, Object jsonResult) {
         try {
             // *========数据库日志=========*//
-            UserOperLog operLog = new UserOperLog();
-            operLog.setId(IdUtils.fastSimpleUUID());
+            SysOperLog operLog = new SysOperLog();
             operLog.setStatus(BusinessStatus.SUCCESS.ordinal());
             // 请求的地址
             String ip = IpUtils.getIpAddr(ServletUtils.getRequest());
@@ -96,11 +93,7 @@ public class LogAspect {
             // 处理设置注解上的参数
             getControllerMethodDescription(joinPoint, controllerLog, operLog, jsonResult);
             // 保存数据库
-            asyncLogService.saveUserOperLog(operLog);
-            //记录请求信息(通过Logstash传入Elasticsearch)
-            //Map<String, Object> logMap = new HashMap<>();
-            //logMap.put("logMap", operLog);
-            //log.info(Markers.appendEntries(logMap), JSONUtil.parse(operLog).toString());
+            asyncLogService.saveSysLog(operLog);
         } catch (Exception exp) {
             // 记录本地异常日志
             log.error("==前置通知异常==");
@@ -116,7 +109,7 @@ public class LogAspect {
      * @param operLog 操作日志
      * @throws Exception
      */
-    public void getControllerMethodDescription(JoinPoint joinPoint, Log log, UserOperLog operLog, Object jsonResult) throws Exception {
+    public void getControllerMethodDescription(JoinPoint joinPoint, Log log, SysOperLog operLog, Object jsonResult) throws Exception {
         // 设置action动作
         operLog.setBusinessType(log.businessType().ordinal());
         // 设置标题
@@ -140,7 +133,7 @@ public class LogAspect {
      * @param operLog 操作日志
      * @throws Exception 异常
      */
-    private void setRequestValue(JoinPoint joinPoint, UserOperLog operLog) throws Exception {
+    private void setRequestValue(JoinPoint joinPoint, SysOperLog operLog) throws Exception {
         String requestMethod = operLog.getRequestMethod();
         if (HttpMethod.PUT.name().equals(requestMethod) || HttpMethod.POST.name().equals(requestMethod)) {
             String params = argsArrayToString(joinPoint.getArgs());

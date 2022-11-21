@@ -3,16 +3,14 @@ package com.cloud.common.web.page;
 import com.cloud.common.utils.StringUtils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 /**
- * 分页参数
+ * 分页数据
  *
  * @author ai-cloud
  */
-@Getter
-@Setter
+@Data
 @ApiModel("分页参数")
 public class PageParam {
     /**

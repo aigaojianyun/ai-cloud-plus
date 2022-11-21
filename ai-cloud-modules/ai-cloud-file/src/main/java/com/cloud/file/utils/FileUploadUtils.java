@@ -1,11 +1,11 @@
 package com.cloud.file.utils;
 
-
 import com.cloud.common.exception.file.FileNameLengthLimitExceededException;
 import com.cloud.common.exception.file.FileSizeLimitExceededException;
 import com.cloud.common.exception.file.InvalidExtensionException;
 import com.cloud.common.utils.DateUtils;
 import com.cloud.common.utils.StringUtils;
+import com.cloud.common.utils.file.FileTypeUtils;
 import com.cloud.common.utils.file.MimeTypeUtils;
 import com.cloud.common.utils.uuid.Seq;
 import org.apache.commons.io.FilenameUtils;
@@ -23,14 +23,14 @@ import java.util.Objects;
  */
 public class FileUploadUtils {
     /**
-     * 默认大小 10G
+     * 默认大小 50M
      */
-    public static final long DEFAULT_MAX_SIZE = 10240 * 1024 * 1024;
+    public static final long DEFAULT_MAX_SIZE = 50 * 1024 * 1024;
 
     /**
-     * 默认的文件名最大长度 1000
+     * 默认的文件名最大长度 100
      */
-    public static final int DEFAULT_FILE_NAME_LENGTH = 1000;
+    public static final int DEFAULT_FILE_NAME_LENGTH = 100;
 
     /**
      * 根据文件路径上传
@@ -82,7 +82,7 @@ public class FileUploadUtils {
      */
     public static final String extractFilename(MultipartFile file) {
         return StringUtils.format("{}/{}_{}.{}", DateUtils.datePath(),
-                FilenameUtils.getBaseName(file.getOriginalFilename()), Seq.getId(Seq.uploadSeqType), getExtension(file));
+                FilenameUtils.getBaseName(file.getOriginalFilename()), Seq.getId(Seq.UPLOAD_SEQ_TYPE), FileTypeUtils.getExtension(file));
     }
 
     private static final File getAbsoluteFile(String uploadDir, String fileName) throws IOException {
@@ -116,7 +116,7 @@ public class FileUploadUtils {
         }
 
         String fileName = file.getOriginalFilename();
-        String extension = getExtension(file);
+        String extension = FileTypeUtils.getExtension(file);
         if (allowedExtension != null && !isAllowedExtension(extension, allowedExtension)) {
             if (allowedExtension == MimeTypeUtils.IMAGE_EXTENSION) {
                 throw new InvalidExtensionException.InvalidImageExtensionException(allowedExtension, extension,
@@ -150,19 +150,5 @@ public class FileUploadUtils {
             }
         }
         return false;
-    }
-
-    /**
-     * 获取文件名的后缀
-     *
-     * @param file 表单文件
-     * @return 后缀名
-     */
-    public static final String getExtension(MultipartFile file) {
-        String extension = FilenameUtils.getExtension(file.getOriginalFilename());
-        if (StringUtils.isEmpty(extension)) {
-            extension = MimeTypeUtils.getExtension(Objects.requireNonNull(file.getContentType()));
-        }
-        return extension;
     }
 }

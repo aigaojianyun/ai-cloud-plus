@@ -1,4 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.cloud.auth.api.factory.RemoteUserFallbackFactory,\
-  com.cloud.auth.api.factory.RemoteLogFallbackFactory
-

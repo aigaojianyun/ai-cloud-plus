@@ -26,12 +26,12 @@ public class ValidateCodeHandler implements HandlerFunction<ServerResponse> {
 
     @Override
     public Mono<ServerResponse> handle(ServerRequest serverRequest) {
-        AjaxResult result;
+        AjaxResult ajax;
         try {
-            result = validateCodeService.createCaptcha();
+            ajax = validateCodeService.createCaptcha();
         } catch (CaptchaException | IOException e) {
             return Mono.error(e);
         }
-        return ServerResponse.status(HttpStatus.OK).body(BodyInserters.fromValue(result));
+        return ServerResponse.status(HttpStatus.OK).body(BodyInserters.fromValue(ajax));
     }
 }

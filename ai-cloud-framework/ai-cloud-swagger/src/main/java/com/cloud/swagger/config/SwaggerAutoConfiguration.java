@@ -20,11 +20,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
-/**
- * swagger安全模式校验
- *
- * @author ai-cloud
- */
 @Configuration
 @EnableSwagger2
 @EnableAutoConfiguration

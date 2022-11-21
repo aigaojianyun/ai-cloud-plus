@@ -92,17 +92,6 @@ public class JwtUtils {
     }
 
     /**
-     * 根据令牌获取设备唯一标识
-     *
-     * @param token 令牌
-     * @return 设备唯一标识
-     */
-    public static String getDeviceId(String token) {
-        Claims claims = parseToken(token);
-        return getValue(claims, SecurityConstants.DETAILS_DEVICEID);
-    }
-
-    /**
      * 根据身份信息获取用户名
      *
      * @param claims 身份信息

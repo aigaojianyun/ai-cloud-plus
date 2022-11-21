@@ -1,16 +1,15 @@
 package com.cloud.auth.service.impl;
 
-import com.cloud.auth.api.domain.User;
 import com.cloud.common.constant.CacheConstants;
 import com.cloud.common.constant.Constants;
 import com.cloud.common.exception.ServiceException;
 import com.cloud.redis.service.RedisService;
 import com.cloud.security.utils.SecurityUtils;
+import com.cloud.system.api.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
-
 
 /**
  * 登录密码方法
@@ -19,7 +18,6 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 public class PasswordService {
-
     @Autowired
     private RedisService redisService;
 
@@ -42,7 +40,7 @@ public class PasswordService {
 
     public void validate(User user, String password) {
         String username = user.getUserName();
-        String deviceId = user.getDeviceId();
+
         Integer retryCount = redisService.getCacheObject(getCacheKey(username));
 
         if (retryCount == null) {
@@ -51,13 +49,13 @@ public class PasswordService {
 
         if (retryCount >= Integer.valueOf(maxRetryCount).intValue()) {
             String errMsg = String.format("密码输入错误%s次，帐户锁定%s分钟", maxRetryCount, lockTime);
-            recordLogService.recordLoginLog(username, deviceId, Constants.LOGIN_FAIL, errMsg);
+            recordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, errMsg);
             throw new ServiceException(errMsg);
         }
 
         if (!matches(user, password)) {
             retryCount = retryCount + 1;
-            recordLogService.recordLoginLog(username, deviceId, Constants.LOGIN_FAIL, String.format("密码输入错误%s次", retryCount));
+            recordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, String.format("密码输入错误%s次", retryCount));
             redisService.setCacheObject(getCacheKey(username), retryCount, lockTime, TimeUnit.MINUTES);
             throw new ServiceException("用户不存在/密码错误");
         } else {
