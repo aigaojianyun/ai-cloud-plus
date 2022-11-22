@@ -16,6 +16,7 @@ import com.cloud.common.enums.UserStatus;
 import com.cloud.common.exception.CaptchaException;
 import com.cloud.common.exception.ServiceException;
 import com.cloud.common.utils.StringUtils;
+import com.cloud.common.utils.uuid.IdUtils;
 import com.cloud.system.api.domain.SysUser;
 import com.cloud.system.api.domain.User;
 import com.cloud.system.api.model.LoginUser;
@@ -162,7 +163,7 @@ public class LoginService {
             if (StringUtils.isNull(userResult) || StringUtils.isNull(userResult.getData())) {
                 // 添加新用户
                 User user = new User();
-                user.setUserName(param.getNickName());
+                user.setUserName(IdUtils.fastSimpleUUID());
                 user.setNickName(param.getNickName());
                 user.setPhone(phoneNumber);
                 user.setHeadImg(param.getAvatarUrl());
@@ -181,8 +182,51 @@ public class LoginService {
                 }
                 recordLogService.recordLogininfor(param.getNickName(), Constants.REGISTER, "注册成功");
             } else {
-
+                // 存在就更新用户信息
+                User user = userResult.getData();
+                R<?> updateResult = remoteUserService.updateUserInfo(user, SecurityConstants.INNER);
+                if (R.FAIL == updateResult.getCode()) {
+                    throw new ServiceException(updateResult.getMsg());
+                }
+                recordLogService.recordLogininfor(param.getNickName(), Constants.REGISTER, "更新成功");
             }
+            // 查询用户信息
+            R<LoginUser> userResults = remoteSysUserService.getUserInfo(phoneNumber, SecurityConstants.INNER);
+
+            if (StringUtils.isNull(userResults) || StringUtils.isNull(userResult.getData())) {
+                recordLogService.recordLogininfor(phoneNumber, Constants.LOGIN_FAIL, "登录用户不存在");
+                throw new ServiceException("登录用户：" + phoneNumber + " 不存在!");
+            }
+
+            if (R.FAIL == userResult.getCode()) {
+                throw new ServiceException(userResult.getMsg());
+            }
+            LoginUser userInfo = userResults.getData();
+            //普通用户信息
+            User user = userResults.getData().getUser();
+            //系统用户信息
+            SysUser sysUser = userResults.getData().getSysUser();
+            if (StringUtils.isNotNull(user)) {
+                if (UserStatus.DELETED.getCode().equals(user.getDeleteFlag())) {
+                    recordLogService.recordLogininfor(phoneNumber, Constants.LOGIN_FAIL, "对不起，您的账号已被删除");
+                    throw new ServiceException("对不起，您的账号：" + phoneNumber + " 已被删除");
+                }
+                if (UserStatus.DISABLE.getCode().equals(user.getStatusFlag())) {
+                    recordLogService.recordLogininfor(phoneNumber, Constants.LOGIN_FAIL, "用户已停用，请联系管理员");
+                    throw new ServiceException("对不起，您的账号：" + phoneNumber + " 已停用");
+                }
+            } else if ((StringUtils.isNotNull(sysUser))) {
+                if (UserStatus.DELETED.getCode().equals(sysUser.getDelFlag())) {
+                    recordLogService.recordLogininfor(phoneNumber, Constants.LOGIN_FAIL, "对不起，您的账号已被删除");
+                    throw new ServiceException("对不起，您的账号：" + phoneNumber + " 已被删除");
+                }
+                if (UserStatus.DISABLE.getCode().equals(sysUser.getStatus())) {
+                    recordLogService.recordLogininfor(phoneNumber, Constants.LOGIN_FAIL, "用户已停用，请联系管理员");
+                    throw new ServiceException("对不起，您的账号：" + phoneNumber + " 已停用");
+                }
+            }
+            recordLogService.recordLogininfor(phoneNumber, Constants.LOGIN_SUCCESS, "登录成功");
+            return userInfo;
         }
         return null;
     }

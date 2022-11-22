@@ -57,6 +57,19 @@ public class UserApi {
         return R.ok(userService.registerUser(user));
     }
 
+    /**
+     * 更新用户信息
+     *
+     * @param user 用户信息
+     * @return 结果
+     */
+    @InnerAuth
+    @PostMapping("update")
+    @ApiOperation("更新用户信息")
+    public R<Boolean> update(@RequestBody User user) {
+        return R.ok(userService.updateUser(user));
+    }
+
 
 }
 

@@ -40,4 +40,14 @@ public interface RemoteUserService {
     @PostMapping("/user/register")
     public R<Boolean> registerUserInfo(@RequestBody User user, @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
 
+    /**
+     * 更新用户信息
+     *
+     * @param user   用户信息
+     * @param source 请求来源
+     * @return 结果
+     */
+    @PostMapping("/user/update")
+    public R<Boolean> updateUserInfo(@RequestBody User user, @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
+
 }

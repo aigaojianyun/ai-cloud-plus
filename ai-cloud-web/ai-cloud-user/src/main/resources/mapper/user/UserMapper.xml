@@ -91,7 +91,7 @@
     <select id="selectByOpenId" resultMap="UserResult">
         SELECT a.*
         FROM `user` a
-        WHERE a.open_id = #{openId} a.status_flag = 0 AND a.delete_flag = 0
+        WHERE a.open_id = #{openId} AND a.status_flag = 0 AND a.delete_flag = 0
     </select>
 
     <update id="updateSign">

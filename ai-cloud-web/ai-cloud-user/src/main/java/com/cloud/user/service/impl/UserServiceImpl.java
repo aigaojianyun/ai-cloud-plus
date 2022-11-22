@@ -106,4 +106,16 @@ public class UserServiceImpl implements IUserService {
         return userMapper.insert(user) > 0;
     }
 
+    /**
+     * 更新用户信息
+     *
+     * @param user 用户信息
+     * @return 结果
+     */
+    @Override
+    public boolean updateUser(User user) {
+        userMapper.updateById(user);
+        return true;
+    }
+
 }
