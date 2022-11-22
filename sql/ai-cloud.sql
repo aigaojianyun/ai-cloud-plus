@@ -4,7 +4,7 @@
  Source Server         : ai-cloud
  Source Server Type    : MySQL
  Source Server Version : 80018
- Source Host           : rm-bp15521us1y063fs28o.mysql.rds.aliyuncs.com:3306
+ Source Host           : 127.0.0.1:3306
  Source Schema         : ai-cloud
 
  Target Server Type    : MySQL

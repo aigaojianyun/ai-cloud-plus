@@ -88,6 +88,13 @@ ai-cloud-parent
 - http://localhost:9090/
 - ai168/123456
 
+## sql表预览
+<table>
+    <tr>
+        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/iww44e120mdlen154dnw.png"/></td>
+        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/ekb741txm44g835v1xmg.jpg"/></td>
+    </tr>
+</table>
 
 ## 后台演示图
 
