@@ -1,7 +1,7 @@
 <template>
     <view>
         <view class="header">
-            <image src="/static/login/wx_login.png" mode=""></image>
+            <image src="/static/logo.png" mode=""></image>
         </view>
         <view class='content'>
             <view>申请获取以下权限</view>
@@ -68,28 +68,11 @@
                 that.loginForm.iv = e.detail.iv;
                 // 检查登录态是否过期
                 wx.checkSession({
-                    success() {
+                    async success() {
                         // 用户信息
                         wx.getUserInfo({
                             success: function(res) {
-                                // let userInfo = res.userInfo;
-                                // that.loginForm.nickName = userInfo.nickName;
-                                // that.loginForm.avatarUrl = userInfo.avatarUrl;
-                                // that.loginForm.gender = userInfo.gender;
-                                // that.$u.post('/au/weiXin/login', that.loginForm).then(res => {
-                                //     uni.setStorageSync(that.$config.cachePrefix + 'token', res.token);
-                                //     that.$u.get('/au/weiXin/getInfo').then(result => {
-                                //         uni.setStorageSync(that.$config.cachePrefix + 'user', result.user);
-                                //         that.$refs.uToast.show({
-                                //             type: 'success',
-                                //             title: '登录成功',
-                                //             url: '/pages/index/index',
-                                //             isTab: true
-                                //         });
-                                //     });
-                                // });
-                              this.$store.dispatch('LoginWx', this.loginForm).then(() => {
-                                this.$refs.verify.hide();
+                              this.$store.dispatch('LoginWx', this.loginForm).then(res => {
                                 this.$modal.loading("登录中，请耐心等待...")
                                 this.loginSuccess()
                               }).catch(() => {

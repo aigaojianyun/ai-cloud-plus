@@ -36,7 +36,7 @@ export function loginWx(code, encryptedData, iv, nickName, avatarUrl, gender) {
         gender,
     }
     return request({
-        'url': '/auth/wx/login',
+        'url': '/auth/login/wx',
         headers: {
             isToken: false
         },

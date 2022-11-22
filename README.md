@@ -233,3 +233,7 @@ sed -i 's/\r$//' deploy.sh
 # 删除所有环境/模块
 ./deploy.sh rm
 ~~~
+
+## 交流群
+QQ群: [![加入QQ群](https://img.shields.io/badge/652111512-blue.svg)](https://jq.qq.com/?_wv=1027&k=M1QxJmCB) 点击按钮入群。
+

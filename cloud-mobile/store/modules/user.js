@@ -50,7 +50,7 @@ const user = {
             const avatarUrl = userInfo.avatarUrl
             const gender = userInfo.gender
             return new Promise((resolve, reject) => {
-                wxLogin(code, encryptedData, iv, nickName, avatarUrl, gender).then(res => {
+                loginWx(code, encryptedData, iv, nickName, avatarUrl, gender).then(res => {
                     setToken(res.data.access_token)
                     commit('SET_TOKEN', res.data.access_token)
                     resolve()

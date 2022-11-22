@@ -55,7 +55,7 @@ public class LoginController {
      * @param param 登录参数
      * @return 登录结果
      */
-    @PostMapping("wx/login")
+    @PostMapping("login/wx")
     public R<?> weiXinLogin(@RequestBody WeiXinLoginParam param) throws Exception {
         // 用户登录
         LoginUser userInfo = loginService.loginWx(param);
