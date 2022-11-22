@@ -55,6 +55,7 @@
                 });
             },
             getPhoneNumber: function(e) {
+                console.log(e);
                 that.getCode();
                 uni.showLoading({
                     title: '登录中...'
@@ -72,10 +73,11 @@
                         // 用户信息
                         wx.getUserInfo({
                             success: function(res) {
-                              this.$store.dispatch('LoginWx', this.loginForm).then(res => {
-                                this.$modal.loading("登录中，请耐心等待...")
-                                this.loginSuccess()
+								that.$store.dispatch('LoginWx', that.loginForm).then(res => {
+                                that.$modal.loading("登录中，请耐心等待...")
+                                that.loginSuccess()
                               }).catch(() => {
+
                               })
                             }
                         });
@@ -92,8 +94,8 @@
             // 登录成功后，处理函数
             async loginSuccess(result) {
               // 设置用户信息
-              this.$store.dispatch('GetInfo').then(res => {
-                this.$tab.reLaunch('/pages/home/index')
+              that.$store.dispatch('GetInfo').then(res => {
+                that.$tab.reLaunch('/pages/home/index')
               })
             },
         }
