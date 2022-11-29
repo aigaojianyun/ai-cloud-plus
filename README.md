@@ -82,12 +82,22 @@ ai-cloud-parent
 
 ## 在线体验
 
-- 后台管理
+* 后台管理
 - http://162.14.103.169/admin
 - ceshi/123456
+- 
 - 移动端
 - http://162.14.103.169
 - ai168/123456
+- 
+- admin监控
+- http://162.14.103.169:9100
+- admin/123456
+- 
+- 文档地址
+- http://162.14.103.169:8080/swagger-ui/index.html?urls.primaryName=ai-cloud-user
+- http://162.14.103.169:8080/doc.html#/home
+
 
 ## sql表预览
 <table>
