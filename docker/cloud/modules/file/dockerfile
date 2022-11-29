@@ -10,6 +10,6 @@ RUN mkdir -p /home/cloud
 # 指定路径
 WORKDIR /home/cloud
 # 复制jar文件到路径
-COPY ./jar/ai-cloud-file.jar /home/cloud/ai-cloud-file.jar
+COPY jar/ai-cloud-file.jar /home/cloud/ai-cloud-file.jar
 # 启动文件服务
 ENTRYPOINT ["java","-jar","ai-cloud-file.jar"]

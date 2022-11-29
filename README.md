@@ -82,10 +82,11 @@ ai-cloud-parent
 
 ## 在线体验
 
-- http://localhost:9091/admin
-- admin/admin123
-- 
-- http://localhost:9090/
+- 后台管理
+- http://162.14.103.169/admin
+- ceshi/123456
+- 移动端
+- http://162.14.103.169
 - ai168/123456
 
 ## sql表预览
