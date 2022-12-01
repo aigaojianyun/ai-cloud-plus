@@ -138,6 +138,9 @@ ai-cloud-parent
         <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/uwj88a0fcnowfm560l73.png"/></td>
         <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/m3m0xgglm5mg6cypyimd.png"/></td>
     </tr>
+	<tr>
+        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/3phkgz1wl4ogts4mb8op.png"/></td>
+    </tr>
 </table>
 
 ## 移动端演示图
