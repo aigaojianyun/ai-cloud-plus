@@ -83,20 +83,20 @@ ai-cloud-parent
 ## 在线体验
 
 * 后台管理
-- http://162.14.103.169/admin
+- http://www.aiclouds.vip/admin
 - ceshi/123456
 - 
 - 移动端
-- http://162.14.103.169
+- http://www.aiclouds.vip
 - ai168/123456
 - 
 - admin监控
-- http://162.14.103.169:9100
+- http://www.aiclouds.vip:9100
 - admin/123456
 - 
 - 文档地址
-- http://162.14.103.169:8080/swagger-ui/index.html?urls.primaryName=ai-cloud-user
-- http://162.14.103.169:8080/doc.html#/home
+- http://www.aiclouds.vip:8080/swagger-ui/index.html?urls.primaryName=ai-cloud-user
+- http://www.aiclouds.vip:8080/doc.html#/home
 
 
 ## sql表预览
