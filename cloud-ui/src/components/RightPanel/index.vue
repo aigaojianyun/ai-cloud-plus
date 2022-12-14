@@ -1,9 +1,9 @@
 <template>
   <div ref="rightPanel" class="rightPanel-container">
-    <div class="rightPanel-background" />
+    <div class="rightPanel-background"/>
     <div class="rightPanel">
       <div class="rightPanel-items">
-        <slot />
+        <slot/>
       </div>
     </div>
   </div>
@@ -39,7 +39,6 @@ export default {
     }
   },
   mounted() {
-    this.insertToBody()
     this.addEventClick()
   },
   beforeDestroy() {
@@ -56,11 +55,6 @@ export default {
         this.show = false
         window.removeEventListener('click', this.closeSidebar)
       }
-    },
-    insertToBody() {
-      const elx = this.$refs.rightPanel
-      const body = document.querySelector('body')
-      body.insertBefore(elx, body.firstChild)
     }
   }
 }
@@ -104,6 +98,7 @@ export default {
   cursor: pointer;
   color: #fff;
   line-height: 48px;
+
   i {
     font-size: 24px;
     line-height: 48px;

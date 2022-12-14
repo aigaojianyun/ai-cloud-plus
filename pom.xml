@@ -25,15 +25,15 @@
         <swagger.fox.version>3.0.0</swagger.fox.version>
         <swagger.core.version>1.6.2</swagger.core.version>
         <knife4j.version>3.0.3</knife4j.version>
-        <kaptcha.version>2.3.2</kaptcha.version>
+        <kaptcha.version>2.3.3</kaptcha.version>
         <captcha.version>1.3.0</captcha.version>
         <pagehelper.boot.version>1.4.5</pagehelper.boot.version>
-        <druid.version>1.2.14</druid.version>
+        <druid.version>1.2.15</druid.version>
         <dynamic-ds.version>3.5.2</dynamic-ds.version>
         <commons.io.version>2.11.0</commons.io.version>
         <commons.fileupload.version>1.4</commons.fileupload.version>
         <velocity.version>2.3</velocity.version>
-        <fastjson.version>2.0.16</fastjson.version>
+        <fastjson.version>2.0.20</fastjson.version>
         <oshi.version>6.2.2</oshi.version>
         <jjwt.version>0.9.1</jjwt.version>
         <justauth.version>1.15.6</justauth.version>
@@ -165,7 +165,7 @@
 
             <!-- 验证码 -->
             <dependency>
-                <groupId>com.github.penggle</groupId>
+                <groupId>pro.fessional</groupId>
                 <artifactId>kaptcha</artifactId>
                 <version>${kaptcha.version}</version>
             </dependency>

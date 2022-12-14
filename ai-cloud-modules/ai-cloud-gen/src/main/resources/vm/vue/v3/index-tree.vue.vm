@@ -186,6 +186,7 @@
                               :props="{ value: '${treeCode}', label: '${treeName}', children: 'children' }"
                               value-key="${treeCode}"
                               placeholder="请选择${comment}"
+                              :render-after-expand="false"
                               check-strictly
                           />
                         </el-form-item>
