@@ -12,6 +12,8 @@ import com.cloud.security.annotation.RequiresPermissions;
 import com.cloud.system.api.model.LoginUser;
 import com.cloud.system.domain.SysUserOnline;
 import com.cloud.system.service.ISysUserOnlineService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +27,7 @@ import java.util.List;
  *
  * @author ai-cloud
  */
+@Api(tags = "在线用户监控")
 @RestController
 @RequestMapping("/online")
 public class SysUserOnlineController extends BaseController {
@@ -36,6 +39,7 @@ public class SysUserOnlineController extends BaseController {
 
     @RequiresPermissions("monitor:online:list")
     @GetMapping("/list")
+    @ApiOperation(value = "在线用户列表", notes = "在线用户列表")
     public TableDataInfo list(String ipaddr, String userName) {
         Collection<String> keys = redisService.keys(CacheConstants.LOGIN_TOKEN_KEY + "*");
         List<SysUserOnline> userOnlineList = new ArrayList<SysUserOnline>();
@@ -68,6 +72,7 @@ public class SysUserOnlineController extends BaseController {
     @RequiresPermissions("monitor:online:forceLogout")
     @Log(title = "在线用户", businessType = BusinessType.FORCE)
     @DeleteMapping("/{tokenId}")
+    @ApiOperation(value = "强退用户", notes = "强退用户")
     public AjaxResult forceLogout(@PathVariable String tokenId) {
         redisService.deleteObject(CacheConstants.LOGIN_TOKEN_KEY + tokenId);
         return success();

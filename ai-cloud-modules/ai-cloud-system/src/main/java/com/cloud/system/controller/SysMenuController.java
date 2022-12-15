@@ -10,6 +10,8 @@ import com.cloud.security.annotation.RequiresPermissions;
 import com.cloud.security.utils.SecurityUtils;
 import com.cloud.system.domain.SysMenu;
 import com.cloud.system.service.ISysMenuService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,7 @@ import java.util.List;
  *
  * @author ai-cloud
  */
+@Api(tags = "公告信息")
 @RestController
 @RequestMapping("/menu")
 public class SysMenuController extends BaseController {
@@ -32,6 +35,7 @@ public class SysMenuController extends BaseController {
      */
     @RequiresPermissions("system:menu:list")
     @GetMapping("/list")
+    @ApiOperation(value = "获取菜单列表", notes = "获取菜单列表")
     public AjaxResult list(SysMenu menu) {
         Long userId = SecurityUtils.getUserId();
         List<SysMenu> menus = menuService.selectMenuList(menu, userId);
@@ -43,6 +47,7 @@ public class SysMenuController extends BaseController {
      */
     @RequiresPermissions("system:menu:query")
     @GetMapping(value = "/{menuId}")
+    @ApiOperation(value = "根据菜单编号获取详细信息", notes = "根据菜单编号获取详细信息")
     public AjaxResult getInfo(@PathVariable Long menuId) {
         return success(menuService.selectMenuById(menuId));
     }
@@ -51,6 +56,7 @@ public class SysMenuController extends BaseController {
      * 获取菜单下拉树列表
      */
     @GetMapping("/treeselect")
+    @ApiOperation(value = "获取菜单下拉树列表", notes = "获取菜单下拉树列表")
     public AjaxResult treeselect(SysMenu menu) {
         Long userId = SecurityUtils.getUserId();
         List<SysMenu> menus = menuService.selectMenuList(menu, userId);
@@ -61,6 +67,7 @@ public class SysMenuController extends BaseController {
      * 加载对应角色菜单列表树
      */
     @GetMapping(value = "/roleMenuTreeselect/{roleId}")
+    @ApiOperation(value = "加载对应角色菜单列表树", notes = "加载对应角色菜单列表树")
     public AjaxResult roleMenuTreeselect(@PathVariable("roleId") Long roleId) {
         Long userId = SecurityUtils.getUserId();
         List<SysMenu> menus = menuService.selectMenuList(userId);
@@ -76,6 +83,7 @@ public class SysMenuController extends BaseController {
     @RequiresPermissions("system:menu:add")
     @Log(title = "菜单管理", businessType = BusinessType.INSERT)
     @PostMapping
+    @ApiOperation(value = "新增菜单", notes = "新增菜单")
     public AjaxResult add(@Validated @RequestBody SysMenu menu) {
         if (UserConstants.NOT_UNIQUE.equals(menuService.checkMenuNameUnique(menu))) {
             return error("新增菜单'" + menu.getMenuName() + "'失败，菜单名称已存在");
@@ -92,6 +100,7 @@ public class SysMenuController extends BaseController {
     @RequiresPermissions("system:menu:edit")
     @Log(title = "菜单管理", businessType = BusinessType.UPDATE)
     @PutMapping
+    @ApiOperation(value = "修改菜单", notes = "修改菜单")
     public AjaxResult edit(@Validated @RequestBody SysMenu menu) {
         if (UserConstants.NOT_UNIQUE.equals(menuService.checkMenuNameUnique(menu))) {
             return error("修改菜单'" + menu.getMenuName() + "'失败，菜单名称已存在");
@@ -110,6 +119,7 @@ public class SysMenuController extends BaseController {
     @RequiresPermissions("system:menu:remove")
     @Log(title = "菜单管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{menuId}")
+    @ApiOperation(value = "删除菜单", notes = "删除菜单")
     public AjaxResult remove(@PathVariable("menuId") Long menuId) {
         if (menuService.hasChildByMenuId(menuId)) {
             return warn("存在子菜单,不允许删除");
@@ -126,6 +136,7 @@ public class SysMenuController extends BaseController {
      * @return 路由信息
      */
     @GetMapping("getRouters")
+    @ApiOperation(value = "获取路由信息", notes = "获取路由信息")
     public AjaxResult getRouters() {
         Long userId = SecurityUtils.getUserId();
         List<SysMenu> menus = menuService.selectMenuTreeByUserId(userId);

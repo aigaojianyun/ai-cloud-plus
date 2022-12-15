@@ -10,6 +10,8 @@ import com.cloud.security.annotation.RequiresPermissions;
 import com.cloud.security.utils.SecurityUtils;
 import com.cloud.system.api.domain.SysDept;
 import com.cloud.system.service.ISysDeptService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -22,6 +24,7 @@ import java.util.List;
  *
  * @author ai-cloud
  */
+@Api(tags = "部门信息")
 @RestController
 @RequestMapping("/dept")
 public class SysDeptController extends BaseController {
@@ -33,6 +36,7 @@ public class SysDeptController extends BaseController {
      */
     @RequiresPermissions("system:dept:list")
     @GetMapping("/list")
+    @ApiOperation(value = "获取部门列表", notes = "获取部门列表")
     public AjaxResult list(SysDept dept) {
         List<SysDept> depts = deptService.selectDeptList(dept);
         return success(depts);
@@ -43,6 +47,7 @@ public class SysDeptController extends BaseController {
      */
     @RequiresPermissions("system:dept:list")
     @GetMapping("/list/exclude/{deptId}")
+    @ApiOperation(value = "查询部门列表（排除节点）", notes = "查询部门列表（排除节点）")
     public AjaxResult excludeChild(@PathVariable(value = "deptId", required = false) Long deptId) {
         List<SysDept> depts = deptService.selectDeptList(new SysDept());
         depts.removeIf(d -> d.getDeptId().intValue() == deptId || ArrayUtils.contains(StringUtils.split(d.getAncestors(), ","), deptId + ""));
@@ -54,6 +59,7 @@ public class SysDeptController extends BaseController {
      */
     @RequiresPermissions("system:dept:query")
     @GetMapping(value = "/{deptId}")
+    @ApiOperation(value = "根据部门编号获取详细信息", notes = "根据部门编号获取详细信息")
     public AjaxResult getInfo(@PathVariable Long deptId) {
         deptService.checkDeptDataScope(deptId);
         return success(deptService.selectDeptById(deptId));
@@ -65,6 +71,7 @@ public class SysDeptController extends BaseController {
     @RequiresPermissions("system:dept:add")
     @Log(title = "部门管理", businessType = BusinessType.INSERT)
     @PostMapping
+    @ApiOperation(value = "新增部门", notes = "新增部门")
     public AjaxResult add(@Validated @RequestBody SysDept dept) {
         if (UserConstants.NOT_UNIQUE.equals(deptService.checkDeptNameUnique(dept))) {
             return error("新增部门'" + dept.getDeptName() + "'失败，部门名称已存在");
@@ -79,6 +86,7 @@ public class SysDeptController extends BaseController {
     @RequiresPermissions("system:dept:edit")
     @Log(title = "部门管理", businessType = BusinessType.UPDATE)
     @PutMapping
+    @ApiOperation(value = "修改部门", notes = "修改部门")
     public AjaxResult edit(@Validated @RequestBody SysDept dept) {
         Long deptId = dept.getDeptId();
         deptService.checkDeptDataScope(deptId);
@@ -99,6 +107,7 @@ public class SysDeptController extends BaseController {
     @RequiresPermissions("system:dept:remove")
     @Log(title = "部门管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{deptId}")
+    @ApiOperation(value = "删除部门", notes = "删除部门")
     public AjaxResult remove(@PathVariable Long deptId) {
         if (deptService.hasChildByDeptId(deptId)) {
             return warn("存在下级部门,不允许删除");

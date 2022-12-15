@@ -15,6 +15,8 @@ import com.cloud.log.annotation.Log;
 import com.cloud.log.enums.BusinessType;
 import com.cloud.security.annotation.RequiresPermissions;
 import com.cloud.security.utils.SecurityUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +29,7 @@ import java.util.List;
  *
  * @author ai-cloud
  */
+@Api(tags = "调度任务")
 @RestController
 @RequestMapping("/job")
 public class SysJobController extends BaseController {
@@ -38,6 +41,7 @@ public class SysJobController extends BaseController {
      */
     @RequiresPermissions("monitor:job:list")
     @GetMapping("/list")
+    @ApiOperation(value = "查询定时任务列表", notes = "查询定时任务列表")
     public TableDataInfo list(SysJob sysJob) {
         startPage();
         List<SysJob> list = jobService.selectJobList(sysJob);
@@ -50,6 +54,7 @@ public class SysJobController extends BaseController {
     @RequiresPermissions("monitor:job:export")
     @Log(title = "定时任务", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
+    @ApiOperation(value = "导出定时任务列表", notes = "导出定时任务列表")
     public void export(HttpServletResponse response, SysJob sysJob) {
         List<SysJob> list = jobService.selectJobList(sysJob);
         ExcelUtil<SysJob> util = new ExcelUtil<SysJob>(SysJob.class);
@@ -61,6 +66,7 @@ public class SysJobController extends BaseController {
      */
     @RequiresPermissions("monitor:job:query")
     @GetMapping(value = "/{jobId}")
+    @ApiOperation(value = "获取定时任务详细信息", notes = "获取定时任务详细信息")
     public AjaxResult getInfo(@PathVariable("jobId") Long jobId) {
         return success(jobService.selectJobById(jobId));
     }
@@ -71,6 +77,7 @@ public class SysJobController extends BaseController {
     @RequiresPermissions("monitor:job:add")
     @Log(title = "定时任务", businessType = BusinessType.INSERT)
     @PostMapping
+    @ApiOperation(value = "新增定时任务", notes = "新增定时任务")
     public AjaxResult add(@RequestBody SysJob job) throws SchedulerException, TaskException {
         if (!CronUtils.isValid(job.getCronExpression())) {
             return error("新增任务'" + job.getJobName() + "'失败，Cron表达式不正确");
@@ -95,6 +102,7 @@ public class SysJobController extends BaseController {
     @RequiresPermissions("monitor:job:edit")
     @Log(title = "定时任务", businessType = BusinessType.UPDATE)
     @PutMapping
+    @ApiOperation(value = "修改定时任务", notes = "修改定时任务")
     public AjaxResult edit(@RequestBody SysJob job) throws SchedulerException, TaskException {
         if (!CronUtils.isValid(job.getCronExpression())) {
             return error("修改任务'" + job.getJobName() + "'失败，Cron表达式不正确");
@@ -119,6 +127,7 @@ public class SysJobController extends BaseController {
     @RequiresPermissions("monitor:job:changeStatus")
     @Log(title = "定时任务", businessType = BusinessType.UPDATE)
     @PutMapping("/changeStatus")
+    @ApiOperation(value = "定时任务状态修改", notes = "定时任务状态修改")
     public AjaxResult changeStatus(@RequestBody SysJob job) throws SchedulerException {
         SysJob newJob = jobService.selectJobById(job.getJobId());
         newJob.setStatus(job.getStatus());
@@ -131,6 +140,7 @@ public class SysJobController extends BaseController {
     @RequiresPermissions("monitor:job:changeStatus")
     @Log(title = "定时任务", businessType = BusinessType.UPDATE)
     @PutMapping("/run")
+    @ApiOperation(value = "定时任务立即执行一次", notes = "定时任务立即执行一次")
     public AjaxResult run(@RequestBody SysJob job) throws SchedulerException {
         boolean result = jobService.run(job);
         return result ? success() : error("任务不存在或已过期！");
@@ -142,6 +152,7 @@ public class SysJobController extends BaseController {
     @RequiresPermissions("monitor:job:remove")
     @Log(title = "定时任务", businessType = BusinessType.DELETE)
     @DeleteMapping("/{jobIds}")
+    @ApiOperation(value = "删除定时任务", notes = "删除定时任务")
     public AjaxResult remove(@PathVariable Long[] jobIds) throws SchedulerException, TaskException {
         jobService.deleteJobByIds(jobIds);
         return success();

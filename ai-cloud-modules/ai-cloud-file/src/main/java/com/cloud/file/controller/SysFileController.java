@@ -4,6 +4,8 @@ import com.cloud.common.domain.R;
 import com.cloud.common.utils.file.FileUtils;
 import com.cloud.file.api.domain.File;
 import com.cloud.file.service.ISysFileService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
  *
  * @author ai-cloud
  */
+@Api(tags = "文件请求")
 @RestController
 public class SysFileController {
     private static final Logger log = LoggerFactory.getLogger(SysFileController.class);
@@ -27,6 +30,7 @@ public class SysFileController {
      * 文件上传请求
      */
     @PostMapping("upload")
+    @ApiOperation(value = "文件上传", notes = "文件上传")
     public R<File> upload(MultipartFile file) {
         try {
             // 上传并返回访问地址

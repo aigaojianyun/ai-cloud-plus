@@ -21,6 +21,8 @@ import com.cloud.system.api.domain.SysUser;
 import com.cloud.system.api.domain.User;
 import com.cloud.system.api.model.LoginUser;
 import com.cloud.system.service.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -38,6 +40,7 @@ import java.util.stream.Collectors;
  *
  * @author ai-cloud
  */
+@Api(tags = "用户信息")
 @RestController
 @RequestMapping("/user")
 public class SysUserController extends BaseController {
@@ -68,24 +71,33 @@ public class SysUserController extends BaseController {
      */
     @RequiresPermissions("system:user:list")
     @GetMapping("/list")
+    @ApiOperation(value = "获取用户列表", notes = "获取用户列表")
     public TableDataInfo list(SysUser user) {
         startPage();
         List<SysUser> list = userService.selectUserList(user);
         return getDataTable(list);
     }
 
+    /**
+     * 根据条件分页查询用户列表
+     */
     @Log(title = "用户管理", businessType = BusinessType.EXPORT)
     @RequiresPermissions("system:user:export")
     @PostMapping("/export")
+    @ApiOperation(value = "根据条件分页查询用户列表", notes = "根据条件分页查询用户列表")
     public void export(HttpServletResponse response, SysUser user) {
         List<SysUser> list = userService.selectUserList(user);
         ExcelUtil<SysUser> util = new ExcelUtil<SysUser>(SysUser.class);
         util.exportExcel(response, list, "用户数据");
     }
 
+    /**
+     * 导入用户数据
+     */
     @Log(title = "用户管理", businessType = BusinessType.IMPORT)
     @RequiresPermissions("system:user:import")
     @PostMapping("/importData")
+    @ApiOperation(value = "导入用户数据", notes = "导入用户数据")
     public AjaxResult importData(MultipartFile file, boolean updateSupport) throws Exception {
         ExcelUtil<SysUser> util = new ExcelUtil<SysUser>(SysUser.class);
         List<SysUser> userList = util.importExcel(file.getInputStream());
@@ -94,7 +106,11 @@ public class SysUserController extends BaseController {
         return success(message);
     }
 
+    /**
+     * 导出用户数据
+     */
     @PostMapping("/importTemplate")
+    @ApiOperation(value = "导出用户数据", notes = "导出用户数据")
     public void importTemplate(HttpServletResponse response) throws IOException {
         ExcelUtil<SysUser> util = new ExcelUtil<SysUser>(SysUser.class);
         util.importTemplateExcel(response, "用户数据");
@@ -105,6 +121,7 @@ public class SysUserController extends BaseController {
      */
     @InnerAuth
     @GetMapping("/info/{username}")
+    @ApiOperation(value = "获取当前用户信息", notes = "获取当前用户信息")
     public R<LoginUser> info(@PathVariable("username") String username) {
         //普通用户信息
         User user = iUserService.selectByUserNamePhone(username);
@@ -131,6 +148,7 @@ public class SysUserController extends BaseController {
      */
     @InnerAuth
     @PostMapping("/register")
+    @ApiOperation(value = "注册用户信息", notes = "注册用户信息")
     public R<Boolean> register(@RequestBody SysUser sysUser) {
         String username = sysUser.getUserName();
         if (!("true".equals(configService.selectConfigByKey("sys.account.registerUser")))) {
@@ -148,6 +166,7 @@ public class SysUserController extends BaseController {
      * @return 用户信息
      */
     @GetMapping("getInfo")
+    @ApiOperation(value = "获取用户信息", notes = "获取用户信息")
     public AjaxResult getInfo() {
         SysUser user = userService.selectUserById(SecurityUtils.getUserId());
         AjaxResult ajax = success();
@@ -170,6 +189,7 @@ public class SysUserController extends BaseController {
      */
     @RequiresPermissions("system:user:query")
     @GetMapping(value = {"/", "/{userId}"})
+    @ApiOperation(value = "根据用户编号获取详细信息", notes = "根据用户编号获取详细信息")
     public AjaxResult getInfo(@PathVariable(value = "userId", required = false) Long userId) {
         userService.checkUserDataScope(userId);
         AjaxResult ajax = success();
@@ -191,6 +211,7 @@ public class SysUserController extends BaseController {
     @RequiresPermissions("system:user:add")
     @Log(title = "用户管理", businessType = BusinessType.INSERT)
     @PostMapping
+    @ApiOperation(value = "新增用户", notes = "新增用户")
     public AjaxResult add(@Validated @RequestBody SysUser sysUser) {
         if (UserConstants.NOT_UNIQUE.equals(userService.checkUserNameUnique(sysUser.getUserName()))) {
             return error("新增用户'" + sysUser.getUserName() + "'失败，登录账号已存在");
@@ -226,6 +247,7 @@ public class SysUserController extends BaseController {
     @RequiresPermissions("system:user:edit")
     @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @PutMapping
+    @ApiOperation(value = "修改用户", notes = "修改用户")
     public AjaxResult edit(@Validated @RequestBody SysUser sysUser) {
         userService.checkUserAllowed(sysUser);
         userService.checkUserDataScope(sysUser.getUserId());
@@ -253,6 +275,7 @@ public class SysUserController extends BaseController {
     @RequiresPermissions("system:user:remove")
     @Log(title = "用户管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{userIds}")
+    @ApiOperation(value = "删除用户", notes = "删除用户")
     public AjaxResult remove(@PathVariable Long[] userIds) {
         if (ArrayUtils.contains(userIds, SecurityUtils.getUserId())) {
             return error("当前用户不能删除");
@@ -267,6 +290,7 @@ public class SysUserController extends BaseController {
     @RequiresPermissions("system:user:edit")
     @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @PutMapping("/resetPwd")
+    @ApiOperation(value = "重置密码", notes = "重置密码")
     public AjaxResult resetPwd(@RequestBody SysUser user) {
         userService.checkUserAllowed(user);
         userService.checkUserDataScope(user.getUserId());
@@ -281,6 +305,7 @@ public class SysUserController extends BaseController {
     @RequiresPermissions("system:user:edit")
     @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @PutMapping("/changeStatus")
+    @ApiOperation(value = "状态修改", notes = "状态修改")
     public AjaxResult changeStatus(@RequestBody SysUser user) {
         userService.checkUserAllowed(user);
         userService.checkUserDataScope(user.getUserId());
@@ -293,6 +318,7 @@ public class SysUserController extends BaseController {
      */
     @RequiresPermissions("system:user:query")
     @GetMapping("/authRole/{userId}")
+    @ApiOperation(value = "根据用户编号获取授权角色", notes = "根据用户编号获取授权角色")
     public AjaxResult authRole(@PathVariable("userId") Long userId) {
         AjaxResult ajax = success();
         SysUser user = userService.selectUserById(userId);
@@ -308,6 +334,7 @@ public class SysUserController extends BaseController {
     @RequiresPermissions("system:user:edit")
     @Log(title = "用户管理", businessType = BusinessType.GRANT)
     @PutMapping("/authRole")
+    @ApiOperation(value = "用户授权角色", notes = "用户授权角色")
     public AjaxResult insertAuthRole(Long userId, Long[] roleIds) {
         userService.checkUserDataScope(userId);
         userService.insertUserAuth(userId, roleIds);
@@ -319,6 +346,7 @@ public class SysUserController extends BaseController {
      */
     @RequiresPermissions("system:user:list")
     @GetMapping("/deptTree")
+    @ApiOperation(value = "获取部门树列表", notes = "获取部门树列表")
     public AjaxResult deptTree(SysDept dept) {
         return success(deptService.selectDeptTreeList(dept));
     }

@@ -18,6 +18,8 @@ import com.cloud.system.api.domain.SysUser;
 import com.cloud.system.api.model.LoginUser;
 import com.cloud.system.service.ISysUserService;
 import com.cloud.system.service.IUserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,6 +31,7 @@ import java.util.Arrays;
  *
  * @author ai-cloud
  */
+@Api(tags = "个人信息")
 @RestController
 @RequestMapping("/user/profile")
 public class SysProfileController extends BaseController {
@@ -48,6 +51,7 @@ public class SysProfileController extends BaseController {
      * 个人信息
      */
     @GetMapping
+    @ApiOperation(value = "个人信息", notes = "个人信息")
     public AjaxResult profile() {
         String username = SecurityUtils.getUsername();
         SysUser user = userService.selectUserByUserName(username);
@@ -62,6 +66,7 @@ public class SysProfileController extends BaseController {
      */
     @Log(title = "个人信息", businessType = BusinessType.UPDATE)
     @PutMapping
+    @ApiOperation(value = "修改用户", notes = "修改用户")
     public AjaxResult updateProfile(@RequestBody SysUser user) {
         LoginUser loginUser = SecurityUtils.getLoginUser();
         SysUser sysUser = loginUser.getSysUser();
@@ -99,6 +104,7 @@ public class SysProfileController extends BaseController {
      */
     @Log(title = "个人信息", businessType = BusinessType.UPDATE)
     @PutMapping("/updatePwd")
+    @ApiOperation(value = "重置密码", notes = "重置密码")
     public AjaxResult updatePwd(String oldPassword, String newPassword) {
         String username = SecurityUtils.getUsername();
         SysUser sysUser = userService.selectUserByUserName(username);
@@ -128,6 +134,7 @@ public class SysProfileController extends BaseController {
      */
     @Log(title = "用户头像", businessType = BusinessType.UPDATE)
     @PostMapping("/avatar")
+    @ApiOperation(value = "头像上传", notes = "头像上传")
     public AjaxResult avatar(@RequestParam("avatarfile") MultipartFile file) {
         if (!file.isEmpty()) {
             LoginUser loginUser = SecurityUtils.getLoginUser();
