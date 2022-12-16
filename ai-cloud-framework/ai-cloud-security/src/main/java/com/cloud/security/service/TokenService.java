@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * token验证处理
@@ -154,11 +155,11 @@ public class TokenService {
         //redisService.setCacheObject(userIdKey, userKey, expireTime, TimeUnit.MINUTES);
         //redisService.setCacheObject(userKey, loginUser, expireTime, TimeUnit.MINUTES);
 
-        long expireTime = loginUser.getExpireTime();
-        long currentTime = System.currentTimeMillis();
-        if (expireTime - currentTime <= MILLIS_MINUTE_TEN) {
-            refreshToken(loginUser);
-        }
+        loginUser.setLoginTime(System.currentTimeMillis());
+        loginUser.setExpireTime(loginUser.getLoginTime() + EXPIRE_TIME * MILLIS_MINUTE);
+        // 根据uuid将loginUser缓存
+        String userKey = getTokenKey(loginUser.getToken());
+        redisService.setCacheObject(userKey, loginUser, EXPIRE_TIME, TimeUnit.MINUTES);
     }
 
     private String getTokenKey(String token) {
