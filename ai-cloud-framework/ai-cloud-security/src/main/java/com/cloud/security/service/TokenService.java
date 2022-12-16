@@ -140,20 +140,19 @@ public class TokenService {
      * @param loginUser 登录信息
      */
     public void refreshToken(LoginUser loginUser) {
-        //Long expireTime = System.currentTimeMillis();
-        //loginUser.setLoginTime(System.currentTimeMillis());
-        //loginUser.setExpireTime(loginUser.getLoginTime() + expireTime * MILLIS_MINUTE);
-        // 如果用户不允许多终端同时登录，清除缓存信息
-        //String userIdKey = CacheConstants.LOGIN_SYS_USER_KEY + loginUser.getUserid();
-        //String userKey = redisService.getCacheObject(userIdKey);
-        //if (StringUtils.isNotEmpty(userKey)) {
-        //    redisService.deleteObject(userIdKey);
-        //    redisService.deleteObject(userKey);
-        //}
-        // 根据uuid将loginUser缓存
-        //userKey = getTokenKey(loginUser.getToken());
-        //redisService.setCacheObject(userIdKey, userKey, expireTime, TimeUnit.MINUTES);
-        //redisService.setCacheObject(userKey, loginUser, expireTime, TimeUnit.MINUTES);
+//        loginUser.setLoginTime(System.currentTimeMillis());
+//        loginUser.setExpireTime(loginUser.getLoginTime() + EXPIRE_TIME * MILLIS_MINUTE);
+//        // 如果用户不允许多终端同时登录，清除缓存信息
+//        String userIdKey = CacheConstants.LOGIN_SYS_USER_KEY + loginUser.getUserid();
+//        String userKey = redisService.getCacheObject(userIdKey);
+//        if (StringUtils.isNotEmpty(userKey)) {
+//            redisService.deleteObject(userIdKey);
+//            redisService.deleteObject(userKey);
+//        }
+//        // 根据uuid将loginUser缓存
+//        userKey = getTokenKey(loginUser.getToken());
+//        redisService.setCacheObject(userIdKey, userKey, EXPIRE_TIME, TimeUnit.MINUTES);
+//        redisService.setCacheObject(userKey, loginUser, EXPIRE_TIME, TimeUnit.MINUTES);
 
         loginUser.setLoginTime(System.currentTimeMillis());
         loginUser.setExpireTime(loginUser.getLoginTime() + EXPIRE_TIME * MILLIS_MINUTE);
