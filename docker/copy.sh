@@ -9,7 +9,7 @@ usage() {
 
 # copy sql
 #echo "begin copy sql "
-#cp ../sql/ai-cloud.sql ./mysql/db
+cp ../sql/ai-cloud.sql ./mysql/db
 
 # copy html
 echo "begin copy html "
