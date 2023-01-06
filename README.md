@@ -23,6 +23,7 @@
 ai-cloud-parent
 ├── ai-cloud-gateway         // 网关模块 [8080]
 ├── ai-cloud-auth            // 认证中心 [9200]
+├── ai-cloud-exchange        // 交易所模块
 ├── ai-cloud-api             // 接口模块
 │       └── ai-cloud-file-api                            // 文件接口
 │       └── ai-cloud-resource-api                        // 资源接口

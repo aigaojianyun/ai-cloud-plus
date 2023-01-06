@@ -9,7 +9,7 @@ export default {
   components: { iFrame },
   data() {
     return {
-      url: "http://10.0.0.9:9100/login"
+      url: "http://127.0.0.1:9100/login"
     };
   },
 };
