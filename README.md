@@ -89,7 +89,7 @@ ai-cloud-parent
 - 
 - 移动端
 - http://www.aiclouds.vip
-- ai168/123456
+- ceshi/123456
 - 
 - admin监控
 - http://www.aiclouds.vip:9100
