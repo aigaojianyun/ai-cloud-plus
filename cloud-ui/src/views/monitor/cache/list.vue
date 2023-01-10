@@ -6,9 +6,9 @@
           <div slot="header">
             <span>缓存列表</span>
             <el-button
+              icon="el-icon-refresh-right"
               style="float: right; padding: 3px 0"
               type="text"
-              icon="el-icon-refresh-right"
               @click="refreshCacheNames()"
             ></el-button>
           </div>
@@ -17,40 +17,40 @@
             :data="cacheNames"
             :height="tableHeight"
             highlight-current-row
-            @row-click="getCacheKeys"
             style="width: 100%"
+            @row-click="getCacheKeys"
           >
             <el-table-column
               label="序号"
-              width="60"
               type="index"
+              width="60"
             ></el-table-column>
 
             <el-table-column
-              label="缓存名称"
-              align="center"
-              prop="cacheName"
-              :show-overflow-tooltip="true"
               :formatter="nameFormatter"
+              :show-overflow-tooltip="true"
+              align="center"
+              label="缓存名称"
+              prop="cacheName"
             ></el-table-column>
 
             <el-table-column
-              label="备注"
-              align="center"
-              prop="remark"
               :show-overflow-tooltip="true"
+              align="center"
+              label="备注"
+              prop="remark"
             />
             <el-table-column
-              label="操作"
-              width="60"
               align="center"
               class-name="small-padding fixed-width"
+              label="操作"
+              width="60"
             >
               <template slot-scope="scope">
                 <el-button
+                  icon="el-icon-delete"
                   size="mini"
                   type="text"
-                  icon="el-icon-delete"
                   @click="handleClearCacheName(scope.row)"
                 ></el-button>
               </template>
@@ -64,9 +64,9 @@
           <div slot="header">
             <span>键名列表</span>
             <el-button
+              icon="el-icon-refresh-right"
               style="float: right; padding: 3px 0"
               type="text"
-              icon="el-icon-refresh-right"
               @click="refreshCacheKeys()"
             ></el-button>
           </div>
@@ -75,32 +75,32 @@
             :data="cacheKeys"
             :height="tableHeight"
             highlight-current-row
-            @row-click="handleCacheValue"
             style="width: 100%"
+            @row-click="handleCacheValue"
           >
             <el-table-column
               label="序号"
-              width="60"
               type="index"
+              width="60"
             ></el-table-column>
             <el-table-column
-              label="缓存键名"
-              align="center"
-              :show-overflow-tooltip="true"
               :formatter="keyFormatter"
+              :show-overflow-tooltip="true"
+              align="center"
+              label="缓存键名"
             >
             </el-table-column>
             <el-table-column
-              label="操作"
-              width="60"
               align="center"
               class-name="small-padding fixed-width"
+              label="操作"
+              width="60"
             >
               <template slot-scope="scope">
                 <el-button
+                  icon="el-icon-delete"
                   size="mini"
                   type="text"
-                  icon="el-icon-delete"
                   @click="handleClearCacheKey(scope.row)"
                 ></el-button>
               </template>
@@ -114,9 +114,9 @@
           <div slot="header">
             <span>缓存内容</span>
             <el-button
+              icon="el-icon-refresh-right"
               style="float: right; padding: 3px 0"
               type="text"
-              icon="el-icon-refresh-right"
               @click="handleClearCacheAll()"
             >清理全部
             </el-button
@@ -138,9 +138,9 @@
                 <el-form-item label="缓存内容:" prop="cacheValue">
                   <el-input
                     v-model="cacheForm.cacheValue"
-                    type="textarea"
-                    :rows="8"
                     :readOnly="true"
+                    :rows="8"
+                    type="textarea"
                   />
                 </el-form-item>
               </el-col>

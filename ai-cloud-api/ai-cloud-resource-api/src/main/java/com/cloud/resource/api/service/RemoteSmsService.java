@@ -19,6 +19,6 @@ public interface RemoteSmsService {
      * @param templateId 模板id
      * @param param      模板对应参数
      */
-   public Sms send(String phones, String templateId, Map<String, String> param) throws ServiceException;
+    public Sms send(String phones, String templateId, Map<String, String> param) throws ServiceException;
 
 }

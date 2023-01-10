@@ -124,9 +124,8 @@ public class UserServiceImpl implements IUserService {
      * @return 结果
      */
     @Override
-    public boolean updateUser(User user) {
-        userMapper.updateById(user);
-        return true;
+    public int updateUser(User user) {
+        return userMapper.updateById(user);
     }
 
 }

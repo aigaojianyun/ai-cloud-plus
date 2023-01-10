@@ -104,72 +104,85 @@ public class GenTableColumn extends BaseEntity {
      */
     private Integer sort;
 
-    public void setColumnId(Long columnId) {
-        this.columnId = columnId;
+    public static boolean isSuperColumn(String javaField) {
+        return StringUtils.equalsAnyIgnoreCase(javaField,
+                // BaseEntity
+                "createBy", "createTime", "updateBy", "updateTime", "remark",
+                // TreeEntity
+                "parentName", "parentId", "orderNum", "ancestors");
+    }
+
+    public static boolean isUsableColumn(String javaField) {
+        // isSuperColumn()中的名单用于避免生成多余Domain属性，若某些属性在生成页面时需要用到不能忽略，则放在此处白名单
+        return StringUtils.equalsAnyIgnoreCase(javaField, "parentId", "orderNum", "remark");
     }
 
     public Long getColumnId() {
         return columnId;
     }
 
-    public void setTableId(Long tableId) {
-        this.tableId = tableId;
+    public void setColumnId(Long columnId) {
+        this.columnId = columnId;
     }
 
     public Long getTableId() {
         return tableId;
     }
 
-    public void setColumnName(String columnName) {
-        this.columnName = columnName;
+    public void setTableId(Long tableId) {
+        this.tableId = tableId;
     }
 
     public String getColumnName() {
         return columnName;
     }
 
-    public void setColumnComment(String columnComment) {
-        this.columnComment = columnComment;
+    public void setColumnName(String columnName) {
+        this.columnName = columnName;
     }
 
     public String getColumnComment() {
         return columnComment;
     }
 
-    public void setColumnType(String columnType) {
-        this.columnType = columnType;
+    public void setColumnComment(String columnComment) {
+        this.columnComment = columnComment;
     }
 
     public String getColumnType() {
         return columnType;
     }
 
-    public void setJavaType(String javaType) {
-        this.javaType = javaType;
+    public void setColumnType(String columnType) {
+        this.columnType = columnType;
     }
 
     public String getJavaType() {
         return javaType;
     }
 
-    public void setJavaField(String javaField) {
-        this.javaField = javaField;
+    public void setJavaType(String javaType) {
+        this.javaType = javaType;
     }
 
     public String getJavaField() {
         return javaField;
     }
 
+    public void setJavaField(String javaField) {
+        this.javaField = javaField;
+    }
+
     public String getCapJavaField() {
         return StringUtils.capitalize(javaField);
     }
 
-    public void setIsPk(String isPk) {
-        this.isPk = isPk;
-    }
-
     public String getIsPk() {
         return isPk;
+    }
+
+    public void setIsPk(String isPk) {
+        this.isPk = isPk;
     }
 
     public boolean isPk() {
@@ -196,12 +209,12 @@ public class GenTableColumn extends BaseEntity {
         return isIncrement != null && StringUtils.equals("1", isIncrement);
     }
 
-    public void setIsRequired(String isRequired) {
-        this.isRequired = isRequired;
-    }
-
     public String getIsRequired() {
         return isRequired;
+    }
+
+    public void setIsRequired(String isRequired) {
+        this.isRequired = isRequired;
     }
 
     public boolean isRequired() {
@@ -212,12 +225,12 @@ public class GenTableColumn extends BaseEntity {
         return isRequired != null && StringUtils.equals("1", isRequired);
     }
 
-    public void setIsInsert(String isInsert) {
-        this.isInsert = isInsert;
-    }
-
     public String getIsInsert() {
         return isInsert;
+    }
+
+    public void setIsInsert(String isInsert) {
+        this.isInsert = isInsert;
     }
 
     public boolean isInsert() {
@@ -228,12 +241,12 @@ public class GenTableColumn extends BaseEntity {
         return isInsert != null && StringUtils.equals("1", isInsert);
     }
 
-    public void setIsEdit(String isEdit) {
-        this.isEdit = isEdit;
-    }
-
     public String getIsEdit() {
         return isEdit;
+    }
+
+    public void setIsEdit(String isEdit) {
+        this.isEdit = isEdit;
     }
 
     public boolean isEdit() {
@@ -244,12 +257,12 @@ public class GenTableColumn extends BaseEntity {
         return isEdit != null && StringUtils.equals("1", isEdit);
     }
 
-    public void setIsList(String isList) {
-        this.isList = isList;
-    }
-
     public String getIsList() {
         return isList;
+    }
+
+    public void setIsList(String isList) {
+        this.isList = isList;
     }
 
     public boolean isList() {
@@ -260,12 +273,12 @@ public class GenTableColumn extends BaseEntity {
         return isList != null && StringUtils.equals("1", isList);
     }
 
-    public void setIsQuery(String isQuery) {
-        this.isQuery = isQuery;
-    }
-
     public String getIsQuery() {
         return isQuery;
+    }
+
+    public void setIsQuery(String isQuery) {
+        this.isQuery = isQuery;
     }
 
     public boolean isQuery() {
@@ -276,12 +289,12 @@ public class GenTableColumn extends BaseEntity {
         return isQuery != null && StringUtils.equals("1", isQuery);
     }
 
-    public void setQueryType(String queryType) {
-        this.queryType = queryType;
-    }
-
     public String getQueryType() {
         return queryType;
+    }
+
+    public void setQueryType(String queryType) {
+        this.queryType = queryType;
     }
 
     public String getHtmlType() {
@@ -292,41 +305,28 @@ public class GenTableColumn extends BaseEntity {
         this.htmlType = htmlType;
     }
 
-    public void setDictType(String dictType) {
-        this.dictType = dictType;
-    }
-
     public String getDictType() {
         return dictType;
     }
 
-    public void setSort(Integer sort) {
-        this.sort = sort;
+    public void setDictType(String dictType) {
+        this.dictType = dictType;
     }
 
     public Integer getSort() {
         return sort;
     }
 
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
+
     public boolean isSuperColumn() {
         return isSuperColumn(this.javaField);
     }
 
-    public static boolean isSuperColumn(String javaField) {
-        return StringUtils.equalsAnyIgnoreCase(javaField,
-                // BaseEntity
-                "createBy", "createTime", "updateBy", "updateTime", "remark",
-                // TreeEntity
-                "parentName", "parentId", "orderNum", "ancestors");
-    }
-
     public boolean isUsableColumn() {
         return isUsableColumn(javaField);
-    }
-
-    public static boolean isUsableColumn(String javaField) {
-        // isSuperColumn()中的名单用于避免生成多余Domain属性，若某些属性在生成页面时需要用到不能忽略，则放在此处白名单
-        return StringUtils.equalsAnyIgnoreCase(javaField, "parentId", "orderNum", "remark");
     }
 
     public String readConverterExp() {

@@ -131,6 +131,7 @@ public class SysUserController extends BaseController {
         }
         return R.ok(sysUserVo);
     }
+
     /**
      * 注册用户信息
      */
@@ -147,6 +148,7 @@ public class SysUserController extends BaseController {
         }
         return R.ok(userService.registerUser(sysUser));
     }
+
     /**
      * 获取用户信息
      *

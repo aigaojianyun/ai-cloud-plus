@@ -11,7 +11,7 @@ import lombok.Data;
  */
 @Data
 @ApiModel("账号密码登录参数")
-public class LoginParam extends BaseParam{
+public class LoginParam extends BaseParam {
 
     @ApiModelProperty(value = "用户账号或手机号", example = "13888888888")
     private String username;

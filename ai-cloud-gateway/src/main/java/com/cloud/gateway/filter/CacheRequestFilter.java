@@ -39,6 +39,11 @@ public class CacheRequestFilter extends AbstractGatewayFilterFactory<CacheReques
         return new OrderedGatewayFilter(cacheRequestGatewayFilter, order);
     }
 
+    @Override
+    public List<String> shortcutFieldOrder() {
+        return Collections.singletonList("order");
+    }
+
     public static class CacheRequestGatewayFilter implements GatewayFilter {
         @Override
         public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -54,11 +59,6 @@ public class CacheRequestFilter extends AbstractGatewayFilterFactory<CacheReques
                 return chain.filter(exchange.mutate().request(serverHttpRequest).build());
             });
         }
-    }
-
-    @Override
-    public List<String> shortcutFieldOrder() {
-        return Collections.singletonList("order");
     }
 
     static class Config {

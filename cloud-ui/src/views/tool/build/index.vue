@@ -13,12 +13,12 @@
             输入型组件
           </div>
           <draggable
-            class="components-draggable"
-            :list="inputComponents"
-            :group="{ name: 'componentsGroup', pull: 'clone', put: false }"
             :clone="cloneComponent"
-            draggable=".components-item"
+            :group="{ name: 'componentsGroup', pull: 'clone', put: false }"
+            :list="inputComponents"
             :sort="false"
+            class="components-draggable"
+            draggable=".components-item"
             @end="onEnd"
           >
             <div
@@ -36,12 +36,12 @@
             选择型组件
           </div>
           <draggable
-            class="components-draggable"
-            :list="selectComponents"
-            :group="{ name: 'componentsGroup', pull: 'clone', put: false }"
             :clone="cloneComponent"
-            draggable=".components-item"
+            :group="{ name: 'componentsGroup', pull: 'clone', put: false }"
+            :list="selectComponents"
             :sort="false"
+            class="components-draggable"
+            draggable=".components-item"
             @end="onEnd"
           >
             <div
@@ -61,9 +61,9 @@
             布局型组件
           </div>
           <draggable
-            class="components-draggable" :list="layoutComponents"
-            :group="{ name: 'componentsGroup', pull: 'clone', put: false }" :clone="cloneComponent"
-            draggable=".components-item" :sort="false" @end="onEnd"
+            :clone="cloneComponent" :group="{ name: 'componentsGroup', pull: 'clone', put: false }"
+            :list="layoutComponents" :sort="false"
+            class="components-draggable" draggable=".components-item" @end="onEnd"
           >
             <div
               v-for="(element, index) in layoutComponents" :key="index" class="components-item"
@@ -92,22 +92,22 @@
         </el-button>
       </div>
       <el-scrollbar class="center-scrollbar">
-        <el-row class="center-board-row" :gutter="formConf.gutter">
+        <el-row :gutter="formConf.gutter" class="center-board-row">
           <el-form
-            :size="formConf.size"
-            :label-position="formConf.labelPosition"
             :disabled="formConf.disabled"
+            :label-position="formConf.labelPosition"
             :label-width="formConf.labelWidth + 'px'"
+            :size="formConf.size"
           >
-            <draggable class="drawing-board" :list="drawingList" :animation="340" group="componentsGroup">
+            <draggable :animation="340" :list="drawingList" class="drawing-board" group="componentsGroup">
               <draggable-item
                 v-for="(element, index) in drawingList"
                 :key="element.renderKey"
+                :active-id="activeId"
                 :drawing-list="drawingList"
                 :element="element"
-                :index="index"
-                :active-id="activeId"
                 :form-conf="formConf"
+                :index="index"
                 @activeItem="activeFormItem"
                 @copyItem="drawingItemCopy"
                 @deleteItem="drawingItemDelete"
@@ -129,9 +129,9 @@
     />
 
     <code-type-dialog
+      :show-file-name="showFileName"
       :visible.sync="dialogVisible"
       title="选择生成类型"
-      :show-file-name="showFileName"
       @confirm="generate"
     />
     <input id="copyNode" type="hidden">

@@ -2,12 +2,12 @@
   <div style="position: relative">
     <div
       v-if="type === '2'"
-      class="verify-img-out"
       :style="{ height: parseInt(setSize.imgHeight) + vSpace + 'px' }"
+      class="verify-img-out"
     >
       <div
-        class="verify-img-panel"
         :style="{ width: setSize.imgWidth, height: setSize.imgHeight }"
+        class="verify-img-panel"
       >
         <img
           :src="
@@ -16,43 +16,40 @@
           alt=""
           style="width: 100%; height: 100%; display: block"
         />
-        <div class="verify-refresh" @click="refresh" v-show="showRefresh">
+        <div v-show="showRefresh" class="verify-refresh" @click="refresh">
           <i class="iconfont icon-refresh"></i>
         </div>
         <transition name="tips">
           <span
-            class="verify-tips"
             v-if="tipWords"
             :class="passFlag ? 'suc-bg' : 'err-bg'"
-            >{{ tipWords }}</span
+            class="verify-tips"
+          >{{ tipWords }}</span
           >
         </transition>
       </div>
     </div>
     <!-- 公共部分 -->
     <div
-      class="verify-bar-area"
       :style="{
         width: setSize.imgWidth,
         height: barSize.height,
         'line-height': barSize.height,
       }"
+      class="verify-bar-area"
     >
       <span class="verify-msg" v-text="text"></span>
       <div
-        class="verify-left-bar"
         :style="{
           width: leftBarWidth !== undefined ? leftBarWidth : barSize.height,
           height: barSize.height,
           'border-color': leftBarBorderColor,
           transaction: transitionWidth,
         }"
+        class="verify-left-bar"
       >
         <span class="verify-msg" v-text="finishText"></span>
         <div
-          class="verify-move-block"
-          @touchstart="start"
-          @mousedown="start"
           :style="{
             width: barSize.height,
             height: barSize.height,
@@ -60,6 +57,9 @@
             left: moveBlockLeft,
             transition: transitionLeft,
           }"
+          class="verify-move-block"
+          @mousedown="start"
+          @touchstart="start"
         >
           <i
             :class="['verify-icon iconfont', iconClass]"
@@ -67,13 +67,13 @@
           ></i>
           <div
             v-if="type === '2'"
-            class="verify-sub-block"
             :style="{
               width: Math.floor((parseInt(setSize.imgWidth) * 47) / 310) + 'px',
               height: setSize.imgHeight,
               top: '-' + (parseInt(setSize.imgHeight) + vSpace) + 'px',
               'background-size': setSize.imgWidth + ' ' + setSize.imgHeight,
             }"
+            class="verify-sub-block"
           >
             <img
               :src="'data:image/png;base64,' + blockBackImgBase"
@@ -278,8 +278,8 @@ export default {
         if (
           move_block_left >=
           this.barArea.offsetWidth -
-            parseInt(parseInt(this.blockSize.width) / 2) -
-            2
+          parseInt(parseInt(this.blockSize.width) / 2) -
+          2
         ) {
           move_block_left =
             this.barArea.offsetWidth -
@@ -310,10 +310,10 @@ export default {
           captchaType: this.captchaType,
           pointJson: this.secretKey
             ? aesEncrypt(
-                JSON.stringify({ x: moveLeftDistance, y: 5.0 }),
-                this.secretKey
-              )
-            : JSON.stringify({ x: moveLeftDistance, y: 5.0 }),
+              JSON.stringify({x: moveLeftDistance, y: 5.0}),
+              this.secretKey
+            )
+            : JSON.stringify({x: moveLeftDistance, y: 5.0}),
           token: this.backToken,
         };
         reqCheck(data).then((res) => {
@@ -331,18 +331,18 @@ export default {
             ).toFixed(2)}s验证成功`;
             var captchaVerification = this.secretKey
               ? aesEncrypt(
-                  this.backToken +
-                    "---" +
-                    JSON.stringify({ x: moveLeftDistance, y: 5.0 }),
-                  this.secretKey
-                )
-              : this.backToken +
+                this.backToken +
                 "---" +
-                JSON.stringify({ x: moveLeftDistance, y: 5.0 });
+                JSON.stringify({x: moveLeftDistance, y: 5.0}),
+                this.secretKey
+              )
+              : this.backToken +
+              "---" +
+              JSON.stringify({x: moveLeftDistance, y: 5.0});
             setTimeout(() => {
               this.tipWords = "";
               this.$parent.closeBox();
-              this.$parent.$emit("success", { captchaVerification });
+              this.$parent.$emit("success", {captchaVerification});
             }, 1000);
           } else {
             this.moveBlockBackgroundColor = "#d9534f";

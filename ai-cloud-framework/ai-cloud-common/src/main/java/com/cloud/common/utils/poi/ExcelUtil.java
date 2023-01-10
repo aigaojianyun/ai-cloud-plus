@@ -40,109 +40,156 @@ import java.util.stream.Collectors;
  * @author ai-cloud
  */
 public class ExcelUtil<T> {
-    private static final Logger log = LoggerFactory.getLogger(ExcelUtil.class);
-
     public static final String FORMULA_REGEX_STR = "=|-|\\+|@";
-
     public static final String[] FORMULA_STR = {"=", "-", "+", "@"};
-
     /**
      * Excel sheet最大行数，默认65536
      */
     public static final int SHEET_SIZE = 65536;
-
+    private static final Logger log = LoggerFactory.getLogger(ExcelUtil.class);
+    /**
+     * 数字格式
+     */
+    private static final DecimalFormat DOUBLE_FORMAT = new DecimalFormat("######0.00");
+    /**
+     * 实体对象
+     */
+    public Class<T> clazz;
+    /**
+     * 需要排除列属性
+     */
+    public String[] excludeFields;
     /**
      * 工作表名称
      */
     private String sheetName;
-
     /**
      * 导出类型（EXPORT:导出数据；IMPORT：导入模板）
      */
     private Excel.Type type;
-
     /**
      * 工作薄对象
      */
     private Workbook wb;
-
     /**
      * 工作表对象
      */
     private Sheet sheet;
-
     /**
      * 样式列表
      */
     private Map<String, CellStyle> styles;
-
     /**
      * 导入导出数据列表
      */
     private List<T> list;
-
     /**
      * 注解列表
      */
     private List<Object[]> fields;
-
     /**
      * 当前行号
      */
     private int rownum;
-
     /**
      * 标题
      */
     private String title;
-
     /**
      * 最大高度
      */
     private short maxHeight;
-
     /**
      * 合并后最后行数
      */
     private int subMergedLastRowNum = 0;
-
     /**
      * 合并后开始行数
      */
     private int subMergedFirstRowNum = 1;
-
     /**
      * 对象的子列表方法
      */
     private Method subMethod;
-
     /**
      * 对象的子列表属性
      */
     private List<Field> subFields;
-
     /**
      * 统计列表
      */
     private Map<Integer, Double> statistics = new HashMap<Integer, Double>();
 
-    /**
-     * 数字格式
-     */
-    private static final DecimalFormat DOUBLE_FORMAT = new DecimalFormat("######0.00");
-
-    /**
-     * 实体对象
-     */
-    public Class<T> clazz;
-
-    /**
-     * 需要排除列属性
-     */
-    public String[] excludeFields;
-
     public ExcelUtil(Class<T> clazz) {
         this.clazz = clazz;
+    }
+
+    /**
+     * 获取画布
+     */
+    public static Drawing<?> getDrawingPatriarch(Sheet sheet) {
+        if (sheet.getDrawingPatriarch() == null) {
+            sheet.createDrawingPatriarch();
+        }
+        return sheet.getDrawingPatriarch();
+    }
+
+    /**
+     * 解析导出值 0=男,1=女,2=未知
+     *
+     * @param propertyValue 参数值
+     * @param converterExp  翻译注解
+     * @param separator     分隔符
+     * @return 解析后值
+     */
+    public static String convertByExp(String propertyValue, String converterExp, String separator) {
+        StringBuilder propertyString = new StringBuilder();
+        String[] convertSource = converterExp.split(",");
+        for (String item : convertSource) {
+            String[] itemArray = item.split("=");
+            if (StringUtils.containsAny(propertyValue, separator)) {
+                for (String value : propertyValue.split(separator)) {
+                    if (itemArray[0].equals(value)) {
+                        propertyString.append(itemArray[1] + separator);
+                        break;
+                    }
+                }
+            } else {
+                if (itemArray[0].equals(propertyValue)) {
+                    return itemArray[1];
+                }
+            }
+        }
+        return StringUtils.stripEnd(propertyString.toString(), separator);
+    }
+
+    /**
+     * 反向解析值 男=0,女=1,未知=2
+     *
+     * @param propertyValue 参数值
+     * @param converterExp  翻译注解
+     * @param separator     分隔符
+     * @return 解析后值
+     */
+    public static String reverseByExp(String propertyValue, String converterExp, String separator) {
+        StringBuilder propertyString = new StringBuilder();
+        String[] convertSource = converterExp.split(",");
+        for (String item : convertSource) {
+            String[] itemArray = item.split("=");
+            if (StringUtils.containsAny(propertyValue, separator)) {
+                for (String value : propertyValue.split(separator)) {
+                    if (itemArray[1].equals(value)) {
+                        propertyString.append(itemArray[0] + separator);
+                        break;
+                    }
+                }
+            } else {
+                if (itemArray[1].equals(propertyValue)) {
+                    return itemArray[0];
+                }
+            }
+        }
+        return StringUtils.stripEnd(propertyString.toString(), separator);
     }
 
     /**
@@ -674,16 +721,6 @@ public class ExcelUtil<T> {
     }
 
     /**
-     * 获取画布
-     */
-    public static Drawing<?> getDrawingPatriarch(Sheet sheet) {
-        if (sheet.getDrawingPatriarch() == null) {
-            sheet.createDrawingPatriarch();
-        }
-        return sheet.getDrawingPatriarch();
-    }
-
-    /**
      * 获取图片类型,设置图片插入类型
      */
     public int getImageType(byte[] value) {
@@ -708,13 +745,10 @@ public class ExcelUtil<T> {
         }
         if (StringUtils.isNotEmpty(attr.prompt()) || attr.combo().length > 0) {
             // 提示信息或只能选择不能输入的列内容.
-            if (attr.combo().length > 15 || StringUtils.join(attr.combo()).length() > 255)
-            {
+            if (attr.combo().length > 15 || StringUtils.join(attr.combo()).length() > 255) {
                 // 如果下拉数大于15或字符串长度大于255，则使用一个新sheet存储，避免生成的模板下拉值获取不到
                 setXSSFValidationWithHidden(sheet, attr.combo(), attr.prompt(), 1, 100, column, column);
-            }
-            else
-            {
+            } else {
                 // 提示信息或只能选择不能输入的列内容.
                 setPromptOrValidation(sheet, attr.combo(), attr.prompt(), 1, 100, column, column);
             }
@@ -799,20 +833,18 @@ public class ExcelUtil<T> {
     /**
      * 设置某些列的值只能输入预制的数据,显示下拉框（兼容超出一定数量的下拉框）.
      *
-     * @param sheet 要设置的sheet.
-     * @param textlist 下拉框显示的内容
+     * @param sheet         要设置的sheet.
+     * @param textlist      下拉框显示的内容
      * @param promptContent 提示内容
-     * @param firstRow 开始行
-     * @param endRow 结束行
-     * @param firstCol 开始列
-     * @param endCol 结束列
+     * @param firstRow      开始行
+     * @param endRow        结束行
+     * @param firstCol      开始列
+     * @param endCol        结束列
      */
-    public void setXSSFValidationWithHidden(Sheet sheet, String[] textlist, String promptContent, int firstRow, int endRow, int firstCol, int endCol)
-    {
+    public void setXSSFValidationWithHidden(Sheet sheet, String[] textlist, String promptContent, int firstRow, int endRow, int firstCol, int endCol) {
         String hideSheetName = "combo_" + firstCol + "_" + endCol;
         Sheet hideSheet = wb.createSheet(hideSheetName); // 用于存储 下拉菜单数据
-        for (int i = 0; i < textlist.length; i++)
-        {
+        for (int i = 0; i < textlist.length; i++) {
             hideSheet.createRow(i).createCell(0).setCellValue(textlist[i]);
         }
         // 创建名称，可被其他单元格引用
@@ -826,84 +858,22 @@ public class ExcelUtil<T> {
         CellRangeAddressList regions = new CellRangeAddressList(firstRow, endRow, firstCol, endCol);
         // 数据有效性对象
         DataValidation dataValidation = helper.createValidation(constraint, regions);
-        if (StringUtils.isNotEmpty(promptContent))
-        {
+        if (StringUtils.isNotEmpty(promptContent)) {
             // 如果设置了提示信息则鼠标放上去提示
             dataValidation.createPromptBox("", promptContent);
             dataValidation.setShowPromptBox(true);
         }
         // 处理Excel兼容性问题
-        if (dataValidation instanceof XSSFDataValidation)
-        {
+        if (dataValidation instanceof XSSFDataValidation) {
             dataValidation.setSuppressDropDownArrow(true);
             dataValidation.setShowErrorBox(true);
-        }
-        else
-        {
+        } else {
             dataValidation.setSuppressDropDownArrow(false);
         }
 
         sheet.addValidationData(dataValidation);
         // 设置hiddenSheet隐藏
         wb.setSheetHidden(wb.getSheetIndex(hideSheet), true);
-    }
-
-    /**
-     * 解析导出值 0=男,1=女,2=未知
-     *
-     * @param propertyValue 参数值
-     * @param converterExp  翻译注解
-     * @param separator     分隔符
-     * @return 解析后值
-     */
-    public static String convertByExp(String propertyValue, String converterExp, String separator) {
-        StringBuilder propertyString = new StringBuilder();
-        String[] convertSource = converterExp.split(",");
-        for (String item : convertSource) {
-            String[] itemArray = item.split("=");
-            if (StringUtils.containsAny(propertyValue, separator)) {
-                for (String value : propertyValue.split(separator)) {
-                    if (itemArray[0].equals(value)) {
-                        propertyString.append(itemArray[1] + separator);
-                        break;
-                    }
-                }
-            } else {
-                if (itemArray[0].equals(propertyValue)) {
-                    return itemArray[1];
-                }
-            }
-        }
-        return StringUtils.stripEnd(propertyString.toString(), separator);
-    }
-
-    /**
-     * 反向解析值 男=0,女=1,未知=2
-     *
-     * @param propertyValue 参数值
-     * @param converterExp  翻译注解
-     * @param separator     分隔符
-     * @return 解析后值
-     */
-    public static String reverseByExp(String propertyValue, String converterExp, String separator) {
-        StringBuilder propertyString = new StringBuilder();
-        String[] convertSource = converterExp.split(",");
-        for (String item : convertSource) {
-            String[] itemArray = item.split("=");
-            if (StringUtils.containsAny(propertyValue, separator)) {
-                for (String value : propertyValue.split(separator)) {
-                    if (itemArray[1].equals(value)) {
-                        propertyString.append(itemArray[0] + separator);
-                        break;
-                    }
-                }
-            } else {
-                if (itemArray[1].equals(propertyValue)) {
-                    return itemArray[0];
-                }
-            }
-        }
-        return StringUtils.stripEnd(propertyString.toString(), separator);
     }
 
     /**

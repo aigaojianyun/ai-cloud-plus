@@ -35,13 +35,11 @@ import java.util.Map;
 @Aspect
 @Component
 public class LogAspect {
-    private static final Logger log = LoggerFactory.getLogger(LogAspect.class);
-
     /**
      * 排除敏感属性字段
      */
     public static final String[] EXCLUDE_PROPERTIES = {"password", "oldPassword", "newPassword", "confirmPassword"};
-
+    private static final Logger log = LoggerFactory.getLogger(LogAspect.class);
     @Autowired
     private AsyncLogService asyncLogService;
 

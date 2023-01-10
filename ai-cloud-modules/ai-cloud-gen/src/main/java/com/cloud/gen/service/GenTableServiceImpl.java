@@ -54,6 +54,21 @@ public class GenTableServiceImpl implements IGenTableService {
     private GenTableColumnMapper genTableColumnMapper;
 
     /**
+     * 获取代码生成地址
+     *
+     * @param table    业务表信息
+     * @param template 模板文件路径
+     * @return 生成地址
+     */
+    public static String getGenPath(GenTable table, String template) {
+        String genPath = table.getGenPath();
+        if (StringUtils.equals(genPath, "/")) {
+            return System.getProperty("user.dir") + File.separator + "src" + File.separator + VelocityUtils.getFileName(template, table);
+        }
+        return genPath + File.separator + VelocityUtils.getFileName(template, table);
+    }
+
+    /**
      * 查询业务信息
      *
      * @param id 业务ID
@@ -436,20 +451,5 @@ public class GenTableServiceImpl implements IGenTableService {
             genTable.setParentMenuId(parentMenuId);
             genTable.setParentMenuName(parentMenuName);
         }
-    }
-
-    /**
-     * 获取代码生成地址
-     *
-     * @param table    业务表信息
-     * @param template 模板文件路径
-     * @return 生成地址
-     */
-    public static String getGenPath(GenTable table, String template) {
-        String genPath = table.getGenPath();
-        if (StringUtils.equals(genPath, "/")) {
-            return System.getProperty("user.dir") + File.separator + "src" + File.separator + VelocityUtils.getFileName(template, table);
-        }
-        return genPath + File.separator + VelocityUtils.getFileName(template, table);
     }
 }

@@ -1,66 +1,66 @@
 <template>
   <div>
     <el-tabs type="border-card">
-      <el-tab-pane label="秒" v-if="shouldHide('second')">
+      <el-tab-pane v-if="shouldHide('second')" label="秒">
         <CrontabSecond
-          @update="updateCrontabValue"
-          :check="checkNumber"
-          :cron="crontabValueObj"
           ref="cronsecond"
+          :check="checkNumber"
+          :cron="crontabValueObj"
+          @update="updateCrontabValue"
         />
       </el-tab-pane>
 
-      <el-tab-pane label="分钟" v-if="shouldHide('min')">
+      <el-tab-pane v-if="shouldHide('min')" label="分钟">
         <CrontabMin
-          @update="updateCrontabValue"
-          :check="checkNumber"
-          :cron="crontabValueObj"
           ref="cronmin"
+          :check="checkNumber"
+          :cron="crontabValueObj"
+          @update="updateCrontabValue"
         />
       </el-tab-pane>
 
-      <el-tab-pane label="小时" v-if="shouldHide('hour')">
+      <el-tab-pane v-if="shouldHide('hour')" label="小时">
         <CrontabHour
-          @update="updateCrontabValue"
-          :check="checkNumber"
-          :cron="crontabValueObj"
           ref="cronhour"
+          :check="checkNumber"
+          :cron="crontabValueObj"
+          @update="updateCrontabValue"
         />
       </el-tab-pane>
 
-      <el-tab-pane label="日" v-if="shouldHide('day')">
+      <el-tab-pane v-if="shouldHide('day')" label="日">
         <CrontabDay
-          @update="updateCrontabValue"
-          :check="checkNumber"
-          :cron="crontabValueObj"
           ref="cronday"
+          :check="checkNumber"
+          :cron="crontabValueObj"
+          @update="updateCrontabValue"
         />
       </el-tab-pane>
 
-      <el-tab-pane label="月" v-if="shouldHide('month')">
+      <el-tab-pane v-if="shouldHide('month')" label="月">
         <CrontabMonth
-          @update="updateCrontabValue"
-          :check="checkNumber"
-          :cron="crontabValueObj"
           ref="cronmonth"
+          :check="checkNumber"
+          :cron="crontabValueObj"
+          @update="updateCrontabValue"
         />
       </el-tab-pane>
 
-      <el-tab-pane label="周" v-if="shouldHide('week')">
+      <el-tab-pane v-if="shouldHide('week')" label="周">
         <CrontabWeek
-          @update="updateCrontabValue"
+          ref="cronweek"
           :check="checkNumber"
           :cron="crontabValueObj"
-          ref="cronweek"
+          @update="updateCrontabValue"
         />
       </el-tab-pane>
 
-      <el-tab-pane label="年" v-if="shouldHide('year')">
+      <el-tab-pane v-if="shouldHide('year')" label="年">
         <CrontabYear
-          @update="updateCrontabValue"
+          ref="cronyear"
           :check="checkNumber"
           :cron="crontabValueObj"
-          ref="cronyear"
+          @update="updateCrontabValue"
         />
       </el-tab-pane>
     </el-tabs>
@@ -70,34 +70,34 @@
         <p class="title">时间表达式</p>
         <table>
           <thead>
-            <th v-for="item of tabTitles" width="40" :key="item">{{item}}</th>
-            <th>Cron 表达式</th>
+          <th v-for="item of tabTitles" :key="item" width="40">{{ item }}</th>
+          <th>Cron 表达式</th>
           </thead>
           <tbody>
-            <td>
-              <span>{{crontabValueObj.second}}</span>
-            </td>
-            <td>
-              <span>{{crontabValueObj.min}}</span>
-            </td>
-            <td>
-              <span>{{crontabValueObj.hour}}</span>
-            </td>
-            <td>
-              <span>{{crontabValueObj.day}}</span>
-            </td>
-            <td>
-              <span>{{crontabValueObj.month}}</span>
-            </td>
-            <td>
-              <span>{{crontabValueObj.week}}</span>
-            </td>
-            <td>
-              <span>{{crontabValueObj.year}}</span>
-            </td>
-            <td>
-              <span>{{crontabValueString}}</span>
-            </td>
+          <td>
+            <span>{{ crontabValueObj.second }}</span>
+          </td>
+          <td>
+            <span>{{ crontabValueObj.min }}</span>
+          </td>
+          <td>
+            <span>{{ crontabValueObj.hour }}</span>
+          </td>
+          <td>
+            <span>{{ crontabValueObj.day }}</span>
+          </td>
+          <td>
+            <span>{{ crontabValueObj.month }}</span>
+          </td>
+          <td>
+            <span>{{ crontabValueObj.week }}</span>
+          </td>
+          <td>
+            <span>{{ crontabValueObj.year }}</span>
+          </td>
+          <td>
+            <span>{{ crontabValueString }}</span>
+          </td>
           </tbody>
         </table>
       </div>
@@ -329,7 +329,7 @@ export default {
     },
   },
   computed: {
-    crontabValueString: function() {
+    crontabValueString: function () {
       let obj = this.crontabValueObj;
       let str =
         obj.second +
@@ -363,7 +363,7 @@ export default {
       // 隐藏部分组件
     },
   },
-  mounted: function() {
+  mounted: function () {
     this.resolveExp();
   },
 };
@@ -373,6 +373,7 @@ export default {
   text-align: center;
   margin-top: 20px;
 }
+
 .popup-main {
   position: relative;
   margin: 10px auto;
@@ -381,12 +382,14 @@ export default {
   font-size: 12px;
   overflow: hidden;
 }
+
 .popup-title {
   overflow: hidden;
   line-height: 34px;
   padding-top: 6px;
   background: #f2f2f2;
 }
+
 .popup-result {
   box-sizing: border-box;
   line-height: 24px;
@@ -395,6 +398,7 @@ export default {
   border: 1px solid #ccc;
   position: relative;
 }
+
 .popup-result .title {
   position: absolute;
   top: -28px;
@@ -406,11 +410,13 @@ export default {
   line-height: 30px;
   background: #fff;
 }
+
 .popup-result table {
   text-align: center;
   width: 100%;
   margin: 0 auto;
 }
+
 .popup-result table span {
   display: block;
   width: 100%;
@@ -421,6 +427,7 @@ export default {
   overflow: hidden;
   border: 1px solid #e8e8e8;
 }
+
 .popup-result-scroll {
   font-size: 12px;
   line-height: 24px;

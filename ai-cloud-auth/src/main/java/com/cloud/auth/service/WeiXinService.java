@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.cloud.auth.config.properties.WxPayProperties;
 import com.cloud.auth.domain.AccessToken;
 import com.cloud.auth.domain.Code2Session;
-import com.cloud.auth.service.WeiXinService;
 import com.github.binarywang.wxpay.service.WxPayService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +70,7 @@ public class WeiXinService {
                 .setErrCode(jsonObject.getInteger("errcode"))
                 .setErrMsg(jsonObject.getString("errmsg"));
         if (StringUtils.isEmpty(accessToken.getAccessToken())) {
-        } else if ( Objects.equals(accessToken.getErrCode(), -1)) {
+        } else if (Objects.equals(accessToken.getErrCode(), -1)) {
             accessToken.setErrMsg("系统繁忙，此时请开发者稍候再试");
         } else if (Objects.equals(accessToken.getErrCode(), 40001)) {
             accessToken.setErrMsg("AppSecret 错误或者 AppSecret 不属于这个小程序，请开发者确认 AppSecret 的正确性");

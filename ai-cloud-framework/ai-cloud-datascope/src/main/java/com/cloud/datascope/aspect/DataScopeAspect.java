@@ -55,26 +55,6 @@ public class DataScopeAspect {
      */
     public static final String DATA_SCOPE = "dataScope";
 
-    @Before("@annotation(controllerDataScope)")
-    public void doBefore(JoinPoint point, DataScope controllerDataScope) throws Throwable {
-        clearDataScope(point);
-        handleDataScope(point, controllerDataScope);
-    }
-
-    protected void handleDataScope(final JoinPoint joinPoint, DataScope controllerDataScope) {
-        // 获取当前的用户
-        SysLoginUser sysLoginUser = SecurityUtils.getLoginUser();
-        if (StringUtils.isNotNull(sysLoginUser)) {
-            SysUser currentUser = sysLoginUser.getSysUser();
-            // 如果是超级管理员，则不过滤数据
-            if (StringUtils.isNotNull(currentUser) && !currentUser.isAdmin()) {
-                String permission = StringUtils.defaultIfEmpty(controllerDataScope.permission(), SecurityContextHolder.getPermission());
-                dataScopeFilter(joinPoint, currentUser, controllerDataScope.deptAlias(),
-                        controllerDataScope.userAlias(), permission);
-            }
-        }
-    }
-
     /**
      * 数据范围过滤
      *
@@ -126,6 +106,26 @@ public class DataScopeAspect {
             if (StringUtils.isNotNull(params) && params instanceof BaseEntity) {
                 BaseEntity baseEntity = (BaseEntity) params;
                 baseEntity.getParams().put(DATA_SCOPE, " AND (" + sqlString.substring(4) + ")");
+            }
+        }
+    }
+
+    @Before("@annotation(controllerDataScope)")
+    public void doBefore(JoinPoint point, DataScope controllerDataScope) throws Throwable {
+        clearDataScope(point);
+        handleDataScope(point, controllerDataScope);
+    }
+
+    protected void handleDataScope(final JoinPoint joinPoint, DataScope controllerDataScope) {
+        // 获取当前的用户
+        SysLoginUser sysLoginUser = SecurityUtils.getLoginUser();
+        if (StringUtils.isNotNull(sysLoginUser)) {
+            SysUser currentUser = sysLoginUser.getSysUser();
+            // 如果是超级管理员，则不过滤数据
+            if (StringUtils.isNotNull(currentUser) && !currentUser.isAdmin()) {
+                String permission = StringUtils.defaultIfEmpty(controllerDataScope.permission(), SecurityContextHolder.getPermission());
+                dataScopeFilter(joinPoint, currentUser, controllerDataScope.deptAlias(),
+                        controllerDataScope.userAlias(), permission);
             }
         }
     }

@@ -25,18 +25,14 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 public class TokenService {
-    @Autowired
-    private RedisService redisService;
-
     protected static final long MILLIS_SECOND = 1000;
-
     protected static final long MILLIS_MINUTE = 60 * MILLIS_SECOND;
-
+    private final static Long MILLIS_MINUTE_TEN = CacheConstants.REFRESH_TIME * MILLIS_MINUTE;
     private final static long EXPIRE_TIME = CacheConstants.EXPIRATION;
 
     private final static String ACCESS_TOKEN = CacheConstants.LOGIN_TOKEN_KEY;
-
-    private final static Long MILLIS_MINUTE_TEN = CacheConstants.REFRESH_TIME * MILLIS_MINUTE;
+    @Autowired
+    private RedisService redisService;
 
     /**
      * 创建令牌
@@ -74,6 +70,15 @@ public class TokenService {
     }
 
     /**
+     * 设置用户身份信息
+     */
+    public void setLoginUser(SysLoginUser sysLoginUser) {
+        if (StringUtils.isNotNull(sysLoginUser) && StringUtils.isNotEmpty(sysLoginUser.getToken())) {
+            refreshToken(sysLoginUser);
+        }
+    }
+
+    /**
      * 获取用户身份信息
      *
      * @return 用户信息
@@ -100,15 +105,6 @@ public class TokenService {
         } catch (Exception e) {
         }
         return user;
-    }
-
-    /**
-     * 设置用户身份信息
-     */
-    public void setLoginUser(SysLoginUser sysLoginUser) {
-        if (StringUtils.isNotNull(sysLoginUser) && StringUtils.isNotEmpty(sysLoginUser.getToken())) {
-            refreshToken(sysLoginUser);
-        }
     }
 
     /**

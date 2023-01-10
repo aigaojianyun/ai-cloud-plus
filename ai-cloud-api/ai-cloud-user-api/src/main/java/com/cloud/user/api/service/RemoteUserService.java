@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.*;
 public interface RemoteUserService {
 
     /**
-     * 通过用户名查询用户信息
+     * 通过用户名或手机号查询用户
      *
-     * @param param 用户名或手机号
-     * @param source   请求来源
+     * @param param  用户名或手机号
+     * @param source 请求来源
      * @return 结果
      */
     @GetMapping("/user/info/{param}")

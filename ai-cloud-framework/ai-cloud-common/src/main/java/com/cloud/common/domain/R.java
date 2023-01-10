@@ -13,18 +13,15 @@ import java.io.Serializable;
  */
 @Data
 public class R<T> implements Serializable {
-    private static final long serialVersionUID = 1L;
-
     /**
      * 成功
      */
     public static final int SUCCESS = Constants.SUCCESS;
-
     /**
      * 失败
      */
     public static final int FAIL = Constants.FAIL;
-
+    private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "状态码", example = "200")
     private int code;
 
@@ -35,7 +32,7 @@ public class R<T> implements Serializable {
     private T data;
 
     public static <T> R<T> ok() {
-        return restResult(null,SUCCESS, "成功");
+        return restResult(null, SUCCESS, "成功");
     }
 
     public static <T> R<T> ok(T data) {

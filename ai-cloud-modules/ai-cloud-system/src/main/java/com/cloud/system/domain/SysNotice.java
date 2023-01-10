@@ -49,10 +49,6 @@ public class SysNotice extends BaseEntity {
         this.noticeId = noticeId;
     }
 
-    public void setNoticeTitle(String noticeTitle) {
-        this.noticeTitle = noticeTitle;
-    }
-
     @Xss(message = "公告标题不能包含脚本字符")
     @NotBlank(message = "公告标题不能为空")
     @Size(min = 0, max = 50, message = "公告标题不能超过50个字符")
@@ -60,28 +56,32 @@ public class SysNotice extends BaseEntity {
         return noticeTitle;
     }
 
-    public void setNoticeType(String noticeType) {
-        this.noticeType = noticeType;
+    public void setNoticeTitle(String noticeTitle) {
+        this.noticeTitle = noticeTitle;
     }
 
     public String getNoticeType() {
         return noticeType;
     }
 
-    public void setNoticeContent(String noticeContent) {
-        this.noticeContent = noticeContent;
+    public void setNoticeType(String noticeType) {
+        this.noticeType = noticeType;
     }
 
     public String getNoticeContent() {
         return noticeContent;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setNoticeContent(String noticeContent) {
+        this.noticeContent = noticeContent;
     }
 
     public String getStatus() {
         return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override

@@ -34,7 +34,7 @@ public class UserApi {
     @InnerAuth
     @PostMapping("/info/{param}")
     @ApiOperation("通过openId查询用户")
-    public R<LoginUser> openId(@PathVariable("param") String param) {
+    public R<LoginUser> selectByUserInfo(@PathVariable("param") String param) {
         //用户信息
         User user = userService.selectByUserNamePhone(param);
         LoginUser userVo = new LoginUser();
@@ -87,7 +87,7 @@ public class UserApi {
     @InnerAuth
     @PostMapping("update")
     @ApiOperation("更新用户信息")
-    public R<Boolean> update(@RequestBody User user) {
+    public R<Integer> update(@RequestBody User user) {
         return R.ok(userService.updateUser(user));
     }
 

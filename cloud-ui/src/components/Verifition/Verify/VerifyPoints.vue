@@ -2,29 +2,29 @@
   <div style="position: relative">
     <div class="verify-img-out">
       <div
-        class="verify-img-panel"
         :style="{
           width: setSize.imgWidth,
           height: setSize.imgHeight,
           'background-size': setSize.imgWidth + ' ' + setSize.imgHeight,
           'margin-bottom': vSpace + 'px',
         }"
+        class="verify-img-panel"
       >
         <div
+          v-show="showRefresh"
           class="verify-refresh"
           style="z-index: 3"
           @click="refresh"
-          v-show="showRefresh"
         >
           <i class="iconfont icon-refresh"></i>
         </div>
         <img
+          ref="canvas"
           :src="
             pointBackImgBase
               ? 'data:image/png;base64,' + pointBackImgBase
               : defaultImg
           "
-          ref="canvas"
           alt=""
           style="width: 100%; height: 100%; display: block"
           @click="bindingClick ? canvasClick($event) : undefined"
@@ -33,7 +33,6 @@
         <div
           v-for="(tempPoint, index) in tempPoints"
           :key="index"
-          class="point-area"
           :style="{
             'background-color': '#1abd6c',
             color: '#fff',
@@ -47,6 +46,7 @@
             top: parseInt(tempPoint.y - 10) + 'px',
             left: parseInt(tempPoint.x - 10) + 'px',
           }"
+          class="point-area"
         >
           {{ index + 1 }}
         </div>
@@ -54,13 +54,13 @@
     </div>
     <!-- 'height': this.barSize.height, -->
     <div
-      class="verify-bar-area"
       :style="{
         width: setSize.imgWidth,
         color: this.barAreaColor,
         'border-color': this.barAreaBorderColor,
         'line-height': this.barSize.height,
       }"
+      class="verify-bar-area"
     >
       <span class="verify-msg">{{ text }}</span>
     </div>
@@ -167,9 +167,9 @@ export default {
           //发送后端请求
           var captchaVerification = this.secretKey
             ? aesEncrypt(
-                this.backToken + "---" + JSON.stringify(this.checkPosArr),
-                this.secretKey
-              )
+              this.backToken + "---" + JSON.stringify(this.checkPosArr),
+              this.secretKey
+            )
             : this.backToken + "---" + JSON.stringify(this.checkPosArr);
           let data = {
             captchaType: this.captchaType,
@@ -190,7 +190,7 @@ export default {
                   this.refresh();
                 }, 1500);
               }
-              this.$parent.$emit("success", { captchaVerification });
+              this.$parent.$emit("success", {captchaVerification});
             } else {
               this.$parent.$emit("error", this);
               this.barAreaColor = "#d9534f";
@@ -212,7 +212,7 @@ export default {
     getMousePos: function (obj, e) {
       var x = e.offsetX;
       var y = e.offsetY;
-      return { x, y };
+      return {x, y};
     },
     //创建坐标点
     createPoint: function (pos) {
@@ -261,7 +261,7 @@ export default {
       var newPointArr = pointArr.map((p) => {
         let x = Math.round((310 * p.x) / parseInt(imgSize.imgWidth));
         let y = Math.round((155 * p.y) / parseInt(imgSize.imgHeight));
-        return { x, y };
+        return {x, y};
       });
       return newPointArr;
     },

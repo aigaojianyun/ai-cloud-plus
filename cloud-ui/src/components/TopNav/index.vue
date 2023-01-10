@@ -5,22 +5,26 @@
     @select="handleSelect"
   >
     <template v-for="(item, index) in topMenus">
-      <el-menu-item :style="{'--theme': theme}" :index="item.path" :key="index" v-if="index < visibleNumber"
-        ><svg-icon :icon-class="item.meta.icon" />
-        {{ item.meta.title }}</el-menu-item
+      <el-menu-item v-if="index < visibleNumber" :key="index" :index="item.path" :style="{'--theme': theme}"
+      >
+        <svg-icon :icon-class="item.meta.icon"/>
+        {{ item.meta.title }}
+      </el-menu-item
       >
     </template>
 
     <!-- 顶部菜单超出数量折叠 -->
-    <el-submenu :style="{'--theme': theme}" index="more" v-if="topMenus.length > visibleNumber">
+    <el-submenu v-if="topMenus.length > visibleNumber" :style="{'--theme': theme}" index="more">
       <template slot="title">更多菜单</template>
       <template v-for="(item, index) in topMenus">
         <el-menu-item
-          :index="item.path"
-          :key="index"
           v-if="index >= visibleNumber"
-          ><svg-icon :icon-class="item.meta.icon" />
-          {{ item.meta.title }}</el-menu-item
+          :key="index"
+          :index="item.path"
+        >
+          <svg-icon :icon-class="item.meta.icon"/>
+          {{ item.meta.title }}
+        </el-menu-item
         >
       </template>
     </el-submenu>
@@ -53,9 +57,9 @@ export default {
         if (menu.hidden !== true) {
           // 兼容顶部栏一级菜单内部跳转
           if (menu.path === "/") {
-              topMenus.push(menu.children[0]);
+            topMenus.push(menu.children[0]);
           } else {
-              topMenus.push(menu);
+            topMenus.push(menu);
           }
         }
       });
@@ -71,10 +75,10 @@ export default {
       this.routers.map((router) => {
         for (var item in router.children) {
           if (router.children[item].parentPath === undefined) {
-            if(router.path === "/") {
+            if (router.path === "/") {
               router.children[item].path = "/" + router.children[item].path;
             } else {
-              if(!this.ishttp(router.children[item].path)) {
+              if (!this.ishttp(router.children[item].path)) {
                 router.children[item].path = router.path + "/" + router.children[item].path;
               }
             }
@@ -95,7 +99,7 @@ export default {
         if (!this.$route.meta.link) {
           this.$store.dispatch('app/toggleSideBarHide', false);
         }
-      } else if(!this.$route.children) {
+      } else if (!this.$route.children) {
         activePath = path;
         this.$store.dispatch('app/toggleSideBarHide', true);
       }
@@ -127,7 +131,7 @@ export default {
         window.open(key, "_blank");
       } else if (!route || !route.children) {
         // 没有子路由路径内部打开
-        this.$router.push({ path: key });
+        this.$router.push({path: key});
         this.$store.dispatch('app/toggleSideBarHide', true);
       } else {
         // 显示左侧联动菜单
@@ -145,7 +149,7 @@ export default {
           }
         });
       }
-      if(routes.length > 0) {
+      if (routes.length > 0) {
         this.$store.commit("SET_SIDEBAR_ROUTERS", routes);
       } else {
         this.$store.dispatch('app/toggleSideBarHide', true);

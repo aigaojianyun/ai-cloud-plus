@@ -19,7 +19,7 @@ public interface RemoteMailService {
      * @param subject 标题
      * @param text    内容
      */
-   public void send(String to, String subject, String text) throws ServiceException;
+    public void send(String to, String subject, String text) throws ServiceException;
 
     /**
      * 发送邮件带附件

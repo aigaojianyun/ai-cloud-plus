@@ -35,27 +35,20 @@ import java.util.stream.Collectors;
 @Service
 public class SysUserServiceImpl implements ISysUserService {
     private static final Logger log = LoggerFactory.getLogger(SysUserServiceImpl.class);
-
-    @Autowired
-    private SysUserMapper userMapper;
-
-    @Autowired
-    private SysRoleMapper roleMapper;
-
-    @Autowired
-    private SysPostMapper postMapper;
-
-    @Autowired
-    private SysUserRoleMapper userRoleMapper;
-
-    @Autowired
-    private SysUserPostMapper userPostMapper;
-
-    @Autowired
-    private ISysConfigService configService;
-
     @Autowired
     protected Validator validator;
+    @Autowired
+    private SysUserMapper userMapper;
+    @Autowired
+    private SysRoleMapper roleMapper;
+    @Autowired
+    private SysPostMapper postMapper;
+    @Autowired
+    private SysUserRoleMapper userRoleMapper;
+    @Autowired
+    private SysUserPostMapper userPostMapper;
+    @Autowired
+    private ISysConfigService configService;
 
     /**
      * 根据条件分页查询用户列表

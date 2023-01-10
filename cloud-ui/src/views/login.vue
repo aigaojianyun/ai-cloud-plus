@@ -5,45 +5,45 @@
       <el-form-item prop="username">
         <el-input
           v-model="loginForm.username"
-          type="text"
           auto-complete="off"
           placeholder="账号"
+          type="text"
         >
-          <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon"/>
+          <svg-icon slot="prefix" class="el-input__icon input-icon" icon-class="user"/>
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
         <el-input
           v-model="loginForm.password"
-          type="password"
           auto-complete="off"
           placeholder="密码"
+          type="password"
           @keyup.enter.native="handleLogin"
         >
-          <svg-icon slot="prefix" icon-class="password" class="el-input__icon input-icon"/>
+          <svg-icon slot="prefix" class="el-input__icon input-icon" icon-class="password"/>
         </el-input>
       </el-form-item>
       <Verify
-        @success="capctchaCheckSuccess"
-        :mode="'pop'"
+        ref="verify"
         :captchaType="'blockPuzzle'"
         :imgSize="{ width: '330px', height: '155px' }"
-        ref="verify"
+        :mode="'pop'"
+        @success="capctchaCheckSuccess"
       ></Verify>
       <el-checkbox v-model="loginForm.rememberMe" style="margin:0px 0px 25px 0px;">记住密码</el-checkbox>
       <el-form-item style="width: 100%">
         <el-button
           :loading="loading"
           size="medium"
-          type="primary"
           style="width:100%;"
+          type="primary"
           @click.native.prevent="handleLogin"
         >
           <span v-if="!loading">登 录</span>
           <span v-else>登 录 中...</span>
         </el-button>
-        <div style="float: right;" v-if="register">
-          <router-link class="link-type" :to="'/register'">立即注册</router-link>
+        <div v-if="register" style="float: right;">
+          <router-link :to="'/register'" class="link-type">立即注册</router-link>
         </div>
       </el-form-item>
     </el-form>
@@ -136,7 +136,7 @@ export default {
 };
 </script>
 
-<style rel="stylesheet/scss" lang="scss">
+<style lang="scss" rel="stylesheet/scss">
 .login {
   display: flex;
   justify-content: center;

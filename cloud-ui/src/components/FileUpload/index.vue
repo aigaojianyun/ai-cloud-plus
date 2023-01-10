@@ -1,38 +1,38 @@
 <template>
   <div class="upload-file">
     <el-upload
-      multiple
+      ref="fileUpload"
       :action="uploadFileUrl"
       :before-upload="handleBeforeUpload"
       :file-list="fileList"
+      :headers="headers"
       :limit="limit"
       :on-error="handleUploadError"
       :on-exceed="handleExceed"
       :on-success="handleUploadSuccess"
       :show-file-list="false"
-      :headers="headers"
       class="upload-file-uploader"
-      ref="fileUpload"
+      multiple
     >
       <!-- 上传按钮 -->
       <el-button size="mini" type="primary">选取文件</el-button>
       <!-- 上传提示 -->
-      <div class="el-upload__tip" slot="tip" v-if="showTip">
+      <div v-if="showTip" slot="tip" class="el-upload__tip">
         请上传
-        <template v-if="fileSize"> 大小不超过 <b style="color: #f56c6c">{{ fileSize }}MB</b> </template>
-        <template v-if="fileType"> 格式为 <b style="color: #f56c6c">{{ fileType.join("/") }}</b> </template>
+        <template v-if="fileSize"> 大小不超过 <b style="color: #f56c6c">{{ fileSize }}MB</b></template>
+        <template v-if="fileType"> 格式为 <b style="color: #f56c6c">{{ fileType.join("/") }}</b></template>
         的文件
       </div>
     </el-upload>
 
     <!-- 文件列表 -->
     <transition-group class="upload-file-list el-upload-list el-upload-list--text" name="el-fade-in-linear" tag="ul">
-      <li :key="file.url" class="el-upload-list__item ele-upload-list__item-content" v-for="(file, index) in fileList">
+      <li v-for="(file, index) in fileList" :key="file.url" class="el-upload-list__item ele-upload-list__item-content">
         <el-link :href="file.url" :underline="false" target="_blank">
           <span class="el-icon-document"> {{ getFileName(file.name) }} </span>
         </el-link>
         <div class="ele-upload-list__item-content-action">
-          <el-link :underline="false" @click="handleDelete(index)" type="danger">删除</el-link>
+          <el-link :underline="false" type="danger" @click="handleDelete(index)">删除</el-link>
         </div>
       </li>
     </transition-group>
@@ -89,7 +89,7 @@ export default {
           // 然后将数组转为对象数组
           this.fileList = list.map(item => {
             if (typeof item === "string") {
-              item = { name: item, url: item };
+              item = {name: item, url: item};
             }
             item.uid = item.uid || new Date().getTime() + temp++;
             return item;
@@ -146,7 +146,7 @@ export default {
     // 上传成功回调
     handleUploadSuccess(res, file) {
       if (res.code === 200) {
-        this.uploadList.push({ name: res.data.url, url: res.data.url });
+        this.uploadList.push({name: res.data.url, url: res.data.url});
         this.uploadedSuccessfully();
       } else {
         this.number--;
@@ -192,22 +192,25 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .upload-file-uploader {
   margin-bottom: 5px;
 }
+
 .upload-file-list .el-upload-list__item {
   border: 1px solid #e4e7ed;
   line-height: 2;
   margin-bottom: 10px;
   position: relative;
 }
+
 .upload-file-list .ele-upload-list__item-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: inherit;
 }
+
 .ele-upload-list__item-content-action .el-link {
   margin-right: 10px;
 }

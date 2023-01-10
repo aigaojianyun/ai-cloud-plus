@@ -1,6 +1,6 @@
 <template>
   <div class="errPage-container">
-    <el-button icon="arrow-left" class="pan-back-btn" @click="back">
+    <el-button class="pan-back-btn" icon="arrow-left" @click="back">
       返回
     </el-button>
     <el-row>
@@ -19,7 +19,7 @@
         </ul>
       </el-col>
       <el-col :span="12">
-        <img :src="errGif" width="313" height="428" alt="Girl has dropped her ice cream.">
+        <img :src="errGif" alt="Girl has dropped her ice cream." height="428" width="313">
       </el-col>
     </el-row>
   </div>

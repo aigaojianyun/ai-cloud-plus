@@ -3,13 +3,13 @@
     <scroll-pane ref="scrollPane" class="tags-view-wrapper" @scroll="handleScroll">
       <router-link
         v-for="tag in visitedViews"
-        ref="tag"
         :key="tag.path"
+        ref="tag"
         :class="isActive(tag)?'active':''"
-        :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"
-        tag="span"
-        class="tags-view-item"
         :style="activeStyle(tag)"
+        :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"
+        class="tags-view-item"
+        tag="span"
         @click.middle.native="!isAffix(tag)?closeSelectedTag(tag):''"
         @contextmenu.prevent.native="openMenu(tag,$event)"
       >

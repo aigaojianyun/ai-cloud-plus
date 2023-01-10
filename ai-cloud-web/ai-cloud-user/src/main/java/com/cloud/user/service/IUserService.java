@@ -58,6 +58,6 @@ public interface IUserService {
      * @param user 用户信息
      * @return 结果
      */
-    public boolean updateUser(User user);
+    public int updateUser(User user);
 
 }
