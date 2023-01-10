@@ -1,6 +1,7 @@
 package com.cloud.auth.controller;
 
 import com.cloud.auth.param.LoginParam;
+import com.cloud.auth.param.RegisterParam;
 import com.cloud.auth.service.SysLoginService;
 import com.cloud.common.domain.R;
 import com.cloud.common.utils.JwtUtils;
@@ -45,6 +46,19 @@ public class SysLoginController {
         SysLoginUser userInfo = sysLoginService.login(param.getUsername(), RsaUtils.decryptByPrivateKey(param.getPassword()), param.getCode(), param.getUuid());
         // 获取登录token
         return R.ok(tokenService.createToken(userInfo));
+    }
+
+    /**
+     * 账号密码注册
+     *
+     * @param param 注册参数
+     * @return 注册结果
+     */
+    @PostMapping("register")
+    public R<?> register(@RequestBody RegisterParam param) {
+        // 用户注册
+        sysLoginService.register(param.getUsername(), param.getPassword());
+        return R.ok();
     }
 
     /**
