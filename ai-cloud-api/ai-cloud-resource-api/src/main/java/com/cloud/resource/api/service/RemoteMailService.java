@@ -2,7 +2,6 @@ package com.cloud.resource.api.service;
 
 import com.cloud.common.exception.ServiceException;
 
-
 import java.io.File;
 import java.util.List;
 

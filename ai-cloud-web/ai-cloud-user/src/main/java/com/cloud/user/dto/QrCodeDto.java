@@ -3,6 +3,7 @@ package com.cloud.user.dto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
 /**
  * 二维码信息
  *

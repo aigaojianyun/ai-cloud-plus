@@ -6,7 +6,7 @@ import com.cloud.common.utils.ServletUtils;
 import com.cloud.common.utils.StringUtils;
 import com.cloud.security.auth.AuthUtil;
 import com.cloud.security.utils.SecurityUtils;
-import com.cloud.system.api.model.LoginUser;
+import com.cloud.system.api.model.SysLoginUser;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.AsyncHandlerInterceptor;
 
@@ -32,10 +32,10 @@ public class HeaderInterceptor implements AsyncHandlerInterceptor {
 
         String token = SecurityUtils.getToken();
         if (StringUtils.isNotEmpty(token)) {
-            LoginUser loginUser = AuthUtil.getLoginUser(token);
-            if (StringUtils.isNotNull(loginUser)) {
-                AuthUtil.verifyLoginUserExpire(loginUser);
-                SecurityContextHolder.set(SecurityConstants.LOGIN_USER, loginUser);
+            SysLoginUser sysLoginUser = AuthUtil.getLoginUser(token);
+            if (StringUtils.isNotNull(sysLoginUser)) {
+                AuthUtil.verifyLoginUserExpire(sysLoginUser);
+                SecurityContextHolder.set(SecurityConstants.LOGIN_USER, sysLoginUser);
             }
         }
         return true;

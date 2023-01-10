@@ -4,7 +4,7 @@ import cn.hutool.core.lang.Snowflake;
 import com.cloud.common.constant.UserAccountConstants;
 import com.cloud.common.constant.UserConstants;
 import com.cloud.common.utils.StringUtils;
-import com.cloud.system.api.domain.User;
+import com.cloud.user.api.domain.User;
 import com.cloud.user.domain.UserMockData;
 import com.cloud.user.mapper.UserMapper;
 import com.cloud.user.mapper.UserMockDataMapper;
@@ -33,6 +33,17 @@ public class UserServiceImpl implements IUserService {
 
     @Autowired
     private IUserAccountService userAccountService;
+
+    /**
+     * 通过用户名或手机号查询用户
+     *
+     * @param param 用户名或手机号
+     * @return 用户对象信息
+     */
+    @Override
+    public User selectByUserNamePhone(String param) {
+        return userMapper.selectByUserNamePhone(param);
+    }
 
     /**
      * 通过openId查询用户

@@ -2,7 +2,7 @@ package com.cloud.security.auth;
 
 import com.cloud.security.annotation.RequiresPermissions;
 import com.cloud.security.annotation.RequiresRoles;
-import com.cloud.system.api.model.LoginUser;
+import com.cloud.system.api.model.SysLoginUser;
 
 /**
  * Token 权限验证工具类
@@ -41,15 +41,15 @@ public class AuthUtil {
     /**
      * 获取当前登录用户信息
      */
-    public static LoginUser getLoginUser(String token) {
+    public static SysLoginUser getLoginUser(String token) {
         return authLogic.getLoginUser(token);
     }
 
     /**
      * 验证当前用户有效期
      */
-    public static void verifyLoginUserExpire(LoginUser loginUser) {
-        authLogic.verifyLoginUserExpire(loginUser);
+    public static void verifyLoginUserExpire(SysLoginUser sysLoginUser) {
+        authLogic.verifyLoginUserExpire(sysLoginUser);
     }
 
     /**

@@ -12,6 +12,7 @@
         <module>ai-cloud-system-api</module>
         <module>ai-cloud-resource-api</module>
         <module>ai-cloud-file-api</module>
+        <module>ai-cloud-user-api</module>
     </modules>
 
     <artifactId>ai-cloud-api</artifactId>

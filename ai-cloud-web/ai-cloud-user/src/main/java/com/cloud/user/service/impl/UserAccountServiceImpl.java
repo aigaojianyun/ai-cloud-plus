@@ -5,7 +5,7 @@ import com.cloud.common.exception.ServiceException;
 import com.cloud.common.utils.SerialNumberUtils;
 import com.cloud.common.utils.StringUtils;
 import com.cloud.common.utils.uuid.IdUtils;
-import com.cloud.system.api.domain.User;
+import com.cloud.user.api.domain.User;
 import com.cloud.user.domain.UserAccount;
 import com.cloud.user.domain.UserAccountDetail;
 import com.cloud.user.mapper.UserAccountDetailMapper;
@@ -171,7 +171,6 @@ public class UserAccountServiceImpl implements IUserAccountService {
         map.put("addNumber", addNumber);
         return map;
     }
-
 
 
 }

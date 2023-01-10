@@ -34,16 +34,22 @@
             <artifactId>ai-cloud-redis</artifactId>
         </dependency>
 
+        <!-- Api File -->
+        <dependency>
+            <groupId>com.cloud</groupId>
+            <artifactId>ai-cloud-file-api</artifactId>
+        </dependency>
+
         <!-- Api System -->
         <dependency>
             <groupId>com.cloud</groupId>
             <artifactId>ai-cloud-system-api</artifactId>
         </dependency>
 
-        <!-- Api File -->
+        <!-- Api User -->
         <dependency>
             <groupId>com.cloud</groupId>
-            <artifactId>ai-cloud-file-api</artifactId>
+            <artifactId>ai-cloud-user-api</artifactId>
         </dependency>
 
     </dependencies>

@@ -49,8 +49,8 @@ public class SmsController extends BaseController {
      */
     @GetMapping("code")
     @ApiOperation(value = "发送短信验证码", notes = "发送短信验证码")
-    public R smsCaptcha(@ApiParam(value="手机号", required = true) @NotBlank(message = "{user.phone.not.blank}") String phone) {
-        if (StringUtils.isEmpty(phone)){
+    public R smsCaptcha(@ApiParam(value = "手机号", required = true) @NotBlank(message = "{user.phone.not.blank}") String phone) {
+        if (StringUtils.isEmpty(phone)) {
             throw new ServiceException("手机号不能不能为空!");
         }
         if (smsProperties.getEnabled()) {

@@ -47,7 +47,7 @@ public class MailControoller {
      */
     @GetMapping("code")
     @ApiOperation(value = "发送邮件验证码", notes = "发送邮件验证码")
-    public R mailCaptcha(@ApiParam(value="邮箱", required = true) @NotBlank(message = "{user.to.not.blank}") String to) {
+    public R mailCaptcha(@ApiParam(value = "邮箱", required = true) @NotBlank(message = "{user.to.not.blank}") String to) {
         if (StringUtils.isEmpty(to)) {
             throw new ServiceException("邮箱不能不能为空!");
         }

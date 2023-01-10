@@ -2,11 +2,9 @@ package com.cloud.system.controller;
 
 import com.cloud.common.constant.UserConstants;
 import com.cloud.common.domain.R;
-import com.cloud.common.utils.DateUtils;
 import com.cloud.common.utils.ShortIdUtils;
 import com.cloud.common.utils.StringUtils;
 import com.cloud.common.utils.poi.ExcelUtil;
-import com.cloud.common.utils.uuid.IdUtils;
 import com.cloud.common.web.controller.BaseController;
 import com.cloud.common.web.domain.AjaxResult;
 import com.cloud.common.web.page.TableDataInfo;
@@ -18,8 +16,7 @@ import com.cloud.security.utils.SecurityUtils;
 import com.cloud.system.api.domain.SysDept;
 import com.cloud.system.api.domain.SysRole;
 import com.cloud.system.api.domain.SysUser;
-import com.cloud.system.api.domain.User;
-import com.cloud.system.api.model.LoginUser;
+import com.cloud.system.api.model.SysLoginUser;
 import com.cloud.system.service.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -44,9 +41,6 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/user")
 public class SysUserController extends BaseController {
-
-    @Autowired
-    private IUserService iUserService;
 
     @Autowired
     private ISysUserService userService;
@@ -122,27 +116,21 @@ public class SysUserController extends BaseController {
     @InnerAuth
     @GetMapping("/info/{username}")
     @ApiOperation(value = "获取当前用户信息", notes = "获取当前用户信息")
-    public R<LoginUser> info(@PathVariable("username") String username) {
-        //普通用户信息
-        User user = iUserService.selectByUserNamePhone(username);
+    public R<SysLoginUser> info(@PathVariable("username") String username) {
         //系统用户信息
-        SysUser sysUser = userService.selectUserById(user.getId());
-        LoginUser sysUserVo = new LoginUser();
+        SysUser sysUser = userService.selectUserByUserName(username);
+        SysLoginUser sysUserVo = new SysLoginUser();
         if (StringUtils.isNotNull(sysUser)) {
             // 角色集合
             Set<String> roles = permissionService.getRolePermission(sysUser);
             // 权限集合
             Set<String> permissions = permissionService.getMenuPermission(sysUser);
-            sysUserVo.setUser(user);
             sysUserVo.setSysUser(sysUser);
             sysUserVo.setRoles(roles);
             sysUserVo.setPermissions(permissions);
-        } else {
-            sysUserVo.setUser(user);
         }
         return R.ok(sysUserVo);
     }
-
     /**
      * 注册用户信息
      */
@@ -159,7 +147,6 @@ public class SysUserController extends BaseController {
         }
         return R.ok(userService.registerUser(sysUser));
     }
-
     /**
      * 获取用户信息
      *
@@ -169,18 +156,14 @@ public class SysUserController extends BaseController {
     @ApiOperation(value = "获取用户信息", notes = "获取用户信息")
     public AjaxResult getInfo() {
         SysUser user = userService.selectUserById(SecurityUtils.getUserId());
-        AjaxResult ajax = success();
-        if (StringUtils.isNotNull(user)) {
-            // 角色集合
-            Set<String> roles = permissionService.getRolePermission(user);
-            // 权限集合
-            Set<String> permissions = permissionService.getMenuPermission(user);
-            ajax.put("user", user);
-            ajax.put("roles", roles);
-            ajax.put("permissions", permissions);
-        } else {
-            return error("该账号不具备权限,无法进行操作!");
-        }
+        // 角色集合
+        Set<String> roles = permissionService.getRolePermission(user);
+        // 权限集合
+        Set<String> permissions = permissionService.getMenuPermission(user);
+        AjaxResult ajax = AjaxResult.success();
+        ajax.put("user", user);
+        ajax.put("roles", roles);
+        ajax.put("permissions", permissions);
         return ajax;
     }
 
@@ -225,19 +208,6 @@ public class SysUserController extends BaseController {
         sysUser.setUserId(ShortIdUtils.generateId());
         sysUser.setCreateBy(SecurityUtils.getUsername());
         sysUser.setPassword(SecurityUtils.encryptPassword(sysUser.getPassword()));
-        //创建用户登录信息
-        User user = new User();
-        user.setId(sysUser.getUserId());
-        user.setUserName(sysUser.getUserName());
-        user.setNickName(sysUser.getNickName());
-        user.setPhone(sysUser.getPhonenumber());
-        user.setPassword(sysUser.getPassword());
-        user.setSex(sysUser.getSex());
-        user.setUuid(IdUtils.fastSimpleUUID());
-        user.setUserType(2);
-        user.setActivateTime(DateUtils.getNowDate());
-        user.setCreateBy(SecurityUtils.getUsername());
-        iUserService.insertUser(user);
         return toAjax(userService.insertUser(sysUser));
     }
 
@@ -259,13 +229,6 @@ public class SysUserController extends BaseController {
             return error("修改用户'" + sysUser.getUserName() + "'失败，邮箱账号已存在");
         }
         sysUser.setUpdateBy(SecurityUtils.getUsername());
-        //修改用户登录信息
-        User user = iUserService.selectById(sysUser.getUserId());
-        user.setUserName(sysUser.getUserName());
-        user.setNickName(sysUser.getNickName());
-        user.setPhone(sysUser.getPhonenumber());
-        user.setSex(sysUser.getSex());
-        iUserService.updateById(user);
         return toAjax(userService.updateUser(sysUser));
     }
 
@@ -280,7 +243,6 @@ public class SysUserController extends BaseController {
         if (ArrayUtils.contains(userIds, SecurityUtils.getUserId())) {
             return error("当前用户不能删除");
         }
-        iUserService.deleteByIds(userIds);
         return toAjax(userService.deleteUserByIds(userIds));
     }
 

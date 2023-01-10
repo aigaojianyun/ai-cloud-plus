@@ -12,7 +12,7 @@ import com.cloud.common.utils.StringUtils;
 import com.cloud.common.utils.sign.MathUtil;
 import com.cloud.common.utils.sign.Md5Util;
 import com.cloud.security.utils.SecurityUtils;
-import com.cloud.system.api.domain.User;
+import com.cloud.user.api.domain.User;
 import com.cloud.user.domain.*;
 import com.cloud.user.dto.*;
 import com.cloud.user.mapper.*;

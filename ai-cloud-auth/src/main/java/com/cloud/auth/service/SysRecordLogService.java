@@ -1,4 +1,4 @@
-package com.cloud.auth.service.impl;
+package com.cloud.auth.service;
 
 import com.cloud.common.constant.Constants;
 import com.cloud.common.constant.SecurityConstants;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @author ai-cloud
  */
 @Component
-public class RecordLogService {
+public class SysRecordLogService {
     @Autowired
     private RemoteSysLogService remoteSysLogService;
 

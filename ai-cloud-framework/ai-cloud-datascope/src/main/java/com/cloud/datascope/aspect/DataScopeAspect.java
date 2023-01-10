@@ -8,7 +8,7 @@ import com.cloud.datascope.annotation.DataScope;
 import com.cloud.security.utils.SecurityUtils;
 import com.cloud.system.api.domain.SysRole;
 import com.cloud.system.api.domain.SysUser;
-import com.cloud.system.api.model.LoginUser;
+import com.cloud.system.api.model.SysLoginUser;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -63,9 +63,9 @@ public class DataScopeAspect {
 
     protected void handleDataScope(final JoinPoint joinPoint, DataScope controllerDataScope) {
         // 获取当前的用户
-        LoginUser loginUser = SecurityUtils.getLoginUser();
-        if (StringUtils.isNotNull(loginUser)) {
-            SysUser currentUser = loginUser.getSysUser();
+        SysLoginUser sysLoginUser = SecurityUtils.getLoginUser();
+        if (StringUtils.isNotNull(sysLoginUser)) {
+            SysUser currentUser = sysLoginUser.getSysUser();
             // 如果是超级管理员，则不过滤数据
             if (StringUtils.isNotNull(currentUser) && !currentUser.isAdmin()) {
                 String permission = StringUtils.defaultIfEmpty(controllerDataScope.permission(), SecurityContextHolder.getPermission());

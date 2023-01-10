@@ -5,7 +5,7 @@ import com.cloud.common.constant.ServiceNameConstants;
 import com.cloud.common.domain.R;
 import com.cloud.system.api.domain.SysUser;
 import com.cloud.system.api.factory.RemoteSysUserFallbackFactory;
-import com.cloud.system.api.model.LoginUser;
+import com.cloud.system.api.model.SysLoginUser;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +24,7 @@ public interface RemoteSysUserService {
      * @return 结果
      */
     @GetMapping("/user/info/{username}")
-    public R<LoginUser> getUserInfo(@PathVariable("username") String username, @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
+    public R<SysLoginUser> getSysUserInfo(@PathVariable("username") String username, @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
 
     /**
      * 注册系统用户信息

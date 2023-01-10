@@ -16,7 +16,7 @@ import java.util.Date;
 
 @Data
 @ApiModel("用户绑定银行卡或支付宝")
-public class UserBind extends Entity{
+public class UserBind extends Entity {
 
     private static final long serialVersionUID = 1L;
 

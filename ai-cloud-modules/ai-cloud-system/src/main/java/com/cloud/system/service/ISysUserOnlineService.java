@@ -1,6 +1,6 @@
 package com.cloud.system.service;
 
-import com.cloud.system.api.model.LoginUser;
+import com.cloud.system.api.model.SysLoginUser;
 import com.cloud.system.domain.SysUserOnline;
 
 /**
@@ -16,7 +16,7 @@ public interface ISysUserOnlineService {
      * @param user   用户信息
      * @return 在线用户信息
      */
-    public SysUserOnline selectOnlineByIpaddr(String ipaddr, LoginUser user);
+    public SysUserOnline selectOnlineByIpaddr(String ipaddr, SysLoginUser user);
 
     /**
      * 通过用户名称查询信息
@@ -25,7 +25,7 @@ public interface ISysUserOnlineService {
      * @param user     用户信息
      * @return 在线用户信息
      */
-    public SysUserOnline selectOnlineByUserName(String userName, LoginUser user);
+    public SysUserOnline selectOnlineByUserName(String userName, SysLoginUser user);
 
     /**
      * 通过登录地址/用户名称查询信息
@@ -35,7 +35,7 @@ public interface ISysUserOnlineService {
      * @param user     用户信息
      * @return 在线用户信息
      */
-    public SysUserOnline selectOnlineByInfo(String ipaddr, String userName, LoginUser user);
+    public SysUserOnline selectOnlineByInfo(String ipaddr, String userName, SysLoginUser user);
 
     /**
      * 设置在线用户信息
@@ -43,5 +43,5 @@ public interface ISysUserOnlineService {
      * @param user 用户信息
      * @return 在线用户
      */
-    public SysUserOnline loginUserToUserOnline(LoginUser user);
+    public SysUserOnline loginUserToUserOnline(SysLoginUser user);
 }

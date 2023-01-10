@@ -1,4 +1,4 @@
-package com.cloud.auth.service.impl;
+package com.cloud.auth.service;
 
 import com.cloud.common.constant.Constants;
 import com.cloud.common.constant.SecurityConstants;
@@ -7,8 +7,8 @@ import com.cloud.common.domain.R;
 import com.cloud.common.exception.ServiceException;
 import com.cloud.common.utils.StringUtils;
 import com.cloud.security.utils.SecurityUtils;
-import com.cloud.system.api.domain.User;
-import com.cloud.system.api.service.RemoteUserService;
+import com.cloud.system.api.domain.SysUser;
+import com.cloud.system.api.service.RemoteSysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,23 +18,22 @@ import org.springframework.stereotype.Component;
  * @author ai-cloud
  */
 @Component
-public class RegisterService {
+public class SysRegisterService {
 
     @Autowired
-    private RemoteUserService remoteUserService;
+    private RemoteSysUserService remoteSysUserService;
 
     @Autowired
-    private RecordLogService recordLogService;
+    private SysRecordLogService sysRecordLogService;
 
     /**
-     * 用户账号密码注册
+     * 账号密码注册
      *
      * @param username 用户名
      * @param password 密码
-     * @param uuid     设备唯一标识
      * @return 注册结果
      */
-    public void registerUser(String username, String password, String phone, String uuid) {
+    public void register(String username, String password) {
         // 用户名或密码为空 错误
         if (StringUtils.isAnyBlank(username, password)) {
             throw new ServiceException("用户/密码必须填写");
@@ -45,19 +44,20 @@ public class RegisterService {
         }
         if (password.length() < UserConstants.PASSWORD_MIN_LENGTH
                 || password.length() > UserConstants.PASSWORD_MAX_LENGTH) {
-            throw new ServiceException("密码长度必须在6到20个字符之间");
+            throw new ServiceException("密码长度必须在5到20个字符之间");
         }
+
         // 注册用户信息
-        User user = new User();
-        user.setUserName(username);
-        user.setPhone(phone);
-        user.setUuid(uuid);
-        user.setPassword(SecurityUtils.encryptPassword(password));
-        R<?> registerResult = remoteUserService.registerUserInfo(user, SecurityConstants.INNER);
+        SysUser sysUser = new SysUser();
+        sysUser.setUserName(username);
+        sysUser.setNickName(username);
+        sysUser.setPassword(SecurityUtils.encryptPassword(password));
+        R<?> registerResult = remoteSysUserService.registerUserInfo(sysUser, SecurityConstants.INNER);
+
         if (R.FAIL == registerResult.getCode()) {
             throw new ServiceException(registerResult.getMsg());
         }
-        recordLogService.recordLogininfor(username, Constants.REGISTER, "注册成功");
+        sysRecordLogService.recordLogininfor(username, Constants.REGISTER, "注册成功");
     }
 
 

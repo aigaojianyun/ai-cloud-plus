@@ -2,7 +2,7 @@ package com.cloud.system.api.factory;
 
 import com.cloud.common.domain.R;
 import com.cloud.system.api.domain.SysUser;
-import com.cloud.system.api.model.LoginUser;
+import com.cloud.system.api.model.SysLoginUser;
 import com.cloud.system.api.service.RemoteSysUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,7 @@ public class RemoteSysUserFallbackFactory implements FallbackFactory<RemoteSysUs
         log.error("用户服务调用失败:{}", throwable.getMessage());
         return new RemoteSysUserService() {
             @Override
-            public R<LoginUser> getUserInfo(String username, String source) {
+            public R<SysLoginUser> getSysUserInfo(String username, String source) {
                 return R.fail("获取系统用户失败:" + throwable.getMessage());
             }
 

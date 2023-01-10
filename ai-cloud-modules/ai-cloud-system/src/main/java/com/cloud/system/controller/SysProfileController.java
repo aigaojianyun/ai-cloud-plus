@@ -13,11 +13,9 @@ import com.cloud.log.annotation.Log;
 import com.cloud.log.enums.BusinessType;
 import com.cloud.security.service.TokenService;
 import com.cloud.security.utils.SecurityUtils;
-import com.cloud.system.api.domain.User;
 import com.cloud.system.api.domain.SysUser;
-import com.cloud.system.api.model.LoginUser;
+import com.cloud.system.api.model.SysLoginUser;
 import com.cloud.system.service.ISysUserService;
-import com.cloud.system.service.IUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +35,6 @@ import java.util.Arrays;
 public class SysProfileController extends BaseController {
     @Autowired
     private ISysUserService userService;
-
-    @Autowired
-    private IUserService iUserService;
 
     @Autowired
     private TokenService tokenService;
@@ -68,8 +63,8 @@ public class SysProfileController extends BaseController {
     @PutMapping
     @ApiOperation(value = "修改用户", notes = "修改用户")
     public AjaxResult updateProfile(@RequestBody SysUser user) {
-        LoginUser loginUser = SecurityUtils.getLoginUser();
-        SysUser sysUser = loginUser.getSysUser();
+        SysLoginUser sysLoginUser = SecurityUtils.getLoginUser();
+        SysUser sysUser = sysLoginUser.getSysUser();
         user.setUserName(sysUser.getUserName());
         if (StringUtils.isNotEmpty(user.getPhonenumber())
                 && UserConstants.NOT_UNIQUE.equals(userService.checkPhoneUnique(user))) {
@@ -84,16 +79,11 @@ public class SysProfileController extends BaseController {
         user.setDeptId(null);
         if (userService.updateUserProfile(user) > 0) {
             // 更新缓存用户信息
-            loginUser.getSysUser().setNickName(user.getNickName());
-            loginUser.getSysUser().setPhonenumber(user.getPhonenumber());
-            loginUser.getSysUser().setEmail(user.getEmail());
-            loginUser.getSysUser().setSex(user.getSex());
-            tokenService.setLoginUser(loginUser);
-            //更新user表用户
-            User users = iUserService.selectById(sysUser.getUserId());
-            users.setNickName(user.getNickName());
-            users.setPhone(user.getPhonenumber());
-            iUserService.updateById(users);
+            sysLoginUser.getSysUser().setNickName(user.getNickName());
+            sysLoginUser.getSysUser().setPhonenumber(user.getPhonenumber());
+            sysLoginUser.getSysUser().setEmail(user.getEmail());
+            sysLoginUser.getSysUser().setSex(user.getSex());
+            tokenService.setLoginUser(sysLoginUser);
             return success();
         }
         return error("修改个人信息异常，请联系管理员");
@@ -117,13 +107,9 @@ public class SysProfileController extends BaseController {
         }
         if (userService.resetUserPwd(username, SecurityUtils.encryptPassword(newPassword)) > 0) {
             // 更新缓存用户密码
-            LoginUser loginUser = SecurityUtils.getLoginUser();
-            loginUser.getSysUser().setPassword(SecurityUtils.encryptPassword(newPassword));
-            tokenService.setLoginUser(loginUser);
-            //更新user表用户
-            User user = iUserService.selectById(sysUser.getUserId());
-            user.setPassword(SecurityUtils.encryptPassword(newPassword));
-            iUserService.updateById(user);
+            SysLoginUser sysLoginUser = SecurityUtils.getLoginUser();
+            sysLoginUser.getSysUser().setPassword(SecurityUtils.encryptPassword(newPassword));
+            tokenService.setLoginUser(sysLoginUser);
             return success();
         }
         return error("修改密码异常，请联系管理员");
@@ -137,7 +123,7 @@ public class SysProfileController extends BaseController {
     @ApiOperation(value = "头像上传", notes = "头像上传")
     public AjaxResult avatar(@RequestParam("avatarfile") MultipartFile file) {
         if (!file.isEmpty()) {
-            LoginUser loginUser = SecurityUtils.getLoginUser();
+            SysLoginUser sysLoginUser = SecurityUtils.getLoginUser();
             String extension = FileTypeUtils.getExtension(file);
             if (!StringUtils.equalsAnyIgnoreCase(extension, MimeTypeUtils.IMAGE_EXTENSION)) {
                 return error("文件格式不正确，请上传" + Arrays.toString(MimeTypeUtils.IMAGE_EXTENSION) + "格式");
@@ -147,16 +133,12 @@ public class SysProfileController extends BaseController {
                 return error("文件服务异常，请联系管理员");
             }
             String url = fileResult.getData().getUrl();
-            if (userService.updateUserAvatar(loginUser.getUsername(), url)) {
+            if (userService.updateUserAvatar(sysLoginUser.getUsername(), url)) {
                 AjaxResult ajax = success();
                 ajax.put("imgUrl", url);
                 // 更新缓存用户头像
-                loginUser.getSysUser().setAvatar(url);
-                tokenService.setLoginUser(loginUser);
-                //更新user表用户头像
-                User user = iUserService.selectById(loginUser.getUserid());
-                user.setHeadImg(url);
-                iUserService.updateById(user);
+                sysLoginUser.getSysUser().setAvatar(url);
+                tokenService.setLoginUser(sysLoginUser);
                 return ajax;
             }
         }

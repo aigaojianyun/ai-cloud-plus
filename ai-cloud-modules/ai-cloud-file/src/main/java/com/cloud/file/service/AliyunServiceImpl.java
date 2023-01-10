@@ -2,7 +2,6 @@ package com.cloud.file.service;
 
 import cn.hutool.core.date.DateTime;
 import com.aliyun.oss.OSS;
-import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.OSSClientBuilder;
 import com.cloud.common.utils.uuid.UUID;
 import com.cloud.file.config.AliyunConfig;
@@ -12,7 +11,6 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 /**

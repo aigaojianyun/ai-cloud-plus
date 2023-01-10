@@ -5,7 +5,7 @@ import com.cloud.common.constant.TokenConstants;
 import com.cloud.common.context.SecurityContextHolder;
 import com.cloud.common.utils.ServletUtils;
 import com.cloud.common.utils.StringUtils;
-import com.cloud.system.api.model.LoginUser;
+import com.cloud.system.api.model.SysLoginUser;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,8 +40,8 @@ public class SecurityUtils {
     /**
      * 获取登录用户信息
      */
-    public static LoginUser getLoginUser() {
-        return SecurityContextHolder.get(SecurityConstants.LOGIN_USER, LoginUser.class);
+    public static SysLoginUser getLoginUser() {
+        return SecurityContextHolder.get(SecurityConstants.LOGIN_USER, SysLoginUser.class);
     }
 
     /**

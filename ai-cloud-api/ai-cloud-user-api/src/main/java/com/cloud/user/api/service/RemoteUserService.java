@@ -1,15 +1,13 @@
-package com.cloud.system.api.service;
+package com.cloud.user.api.service;
 
 import com.cloud.common.constant.SecurityConstants;
 import com.cloud.common.constant.ServiceNameConstants;
 import com.cloud.common.domain.R;
-import com.cloud.system.api.domain.User;
-import com.cloud.system.api.factory.RemoteUserFallbackFactory;
+import com.cloud.user.api.domain.User;
+import com.cloud.user.api.factory.RemoteUserFallbackFactory;
+import com.cloud.user.api.model.LoginUser;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 用户服务
@@ -19,9 +17,19 @@ import org.springframework.web.bind.annotation.RequestHeader;
 @FeignClient(contextId = "remoteUserService", value = ServiceNameConstants.USER_SERVICE, fallbackFactory = RemoteUserFallbackFactory.class)
 public interface RemoteUserService {
 
+    /**
+     * 通过用户名查询用户信息
+     *
+     * @param param 用户名或手机号
+     * @param source   请求来源
+     * @return 结果
+     */
+    @GetMapping("/user/info/{param}")
+    public R<LoginUser> getUserInfo(@PathVariable("param") String param, @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
+
 
     /**
-     * 通过openId查询用户
+     * 通过openId查询用户信息
      *
      * @param openid openid
      * @param source 请求来源

@@ -9,7 +9,7 @@ import com.cloud.log.annotation.Log;
 import com.cloud.log.enums.BusinessType;
 import com.cloud.redis.service.RedisService;
 import com.cloud.security.annotation.RequiresPermissions;
-import com.cloud.system.api.model.LoginUser;
+import com.cloud.system.api.model.SysLoginUser;
 import com.cloud.system.domain.SysUserOnline;
 import com.cloud.system.service.ISysUserOnlineService;
 import io.swagger.annotations.Api;
@@ -44,7 +44,7 @@ public class SysUserOnlineController extends BaseController {
         Collection<String> keys = redisService.keys(CacheConstants.LOGIN_TOKEN_KEY + "*");
         List<SysUserOnline> userOnlineList = new ArrayList<SysUserOnline>();
         for (String key : keys) {
-            LoginUser user = redisService.getCacheObject(key);
+            SysLoginUser user = redisService.getCacheObject(key);
             if (StringUtils.isNotEmpty(ipaddr) && StringUtils.isNotEmpty(userName)) {
                 if (StringUtils.equals(ipaddr, user.getIpaddr()) && StringUtils.equals(userName, user.getUsername())) {
                     userOnlineList.add(userOnlineService.selectOnlineByInfo(ipaddr, userName, user));

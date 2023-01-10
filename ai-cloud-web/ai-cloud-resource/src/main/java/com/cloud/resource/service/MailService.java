@@ -19,7 +19,7 @@ public interface MailService {
      * @param subject 标题
      * @param text    内容
      */
-   public void send(String to, String subject, String text) throws ServiceException;
+    public void send(String to, String subject, String text) throws ServiceException;
 
     /**
      * 发送邮件带附件
@@ -29,6 +29,6 @@ public interface MailService {
      * @param text     内容
      * @param fileList 附件
      */
-   public void sendWithAttachment(String to, String subject, String text, List<File> fileList) throws ServiceException;
+    public void sendWithAttachment(String to, String subject, String text, List<File> fileList) throws ServiceException;
 
 }

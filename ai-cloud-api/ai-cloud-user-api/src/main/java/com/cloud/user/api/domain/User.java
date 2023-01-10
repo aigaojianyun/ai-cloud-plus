@@ -1,4 +1,4 @@
-package com.cloud.system.api.domain;
+package com.cloud.user.api.domain;
 
 import com.cloud.common.web.domain.Entity;
 import com.fasterxml.jackson.annotation.JsonFormat;

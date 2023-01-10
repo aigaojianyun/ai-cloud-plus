@@ -2,7 +2,7 @@ package com.cloud.user.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cloud.system.api.domain.User;
+import com.cloud.user.api.domain.User;
 import com.cloud.user.dto.UserInfoDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -14,6 +14,22 @@ import org.apache.ibatis.annotations.Param;
  */
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
+
+    /**
+     * 通过用户名或手机号查询用户
+     *
+     * @param param 用户名或手机号
+     * @return 用户对象信息
+     */
+    public User selectByUserNamePhone(@Param("param") String param);
+
+    /**
+     * 通过openId查询用户
+     *
+     * @param openId openId
+     * @return 用户对象信息
+     */
+    public User selectByOpenId(@Param("openId") String openId);
 
     /**
      * 校验用户名称是否唯一
@@ -40,19 +56,12 @@ public interface UserMapper extends BaseMapper<User> {
     public UserInfoDto selectByUserInfo(@Param("userId") Long userId);
 
     /**
-     * 通过openId查询用户
-     *
-     * @param openId openId
-     * @return 用户对象信息
-     */
-    public User selectByOpenId(@Param("openId") String openId);
-
-    /**
      * 设置签名
+     *
      * @param userId
      * @param sign
      */
-   public void updateSign(@Param("userId")Long userId, @Param("sign")String sign);
+    public void updateSign(@Param("userId") Long userId, @Param("sign") String sign);
 
 
 }

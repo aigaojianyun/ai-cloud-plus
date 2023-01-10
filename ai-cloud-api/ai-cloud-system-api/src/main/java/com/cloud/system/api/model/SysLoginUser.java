@@ -1,7 +1,6 @@
 package com.cloud.system.api.model;
 
 import com.cloud.system.api.domain.SysUser;
-import com.cloud.system.api.domain.User;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -13,7 +12,7 @@ import java.util.Set;
  * @author ai-cloud
  */
 @Data
-public class LoginUser implements Serializable {
+public class SysLoginUser implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
@@ -65,10 +64,5 @@ public class LoginUser implements Serializable {
      * 系统用户信息
      */
     private SysUser sysUser;
-
-    /**
-     * 普通用户信息
-     */
-    private User user;
 
 }

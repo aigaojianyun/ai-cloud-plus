@@ -9,7 +9,7 @@ import com.cloud.common.utils.ip.IpUtils;
 import com.cloud.common.utils.uuid.IdUtils;
 import com.cloud.redis.service.RedisService;
 import com.cloud.security.utils.SecurityUtils;
-import com.cloud.system.api.model.LoginUser;
+import com.cloud.system.api.model.SysLoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -41,15 +41,15 @@ public class TokenService {
     /**
      * 创建令牌
      */
-    public Map<String, Object> createToken(LoginUser loginUser) {
+    public Map<String, Object> createToken(SysLoginUser sysLoginUser) {
         String token = IdUtils.fastSimpleUUID();
-        Long userId = loginUser.getUser().getId();
-        String userName = loginUser.getUser().getUserName();
-        loginUser.setToken(token);
-        loginUser.setUserid(userId);
-        loginUser.setUsername(userName);
-        loginUser.setIpaddr(IpUtils.getIpAddr(ServletUtils.getRequest()));
-        refreshToken(loginUser);
+        Long userId = sysLoginUser.getSysUser().getUserId();
+        String userName = sysLoginUser.getSysUser().getUserName();
+        sysLoginUser.setToken(token);
+        sysLoginUser.setUserid(userId);
+        sysLoginUser.setUsername(userName);
+        sysLoginUser.setIpaddr(IpUtils.getIpAddr(ServletUtils.getRequest()));
+        refreshToken(sysLoginUser);
 
         // Jwt存储信息
         Map<String, Object> claimsMap = new HashMap<String, Object>();
@@ -69,7 +69,7 @@ public class TokenService {
      *
      * @return 用户信息
      */
-    public LoginUser getLoginUser() {
+    public SysLoginUser getLoginUser() {
         return getLoginUser(ServletUtils.getRequest());
     }
 
@@ -78,7 +78,7 @@ public class TokenService {
      *
      * @return 用户信息
      */
-    public LoginUser getLoginUser(HttpServletRequest request) {
+    public SysLoginUser getLoginUser(HttpServletRequest request) {
         // 获取请求携带的令牌
         String token = SecurityUtils.getToken(request);
         return getLoginUser(token);
@@ -89,8 +89,8 @@ public class TokenService {
      *
      * @return 用户信息
      */
-    public LoginUser getLoginUser(String token) {
-        LoginUser user = null;
+    public SysLoginUser getLoginUser(String token) {
+        SysLoginUser user = null;
         try {
             if (StringUtils.isNotEmpty(token)) {
                 String userkey = JwtUtils.getUserKey(token);
@@ -105,9 +105,9 @@ public class TokenService {
     /**
      * 设置用户身份信息
      */
-    public void setLoginUser(LoginUser loginUser) {
-        if (StringUtils.isNotNull(loginUser) && StringUtils.isNotEmpty(loginUser.getToken())) {
-            refreshToken(loginUser);
+    public void setLoginUser(SysLoginUser sysLoginUser) {
+        if (StringUtils.isNotNull(sysLoginUser) && StringUtils.isNotEmpty(sysLoginUser.getToken())) {
+            refreshToken(sysLoginUser);
         }
     }
 
@@ -124,41 +124,41 @@ public class TokenService {
     /**
      * 验证令牌有效期，相差不足120分钟，自动刷新缓存
      *
-     * @param loginUser
+     * @param sysLoginUser
      */
-    public void verifyToken(LoginUser loginUser) {
-        long expireTime = loginUser.getExpireTime();
+    public void verifyToken(SysLoginUser sysLoginUser) {
+        long expireTime = sysLoginUser.getExpireTime();
         long currentTime = System.currentTimeMillis();
         if (expireTime - currentTime <= MILLIS_MINUTE_TEN) {
-            refreshToken(loginUser);
+            refreshToken(sysLoginUser);
         }
     }
 
     /**
      * 刷新令牌有效期
      *
-     * @param loginUser 登录信息
+     * @param sysLoginUser 登录信息
      */
-    public void refreshToken(LoginUser loginUser) {
-        loginUser.setLoginTime(System.currentTimeMillis());
-        loginUser.setExpireTime(loginUser.getLoginTime() + EXPIRE_TIME * MILLIS_MINUTE);
+    public void refreshToken(SysLoginUser sysLoginUser) {
+        sysLoginUser.setLoginTime(System.currentTimeMillis());
+        sysLoginUser.setExpireTime(sysLoginUser.getLoginTime() + EXPIRE_TIME * MILLIS_MINUTE);
         // 如果用户不允许多终端同时登录，清除缓存信息
-        String userIdKey = CacheConstants.LOGIN_SYS_USER_KEY + loginUser.getUserid();
+        String userIdKey = CacheConstants.LOGIN_SYS_USER_KEY + sysLoginUser.getUserid();
         String userKey = redisService.getCacheObject(userIdKey);
         if (StringUtils.isNotEmpty(userKey)) {
             redisService.deleteObject(userIdKey);
             redisService.deleteObject(userKey);
         }
         // 根据uuid将loginUser缓存
-        userKey = getTokenKey(loginUser.getToken());
+        userKey = getTokenKey(sysLoginUser.getToken());
         redisService.setCacheObject(userIdKey, userKey, EXPIRE_TIME, TimeUnit.MINUTES);
-        redisService.setCacheObject(userKey, loginUser, EXPIRE_TIME, TimeUnit.MINUTES);
+        redisService.setCacheObject(userKey, sysLoginUser, EXPIRE_TIME, TimeUnit.MINUTES);
 
-//        loginUser.setLoginTime(System.currentTimeMillis());
-//        loginUser.setExpireTime(loginUser.getLoginTime() + EXPIRE_TIME * MILLIS_MINUTE);
+//        sysLoginUser.setLoginTime(System.currentTimeMillis());
+//        sysLoginUser.setExpireTime(sysLoginUser.getLoginTime() + EXPIRE_TIME * MILLIS_MINUTE);
 //        // 根据uuid将loginUser缓存
-//        String userKey = getTokenKey(loginUser.getToken());
-//        redisService.setCacheObject(userKey, loginUser, EXPIRE_TIME, TimeUnit.MINUTES);
+//        String userKey = getTokenKey(sysLoginUser.getToken());
+//        redisService.setCacheObject(userKey, sysLoginUser, EXPIRE_TIME, TimeUnit.MINUTES);
     }
 
     private String getTokenKey(String token) {

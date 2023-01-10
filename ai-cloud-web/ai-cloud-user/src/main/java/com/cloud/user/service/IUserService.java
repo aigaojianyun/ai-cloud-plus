@@ -1,7 +1,7 @@
 package com.cloud.user.service;
 
 
-import com.cloud.system.api.domain.User;
+import com.cloud.user.api.domain.User;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -10,6 +10,14 @@ import org.apache.ibatis.annotations.Param;
  * @author ai-cloud
  */
 public interface IUserService {
+
+    /**
+     * 通过用户名或手机号查询用户
+     *
+     * @param param 用户名或手机号
+     * @return 用户对象信息
+     */
+    public User selectByUserNamePhone(@Param("param") String param);
 
     /**
      * 通过openId查询用户

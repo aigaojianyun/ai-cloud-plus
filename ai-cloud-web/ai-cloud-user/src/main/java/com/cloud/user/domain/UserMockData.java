@@ -12,7 +12,7 @@ import lombok.Data;
  */
 @Data
 @ApiModel("用户随机信息")
-public class UserMockData extends Entity{
+public class UserMockData extends Entity {
 
     private static final long serialVersionUID = 1L;
 

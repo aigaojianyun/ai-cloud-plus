@@ -12,7 +12,7 @@ import com.cloud.security.annotation.RequiresPermissions;
 import com.cloud.security.annotation.RequiresRoles;
 import com.cloud.security.service.TokenService;
 import com.cloud.security.utils.SecurityUtils;
-import com.cloud.system.api.model.LoginUser;
+import com.cloud.system.api.model.SysLoginUser;
 import org.springframework.util.PatternMatchUtils;
 
 import java.util.Collection;
@@ -67,16 +67,16 @@ public class AuthLogic {
      *
      * @return 用户缓存信息
      */
-    public LoginUser getLoginUser() {
+    public SysLoginUser getLoginUser() {
         String token = SecurityUtils.getToken();
         if (token == null) {
             throw new NotLoginException("未提供token");
         }
-        LoginUser loginUser = SecurityUtils.getLoginUser();
-        if (loginUser == null) {
+        SysLoginUser sysLoginUser = SecurityUtils.getLoginUser();
+        if (sysLoginUser == null) {
             throw new NotLoginException("无效的token");
         }
-        return loginUser;
+        return sysLoginUser;
     }
 
     /**
@@ -85,17 +85,17 @@ public class AuthLogic {
      * @param token 前端传递的认证信息
      * @return 用户缓存信息
      */
-    public LoginUser getLoginUser(String token) {
+    public SysLoginUser getLoginUser(String token) {
         return tokenService.getLoginUser(token);
     }
 
     /**
      * 验证当前用户有效期, 如果相差不足120分钟，自动刷新缓存
      *
-     * @param loginUser 当前用户信息
+     * @param sysLoginUser 当前用户信息
      */
-    public void verifyLoginUserExpire(LoginUser loginUser) {
-        tokenService.verifyToken(loginUser);
+    public void verifyLoginUserExpire(SysLoginUser sysLoginUser) {
+        tokenService.verifyToken(sysLoginUser);
     }
 
     /**
@@ -274,8 +274,8 @@ public class AuthLogic {
      */
     public Set<String> getRoleList() {
         try {
-            LoginUser loginUser = getLoginUser();
-            return loginUser.getRoles();
+            SysLoginUser sysLoginUser = getLoginUser();
+            return sysLoginUser.getRoles();
         } catch (Exception e) {
             return new HashSet<>();
         }
@@ -288,8 +288,8 @@ public class AuthLogic {
      */
     public Set<String> getPermiList() {
         try {
-            LoginUser loginUser = getLoginUser();
-            return loginUser.getPermissions();
+            SysLoginUser sysLoginUser = getLoginUser();
+            return sysLoginUser.getPermissions();
         } catch (Exception e) {
             return new HashSet<>();
         }

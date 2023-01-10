@@ -394,13 +394,6 @@
                 <version>${ai-cloud.version}</version>
             </dependency>
 
-            <!-- 系统接口 -->
-            <dependency>
-                <groupId>com.cloud</groupId>
-                <artifactId>ai-cloud-system-api</artifactId>
-                <version>${ai-cloud.version}</version>
-            </dependency>
-
             <!-- 文件接口 -->
             <dependency>
                 <groupId>com.cloud</groupId>
@@ -412,6 +405,20 @@
             <dependency>
                 <groupId>com.cloud</groupId>
                 <artifactId>ai-cloud-resource-api</artifactId>
+                <version>${ai-cloud.version}</version>
+            </dependency>
+
+            <!-- 系统接口 -->
+            <dependency>
+                <groupId>com.cloud</groupId>
+                <artifactId>ai-cloud-system-api</artifactId>
+                <version>${ai-cloud.version}</version>
+            </dependency>
+
+            <!-- 用户接口 -->
+            <dependency>
+                <groupId>com.cloud</groupId>
+                <artifactId>ai-cloud-user-api</artifactId>
                 <version>${ai-cloud.version}</version>
             </dependency>
 
