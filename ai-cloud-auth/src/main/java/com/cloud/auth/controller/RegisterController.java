@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(tags = "注册接口")
 @RestController
+@RequestMapping("/web")
 public class RegisterController {
 
     @Autowired
@@ -28,7 +30,7 @@ public class RegisterController {
      * @param param
      * @return 注册结果
      */
-    @PostMapping("register")
+    @PostMapping("/register")
     public R<?> registerUser(@RequestBody RegisterParam param) {
         //用户注册
         registerService.registerUser(param.getUsername(), param.getPassword(), param.getPhone(), param.getUuid());

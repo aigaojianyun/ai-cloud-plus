@@ -77,7 +77,6 @@ public class SysLoginService {
             sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "登录用户不存在");
             throw new ServiceException("登录用户：" + username + " 不存在!");
         }
-
         if (R.FAIL == userResult.getCode()) {
             throw new ServiceException(userResult.getMsg());
         }

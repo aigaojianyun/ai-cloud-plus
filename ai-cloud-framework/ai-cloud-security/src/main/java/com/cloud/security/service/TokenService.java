@@ -29,7 +29,6 @@ public class TokenService {
     protected static final long MILLIS_MINUTE = 60 * MILLIS_SECOND;
     private final static Long MILLIS_MINUTE_TEN = CacheConstants.REFRESH_TIME * MILLIS_MINUTE;
     private final static long EXPIRE_TIME = CacheConstants.EXPIRATION;
-
     private final static String ACCESS_TOKEN = CacheConstants.LOGIN_TOKEN_KEY;
     @Autowired
     private RedisService redisService;
@@ -95,16 +94,16 @@ public class TokenService {
      * @return 用户信息
      */
     public SysLoginUser getLoginUser(String token) {
-        SysLoginUser user = null;
+        SysLoginUser sysUser = null;
         try {
             if (StringUtils.isNotEmpty(token)) {
                 String userkey = JwtUtils.getUserKey(token);
-                user = redisService.getCacheObject(getTokenKey(userkey));
-                return user;
+                sysUser = redisService.getCacheObject(getTokenKey(userkey));
+                return sysUser;
             }
         } catch (Exception e) {
         }
-        return user;
+        return sysUser;
     }
 
     /**
@@ -150,11 +149,11 @@ public class TokenService {
         redisService.setCacheObject(userIdKey, userKey, EXPIRE_TIME, TimeUnit.MINUTES);
         redisService.setCacheObject(userKey, sysLoginUser, EXPIRE_TIME, TimeUnit.MINUTES);
 
-//        sysLoginUser.setLoginTime(System.currentTimeMillis());
-//        sysLoginUser.setExpireTime(sysLoginUser.getLoginTime() + EXPIRE_TIME * MILLIS_MINUTE);
-//        // 根据uuid将loginUser缓存
-//        String userKey = getTokenKey(sysLoginUser.getToken());
-//        redisService.setCacheObject(userKey, sysLoginUser, EXPIRE_TIME, TimeUnit.MINUTES);
+        //sysLoginUser.setLoginTime(System.currentTimeMillis());
+        //sysLoginUser.setExpireTime(sysLoginUser.getLoginTime() + EXPIRE_TIME * MILLIS_MINUTE);
+        //根据uuid将loginUser缓存
+        //String userKey = getTokenKey(sysLoginUser.getToken());
+        //redisService.setCacheObject(userKey, sysLoginUser, EXPIRE_TIME, TimeUnit.MINUTES);
     }
 
     private String getTokenKey(String token) {

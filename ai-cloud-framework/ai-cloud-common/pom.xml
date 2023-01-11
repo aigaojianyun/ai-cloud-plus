@@ -83,6 +83,12 @@
             <artifactId>jjwt</artifactId>
         </dependency>
 
+        <!-- 第三方授权登录 -->
+        <dependency>
+            <groupId>me.zhyd.oauth</groupId>
+            <artifactId>JustAuth</artifactId>
+        </dependency>
+
         <!-- Jaxb -->
         <dependency>
             <groupId>javax.xml.bind</groupId>

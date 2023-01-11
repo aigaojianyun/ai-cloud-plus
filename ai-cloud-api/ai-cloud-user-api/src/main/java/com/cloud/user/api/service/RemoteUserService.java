@@ -56,6 +56,6 @@ public interface RemoteUserService {
      * @return 结果
      */
     @PostMapping("/user/update")
-    public R<Boolean> updateUserInfo(@RequestBody User user, @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
+    public R<Integer> updateUserInfo(@RequestBody User user, @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
 
 }
