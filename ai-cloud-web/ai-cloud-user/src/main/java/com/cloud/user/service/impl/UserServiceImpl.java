@@ -37,23 +37,12 @@ public class UserServiceImpl implements IUserService {
     /**
      * 通过用户名或手机号查询用户
      *
-     * @param param 用户名或手机号
+     * @param param 用户名手机号或openId
      * @return 用户对象信息
      */
     @Override
-    public User selectByUserNamePhone(String param) {
-        return userMapper.selectByUserNamePhone(param);
-    }
-
-    /**
-     * 通过openId查询用户
-     *
-     * @param openId openId
-     * @return 用户对象信息
-     */
-    @Override
-    public User selectByOpenId(String openId) {
-        return userMapper.selectByOpenId(openId);
+    public User selectByUserNamePhoneOpenId(String param) {
+        return userMapper.selectByUserNamePhoneOpenId(param);
     }
 
     /**

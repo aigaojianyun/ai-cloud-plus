@@ -58,7 +58,7 @@ export default {
       title: '',
       subTitle: '欢迎回来，开始工作吧！',
       loginForm: {
-        username: "ceshi",
+        username: "ai168",
         password: "123456",
         code: "",
         uuid: ""

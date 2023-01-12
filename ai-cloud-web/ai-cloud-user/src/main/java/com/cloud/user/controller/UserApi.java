@@ -28,33 +28,20 @@ public class UserApi {
     /**
      * 通过用户名或手机号查询用户
      *
-     * @param param 用户名或手机号
+     * @param param 用户名手机号或openId
      * @return 用户对象信息
      */
     @InnerAuth
-    @PostMapping("/info/{param}")
-    @ApiOperation("通过openId查询用户")
+    @GetMapping("/info/{param}")
+    @ApiOperation("通过用户名手机号或openId查询用户")
     public R<LoginUser> selectByUserInfo(@PathVariable("param") String param) {
         //用户信息
-        User user = userService.selectByUserNamePhone(param);
+        User user = userService.selectByUserNamePhoneOpenId(param);
         LoginUser userVo = new LoginUser();
         if (StringUtils.isNotNull(user)) {
             userVo.setUser(user);
         }
         return R.ok(userVo);
-    }
-
-    /**
-     * 通过openId查询用户
-     *
-     * @param openid openid
-     * @return 用户对象信息
-     */
-    @InnerAuth
-    @PostMapping("/info/{openid}")
-    @ApiOperation("通过openId查询用户")
-    public R<User> selectByOpenId(@PathVariable("openid") String openid) {
-        return R.ok(userService.selectByOpenId(openid));
     }
 
     /**

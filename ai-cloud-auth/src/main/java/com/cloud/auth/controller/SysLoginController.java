@@ -8,7 +8,7 @@ import com.cloud.common.utils.JwtUtils;
 import com.cloud.common.utils.StringUtils;
 import com.cloud.common.utils.sign.RsaUtils;
 import com.cloud.security.auth.AuthUtil;
-import com.cloud.security.service.TokenService;
+import com.cloud.security.service.SysTokenService;
 import com.cloud.security.utils.SecurityUtils;
 import com.cloud.system.api.model.SysLoginUser;
 import io.swagger.annotations.Api;
@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class SysLoginController {
     @Autowired
-    private TokenService tokenService;
+    private SysTokenService sysTokenService;
 
     @Autowired
     private SysLoginService sysLoginService;
@@ -45,7 +45,7 @@ public class SysLoginController {
         // 用户登录
         SysLoginUser userInfo = sysLoginService.login(param.getUsername(), RsaUtils.decryptByPrivateKey(param.getPassword()), param.getCode(), param.getUuid());
         // 获取登录token
-        return R.ok(tokenService.createToken(userInfo));
+        return R.ok(sysTokenService.createToken(userInfo));
     }
 
     /**
@@ -69,10 +69,10 @@ public class SysLoginController {
      */
     @PostMapping("refresh")
     public R<?> refresh(HttpServletRequest request) {
-        SysLoginUser sysLoginUser = tokenService.getLoginUser(request);
+        SysLoginUser sysLoginUser = sysTokenService.getLoginUser(request);
         if (StringUtils.isNotNull(sysLoginUser)) {
             // 刷新令牌有效期
-            tokenService.refreshToken(sysLoginUser);
+            sysTokenService.refreshToken(sysLoginUser);
             return R.ok();
         }
         return R.ok();

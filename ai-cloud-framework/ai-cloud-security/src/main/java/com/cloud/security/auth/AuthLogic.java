@@ -10,7 +10,7 @@ import com.cloud.security.annotation.Logical;
 import com.cloud.security.annotation.RequiresLogin;
 import com.cloud.security.annotation.RequiresPermissions;
 import com.cloud.security.annotation.RequiresRoles;
-import com.cloud.security.service.TokenService;
+import com.cloud.security.service.SysTokenService;
 import com.cloud.security.utils.SecurityUtils;
 import com.cloud.system.api.model.SysLoginUser;
 import org.springframework.util.PatternMatchUtils;
@@ -35,7 +35,7 @@ public class AuthLogic {
      */
     private static final String SUPER_ADMIN = "admin";
 
-    public TokenService tokenService = SpringUtils.getBean(TokenService.class);
+    public SysTokenService sysTokenService = SpringUtils.getBean(SysTokenService.class);
 
     /**
      * 会话注销
@@ -52,7 +52,7 @@ public class AuthLogic {
      * 会话注销，根据指定Token
      */
     public void logoutByToken(String token) {
-        tokenService.delLoginUser(token);
+        sysTokenService.delLoginUser(token);
     }
 
     /**
@@ -86,7 +86,7 @@ public class AuthLogic {
      * @return 用户缓存信息
      */
     public SysLoginUser getLoginUser(String token) {
-        return tokenService.getLoginUser(token);
+        return sysTokenService.getLoginUser(token);
     }
 
     /**
@@ -95,7 +95,7 @@ public class AuthLogic {
      * @param sysLoginUser 当前用户信息
      */
     public void verifyLoginUserExpire(SysLoginUser sysLoginUser) {
-        tokenService.verifyToken(sysLoginUser);
+        sysTokenService.verifyToken(sysLoginUser);
     }
 
     /**

@@ -18,10 +18,10 @@ public interface UserMapper extends BaseMapper<User> {
     /**
      * 通过用户名或手机号查询用户
      *
-     * @param param 用户名或手机号
+     * @param param 用户名手机号或openId
      * @return 用户对象信息
      */
-    public User selectByUserNamePhone(@Param("param") String param);
+    public User selectByUserNamePhoneOpenId(@Param("param") String param);
 
     /**
      * 通过openId查询用户

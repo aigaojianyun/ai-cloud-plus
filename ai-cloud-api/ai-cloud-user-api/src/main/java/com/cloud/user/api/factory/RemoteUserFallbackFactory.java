@@ -29,11 +29,6 @@ public class RemoteUserFallbackFactory implements FallbackFactory<RemoteUserServ
             }
 
             @Override
-            public R<User> getOpenIdUserInfo(String openid, String source) {
-                return R.fail("查询用户失败:" + throwable.getMessage());
-            }
-
-            @Override
             public R<Boolean> registerUserInfo(User user, String source) {
                 return R.fail("注册用户失败:" + throwable.getMessage());
             }

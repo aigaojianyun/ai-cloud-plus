@@ -11,7 +11,7 @@ import com.cloud.file.api.domain.File;
 import com.cloud.file.api.service.RemoteFileService;
 import com.cloud.log.annotation.Log;
 import com.cloud.log.enums.BusinessType;
-import com.cloud.security.service.TokenService;
+import com.cloud.security.service.SysTokenService;
 import com.cloud.security.utils.SecurityUtils;
 import com.cloud.system.api.domain.SysUser;
 import com.cloud.system.api.model.SysLoginUser;
@@ -37,7 +37,7 @@ public class SysProfileController extends BaseController {
     private ISysUserService userService;
 
     @Autowired
-    private TokenService tokenService;
+    private SysTokenService sysTokenService;
 
     @Autowired
     private RemoteFileService remoteFileService;
@@ -83,7 +83,7 @@ public class SysProfileController extends BaseController {
             sysLoginUser.getSysUser().setPhonenumber(user.getPhonenumber());
             sysLoginUser.getSysUser().setEmail(user.getEmail());
             sysLoginUser.getSysUser().setSex(user.getSex());
-            tokenService.setLoginUser(sysLoginUser);
+            sysTokenService.setLoginUser(sysLoginUser);
             return success();
         }
         return error("修改个人信息异常，请联系管理员");
@@ -109,7 +109,7 @@ public class SysProfileController extends BaseController {
             // 更新缓存用户密码
             SysLoginUser sysLoginUser = SecurityUtils.getLoginUser();
             sysLoginUser.getSysUser().setPassword(SecurityUtils.encryptPassword(newPassword));
-            tokenService.setLoginUser(sysLoginUser);
+            sysTokenService.setLoginUser(sysLoginUser);
             return success();
         }
         return error("修改密码异常，请联系管理员");
@@ -138,7 +138,7 @@ public class SysProfileController extends BaseController {
                 ajax.put("imgUrl", url);
                 // 更新缓存用户头像
                 sysLoginUser.getSysUser().setAvatar(url);
-                tokenService.setLoginUser(sysLoginUser);
+                sysTokenService.setLoginUser(sysLoginUser);
                 return ajax;
             }
         }

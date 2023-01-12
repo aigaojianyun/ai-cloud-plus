@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
  * @author ai-cloud
  */
 @Component
-public class TokenService {
+public class SysTokenService {
     protected static final long MILLIS_SECOND = 1000;
     protected static final long MILLIS_MINUTE = 60 * MILLIS_SECOND;
     private final static Long MILLIS_MINUTE_TEN = CacheConstants.REFRESH_TIME * MILLIS_MINUTE;

@@ -249,6 +249,10 @@ sed -i 's/\r$//' deploy.sh
 ./deploy.sh rm
 ~~~
 
+## 开源
+**源于开源，回归开源**
+* 感谢若依开源的[RuoYi-Cloud](https://gitee.com/y_project/RuoYi-Cloud.git)
+
 ## 交流群
 QQ群: [![加入QQ群](https://img.shields.io/badge/652111512-blue.svg)](https://jq.qq.com/?_wv=1027&k=M1QxJmCB) 点击按钮入群。
 

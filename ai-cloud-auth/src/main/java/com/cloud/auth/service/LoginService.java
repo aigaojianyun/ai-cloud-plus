@@ -114,6 +114,7 @@ public class LoginService {
      */
     public LoginUser loginWx(WeiXinLoginParam param) {
         Code2Session code2Session = weiXinService.codeSession(param.getCode());
+        LoginUser userInfo = null;
         if (StringUtils.isNotEmpty(code2Session.getOpenId())) {
             // 解析电话号码
             String phoneNumber;
@@ -133,8 +134,8 @@ public class LoginService {
                 throw new ServiceException("手机号码解密失败!");
             }
             // 根据openId查询是否存在这个用户
-            R<User> userResult = remoteUserService.getOpenIdUserInfo(code2Session.getOpenId(), SecurityConstants.INNER);
-            if (StringUtils.isNull(userResult) || StringUtils.isNull(userResult.getData())) {
+            R<LoginUser> userResult = remoteUserService.getUserInfo(code2Session.getOpenId(), SecurityConstants.INNER);
+            if (StringUtils.isNull(userResult) || StringUtils.isNull(userResult.getData().getUser())) {
                 // 添加新用户
                 User user = new User();
                 user.setUserName(IdUtils.fastSimpleUUID());
@@ -154,29 +155,20 @@ public class LoginService {
                 if (R.FAIL == registerResult.getCode()) {
                     throw new ServiceException(registerResult.getMsg());
                 }
-                sysRecordLogService.recordLogininfor(param.getNickName(), Constants.REGISTER, "注册成功");
+                sysRecordLogService.recordLogininfor(code2Session.getOpenId(), Constants.REGISTER, "注册成功");
             } else {
                 // 存在就更新用户信息
-                User user = userResult.getData();
+                User user = userResult.getData().getUser();
                 R<?> updateResult = remoteUserService.updateUserInfo(user, SecurityConstants.INNER);
                 if (R.FAIL == updateResult.getCode()) {
                     throw new ServiceException(updateResult.getMsg());
                 }
-                sysRecordLogService.recordLogininfor(param.getNickName(), Constants.REGISTER, "更新成功");
+                sysRecordLogService.recordLogininfor(code2Session.getOpenId(), Constants.REGISTER, "更新成功");
             }
-            // 查询用户信息
-            R<LoginUser> userResults = remoteUserService.getUserInfo(phoneNumber, SecurityConstants.INNER);
-
-            if (StringUtils.isNull(userResults) || StringUtils.isNull(userResult.getData())) {
-                sysRecordLogService.recordLogininfor(phoneNumber, Constants.LOGIN_FAIL, "登录用户不存在");
-                throw new ServiceException("登录用户：" + phoneNumber + " 不存在!");
-            }
-
-            if (R.FAIL == userResult.getCode()) {
-                throw new ServiceException(userResult.getMsg());
-            }
-            LoginUser userInfo = userResults.getData();
-            //用户信息
+            // 根据openId查询用户
+            R<LoginUser> userResults = remoteUserService.getUserInfo(code2Session.getOpenId(), SecurityConstants.INNER);
+            userInfo = userResults.getData();
+            // 用户信息
             User user = userResults.getData().getUser();
             if (StringUtils.isNotNull(user)) {
                 if (UserStatus.DELETED.getCode().equals(user.getDeleteFlag())) {
@@ -188,10 +180,19 @@ public class LoginService {
                     throw new ServiceException("对不起，您的账号：" + phoneNumber + " 已停用");
                 }
             }
-            sysRecordLogService.recordLogininfor(phoneNumber, Constants.LOGIN_SUCCESS, "登录成功");
-            return userInfo;
+            sysRecordLogService.recordLogininfor(code2Session.getOpenId(), Constants.LOGIN_SUCCESS, "登录成功");
         }
-        return null;
+        return userInfo;
+    }
+
+    /**
+     * 退出登录
+     *
+     * @param loginName 请求对象
+     * @return 结果
+     */
+    public void logout(String loginName) {
+        sysRecordLogService.recordLogininfor(loginName, Constants.LOGOUT, "退出成功");
     }
 
 }

@@ -12,6 +12,7 @@ import com.cloud.security.annotation.RequiresPermissions;
 import com.cloud.system.api.model.SysLoginUser;
 import com.cloud.system.domain.SysUserOnline;
 import com.cloud.system.service.ISysUserOnlineService;
+import com.cloud.user.api.model.LoginUser;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,21 +45,22 @@ public class SysUserOnlineController extends BaseController {
         Collection<String> keys = redisService.keys(CacheConstants.LOGIN_TOKEN_KEY + "*");
         List<SysUserOnline> userOnlineList = new ArrayList<SysUserOnline>();
         for (String key : keys) {
-            SysLoginUser user = redisService.getCacheObject(key);
+            SysLoginUser sysUser = redisService.getCacheObject(key);
+            LoginUser user = redisService.getCacheObject(key);
             if (StringUtils.isNotEmpty(ipaddr) && StringUtils.isNotEmpty(userName)) {
-                if (StringUtils.equals(ipaddr, user.getIpaddr()) && StringUtils.equals(userName, user.getUsername())) {
-                    userOnlineList.add(userOnlineService.selectOnlineByInfo(ipaddr, userName, user));
+                if (StringUtils.equals(ipaddr, sysUser.getIpaddr()) && StringUtils.equals(userName, sysUser.getUsername())) {
+                    userOnlineList.add(userOnlineService.selectOnlineByInfo(ipaddr, userName, sysUser));
                 }
             } else if (StringUtils.isNotEmpty(ipaddr)) {
-                if (StringUtils.equals(ipaddr, user.getIpaddr())) {
-                    userOnlineList.add(userOnlineService.selectOnlineByIpaddr(ipaddr, user));
+                if (StringUtils.equals(ipaddr, sysUser.getIpaddr())) {
+                    userOnlineList.add(userOnlineService.selectOnlineByIpaddr(ipaddr, sysUser));
                 }
             } else if (StringUtils.isNotEmpty(userName)) {
-                if (StringUtils.equals(userName, user.getUsername())) {
-                    userOnlineList.add(userOnlineService.selectOnlineByUserName(userName, user));
+                if (StringUtils.equals(userName, sysUser.getUsername())) {
+                    userOnlineList.add(userOnlineService.selectOnlineByUserName(userName, sysUser));
                 }
             } else {
-                userOnlineList.add(userOnlineService.loginUserToUserOnline(user));
+                userOnlineList.add(userOnlineService.loginUserToUserOnline(sysUser));
             }
         }
         Collections.reverse(userOnlineList);

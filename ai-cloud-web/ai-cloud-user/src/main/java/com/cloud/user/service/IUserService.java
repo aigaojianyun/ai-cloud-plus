@@ -14,19 +14,10 @@ public interface IUserService {
     /**
      * 通过用户名或手机号查询用户
      *
-     * @param param 用户名或手机号
+     * @param param 用户名手机号或openId
      * @return 用户对象信息
      */
-    public User selectByUserNamePhone(@Param("param") String param);
-
-    /**
-     * 通过openId查询用户
-     *
-     * @param openId openId
-     * @return 用户对象信息
-     */
-    public User selectByOpenId(@Param("openId") String openId);
-
+    public User selectByUserNamePhoneOpenId(@Param("param") String param);
 
     /**
      * 校验用户名称是否唯一

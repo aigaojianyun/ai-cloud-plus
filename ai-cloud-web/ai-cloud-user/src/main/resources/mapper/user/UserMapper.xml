@@ -56,11 +56,12 @@
         <result property="remark" column="remark"/>
     </resultMap>
 
-    <select id="selectByUserNamePhone" resultMap="UserResult">
+    <select id="selectByUserNamePhoneOpenId" resultMap="UserResult">
         SELECT a.*
         FROM `user` a
         WHERE a.user_name = #{param}
-           OR a.phone = #{param} AND a.status_flag = 0 AND a.delete_flag = 0
+           OR a.phone = #{param}
+           OR a.open_id = #{param} AND a.status_flag = 0 AND a.delete_flag = 0
     </select>
 
 

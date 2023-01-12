@@ -18,25 +18,14 @@ import org.springframework.web.bind.annotation.*;
 public interface RemoteUserService {
 
     /**
-     * 通过用户名或手机号查询用户
+     * 通过用户名手机号或openId查询用户
      *
-     * @param param  用户名或手机号
+     * @param param  用户名手机号或openId
      * @param source 请求来源
      * @return 结果
      */
     @GetMapping("/user/info/{param}")
     public R<LoginUser> getUserInfo(@PathVariable("param") String param, @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
-
-
-    /**
-     * 通过openId查询用户信息
-     *
-     * @param openid openid
-     * @param source 请求来源
-     * @return 结果
-     */
-    @PostMapping("user/info/{openid}")
-    public R<User> getOpenIdUserInfo(@PathVariable("openid") String openid, @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
 
     /**
      * 注册用户信息

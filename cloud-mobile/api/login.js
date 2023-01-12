@@ -11,7 +11,7 @@ export function login(username, password, code, uuid) {
         uuid
     }
     return request({
-        'url': '/auth/login',
+        'url': '/auth/web/login',
         headers: {
             isToken: false
         },
@@ -36,12 +36,23 @@ export function loginWx(code, encryptedData, iv, nickName, avatarUrl, gender) {
         gender,
     }
     return request({
-        'url': '/auth/login/wx',
+        'url': '/auth/web/login/wx',
         headers: {
             isToken: false
         },
         'method': 'post',
         'data': data
+    })
+}
+
+// 退出方法
+export function logout() {
+    return request({
+        'url': '/auth/web/logout',
+        headers: {
+            isToken: true
+        },
+        method: 'delete'
     })
 }
 
@@ -53,17 +64,6 @@ export function getInfo() {
             isToken: true
         },
         'method': 'post'
-    })
-}
-
-// 退出方法
-export function logout() {
-    return request({
-        'url': '/auth/logout',
-        headers: {
-            isToken: true
-        },
-        method: 'delete'
     })
 }
 
