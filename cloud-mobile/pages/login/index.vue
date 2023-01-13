@@ -28,18 +28,18 @@
           ref="verify"
           :imgSize="{width:'310px',height:'155px'}">
       </Verify>
-      <button @click="handleLogin">登 录</button>
+      <button type="primary" @click="handleLogin">登 录</button>
       <!-- 更多登录方式 -->
       <view class="login-bottom-box">
+        <u-divider> 更多登录方式 </u-divider>
         <view class="oauth2">
-          <u-icon class="u-icon" size="100" color="#36c956" name="weixin-circle-fill" @click="wxLogin"></u-icon>
-          <u-icon class="u-icon" size="100" color="#23a0f0" name="qq-circle-fill" @click="qqLogin"></u-icon>
+          <u-icon class="u-icon" size="40" color="#36c956" name="weixin-circle-fill" @click="wxLogin"></u-icon>
+          <u-icon class="u-icon" size="40" color="#23a0f0" name="qq-circle-fill" @click="qqLogin"></u-icon>
+          <u-icon class="u-icon" size="40" color="#23a0f0" name="zhifubao-circle-fill" @click="zhifubaoLogin"></u-icon>
+          <u-icon class="u-icon" size="40" color="" name="github-circle-fill" @click="githubLogin"></u-icon>
         </view>
         <view class="copyright">
-          登录即代表您已阅读并同意
-          <u-link href="#">用户协议</u-link>
-          与
-          <u-link href="#">隐私政策</u-link>
+          登录即代表您已阅读并同意<u-link href="#">用户协议</u-link> 与 <u-link href="#">隐私政策</u-link>
         </view>
       </view>
     </form>
@@ -56,7 +56,7 @@ export default {
   data() {
     return {
       title: '',
-      subTitle: '欢迎回来，开始工作吧！',
+      subTitle: '欢迎来到',
       loginForm: {
         username: "ai168",
         password: "123456",

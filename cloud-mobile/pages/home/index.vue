@@ -1,6 +1,7 @@
 <template>
+  <view>
+    <Navbar :hideBtn="true" title="首页" bgColor="#fff" :h5Show="true" :fixed="false"></Navbar>
   <view class="index-content">
-    <Navbar :hideBtn="true" title="首页" bgColor="#fff" :h5Show="false" :fixed="false"></Navbar>
     <view class="index-block">
       <view class="index-block-title">运行统计</view>
       <u-row gutter="16">
@@ -76,6 +77,7 @@
       </view>
     </view>
   </view>
+  </view>
 </template>
 
 <script>
@@ -142,7 +144,7 @@ export default {
 }
 .index-block {
   padding: 40rpx;
-  background-color: #fff;
+  background-color: #f3f4f6;
 }
 .index-block-title {
   font-size: 40rpx;

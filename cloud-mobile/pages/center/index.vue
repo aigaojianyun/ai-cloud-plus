@@ -1,6 +1,6 @@
 <template>
   <view>
-    <Navbar :hideBtn="true" bgColor="#f3f4f6"></Navbar>
+    <Navbar :hideBtn="true" title="我的" bgColor="#fff" :h5Show="true" :fixed="false"></Navbar>
     <view class="profile-top">
       <view class="user-info">
         <view>

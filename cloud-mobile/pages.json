@@ -30,10 +30,9 @@
 		}
 	    ,{
             "path" : "pages/login/wxLogin",
-            "style" :
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
+            "style" : {
+                "navigationBarTitleText": "微信授权登录",
+				"navigationStyle": "custom"
             }
 
         }
