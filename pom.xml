@@ -16,7 +16,7 @@
         <spring-boot.version>2.7.3</spring-boot.version>
         <spring-cloud.version>2021.0.4</spring-cloud.version>
         <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
-        <spring-boot-admin.version>2.7.5</spring-boot-admin.version>
+        <spring-boot-admin.version>2.7.10</spring-boot-admin.version>
         <spring-boot.mybatis>2.2.2</spring-boot.mybatis>
         <spring-boot.mybatis-plus>3.5.1</spring-boot.mybatis-plus>
         <alibaba.nacos.version>2.0.4</alibaba.nacos.version>
@@ -46,8 +46,7 @@
         <aliyun.sms.version>2.0.16</aliyun.sms.version>
         <tencent.sms.version>3.1.555</tencent.sms.version>
         <weixin.pay.version>4.1.0</weixin.pay.version>
-        <commons-collections.version>3.2.2</commons-collections.version>
-        <transmittable-thread-local.version>2.13.2</transmittable-thread-local.version>
+        <transmittable-thread-local.version>2.14.2</transmittable-thread-local.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -308,13 +307,6 @@
                 <groupId>com.github.binarywang</groupId>
                 <artifactId>weixin-java-pay</artifactId>
                 <version>${weixin.pay.version}</version>
-            </dependency>
-
-            <!-- Collection 增强Java集合框架 -->
-            <dependency>
-                <groupId>commons-collections</groupId>
-                <artifactId>commons-collections</artifactId>
-                <version>${commons-collections.version}</version>
             </dependency>
 
             <!-- 线程传递值 -->
