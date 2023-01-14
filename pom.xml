@@ -36,7 +36,7 @@
         <fastjson.version>2.0.20</fastjson.version>
         <oshi.version>6.2.2</oshi.version>
         <jjwt.version>0.9.1</jjwt.version>
-        <justauth.version>1.15.6</justauth.version>
+        <justauth.version>1.16.5</justauth.version>
         <tobato.version>1.27.2</tobato.version>
         <minio.version>8.2.2</minio.version>
         <poi.version>4.1.2</poi.version>
@@ -45,7 +45,8 @@
         <aliyun.oss.version>3.10.0</aliyun.oss.version>
         <aliyun.sms.version>2.0.16</aliyun.sms.version>
         <tencent.sms.version>3.1.555</tencent.sms.version>
-        <weixin.pay.version>4.1.0</weixin.pay.version>
+        <weixin.miniapp.version>4.4.0</weixin.miniapp.version>
+        <weixin.pay.version>4.4.0</weixin.pay.version>
         <transmittable-thread-local.version>2.14.2</transmittable-thread-local.version>
     </properties>
 
@@ -260,7 +261,7 @@
                 <version>${minio.version}</version>
             </dependency>
 
-            <!-- excel工具 -->
+            <!-- Excel工具 -->
             <dependency>
                 <groupId>org.apache.poi</groupId>
                 <artifactId>poi-ooxml</artifactId>
@@ -302,7 +303,14 @@
                 <version>${tencent.sms.version}</version>
             </dependency>
 
-            <!-- weixin-pay -->
+            <!-- Weixin-Miniapp -->
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>weixin-java-miniapp</artifactId>
+                <version>${weixin.miniapp.version}</version>
+            </dependency>
+
+            <!-- Weixin-Pay -->
             <dependency>
                 <groupId>com.github.binarywang</groupId>
                 <artifactId>weixin-java-pay</artifactId>
@@ -337,14 +345,14 @@
                 <version>${ai-cloud.version}</version>
             </dependency>
 
-            <!-- 邮箱服务 -->
+            <!-- 邮箱模块 -->
             <dependency>
                 <groupId>com.cloud</groupId>
                 <artifactId>ai-cloud-mail</artifactId>
                 <version>${ai-cloud.version}</version>
             </dependency>
 
-            <!-- 缓存服务 -->
+            <!-- 缓存模块 -->
             <dependency>
                 <groupId>com.cloud</groupId>
                 <artifactId>ai-cloud-redis</artifactId>
@@ -372,42 +380,49 @@
                 <version>${ai-cloud.version}</version>
             </dependency>
 
-            <!-- 短信服务 -->
+            <!-- 短信模块 -->
             <dependency>
                 <groupId>com.cloud</groupId>
                 <artifactId>ai-cloud-sms</artifactId>
                 <version>${ai-cloud.version}</version>
             </dependency>
 
-            <!-- 接口模块 -->
+            <!-- 系统接口 -->
             <dependency>
                 <groupId>com.cloud</groupId>
                 <artifactId>ai-cloud-swagger</artifactId>
                 <version>${ai-cloud.version}</version>
             </dependency>
 
-            <!-- 文件接口 -->
+            <!-- 微信模块 -->
+            <dependency>
+                <groupId>com.cloud</groupId>
+                <artifactId>ai-cloud-weixin</artifactId>
+                <version>${ai-cloud.version}</version>
+            </dependency>
+
+            <!-- 文件接口模块 -->
             <dependency>
                 <groupId>com.cloud</groupId>
                 <artifactId>ai-cloud-file-api</artifactId>
                 <version>${ai-cloud.version}</version>
             </dependency>
 
-            <!-- 资源接口 -->
+            <!-- 资源接口模块 -->
             <dependency>
                 <groupId>com.cloud</groupId>
                 <artifactId>ai-cloud-resource-api</artifactId>
                 <version>${ai-cloud.version}</version>
             </dependency>
 
-            <!-- 系统接口 -->
+            <!-- 系统接口模块 -->
             <dependency>
                 <groupId>com.cloud</groupId>
                 <artifactId>ai-cloud-system-api</artifactId>
                 <version>${ai-cloud.version}</version>
             </dependency>
 
-            <!-- 用户接口 -->
+            <!-- 用户接口模块 -->
             <dependency>
                 <groupId>com.cloud</groupId>
                 <artifactId>ai-cloud-user-api</artifactId>

@@ -5,7 +5,6 @@ import com.cloud.common.constant.Constants;
 import com.cloud.common.exception.ServiceException;
 import com.cloud.redis.service.RedisService;
 import com.cloud.security.utils.SecurityUtils;
-import com.cloud.system.api.domain.SysUser;
 import com.cloud.user.api.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

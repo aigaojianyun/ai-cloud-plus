@@ -47,7 +47,7 @@
             <artifactId>transmittable-thread-local</artifactId>
         </dependency>
 
-        <!--Mybatis-Plus 依赖配置-->
+        <!--Mybatis-Plus -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
@@ -83,7 +83,7 @@
             <artifactId>jjwt</artifactId>
         </dependency>
 
-        <!-- 第三方授权登录 -->
+        <!-- JustAuth -->
         <dependency>
             <groupId>me.zhyd.oauth</groupId>
             <artifactId>JustAuth</artifactId>
@@ -113,7 +113,7 @@
             <artifactId>commons-fileupload</artifactId>
         </dependency>
 
-        <!-- excel工具 -->
+        <!-- Excel -->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>

@@ -18,10 +18,10 @@
 
     <dependencies>
 
-        <!-- 邮箱服务 -->
+        <!--  Redis -->
         <dependency>
             <groupId>com.cloud</groupId>
-            <artifactId>ai-cloud-mail</artifactId>
+            <artifactId>ai-cloud-redis</artifactId>
         </dependency>
 
         <!-- Aliyun-Sms -->

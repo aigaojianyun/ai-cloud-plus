@@ -1,35 +1,33 @@
-package com.cloud.auth.config.properties;
+package com.cloud.weixin.config.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * wxpay pay properties.
+ * wxauth  properties.
  *
  * @author ai-cloud
  */
 @Data
 @ConfigurationProperties(prefix = "wx.pay")
-public class WxPayProperties {
+public class WeiXinProperties {
+
     /**
-     * 设置微信公众号或者小程序等的appid
+     * appId ： 微信公众号或者小程序等的appid
      */
     private String appId;
     /**
-     * 设置微信公众号或者小程序等的secret
+     * appSecret ： 应用密钥
      */
     private String appSecret;
-
     /**
-     * 微信支付商户号
+     * mchId ： 微信支付商户号
      */
     private String mchId;
-
     /**
-     * 微信支付商户密钥
+     * mchKey ： 微信支付商户密钥
      */
     private String mchKey;
-
     /**
      * 服务商模式下的子商户公众账号ID，普通模式请不要配置，请在配置文件中将对应项删除
      */
@@ -49,5 +47,4 @@ public class WxPayProperties {
      * 支付回调地址
      */
     private String notifyUrl;
-
 }

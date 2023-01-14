@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>ai-cloud-framework</artifactId>
+        <groupId>com.cloud</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <artifactId>ai-cloud-weixin</artifactId>
+
+
+    <description>
+        ai-cloud-weixin 微信服务
+    </description>
+
+    <dependencies>
+
+        <!-- Common -->
+        <dependency>
+            <groupId>com.cloud</groupId>
+            <artifactId>ai-cloud-common</artifactId>
+        </dependency>
+
+        <!-- weixin-miniapp -->
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-miniapp</artifactId>
+        </dependency>
+
+        <!-- weixin-pay -->
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-pay</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>

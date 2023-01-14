@@ -59,16 +59,16 @@
             <artifactId>aliyun-sdk-oss</artifactId>
         </dependency>
 
-        <!-- Api File -->
-        <dependency>
-            <groupId>com.cloud</groupId>
-            <artifactId>ai-cloud-file-api</artifactId>
-        </dependency>
-
         <!-- Swagger -->
         <dependency>
             <groupId>com.cloud</groupId>
             <artifactId>ai-cloud-swagger</artifactId>
+        </dependency>
+
+        <!-- Api File -->
+        <dependency>
+            <groupId>com.cloud</groupId>
+            <artifactId>ai-cloud-file-api</artifactId>
         </dependency>
 
     </dependencies>

@@ -1,13 +1,10 @@
 package com.cloud.auth.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.cloud.auth.param.LoginParam;
 import com.cloud.auth.param.WeiXinLoginParam;
 import com.cloud.auth.service.LoginService;
 import com.cloud.common.domain.R;
-import com.cloud.common.utils.AuthUtils;
 import com.cloud.common.utils.JwtUtils;
-import com.cloud.common.utils.ServletUtils;
 import com.cloud.common.utils.sign.RsaUtils;
 import com.cloud.security.auth.AuthUtil;
 import com.cloud.security.service.WebTokenService;
@@ -17,7 +14,6 @@ import io.swagger.annotations.Api;
 import me.zhyd.oauth.cache.AuthStateCache;
 import me.zhyd.oauth.request.AuthRequest;
 import me.zhyd.oauth.utils.AuthStateUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -69,24 +65,6 @@ public class LoginController {
         LoginUser userInfo = loginService.loginWx(param);
         // 获取登录token
         return R.ok(webTokenService.createToken(userInfo));
-    }
-
-    /**
-     * 第三方认证授权登录
-     *
-     * @param source
-     * @throws IOException
-     */
-    @PostMapping("/login/{source}")
-    public void renderAuth(@PathVariable("source") String source) throws IOException {
-        String obj = auths.get(source);
-        if (StringUtils.isEmpty(obj)) {
-            return;
-        }
-        JSONObject json = JSONObject.parseObject(obj);
-        AuthRequest authRequest = AuthUtils.getAuthRequest(source, json.getString("clientId"), json.getString("clientSecret"), json.getString("redirectUri"), authStateCache);
-        String authorizeUrl = authRequest.authorize(AuthStateUtils.createState());
-        ServletUtils.getResponse().sendRedirect(authorizeUrl);
     }
 
     /**

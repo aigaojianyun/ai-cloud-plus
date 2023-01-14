@@ -52,10 +52,10 @@
             <artifactId>ai-cloud-security</artifactId>
         </dependency>
 
-        <!-- weixin-pay -->
+        <!-- Weixin-->
         <dependency>
-            <groupId>com.github.binarywang</groupId>
-            <artifactId>weixin-java-pay</artifactId>
+            <groupId>com.cloud</groupId>
+            <artifactId>ai-cloud-weixin</artifactId>
         </dependency>
 
     </dependencies>

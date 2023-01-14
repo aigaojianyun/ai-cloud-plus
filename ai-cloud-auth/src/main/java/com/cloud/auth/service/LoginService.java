@@ -1,11 +1,12 @@
 package com.cloud.auth.service;
 
+import cn.binarywang.wx.miniapp.api.WxMaService;
+import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.nacos.common.codec.Base64;
 import com.anji.captcha.model.common.ResponseModel;
 import com.anji.captcha.model.vo.CaptchaVO;
 import com.anji.captcha.service.CaptchaService;
-import com.cloud.auth.domain.Code2Session;
 import com.cloud.auth.param.WeiXinLoginParam;
 import com.cloud.common.constant.Constants;
 import com.cloud.common.constant.SecurityConstants;
@@ -19,6 +20,7 @@ import com.cloud.common.utils.uuid.IdUtils;
 import com.cloud.user.api.domain.User;
 import com.cloud.user.api.model.LoginUser;
 import com.cloud.user.api.service.RemoteUserService;
+import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -50,7 +52,7 @@ public class LoginService {
     private CaptchaService captchaService;
 
     @Autowired
-    private WeiXinService weiXinService;
+    private WxMaService wxMaService;
 
     /**
      * 账号密码登录
@@ -116,15 +118,16 @@ public class LoginService {
      * @param param 授权参数
      * @return 登录结果
      */
-    public LoginUser loginWx(WeiXinLoginParam param) {
-        Code2Session code2Session = weiXinService.codeSession(param.getCode());
+    public LoginUser loginWx(WeiXinLoginParam param) throws WxErrorException {
+        // 获取微信用户session
+        WxMaJscode2SessionResult session = wxMaService.getUserService().getSessionInfo(param.getCode());
         LoginUser userInfo = null;
-        if (StringUtils.isNotEmpty(code2Session.getOpenId())) {
+        if (StringUtils.isNotEmpty(session.getOpenid())) {
             // 解析电话号码
             String phoneNumber;
             byte[] byEncrypdata = Base64.decodeBase64(param.getEncryptedData().getBytes());
             byte[] byIvdata = Base64.decodeBase64(param.getIv().getBytes());
-            byte[] bySessionkey = Base64.decodeBase64(code2Session.getSessionKey().getBytes());
+            byte[] bySessionkey = Base64.decodeBase64(session.getSessionKey().getBytes());
             AlgorithmParameterSpec ivSpec = new IvParameterSpec(byIvdata);
             try {
                 SecretKeySpec keySpec = new SecretKeySpec(bySessionkey, "AES");
@@ -138,7 +141,7 @@ public class LoginService {
                 throw new ServiceException("手机号码解密失败!");
             }
             // 根据openId查询是否存在这个用户
-            R<LoginUser> userResult = remoteUserService.getUserInfo(code2Session.getOpenId(), SecurityConstants.INNER);
+            R<LoginUser> userResult = remoteUserService.getUserInfo(session.getOpenid(), SecurityConstants.INNER);
             if (StringUtils.isNull(userResult) || StringUtils.isNull(userResult.getData().getUser())) {
                 // 添加新用户
                 User user = new User();
@@ -146,8 +149,8 @@ public class LoginService {
                 user.setNickName(param.getNickName());
                 user.setPhone(phoneNumber);
                 user.setHeadImg(param.getAvatarUrl());
-                user.setOpenId(code2Session.getOpenId());
-                user.setSessionKey(code2Session.getSessionKey());
+                user.setOpenId(session.getOpenid());
+                user.setSessionKey(session.getSessionKey());
                 if (Objects.equals(param.getGender(), 0)) {
                     user.setSex("2");
                 } else if (Objects.equals(param.getGender(), 1)) {
@@ -159,7 +162,7 @@ public class LoginService {
                 if (R.FAIL == registerResult.getCode()) {
                     throw new ServiceException(registerResult.getMsg());
                 }
-                sysRecordLogService.recordLogininfor(code2Session.getOpenId(), Constants.REGISTER, "注册成功");
+                sysRecordLogService.recordLogininfor(session.getOpenid(), Constants.REGISTER, "注册成功");
             } else {
                 // 存在就更新用户信息
                 User user = userResult.getData().getUser();
@@ -167,10 +170,10 @@ public class LoginService {
                 if (R.FAIL == updateResult.getCode()) {
                     throw new ServiceException(updateResult.getMsg());
                 }
-                sysRecordLogService.recordLogininfor(code2Session.getOpenId(), Constants.REGISTER, "更新成功");
+                sysRecordLogService.recordLogininfor(session.getOpenid(), Constants.REGISTER, "更新成功");
             }
             // 根据openId查询用户
-            R<LoginUser> userResults = remoteUserService.getUserInfo(code2Session.getOpenId(), SecurityConstants.INNER);
+            R<LoginUser> userResults = remoteUserService.getUserInfo(session.getOpenid(), SecurityConstants.INNER);
             userInfo = userResults.getData();
             // 用户信息
             User user = userResults.getData().getUser();
@@ -184,7 +187,7 @@ public class LoginService {
                     throw new ServiceException("对不起，您的账号：" + phoneNumber + " 已停用");
                 }
             }
-            sysRecordLogService.recordLogininfor(code2Session.getOpenId(), Constants.LOGIN_SUCCESS, "登录成功");
+            sysRecordLogService.recordLogininfor(session.getOpenid(), Constants.LOGIN_SUCCESS, "登录成功");
         }
         return userInfo;
     }

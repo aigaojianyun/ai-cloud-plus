@@ -19,6 +19,7 @@
         <module>ai-cloud-sms</module>
         <module>ai-cloud-mail</module>
         <module>ai-cloud-seata</module>
+        <module>ai-cloud-weixin</module>
     </modules>
 
     <artifactId>ai-cloud-framework</artifactId>

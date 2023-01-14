@@ -48,18 +48,22 @@
             <artifactId>ai-cloud-swagger</artifactId>
         </dependency>
 
-        <!-- 短信服务 -->
+        <!-- Mail -->
+        <dependency>
+            <groupId>com.cloud</groupId>
+            <artifactId>ai-cloud-mail</artifactId>
+        </dependency>
+
+        <!-- Sms -->
         <dependency>
             <groupId>com.cloud</groupId>
             <artifactId>ai-cloud-sms</artifactId>
-            <version>${ai-cloud.version}</version>
         </dependency>
 
-        <!-- 资源接口 -->
+        <!-- Api Resource -->
         <dependency>
             <groupId>com.cloud</groupId>
             <artifactId>ai-cloud-resource-api</artifactId>
-            <version>${ai-cloud.version}</version>
         </dependency>
 
     </dependencies>

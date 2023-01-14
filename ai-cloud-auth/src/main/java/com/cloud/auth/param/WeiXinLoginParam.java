@@ -13,7 +13,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class WeiXinLoginParam {
 
-    @ApiModelProperty(value = "换取openId", example = "dac071e4f2604729ac676ed4c782dc8d")
+    @ApiModelProperty(value = "code", example = "dac071e4f2604729ac676ed4c782dc8d")
     private String code;
 
     @ApiModelProperty(value = "手机号", example = "13800138000")
