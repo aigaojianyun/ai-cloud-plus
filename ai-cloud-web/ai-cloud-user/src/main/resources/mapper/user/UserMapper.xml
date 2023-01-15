@@ -93,6 +93,7 @@
                age,
                phone,
                sign,
+               user_type,
                vip_type,
                vip_start_time,
                vip_end_time,

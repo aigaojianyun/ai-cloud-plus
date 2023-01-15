@@ -219,13 +219,13 @@ public class User extends Entity {
     private String invitationIds;
 
     /**
-     * 用户类型（1普通用户）
+     * 用户类型（1普通用户 ，2会员用户）
      */
     @ApiModelProperty(value = "用户类型", example = "Integer")
     private Integer userType;
 
     /**
-     * 会员类型（1普通会员 ，2VIP会员 ，3SVIP会员）
+     * 会员类型（1非会员 ，2普通会员 ，3VIP会员 ，4SVIP会员）
      */
     @ApiModelProperty(value = "会员类型", example = "String")
     private String vipType;

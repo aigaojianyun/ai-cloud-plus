@@ -25,14 +25,14 @@
 			"path": "pages/wallet/index",
 			"style": {
 				"navigationBarTitleText": "钱包",
-				"navigationStyle": "custom"
+				"enablePullDownRefresh": false
 			}
 		}
 	    ,{
             "path" : "pages/login/wxLogin",
             "style" : {
                 "navigationBarTitleText": "微信授权登录",
-				"navigationStyle": "custom"
+				"enablePullDownRefresh": false
             }
 
         }

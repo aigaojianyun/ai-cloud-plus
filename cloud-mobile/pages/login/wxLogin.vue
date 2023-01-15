@@ -1,8 +1,7 @@
 <template>
   <view>
-    <Navbar :hideBtn="true" title="微信授权登录" bgColor="#fff" :h5Show="true" :fixed="true"></Navbar>
     <view class="header">
-      <image mode="" src="/static/logo.png">
+      <image mode="" src="/static/images/weixin/logo.png">
       </image>
     </view>
     <view class='content'>

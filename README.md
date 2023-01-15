@@ -55,6 +55,8 @@ ai-cloud-parent
 ├── cloud-mobile             //uview-ui  [9090] 
 ├── cloud-ui                 //element-ui[9091]
 ├── docker                   // 一键部署
+├── icon                     // ui图标
+├── sql                      // 数据表
 ├──pom.xml                   // 公共依赖
 ~~~
 

@@ -54,7 +54,7 @@ public class LoginController {
     }
 
     /**
-     * 用户微信授权登录
+     * 微信授权登录
      *
      * @param param 登录参数
      * @return 登录结果

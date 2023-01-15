@@ -1,6 +1,6 @@
 <template>
   <view>
-    <Navbar :hideBtn="true" title="我的" bgColor="#fff" :h5Show="true" :fixed="false"></Navbar>
+    <Navbar :hideBtn="true" title="我的" bgColor="#fff" :h5Show="false" :fixed="false"></Navbar>
     <view class="profile-top">
       <view class="user-info">
         <view>
@@ -16,11 +16,11 @@
           <u-row>
             <u-col span="8">
               <view style="color: white; font-size: 20px;">
-                {{ user.vipType == 1 ? '普通会员' : user.vipType == 2 ? 'VIP会员' : 'SVIP会员' }}
+                {{ user.userType == 1 ? '普通用户' : '会员用户' }}
               </view>
             </u-col>
             <u-col span="4">
-              <u-button icon="" text="" style="height: 36px;"></u-button>
+              <u-button icon="" text="" style="height: 36px;">{{ user.vipType == 1 ? '开通会员' : user.vipEndTime }}</u-button>
             </u-col>
           </u-row>
         </view>
@@ -35,7 +35,7 @@
       </u-grid>
     </view>
 
-    <view style="padding: 40rpx; margin-top: 300rpx;">
+    <view style="padding: 40rpx; margin-top: 500rpx;">
       <u-row gutter="32">
         <u-col span="6">
           <u-button icon="phone" text="联系我们" plain></u-button>
@@ -59,8 +59,7 @@ export default {
   },
   data() {
     return {
-      user: {},
-      resetPassword: false
+      user: {}
     }
   },
   created() {

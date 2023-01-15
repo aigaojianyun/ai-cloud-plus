@@ -55,8 +55,8 @@ export default {
   },
   data() {
     return {
-      title: '',
-      subTitle: '欢迎来到',
+      title: '未来 已来!',
+      subTitle: '币币钱包',
       loginForm: {
         username: "ai168",
         password: "123456",
@@ -100,6 +100,18 @@ export default {
     // 微信授权登录
     wxLogin() {
       this.$tab.navigateTo('/pages/login/wxLogin')
+    },
+    // QQ授权登录
+    qqLogin() {
+      this.$modal.loading("QQ授权登录")
+    },
+    // 支付宝授权登录
+    zhifubaoLogin() {
+      this.$modal.loading("支付宝授权登录")
+    },
+    // GitHub授权登录
+    githubLogin() {
+      this.$modal.loading("GitHub授权登录")
     },
   }
 };
@@ -164,16 +176,16 @@ export default {
 
 .t-login .t-b {
   text-align: left;
-  font-size: 56rpx;
-  color: #000;
+  font-size: 32rpx;
+  color: #aaaaaa;
   padding: 300rpx 0 20rpx 0;
   font-weight: bold;
 }
 
 .t-login .t-b2 {
   text-align: left;
-  font-size: 32rpx;
-  color: #aaaaaa;
+  font-size: 56rpx;
+  color: #000;
   padding: 0rpx 0 60rpx 0;
 }
 
