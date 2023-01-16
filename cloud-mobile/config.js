@@ -1,9 +1,9 @@
 // 应用全局配置
 module.exports = {
     // 本地部署的后端
-    baseUrl: 'http://10.10.10.26:8080',
+    // baseUrl: 'http://127.0.0.1:8080',
     // 生产环境配置
-    // baseUrl: 'http://162.14.103.169:8080',
+    baseUrl: 'https://aiclouds.vip/prod-api',
     // 应用信息
     appInfo: {
         // 应用名称

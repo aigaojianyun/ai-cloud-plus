@@ -1,6 +1,6 @@
 <template>
   <view>
-    <Navbar :hideBtn="true" title="我的" bgColor="#fff" :h5Show="false" :fixed="false"></Navbar>
+    <Navbar :hideBtn="true" title="我的" bgColor="#fff" :h5Show="true" :fixed="false"></Navbar>
     <view class="profile-top">
       <view class="user-info">
         <view>
@@ -29,7 +29,7 @@
     <view style="padding: 40rpx; background-color: #fff;">
       <u-grid>
         <u-grid-item @click="handleToWallet">
-          <u-icon name="rmb-circle" color="red" size="60rpx"></u-icon>
+          <u-icon name="rmb-circle" color="#909399" size="80rpx"></u-icon>
           <text class="btn-text">钱包</text>
         </u-grid-item>
       </u-grid>

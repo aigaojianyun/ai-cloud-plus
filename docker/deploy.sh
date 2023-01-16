@@ -31,7 +31,7 @@ base(){
 
 # 启动程序模块（必须）
 modules(){
-	docker-compose up -d cloud-nginx ai-cloud-gateway ai-cloud-auth ai-cloud-system ai-cloud-gen ai-cloud-job ai-cloud-file ai-cloud-monitor ai-cloud-user
+	docker-compose up -d cloud-nginx ai-cloud-gateway ai-cloud-auth ai-cloud-system ai-cloud-gen ai-cloud-job ai-cloud-file ai-cloud-monitor ai-cloud-user ai-cloud-resource
 }
 
 # 关闭所有环境/模块
