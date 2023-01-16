@@ -59,6 +59,7 @@ services:
     volumes:
       - ./nginx/html/cloud-ui:/home/cloud/cloud-ui
       - ./nginx/html/cloud-mobile:/home/cloud/cloud-mobile
+      - ./nginx/crt:/home/cloud/crt
       - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/logs:/var/log/nginx
       - ./nginx/conf.d:/etc/nginx/conf.d

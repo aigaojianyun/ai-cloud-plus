@@ -6,14 +6,19 @@ MAINTAINER cloud
 # 挂载目录
 VOLUME /home/cloud/cloud-ui
 VOLUME /home/cloud/cloud-mobile
+VOLUME /home/cloud/crt
 # 创建目录
 RUN mkdir -p /home/cloud/cloud-ui
 RUN mkdir -p /home/cloud/cloud-mobile
+RUN mkdir -p /home/cloud/crt
 # 指定路径
 WORKDIR /home/cloud/cloud-ui
 WORKDIR /home/cloud/cloud-mobile
+WORKDIR /home/cloud/crt
 # 复制conf文件到路径
 COPY ./conf/nginx.conf /etc/nginx/nginx.conf
 # 复制html文件到路径
 COPY ./html/cloud-ui /home/cloud/cloud-ui
 COPY ./html/cloud-mobile /home/cloud/cloud-mobile
+# 复制证书文件到路径
+COPY ./crt /home/cloud/crt
