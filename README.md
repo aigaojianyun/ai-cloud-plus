@@ -62,7 +62,7 @@ ai-cloud-parent
 ├──pom.xml                   // 公共依赖
 ~~~
 
-## 内置功能
+## 后台内置功能
 
 1. 用户管理：用户是系统操作者，该功能主要完成系统用户配置。
 2. 部门管理：配置系统组织机构（公司、部门、小组），树结构展现支持数据权限。
@@ -89,28 +89,37 @@ ai-cloud-parent
 
 ## 在线体验
 
-* 后台管理
-- http://www.aiclouds.vip/admin
+* 移动端
+- https://www.aiclouds.vip
+- ai168/123456
+- 
+- 后台管理
+- https://aiclouds.vip/admin
 - ceshi/123456
 - 
-- 移动端
-- http://www.aiclouds.vip
-- ceshi/123456
-- 
-- admin监控
-- http://www.aiclouds.vip:9100
-- admin/123456
-- 
-- 文档地址
-- http://www.aiclouds.vip:8080/swagger-ui/index.html?urls.primaryName=ai-cloud-user
-- http://www.aiclouds.vip:8080/doc.html#/home
-
 
 ## sql表预览
 <table>
     <tr>
         <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/iww44e120mdlen154dnw.png"/></td>
         <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/ekb741txm44g835v1xmg.jpg"/></td>
+    </tr>
+</table>
+
+## 移动端演示图
+
+<table>
+    <tr>
+        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/evm263ozig3pkqfv4bbs.jpg"/></td>
+        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/51vciu94hxv5loqk8x7g.jpg"/></td>
+    </tr>
+    <tr>
+        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/6defj2lcppq2ysfgrx3u.jpg"/></td>
+        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/th0idccw4qak6owm51a6.jpg"/></td>
+    </tr>
+    <tr>
+        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/fyd6xblm5lup5j1tcuhc.jpg"/></td>
+        <td><img src=""/></td>
     </tr>
 </table>
 
@@ -147,19 +156,6 @@ ai-cloud-parent
     </tr>
 	<tr>
         <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/3phkgz1wl4ogts4mb8op.png"/></td>
-    </tr>
-</table>
-
-## 移动端演示图
-
-<table>
-    <tr>
-        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/ce7mu2np8a5qh8d3m40k.jpg"/></td>
-        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/g4qal0xb5ru27j4g2ip9.jpg"/></td>
-    </tr>
-    <tr>
-        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/73io7y6ztcl3sey36nxg.jpg"/></td>
-        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/ej043xs7vg1gifwox9ei.jpg"/></td>
     </tr>
 </table>
 

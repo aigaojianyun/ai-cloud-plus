@@ -56,6 +56,7 @@ services:
       context: ./nginx
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./nginx/html/cloud-ui:/home/cloud/cloud-ui
       - ./nginx/html/cloud-mobile:/home/cloud/cloud-mobile
