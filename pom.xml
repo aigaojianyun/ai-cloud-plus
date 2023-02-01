@@ -435,7 +435,7 @@
     <modules>
         <module>ai-cloud-api</module>
         <module>ai-cloud-auth</module>
-        <module>ai-cloud-exchange</module>
+        <module>ai-cloud-coin</module>
         <module>ai-cloud-framework</module>
         <module>ai-cloud-gateway</module>
         <module>ai-cloud-modules</module>

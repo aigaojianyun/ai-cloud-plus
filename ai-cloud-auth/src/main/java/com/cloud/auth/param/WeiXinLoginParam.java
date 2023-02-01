@@ -1,5 +1,6 @@
 package com.cloud.auth.param;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -10,7 +11,7 @@ import lombok.experimental.Accessors;
  * @author ai-cloud
  */
 @Data
-@Accessors(chain = true)
+@ApiModel("微信授权登录请求参数")
 public class WeiXinLoginParam {
 
     @ApiModelProperty(value = "code", example = "dac071e4f2604729ac676ed4c782dc8d")

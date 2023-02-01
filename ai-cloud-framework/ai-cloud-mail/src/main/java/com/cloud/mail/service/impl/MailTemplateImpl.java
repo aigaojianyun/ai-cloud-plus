@@ -2,10 +2,8 @@ package com.cloud.mail.service.impl;
 
 import cn.hutool.core.util.ArrayUtil;
 import com.cloud.common.exception.ServiceException;
-import com.cloud.mail.service.MailService;
+import com.cloud.mail.service.MailTemplate;
 import com.cloud.mail.utils.MailUtils;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -16,10 +14,8 @@ import java.util.List;
  *
  * @author Lion Li
  */
-@Slf4j
-@RequiredArgsConstructor
 @Service
-public class MailServiceImpl implements MailService {
+public class MailTemplateImpl implements MailTemplate {
 
     /**
      * 发送邮件

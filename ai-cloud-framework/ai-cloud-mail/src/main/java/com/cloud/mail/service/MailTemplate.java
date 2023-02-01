@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author Lion Li
  */
-public interface MailService {
+public interface MailTemplate {
 
     /**
      * 发送邮件

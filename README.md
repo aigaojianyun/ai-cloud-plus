@@ -23,7 +23,7 @@
 ai-cloud-parent
 ├── ai-cloud-gateway         // 网关模块 [8080]
 ├── ai-cloud-auth            // 认证中心 [9200]
-├── ai-cloud-exchange        // 交易所模块
+├── ai-cloud-coin            // 币币模块
 ├── ai-cloud-api             // 接口模块
 │       └── ai-cloud-file-api                            // 文件接口模块
 │       └── ai-cloud-resource-api                        // 资源接口模块
@@ -33,8 +33,10 @@ ai-cloud-parent
 │       └── ai-cloud-common                              // 通用模块
 │       └── ai-cloud-datascope                           // 权限范围
 │       └── ai-cloud-datasource                          // 多数据源
+│       └── ai-cloud-kafka                               // 消息队列
 │       └── ai-cloud-log                                 // 日志记录
 │       └── ai-cloud-mail                                // 邮箱模块
+│       └── ai-cloud-mybatis                             // mybatis
 │       └── ai-cloud-redis                               // 缓存模块
 │       └── ai-cloud-seata                               // 分布式事务
 │       └── ai-cloud-security                            // 安全模块

@@ -2,6 +2,7 @@ package com.cloud.mail.config;
 
 import cn.hutool.extra.mail.MailAccount;
 import com.cloud.mail.config.properties.MailProperties;
+import com.cloud.mail.service.MailTemplate;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -33,5 +34,6 @@ public class MailConfiguration {
         account.setConnectionTimeout(mailProperties.getConnectionTimeout());
         return account;
     }
+
 
 }

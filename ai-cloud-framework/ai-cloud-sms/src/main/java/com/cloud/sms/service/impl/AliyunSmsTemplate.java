@@ -8,7 +8,7 @@ import com.cloud.common.utils.JsonUtils;
 import com.cloud.common.utils.StringUtils;
 import com.cloud.sms.config.properties.SmsProperties;
 import com.cloud.sms.domain.SmsResult;
-import com.cloud.sms.exception.SmsException;
+import com.cloud.common.exception.SmsException;
 import com.cloud.sms.service.SmsTemplate;
 import lombok.SneakyThrows;
 

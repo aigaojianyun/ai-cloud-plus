@@ -1,4 +1,4 @@
-package com.cloud.sms.exception;
+package com.cloud.common.exception;
 
 /**
  * Sms异常类

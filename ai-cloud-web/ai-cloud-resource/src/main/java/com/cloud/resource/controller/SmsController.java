@@ -5,7 +5,6 @@ import cn.hutool.core.util.RandomUtil;
 import com.cloud.common.constant.CacheConstants;
 import com.cloud.common.constant.Constants;
 import com.cloud.common.domain.R;
-import com.cloud.common.exception.ServiceException;
 import com.cloud.common.utils.SpringUtils;
 import com.cloud.common.utils.StringUtils;
 import com.cloud.common.web.controller.BaseController;
@@ -38,7 +37,6 @@ public class SmsController extends BaseController {
 
     @Autowired
     private SmsProperties smsProperties;
-
     @Autowired
     private RedisService redisService;
 
@@ -51,9 +49,9 @@ public class SmsController extends BaseController {
     @ApiOperation(value = "发送短信验证码", notes = "发送短信验证码")
     public R smsCaptcha(@ApiParam(value = "手机号", required = true) @NotBlank(message = "{user.phone.not.blank}") String phone) {
         if (StringUtils.isEmpty(phone)) {
-            throw new ServiceException("手机号不能不能为空!");
+           return R.fail("手机号不能不能为空!");
         }
-        if (smsProperties.getEnabled()) {
+        if (!smsProperties.getEnabled()) {
             R.fail("当前系统没有开启短信功能！");
         }
         String key = CacheConstants.CAPTCHA_CODE_KEY + phone;
