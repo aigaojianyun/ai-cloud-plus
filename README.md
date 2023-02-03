@@ -24,9 +24,9 @@ ai-cloud-parent
 ├── ai-cloud-gateway         // 网关模块 [8080]
 ├── ai-cloud-auth            // 认证中心 [9200]
 ├── ai-cloud-coin            // 币币模块
+│       └── ai-cloud-wallet                              // 钱包模块 [9600]
 ├── ai-cloud-api             // 接口模块
 │       └── ai-cloud-file-api                            // 文件接口模块
-│       └── ai-cloud-resource-api                        // 资源接口模块
 │       └── ai-cloud-system-api                          // 系统接口模块
 │       └── ai-cloud-user-api                            // 用户接口模块
 ├── ai-cloud-framework       // 核心模块

@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>ai-cloud</artifactId>
+        <artifactId>ai-cloud-coin</artifactId>
         <groupId>com.cloud</groupId>
         <version>1.0.0</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ai-cloud-resource</artifactId>
+    <artifactId>ai-cloud-wallet</artifactId>
 
     <description>
-        ai-cloud-resource资源服务
+        ai-cloud-wallet钱包模块
     </description>
 
     <dependencies>
@@ -42,22 +41,22 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
+        <!-- Mysql Connector -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <!--  Log -->
+        <dependency>
+            <groupId>com.cloud</groupId>
+            <artifactId>ai-cloud-log</artifactId>
+        </dependency>
+
         <!--  Swagger -->
         <dependency>
             <groupId>com.cloud</groupId>
             <artifactId>ai-cloud-swagger</artifactId>
-        </dependency>
-
-        <!-- Mail -->
-        <dependency>
-            <groupId>com.cloud</groupId>
-            <artifactId>ai-cloud-mail</artifactId>
-        </dependency>
-
-        <!-- Sms -->
-        <dependency>
-            <groupId>com.cloud</groupId>
-            <artifactId>ai-cloud-sms</artifactId>
         </dependency>
 
     </dependencies>
