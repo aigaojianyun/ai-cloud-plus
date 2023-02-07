@@ -17,7 +17,7 @@ import java.lang.annotation.*;
 public @interface EnableRyFeignClients {
     String[] value() default {};
 
-    String[] basePackages() default {"com.cloud"};
+    String[] basePackages() default {"com.cloud.**"};
 
     Class<?>[] basePackageClasses() default {};
 

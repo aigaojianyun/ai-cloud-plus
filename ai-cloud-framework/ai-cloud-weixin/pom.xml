@@ -25,16 +25,22 @@
             <artifactId>ai-cloud-common</artifactId>
         </dependency>
 
-        <!-- weixin-miniapp -->
+        <!-- Weixin-Miniapp -->
         <dependency>
             <groupId>com.github.binarywang</groupId>
             <artifactId>weixin-java-miniapp</artifactId>
         </dependency>
 
-        <!-- weixin-pay -->
+        <!-- Weixin-Pay -->
         <dependency>
             <groupId>com.github.binarywang</groupId>
             <artifactId>weixin-java-pay</artifactId>
+        </dependency>
+
+        <!-- Weixin-Mp -->
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-mp</artifactId>
         </dependency>
 
     </dependencies>
