@@ -15,6 +15,20 @@
 			}
 		},
 		{
+			"path": "pages/quotation/index",
+			"style": {
+				"navigationBarTitleText": "行情",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/assets/index",
+			"style": {
+				"navigationBarTitleText": "资产",
+				"navigationStyle": "custom"
+			}
+		},
+		{
 			"path": "pages/center/index",
 			"style": {
 				"navigationBarTitleText": "我的",
@@ -48,6 +62,18 @@
 				"iconPath": "static/images/tabbar/home.png",
 				"selectedIconPath": "static/images/tabbar/home_art.png",
 				"text": "首页"
+			},
+			{
+				"pagePath": "pages/quotation/index",
+				"iconPath": "static/images/tabbar/quotation.png",
+				"selectedIconPath": "static/images/tabbar/quotation_art.png",
+				"text": "行情"
+			},
+			{
+				"pagePath": "pages/assets/index",
+				"iconPath": "static/images/tabbar/assets.png",
+				"selectedIconPath": "static/images/tabbar/assets_art.png",
+				"text": "资产"
 			},
 			{
 				"pagePath": "pages/center/index",
