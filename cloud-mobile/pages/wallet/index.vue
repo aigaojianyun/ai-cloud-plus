@@ -6,7 +6,6 @@
         <view class="title">余额</view>
         <view class="asset">
           <text class="amount">{{data}}</text>
-          <text class="cny">≈${{data}}</text>
         </view>
         <view class="operat">
           <view class="btn" >充值</view>
@@ -54,31 +53,28 @@ export default {
   background: url(../../static/images/wallet/wallet-bg.png);
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  font-size: 14px;
-  padding: 30px 15px 20px 15px;
+  font-size: 10px;
+  padding: 60rpx 30rpx 40rpx 30rpx;
   color: #8db3fe;
   .title{
-    padding-bottom: 10px;
+    padding-bottom: 10rpx;
   }
   .amount{
     font-size: 20px;
-    font-weight: 100px;
+    font-weight: 100rpx;
     color: #ffffff;
-  }
-  .cny{
-    padding-left: 20px;
   }
   .operat{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: middle;
-    padding-top: 40px;
+    padding-top: 40rpx;
     .btn{
       text-align: center;
       flex: 0 0 32%;
-      height: 30px;
-      line-height: 30px;
+      height: 60rpx;
+      line-height: 60rpx;
       color: #ffffff;
       background-color: rgba(255,255,255,0.08);
     }

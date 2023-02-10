@@ -17,10 +17,11 @@
           <view class="subtitle">4.65MB</view>
         </view>
         <view class="col r light">
-          210000
-          <view class="subtitle">$30000</view>
+          210000.36
+          <view class="subtitle">$29832.63</view>
         </view>
         <view class="col r"><u-tag :text="0.71 | formatChange" :type="0.71 >= 0 ? 'success' : 'error'"></u-tag></view>
+        <view class="line"></view>
       </view>
 
       <view class="s-row little-line">
@@ -30,8 +31,8 @@
           <view class="subtitle">4.65MB</view>
         </view>
         <view class="col r light">
-          210000
-          <view class="subtitle">$30000</view>
+          210000.36
+          <view class="subtitle">$29832.63</view>
         </view>
         <view class="col r"><u-tag :text="0.71 | formatChange" :type="0.71 >= 0 ? 'success' : 'error'"></u-tag></view>
       </view>
@@ -43,8 +44,8 @@
           <view class="subtitle">4.65MB</view>
         </view>
         <view class="col r light">
-          210000
-          <view class="subtitle">$30000</view>
+          210000.36
+          <view class="subtitle">$29832.63</view>
         </view>
         <view class="col r"><u-tag :text="-0.71 | formatChange" :type="-0.71 >= 0 ? 'success' : 'error'"></u-tag></view>
       </view>
@@ -56,8 +57,8 @@
           <view class="subtitle">4.65MB</view>
         </view>
         <view class="col r light">
-          210000
-          <view class="subtitle">$30000</view>
+          210000.36
+          <view class="subtitle">$29832.63</view>
         </view>
         <view class="col r"><u-tag :text="0.71 | formatChange" :type="0.71 >= 0 ? 'success' : 'error'"></u-tag></view>
       </view>
@@ -89,21 +90,21 @@ export default {
 
 <style lang="scss">
 .container{
-  padding-bottom: 100px;
+  padding-bottom: 100rpx;
 }
 /* 市值排行 */
 .coin-section{
-  padding: 4px 30px 24px;
+  padding: 4rpx 30rpx 24rpx;
   background: #fff;
   .s-header{
     display:flex;
     align-items:center;
-    height: 30px;
-    line-height: 30px;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    height: 30rpx;
+    line-height: 30rpx;
+    padding-top: 30rpx;
+    padding-bottom: 30rpx;
     .col{
-      font-size: 10px;
+      font-size: 20rpx;
       color: #8b9faa;
       flex:1;
     }
@@ -114,47 +115,47 @@ export default {
   .s-row{
     display:flex;
     align-items:center;
-    height: 60px;
+    height: 120rpx;
     .subtitle{
-      font-size: 12px;
+      font-size: 12rpx;
       font-weight: normal;
-      color: #00afff;
-      padding: 4px 0 10px 0;
+      color: #8b9faa;
+      padding: 8rpx 0 10rpx 0;
     }
     .u-tag--success {
       color: #fff;
       background-color: #00b45a;
-      border-width: 0.25px;
+      border-width: 0.5px;
       border-style: solid;
       border-color: #00b45a;
-      width: 80px;
+      width: 160rpx;
       float: right;
     }
     .u-tag--error {
       color: #fff;
       background-color: #ff6059;
-      border-width: 0.25px;
+      border-width: 0.5px;
       border-style: solid;
       border-color: #ff6059;
-      width: 80px;
+      width: 160rpx;
       float: right;
     }
     .col{
-      font-size: 10px;
+      font-size: 20rpx;
       color: #157a0c;
       flex:1;
     }
     .coinLogo {
-      width: 18px;
-      height: 18px;
-      margin-right: 4px;
+      width: 36rpx;
+      height: 36rpx;
+      margin-right: 16rpx;
       display: inline-block;
       vertical-align: middle;
       float: left;
     }
     .light{
       font-weight: bold;
-      font-size: 10px;
+      font-size: 32rpx;
       color: #000000;
     }
     .r{
