@@ -2,13 +2,16 @@
   <view>
     <Navbar :hideBtn="true" title="钱包" bgColor="#fff" :h5Show="false" :fixed="false"></Navbar>
     <view class="container">
-      <view class="Wallet">
-        <view class="topWallet">
-          <view class="title">
-            <view class="">余额</view>
-          </view>
-          <view class="money">{{ data }}</view>
-          <view class="about">≈{{ data }}</view>
+      <view class="total-box">
+        <view class="title">余额</view>
+        <view class="asset">
+          <text class="amount">{{data}}</text>
+          <text class="cny">≈${{data}}</text>
+        </view>
+        <view class="operat">
+          <view class="btn" >充值</view>
+          <view class="btn" >提现</view>
+          <view class="btn" >兑换</view>
         </view>
       </view>
     </view>
@@ -44,51 +47,41 @@ export default {
 </script>
 
 <style lang="scss">
-.container {
-  width: 750rpx;
-  min-height: 100vh;
-  height: auto;
-  background: #eeeeee;
-
-  .line {
-    margin: 20rpx auto;
-    width: 92%;
-    height: 1px;
-    background: #d0d0d0;
+.container{
+  padding: 0px 20px;
+}
+.total-box{
+  background: url(../../static/images/wallet/wallet-bg.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  font-size: 14px;
+  padding: 30px 15px 20px 15px;
+  color: #8db3fe;
+  .title{
+    padding-bottom: 10px;
   }
-
-
-  .Wallet {
-    position: fixed;
-    top: 80rpx;
-    width: 100%;
-    //height: 310rpx;
-    z-index: 1000;
-    background: #eeeeee;
-    border-radius: 15rpx;
-
-    .topWallet {
-      border-radius: 15rpx;
-      line-height: 68rpx;
-      padding: 40rpx 0;
-      background: #e26060;
-
-      .title {
-        display: flex;
-        padding-left: 34rpx;
-      }
-
-      .money {
-        padding-left: 34rpx;
-        font-size: 42rpx;
-        font-weight: bold;
-      }
-
-      .about {
-        padding-left: 34rpx;
-      }
+  .amount{
+    font-size: 20px;
+    font-weight: 100px;
+    color: #ffffff;
+  }
+  .cny{
+    padding-left: 20px;
+  }
+  .operat{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: middle;
+    padding-top: 40px;
+    .btn{
+      text-align: center;
+      flex: 0 0 32%;
+      height: 30px;
+      line-height: 30px;
+      color: #ffffff;
+      background-color: rgba(255,255,255,0.08);
     }
-
   }
 }
 </style>

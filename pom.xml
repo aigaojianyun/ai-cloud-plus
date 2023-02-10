@@ -20,6 +20,7 @@
         <spring-boot.mybatis>2.2.2</spring-boot.mybatis>
         <spring-boot.mybatis-plus>3.5.1</spring-boot.mybatis-plus>
         <spring-kafka.version>2.8.8</spring-kafka.version>
+        <spring-websocket.version></spring-websocket.version>
         <alibaba.nacos.version>2.0.4</alibaba.nacos.version>
         <alibaba.seata.version>1.5.2</alibaba.seata.version>
         <redisson.version>3.16.2</redisson.version>
@@ -109,6 +110,13 @@
                 <groupId>org.springframework.kafka</groupId>
                 <artifactId>spring-kafka</artifactId>
                 <version>${spring-kafka.version}</version>
+            </dependency>
+
+            <!-- SpringBoot Websocket -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-websocket</artifactId>
+                <version>${spring-websocket.version}</version>
             </dependency>
 
             <!-- Alibaba Nacos 配置 -->

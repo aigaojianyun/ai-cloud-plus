@@ -40,7 +40,7 @@ export default {
   },
   data() {
     return {
-      title: 'ai管理系统',
+      title: '币币管理系统',
       logo: logoImg
     }
   }
