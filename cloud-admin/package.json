@@ -1,8 +1,8 @@
 {
-  "name": "ai",
+  "name": "cloud-admin",
   "version": "1.0.0",
   "description": "币币管理系统",
-  "author": "ai",
+  "author": "cloud-admin",
   "license": "MIT",
   "scripts": {
     "dev": "vue-cli-service serve",

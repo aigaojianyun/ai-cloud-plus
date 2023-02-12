@@ -13,7 +13,7 @@ usage() {
 
 # copy html
 echo "begin copy html "
-cp -r ../cloud-ui/dist/** ./nginx/html/cloud-ui
+cp -r ../cloud-admin/dist/** ./nginx/html/cloud-admin
 cp -r ../cloud-mobile/unpackage/dist/build/h5/** ./nginx/html/cloud-mobile
 
 

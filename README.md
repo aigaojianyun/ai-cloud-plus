@@ -54,8 +54,8 @@ ai-cloud-parent
 │       └── ai-cloud-pay                                 // 支付模块 [9402]
 │       └── ai-cloud-resource                            // 资源服务 [9403]
 │       └── ai-cloud-user                                // 用户模块 [9401]
-├── cloud-mobile             //uview-ui  [9090] 
-├── cloud-ui                 //element-ui[9091]
+├── cloud-admin              //element-ui后台管理 [9091]
+├── cloud-mobile             //uin-app+uview-ui移动端[9090] 
 ├── docker                   // 一键部署
 ├── icon                     // ui图标
 ├── sql                      // 数据表

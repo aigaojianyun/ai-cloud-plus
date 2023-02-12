@@ -5,7 +5,7 @@
 git clone
 
 # 进入项目目录
-cd ai-cloud-ui
+cd cloud-admin
 
 # 安装依赖
 npm install
