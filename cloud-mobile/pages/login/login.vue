@@ -93,7 +93,7 @@ export default {
     // 登录成功后，处理函数
     async loginSuccess(result) {
       // 设置用户信息
-      this.$store.dispatch('GetInfo').then(res => {
+      this.$store.dispatch('GetUserInfo').then(res => {
         this.$tab.reLaunch('/pages/home/index')
       })
     },

@@ -1,6 +1,47 @@
-// 此文件为uView的主题变量，这些变量目前只能通过uni.scss引入才有效，另外由于
-// uni.scss中引入的样式会同时混入到全局样式文件和单独每一个页面的样式中，造成微信程序包太大，
-// 故uni.scss只建议放scss变量名相关样式，其他的样式可以通过main.js或者App.vue引入
+// 此文件为uView的主题变量，这些变量目前只能通过u.scss引入才有效，另外由于
+// u.scss中引入的样式会同时混入到全局样式文件和单独每一个页面的样式中，造成微信程序包太大，
+// 故u.scss只建议放scss变量名相关样式，其他的样式可以通过main.js或者App.vue引入
+
+/* 页面左右间距 */
+$u-page-row-spacing: 30rpx;
+$u-page-color-base: #f8f8f8;
+$u-page-color-light: #f8f6fc;
+$base-color: #fa436a;
+/* 文字尺寸 */
+$u-font-base: 28rpx;
+$u-font-xsm: 22rpx;
+$u-font-sm: 24rpx;
+$u-font-md: 30rpx;
+$u-font-lg: 34rpx;
+$u-font-xl: 40rpx;
+$u-font-xxl: 50rpx;
+/*文字颜色*/
+$u-font-color-dark: #14191F;
+$u-font-color-base: #606266;
+$u-font-color-light: #8B9FAA;
+$u-font-color-disabled: #C0C4CC;
+$u-font-color-spec: #4399fc;
+$u-font-color-blue: #0952C3;
+$u-font-color-red: red;
+/* 边框颜色 */
+$u-border-color-dark: #DCDFE6;
+$u-border-color-base: #E4E7ED;
+$u-border-color-light: #EBEEF5;
+/* 图片加载中颜色 */
+$u-image-bg-color: #eee;
+/* 行为相关颜色 */
+$u-color-primary:#fa436a;
+$u-color-success: #4cd964;
+$u-color-warning: #f0ad4e;
+$u-color-error: #dd524d;
+$u-color-upper: #00b45a;
+$u-color-lower: #ff6059;
+$u-color-gap: #EEF2F5;
+$u-color-subbg: #F7F6FB;
+$u-color-blue: #0952C3;
+$u-color-tip: #E8F2FC;
+$u-color-royal: #E8F2FC;
+
 
 $u-main-color: #303133;
 $u-content-color: #606266;

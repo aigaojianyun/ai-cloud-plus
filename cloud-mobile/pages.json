@@ -1,99 +1,99 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/login/index",
-			"style": {
-				"navigationBarTitleText": "登录",
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/home/index",
-			"style": {
-				"navigationBarTitleText": "首页",
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/quotation/index",
-			"style": {
-				"navigationBarTitleText": "行情",
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/assets/index",
-			"style": {
-				"navigationBarTitleText": "资产",
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/center/index",
-			"style": {
-				"navigationBarTitleText": "我的",
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/wallet/index",
-			"style": {
-				"navigationBarTitleText": "钱包",
-				"enablePullDownRefresh": false
-			}
-		}
-	    ,{
-            "path" : "pages/login/wxLogin",
-            "style" : {
-                "navigationBarTitleText": "微信授权登录",
-				"enablePullDownRefresh": false
-            }
-
-        }
-    ],
-	"tabBar": {
-		"color": "#909399",
-		"selectedColor": "#000000",
-		"borderStyle": "black",
-		"backgroundColor": "#ffffff",
-		"list": [
-			{
-				"pagePath": "pages/home/index",
-				"iconPath": "static/images/tabbar/home.png",
-				"selectedIconPath": "static/images/tabbar/home_art.png",
-				"text": "首页"
-			},
-			{
-				"pagePath": "pages/quotation/index",
-				"iconPath": "static/images/tabbar/quotation.png",
-				"selectedIconPath": "static/images/tabbar/quotation_art.png",
-				"text": "行情"
-			},
-			{
-				"pagePath": "pages/assets/index",
-				"iconPath": "static/images/tabbar/assets.png",
-				"selectedIconPath": "static/images/tabbar/assets_art.png",
-				"text": "资产"
-			},
-			{
-				"pagePath": "pages/center/index",
-				"iconPath": "static/images/tabbar/user.png",
-				"selectedIconPath": "static/images/tabbar/user_art.png",
-				"text": "我的"
-			}
-		]
-	},
-	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8",
-		"app-plus": {
-			"softinputMode": "adjustResize"
-		}
-	},
-	"easycom": {
-		"^u-(.*)": "@/uni_modules/uview-ui/components/u-$1/u-$1.vue"
-	},
-	"uniIdRouter": {}
+  "pages": [
+    //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+    {
+      "path": "pages/login/login",
+      "style": {
+        "navigationBarTitleText": "登录",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/login/wxLogin",
+      "style": {
+        "navigationBarTitleText": "微信授权登录",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/home/index",
+      "style": {
+        "navigationBarTitleText": "首页",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/quotation/index",
+      "style": {
+        "navigationBarTitleText": "行情",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/assets/index",
+      "style": {
+        "navigationBarTitleText": "资产",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/center/index",
+      "style": {
+        "navigationBarTitleText": "我的",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/wallet/index",
+      "style": {
+        "navigationBarTitleText": "钱包",
+        "enablePullDownRefresh": false
+      }
+    }
+  ],
+  "tabBar": {
+    "color": "#909399",
+    "selectedColor": "#000000",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "iconPath": "static/images/tabbar/home.png",
+        "selectedIconPath": "static/images/tabbar/home_art.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/quotation/index",
+        "iconPath": "static/images/tabbar/quotation.png",
+        "selectedIconPath": "static/images/tabbar/quotation_art.png",
+        "text": "行情"
+      },
+      {
+        "pagePath": "pages/assets/index",
+        "iconPath": "static/images/tabbar/assets.png",
+        "selectedIconPath": "static/images/tabbar/assets_art.png",
+        "text": "资产"
+      },
+      {
+        "pagePath": "pages/center/index",
+        "iconPath": "static/images/tabbar/user.png",
+        "selectedIconPath": "static/images/tabbar/user_art.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8",
+    "app-plus": {
+      "softinputMode": "adjustResize"
+    }
+  },
+  "easycom": {
+    "^u-(.*)": "@/uni_modules/uview-ui/components/u-$1/u-$1.vue"
+  },
+  "uniIdRouter": {}
 }

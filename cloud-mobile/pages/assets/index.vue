@@ -10,8 +10,8 @@
           <text class="cny">≈$123.23</text>
         </view>
         <view class="operat">
-          <view class="btn" >充值</view>
-          <view class="btn" >提现</view>
+          <view class="btn" >充币</view>
+          <view class="btn" >提币</view>
           <view class="btn" >兑换</view>
         </view>
       </view>

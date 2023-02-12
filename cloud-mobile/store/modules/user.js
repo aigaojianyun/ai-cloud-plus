@@ -1,8 +1,9 @@
 import config from '@/config'
 import storage from '@/utils/storage'
 import constant from '@/utils/constant'
-import {getInfo, login,loginWx, logout } from '@/api/login'
+import {login,loginWx, logout } from '@/api/login'
 import {getToken, removeToken, setToken} from '@/utils/auth'
+import {getUserInfo} from '@/api/user'
 
 const baseUrl = config.baseUrl
 
@@ -61,9 +62,9 @@ const user = {
         },
 
         // 获取用户信息
-        GetInfo({commit, state}) {
+        GetUserInfo({commit, state}) {
             return new Promise((resolve, reject) => {
-                getInfo().then(res => {
+                getUserInfo().then(res => {
                     const user = res.data
                     const nickname = (user == null || user.nickName == "" || user.nickName == null) ? "" : user.nickName
                     commit('SET_NAME', nickname)

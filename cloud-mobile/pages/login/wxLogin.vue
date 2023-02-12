@@ -98,7 +98,7 @@ export default {
     // 登录成功后，处理函数
     async loginSuccess(result) {
       // 设置用户信息
-      that.$store.dispatch('GetInfo').then(res => {
+      that.$store.dispatch('GetUserInfo').then(res => {
         that.$tab.reLaunch('/pages/home/index')
       })
     },
