@@ -30,8 +30,9 @@
         <result property="updateTime" column="update_time"/>
     </resultMap>
 
-    <select id="selectByAvailableBalanceUserIdType" resultType="java.math.BigDecimal">
-        SELECT available_balance
+    <select id="selectByAvailableBalanceUserIdType" resultType="com.cloud.user.dto.BalanceDto">
+        SELECT available_balance,
+               frozen_amount
         FROM user_account
         WHERE user_id = #{userId}
           AND type = #{type}

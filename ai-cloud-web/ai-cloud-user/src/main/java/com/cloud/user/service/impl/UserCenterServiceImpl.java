@@ -128,11 +128,13 @@ public class UserCenterServiceImpl implements IUserCenterService {
      * @return
      */
     @Override
-    public Object wallet() {
+    public BalanceDto wallet() {
         //获取userId
         Long userId = SecurityUtils.getUserId();
-        BigDecimal balance = userAccountMapper.selectByAvailableBalanceUserIdType(userId, UserAccountConstants.ACCOUNT_TYPE_BALANCE);
-        return StringUtils.isNull(balance) ? "0.0000" : balance.toString();
+        BalanceDto balanceDto = userAccountMapper.selectByAvailableBalanceUserIdType(userId, UserAccountConstants.ACCOUNT_TYPE_BALANCE);
+        balanceDto.setAvailableBalance(balanceDto.getAvailableBalance().setScale(4,BigDecimal.ROUND_HALF_UP));
+        balanceDto.setFrozenAmount(balanceDto.getFrozenAmount().setScale(4,BigDecimal.ROUND_HALF_UP));
+        return balanceDto;
     }
 
     @Override

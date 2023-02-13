@@ -92,7 +92,7 @@ public class UserCenterApi extends BaseController {
     @Log(title = "查询钱包余额", businessType = BusinessType.QUERY)
     @PostMapping(value = "wallet")
     @ApiOperation(value = "查询钱包余额")
-    public R wallet() {
+    public R<BalanceDto> wallet() {
         return R.ok(userCenterService.wallet());
     }
 

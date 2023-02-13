@@ -2,6 +2,7 @@ package com.cloud.user.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cloud.user.domain.UserAccount;
+import com.cloud.user.dto.BalanceDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -24,7 +25,7 @@ public interface UserAccountMapper extends BaseMapper<UserAccount> {
      * @param type   账户类型
      * @return 可用余额
      */
-    public BigDecimal selectByAvailableBalanceUserIdType(@Param("userId") Long userId, @Param("type") String type);
+    public BalanceDto selectByAvailableBalanceUserIdType(@Param("userId") Long userId, @Param("type") String type);
 
     /**
      * 查询用户存在账户数

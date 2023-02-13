@@ -21,7 +21,6 @@
           <view class="subtitle">$29832.63</view>
         </view>
         <view class="col r"><u-tag :text="0.71 | formatChange" :type="0.71 >= 0 ? 'success' : 'error'"></u-tag></view>
-        <view class="line"></view>
       </view>
 
       <view class="s-row little-line">
@@ -122,6 +121,10 @@ export default {
       color: #8b9faa;
       padding: 8rpx 0 10rpx 0;
     }
+    .col r{
+      width: 100rpx;
+      margin-left: 200rpx !important;
+    }
     .u-tag--success {
       color: #fff;
       background-color: #00b45a;
@@ -129,7 +132,11 @@ export default {
       border-style: solid;
       border-color: #00b45a;
       width: 160rpx;
+      margin-left: 200rpx;
       float: right;
+      .u-tag--medium{
+        width: 100rpx;
+      }
     }
     .u-tag--error {
       color: #fff;

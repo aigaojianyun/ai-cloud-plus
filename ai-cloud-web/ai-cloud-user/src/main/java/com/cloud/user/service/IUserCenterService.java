@@ -51,7 +51,7 @@ public interface IUserCenterService {
      * @param
      * @return
      */
-    public Object wallet();
+    public BalanceDto wallet();
 
     /**
      * 用户申请提现

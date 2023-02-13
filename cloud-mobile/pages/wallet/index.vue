@@ -5,7 +5,9 @@
       <view class="total-box">
         <view class="title">余额</view>
         <view class="asset">
-          <text class="amount">{{data}}</text>
+          <text class="amount">
+            <u-count-to :startVal="0" :endVal="data.availableBalance" separator="," :decimals="4" color="#ffffff"></u-count-to>
+          </text>
         </view>
         <view class="operat">
           <view class="btn" >充值</view>
@@ -27,7 +29,8 @@ export default {
   },
   data() {
     return {
-      data: {}
+      data: {},
+      autoplay: true
     }
   },
   created() {
@@ -62,7 +65,6 @@ export default {
   .amount{
     font-size: 20px;
     font-weight: 100rpx;
-    color: #ffffff;
   }
   .operat{
     display: flex;
