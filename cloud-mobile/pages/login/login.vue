@@ -126,14 +126,14 @@ export default {
 }
 
 /deep/ .login-form-item .u-input {
-  padding: 0 10px 0 62px;
-  height: 32px;
-  line-height: 32px;
-  margin-bottom: 26px;
+  padding: 0 20rpx 0 124rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  margin-bottom: 52rpx;
   background: #f8f7fc;
-  border: 1px solid #e9e9e9;
-  font-size: 14px;
-  border-radius: 26px;
+  border: 2rpx solid #e9e9e9;
+  font-size: 28rpx;
+  border-radius: 52rpx;
 }
 
 .t-captcha {
@@ -143,9 +143,9 @@ export default {
 }
 
 .t-captcha-img {
-  margin-left: 16px;
-  width: 102px;
-  height: 44px;
+  margin-left: 32rpx;
+  width: 204rpx;
+  height: 88rpx;
 }
 
 .img-a {
@@ -171,7 +171,7 @@ export default {
   height: 90rpx;
   line-height: 90rpx;
   border-radius: 50rpx;
-  box-shadow: 0 5px 7px 0 rgba(86, 119, 252, 0.2);
+  box-shadow: 0 10rpx 14rpx 0 rgba(86, 119, 252, 0.2);
 }
 
 .t-login .t-b {

@@ -20,7 +20,7 @@
               </view>
             </u-col>
             <u-col span="4">
-              <u-button icon="" text="" style="height: 36px;">{{ user.vipType == 1 ? '开通会员' : user.vipEndTime }}</u-button>
+              <u-button icon="" text="" style="height: 36px;">{{ user.vipType == 1  ? '开通会员' : user.vipEndTime }}</u-button>
             </u-col>
           </u-row>
         </view>
@@ -45,6 +45,9 @@
           <text>推荐</text>
         </view>
       </view>
+      <view class="history-section icon">
+        <list-cell image="/static/images/my/icon-setting.png" iconColor="#e07472"  :title=应用设置 ></list-cell>
+      </view>
     </view>
 
     <view style="padding: 40rpx; margin-top: 500rpx;">
@@ -58,17 +61,18 @@
       </u-row>
     </view>
 
-
   </view>
 </template>
 
 <script>
 import Navbar from '@/components/navbar/Navbar'
+import listCell from '@/components/mix-list-cell';
 import {getUserInfo} from "@/api/user"
 
 export default {
   components: {
-    Navbar
+    Navbar,
+    listCell
   },
   data() {
     return {
@@ -127,19 +131,19 @@ export default {
   padding: 0 30rpx 0;
   position: relative;
   margin: 0 30rpx 0 30rpx;
-  border-radius: 10px;
+  border-radius: 20rpx;
 }
 .user-info-box {
   display: flex;
   justify-content: left;
   padding: 40rpx;
   max-width: 100%;
-  color: #303133;
 
   &--name {
     font-size: 46rpx;
     font-weight: bold;
-    width: 100%
+    width: 100%;
+    color: #FFFFFF;
   }
 
   &--account {
@@ -186,6 +190,38 @@ export default {
   }
 }
 
+.history-section{
+  padding: 30rpx 0 0;
+  margin-top: 20rpx;
+  margin-bottom: 100rpx;
+  background: #fff;
+  border-radius:10rpx;
+  .sec-header{
+    display:flex;
+    align-items: center;
+    font-size: $u-font-base;
+    color: $u-font-color-dark;
+    line-height: 40rpx;
+    margin-left: 30rpx;
+    .yticon{
+      font-size: 44rpx;
+      color: #5eba8f;
+      margin-right: 16rpx;
+      line-height: 40rpx;
+    }
+  }
+  .h-list{
+    white-space: nowrap;
+    padding: 30rpx 30rpx 0;
+    image{
+      display:inline-block;
+      width: 160rpx;
+      height: 160rpx;
+      margin-right: 20rpx;
+      border-radius: 10rpx;
+    }
+  }
+}
 
 
 

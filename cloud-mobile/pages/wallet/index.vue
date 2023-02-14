@@ -50,20 +50,20 @@ export default {
 
 <style lang="scss">
 .container{
-  padding: 0px 20px;
+  padding: 0 40rpx;
 }
 .total-box{
   background: url(../../static/images/wallet/wallet-bg.png);
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  font-size: 10px;
+  font-size: 20px;
   padding: 60rpx 30rpx 40rpx 30rpx;
   color: #8db3fe;
   .title{
     padding-bottom: 10rpx;
   }
   .amount{
-    font-size: 20px;
+    font-size: 40rpx;
     font-weight: 100rpx;
   }
   .operat{
