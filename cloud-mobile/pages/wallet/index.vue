@@ -1,7 +1,6 @@
 <template>
-  <view>
-    <Navbar :hideBtn="true" title="钱包" bgColor="#fff" :h5Show="false" :fixed="false"></Navbar>
-    <view class="container">
+  <view class="container">
+      <Navbar :hideBtn="true" title="我的余额" bgColor="#fff" :h5Show="false" :fixed="false"></Navbar>
       <view class="total-box">
         <view class="title">余额</view>
         <view class="asset">
@@ -15,7 +14,6 @@
           <view class="btn" >兑换</view>
         </view>
       </view>
-    </view>
   </view>
 </template>
 

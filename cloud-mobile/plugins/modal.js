@@ -56,7 +56,7 @@ export default {
             uni.showToast({
                 title: option,
                 icon: "none",
-                duration: 2500
+                duration: 2000
             })
         }
     },

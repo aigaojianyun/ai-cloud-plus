@@ -88,7 +88,7 @@
 		padding: 20rpx 30rpx;
 		line-height:60rpx;
 		position:relative;
-
+    border-bottom: 1rpx solid #e6ebee;
 		&.cell-hover{
 			background:#fafafa;
 		}

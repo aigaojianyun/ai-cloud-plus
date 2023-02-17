@@ -1,7 +1,6 @@
 <template>
-  <view>
-    <Navbar :hideBtn="true" title="行情" bgColor="#fff" :h5Show="true" :fixed="false"></Navbar>
   <view class="container">
+    <Navbar :hideBtn="true" title="行情" bgColor="#fff" :h5Show="true" :fixed="false"></Navbar>
     <!-- 市值排行 -->
     <view class="coin-section m-t">
       <view class="s-header">
@@ -30,8 +29,8 @@
           <view class="subtitle">4.65MB</view>
         </view>
         <view class="col r light">
-          210000.36
-          <view class="subtitle">$29832.63</view>
+          1963.36
+          <view class="subtitle">$120.63</view>
         </view>
         <view class="col r"><u-tag :text="0.71 | formatChange" :type="0.71 >= 0 ? 'success' : 'error'"></u-tag></view>
       </view>
@@ -43,8 +42,8 @@
           <view class="subtitle">4.65MB</view>
         </view>
         <view class="col r light">
-          210000.36
-          <view class="subtitle">$29832.63</view>
+          1.36
+          <view class="subtitle">$0.63</view>
         </view>
         <view class="col r"><u-tag :text="-0.71 | formatChange" :type="-0.71 >= 0 ? 'success' : 'error'"></u-tag></view>
       </view>
@@ -56,14 +55,13 @@
           <view class="subtitle">4.65MB</view>
         </view>
         <view class="col r light">
-          210000.36
-          <view class="subtitle">$29832.63</view>
+         1.36
+          <view class="subtitle">$0.063</view>
         </view>
         <view class="col r"><u-tag :text="0.71 | formatChange" :type="0.71 >= 0 ? 'success' : 'error'"></u-tag></view>
       </view>
 
     </view>
-  </view>
   </view>
 </template>
 
@@ -90,6 +88,7 @@ export default {
 <style lang="scss">
 .container{
   padding-bottom: 100rpx;
+  background-color: $u-page-color-base;
 }
 /* 市值排行 */
 .coin-section{
@@ -115,6 +114,7 @@ export default {
     display:flex;
     align-items:center;
     height: 120rpx;
+    border-bottom: 1rpx solid #e6ebee;
     .subtitle{
       font-size: 12rpx;
       font-weight: normal;

@@ -15,12 +15,14 @@
         <view class="vip-info-box">
           <u-row>
             <u-col span="8">
-              <view style="color: white; font-size: 20px;">
+              <view class="vip-info-type">
                 {{ user.userType == 1 ? '普通用户' : '会员用户' }}
               </view>
             </u-col>
             <u-col span="4">
-              <u-button icon="" text="" style="height: 36px;">{{ user.vipType == 1  ? '开通会员' : user.vipEndTime }}</u-button>
+              <view class="vip-info-button">
+                <u-button  :text="user.vipType == 1  ? '开通会员' : user.vipEndTime"></u-button>
+              </view>
             </u-col>
           </u-row>
         </view>
@@ -28,39 +30,35 @@
     </view>
     <view class="cover-container">
       <view class="order-section">
-        <view class="order-item"  hover-class="common-hover"  :hover-stay-time="50" @click="handleToWallet">
-          <image class="icon" src="/static/images/my/icon-wallet.png"></image>
-          <text>钱包</text>
+        <view class="order-item"  hover-class="common-hover"  :hover-stay-time="50" @click="handleToNotice">
+          <image class="icon" src="/static/images/my/icon-notice.png"></image>
+          <text>公告</text>
         </view>
-        <view class="order-item" hover-class="common-hover" :hover-stay-time="50">
+        <view class="order-item" hover-class="common-hover" :hover-stay-time="50" @click="handleToSign">
           <image class="icon" src="/static/images/my/icon-sign.png"></image>
           <text>签到</text>
         </view>
-        <view class="order-item" hover-class="common-hover"  :hover-stay-time="50">
+        <view class="order-item" hover-class="common-hover"  :hover-stay-time="50" @click="handleToLottery">
           <image class="icon" src="/static/images/my/icon-lottery.png"></image>
           <text>抽奖</text>
         </view>
-        <view class="order-item"  hover-class="common-hover"  :hover-stay-time="50">
-          <image class="icon" src="/static/images/my/icon-recomment.png"></image>
+        <view class="order-item"  hover-class="common-hover"  :hover-stay-time="50" @click="handleToRecommend">
+          <image class="icon" src="/static/images/my/icon-recommend.png"></image>
           <text>推荐</text>
         </view>
       </view>
       <view class="history-section icon">
-        <list-cell image="/static/images/my/icon-setting.png" iconColor="#e07472"  :title=应用设置 ></list-cell>
+        <view @click="handleToBalance">
+          <list-cell image="/static/images/my/icon-balance.png" iconColor="#e07472"  title="我的余额" ></list-cell>
+        </view>
+        <view @click="handleToAbout">
+        <list-cell image="/static/images/my/icon-about.png" iconColor="#e07472"  title="关于我们" ></list-cell>
+        </view>
+        <view @click="handleToSetting">
+        <list-cell image="/static/images/my/icon-setting.png" iconColor="#e07472"  title="应用设置" ></list-cell>
+        </view>
       </view>
     </view>
-
-    <view style="padding: 40rpx; margin-top: 500rpx;">
-      <u-row gutter="32">
-        <u-col span="6">
-          <u-button icon="phone" text="联系我们" plain></u-button>
-        </u-col>
-        <u-col span="6">
-          <u-button icon="reload" text="退出" type="error" @click="handleLogout"></u-button>
-        </u-col>
-      </u-row>
-    </view>
-
   </view>
 </template>
 
@@ -68,9 +66,11 @@
 import Navbar from '@/components/navbar/Navbar'
 import listCell from '@/components/mix-list-cell';
 import {getUserInfo} from "@/api/user"
+import UButton from "../../uni_modules/uview-ui/components/u-button/u-button";
 
 export default {
   components: {
+    UButton,
     Navbar,
     listCell
   },
@@ -83,9 +83,33 @@ export default {
     this.getInfo()
   },
   methods: {
-    // 跳转到钱包
-    handleToWallet() {
+    // 跳转到公告
+    handleToNotice() {
+      this.$modal.showToast("敬请期待!")
+    },
+    // 跳转到签到
+    handleToSign(){
+      this.$modal.showToast("敬请期待!")
+    },
+    // 跳转到抽奖
+    handleToLottery(){
+      this.$modal.showToast("敬请期待!")
+    },
+    // 跳转到推荐
+    handleToRecommend(){
+      this.$modal.showToast("敬请期待!")
+    },
+    // 跳转到我的余额
+    handleToBalance(){
       this.$tab.navigateTo('/pages/wallet/index')
+    },
+    // 跳转到关于我们
+    handleToAbout(){
+      this.$tab.navigateTo('/pages/center/about')
+    },
+    // 跳转到应用设置
+    handleToSetting(){
+      this.$tab.navigateTo('/pages/center/setting')
     },
     // 获取用户详细信息
     getInfo() {
@@ -121,6 +145,8 @@ export default {
 }
 .container{
   width: 100%;
+  min-height:90vh;
+  height: auto;
   background-color: $u-page-color-base;
   padding-bottom: 100rpx;
 }
@@ -140,8 +166,7 @@ export default {
   max-width: 100%;
 
   &--name {
-    font-size: 46rpx;
-    font-weight: bold;
+    font-size: 48rpx;
     width: 100%;
     color: #FFFFFF;
   }
@@ -163,6 +188,14 @@ export default {
   background-color: #1e1e1e;
   border-radius: 32rpx 32rpx 0 0;
   box-shadow: 0 32rpx 52rpx rgba(0, 0, 0, .8);
+}
+.vip-info-type {
+  color: white;
+  font-size: 20px;
+}
+.u-button{
+  height: 60rpx;
+  color: #dd524d;
 }
 
 .cover-container{

@@ -1,9 +1,7 @@
 <template>
-  <view>
-    <Navbar :hideBtn="true" title="资产" bgColor="#fff" :h5Show="true" :fixed="false"></Navbar>
-    <view class="container">
-
-      <view class="total-box">
+<view class="container">
+  <Navbar :hideBtn="true" title="资产" bgColor="#fff" :h5Show="true" :fixed="false"></Navbar>
+  <view class="total-box">
         <view class="title">总资产约(合USDT)</view>
         <view class="asset">
           <text class="amount">906.62311</text>
@@ -15,9 +13,7 @@
           <view class="btn" >兑换</view>
         </view>
       </view>
-
-      <view class="wrap">
-
+  <view class="wrap">
         <view class="list">
           <view class="title">
             <image class="image" mode="" src="/static/images/coin/BTC.png"></image>
@@ -129,8 +125,7 @@
         </view>
 
       </view>
-    </view>
-  </view>
+</view>
 </template>
 
 <script>
@@ -160,7 +155,7 @@ export default {
   padding: 0px 10px;
   min-height: 100vh;
   height: auto;
-  background: #eeeeee;
+  background-color: $u-page-color-base;
 }
 
 .total-box{

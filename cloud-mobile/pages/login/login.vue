@@ -84,7 +84,7 @@ export default {
       this.loginForm.code = data.captchaVerification;
       this.$store.dispatch('Login', this.loginForm).then(() => {
         this.$refs.verify.hide();
-        this.$modal.loading("登录中，请耐心等待...")
+        this.$modal.showToast("登录中，请耐心等待...")
         this.loginSuccess()
       }).catch(() => {
         this.$refs.verify.hide();
@@ -103,15 +103,15 @@ export default {
     },
     // QQ授权登录
     qqLogin() {
-      this.$modal.loading("QQ授权登录")
+      this.$modal.showToast("QQ授权登录")
     },
     // 支付宝授权登录
     zhifubaoLogin() {
-      this.$modal.loading("支付宝授权登录")
+      this.$modal.showToast("支付宝授权登录")
     },
     // GitHub授权登录
     githubLogin() {
-      this.$modal.loading("GitHub授权登录")
+      this.$modal.showToast("GitHub授权登录")
     },
   }
 };
@@ -216,7 +216,7 @@ export default {
   width: 100%;
   font-size: 24rpx;
 
-  .u-link {
+  u-link {
     margin: 0 10rpx;
     font-size: 24rpx !important;
   }
