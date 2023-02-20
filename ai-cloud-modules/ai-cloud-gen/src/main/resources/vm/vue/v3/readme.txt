@@ -1,1 +1,1 @@
-锟斤拷锟绞癸拷玫锟斤拷锟紺loud-Vue3前锟剿ｏ拷锟斤拷么锟斤拷要锟斤拷锟斤拷一锟铰达拷目录锟斤拷模锟斤拷index.vue.vm锟斤拷index-tree.vue.vm锟侥硷拷锟斤拷锟较硷拷vue目录锟斤拷
+如果使用的是RuoYi-Cloud-Vue3前端，那么需要覆盖一下此目录的模板index.vue.vm、index-tree.vue.vm文件到上级vue目录。

@@ -50,6 +50,7 @@ export default {
   position:relative;
   background: #fff;
   justify-content: center;
+  border-bottom: 0.5px solid #e6ebee;
   &.log-out-btn{
     margin-top: 40rpx;
     .cell-tit{

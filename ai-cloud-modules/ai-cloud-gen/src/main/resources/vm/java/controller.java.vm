@@ -29,7 +29,6 @@ import com.cloud.common.web.page.TableDataInfo;
  * ${functionName}Controller
  *
  * @author ${author}
- * @date ${datetime}
  */
 @RestController
 @RequestMapping("/${businessName}")
@@ -37,11 +36,11 @@ public class ${ClassName}Controller extends BaseController {
     @Autowired
     private I${ClassName}Service ${className}Service;
 
-/**
- * 查询${functionName}列表
- */
-@RequiresPermissions("${permissionPrefix}:list")
-@GetMapping("/list")
+    /**
+     * 查询${functionName}列表
+     */
+    @RequiresPermissions("${permissionPrefix}:list")
+    @GetMapping("/list")
     #if($table.crud || $table.sub)
     public TableDataInfo list(${ClassName} ${className}) {
         startPage();

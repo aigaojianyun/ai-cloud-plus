@@ -12,7 +12,6 @@ import ${packageName}.domain.${subClassName};
  * ${functionName}Mapper接口
  *
  * @author ${author}
- * @date ${datetime}
  */
 @Mapper
 public interface ${ClassName}Mapper extends BaseMapper<${ClassName}> {

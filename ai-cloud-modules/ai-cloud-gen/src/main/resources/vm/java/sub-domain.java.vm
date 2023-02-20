@@ -9,7 +9,6 @@ import com.cloud.common.annotation.Excel;
  * ${subTable.functionName}对象 ${subTableName}
  *
  * @author ${author}
- * @date ${datetime}
  */
 public class ${subClassName} extends BaseEntity
         {
