@@ -1,162 +1,268 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : ai-cloud
+ Source Server         : cloud-mysql
  Source Server Type    : MySQL
- Source Server Version : 80018
+ Source Server Version : 80032
  Source Host           : 127.0.0.1:3306
- Source Schema         : ai-cloud
+ Source Schema         : ai-cloud-dev
 
  Target Server Type    : MySQL
- Target Server Version : 80018
+ Target Server Version : 80032
  File Encoding         : 65001
 
- Date: 16/01/2023 09:26:10
+ Date: 21/02/2023 16:18:10
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
+-- Table structure for ai_bank
+-- ----------------------------
+DROP TABLE IF EXISTS `ai_bank`;
+CREATE TABLE `ai_bank`  (
+                            `id` bigint NOT NULL COMMENT 'id',
+                            `bank_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '银行名称',
+                            `bank_icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'icon',
+                            `sort` int NOT NULL DEFAULT 0 COMMENT '排序',
+                            `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
+                            `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                            `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
+                            `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                            `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
+                            PRIMARY KEY (`id`, `bank_name`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '银行信息表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of ai_bank
+-- ----------------------------
+INSERT INTO `ai_bank` VALUES (1, '中国工商', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/bank/yinhang-gongshang.png', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_bank` VALUES (2, '中国农业', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/bank/yinhang-nonghang.png', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_bank` VALUES (3, '中国银行', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/bank/yinhang-zhongguoyinhang.png', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_bank` VALUES (4, '中国建设', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/bank/yinhang-jianshe.png', 0, '', NULL, '', NULL, NULL);
+
+-- ----------------------------
+-- Table structure for ai_country
+-- ----------------------------
+DROP TABLE IF EXISTS `ai_country`;
+CREATE TABLE `ai_country`  (
+                               `id` bigint NOT NULL COMMENT 'id',
+                               `zh_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '中文名称',
+                               `en_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '英文名称',
+                               `country_icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'icon',
+                               `area_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '区号',
+                               `language` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '语言',
+                               `local_currency` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '当地货币缩写',
+                               `sort` int NOT NULL DEFAULT 0 COMMENT '排序',
+                               `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
+                               `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                               `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
+                               `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                               `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
+                               PRIMARY KEY (`id`, `zh_name`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '国家信息表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of ai_country
+-- ----------------------------
+INSERT INTO `ai_country` VALUES (2, '中国台湾', 'Taiwan (台灣)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Taiwan.png', '886', 'zh_TW', 'TWD', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (3, '中国澳门', 'Macau (澳門)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Macau.png', '853', 'zh_MO', 'MOP', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (4, '中国香港', 'Hong Kong (香港)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/HongKong.png', '852', 'zh_HK', 'HKD', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (5, '丹麦', 'Denmark (Danmark)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Denmark.png', '45', 'da_DK', 'DKK', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (6, '以色列', 'Israel (ישראל‎)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Israel.png', '972', 'he_IL', 'AMD', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (7, '伊朗', 'Iran', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Iran.png', '98', 'fa_IR', 'IRR', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (8, '俄罗斯', 'Russia (Россия)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Russia.png', '7', 'ru_RU', 'RUB', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (9, '加拿大', 'Canada', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Canada.png', '1', 'fr_CA', 'CAD', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (10, '南非', 'South Africa', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/SouthAfrica.png', '27', 'en_ZA', 'ZAR', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (11, '卡塔尔', 'Qatar (قطر‎)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Qatar.png', '974', 'ar_QA', 'QAR', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (12, '印度', 'India (भारत)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/India.png', '91', 'en_IN', 'INR', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (13, '印度尼西亚', 'Indonesia', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Indonesia.png', '62', 'id_ID', 'IDR', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (14, '哥伦比亚', 'Colombia', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Colombia.png', '57', 'es_CO', 'COP', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (15, '土耳其', 'Turkey (Türkiye)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Turkey.png', '90', 'en_US', 'EUR', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (16, '埃及', 'Egypt', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Egypt.png', '2', 'ar_EG', 'EGP', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (17, '墨西哥', 'Mexico (México)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Mexico.png', '52', 'es_MX', 'MXN', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (18, '奥地利', 'Austria (Österreich)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Austria.png', '43', 'de_AT', 'EUR', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (19, '孟加拉国', 'Bangladesh', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Bangladesh.png', '88', 'bn_BD', 'BDT', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (20, '尼日利亚', 'Nigeria', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Nigeria.png', '234', 'ha_Latn_NG', 'NGN', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (21, '巴西', 'Brazil (Brasil)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Brazil.png', '55', 'pt_BR', 'BRL', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (22, '希腊', 'Greece', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Greece.png', '3', 'el_GR', 'EUR', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (23, '德国', 'Germany (Deutschland)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Germany.png', '49', 'de_DE', 'EUR', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (24, '意大利', 'Italy (Italia)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Italy.png', '39', 'it_IT', 'EUR', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (25, '挪威', 'Norway (Norge)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Norway.png', '47', 'nb_NO', 'NOK', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (26, '新加坡', 'Singapore', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Singapore.png', '65', 'en_US', 'SGD', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (27, '新西兰', 'NewZealand', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/NewZealand.png', '64', 'en_NZ', 'NZD', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (28, '日本', 'Japan (日本)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Japan.png', '81', 'ja_JP', 'USD', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (29, '智利', 'Chile', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Chile.png', '56', 'es_CL', 'CLP', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (30, '比利时', 'Belgium (België)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Belgium.png', '32', 'be_BY', 'EUR', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (31, '沙特阿拉伯', 'Saudi Arabia (المملكة العربية السعودية‎)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/SaudiArabia.png', '966', 'ar_SA', 'SAR', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (32, '法国', 'France', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/France.png', '33', 'fr_FR', 'EUR', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (33, '波兰', 'Poland (Polska)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Poland.png', '48', 'pl_PL', 'PLN', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (34, '泰国', 'Thailand (ไทย)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Thailand.png', '66', 'en_US', 'USD', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (35, '澳大利亚', 'Australia', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Australia.png', '61', 'en_AU', 'AUD', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (36, '爱尔兰', 'Ireland', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Ireland.png', '353', 'en_IE', 'EUR', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (37, '瑞典', 'Sweden (Sverige)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Sweden.png', '46', 'sv_SE', 'SEK', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (38, '瑞士', 'Switzerland (Schweiz)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Switzerland.png', '41', 'de_CH', 'CHF', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (39, '白俄罗斯', 'Belarus', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Belarus.png', '375', 'be_BY', 'BYR', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (40, '罗马尼亚', 'Romania', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Romania.png', '4', 'ro_RO', 'RON', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (41, '美国', 'America', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/America.png', '1', 'en_US', 'USD', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (42, '芬兰', 'Finland (Suomi)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Finland.png', '358', 'fi_FI', 'EUR', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (43, '英国', 'United Kingdom', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/UnitedKingdom.png', '44', 'en_US', 'EUR', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (44, '荷兰', 'Netherlands (Nederland)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Netherlands.png', '31', 'nl_NL', 'EUR', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (45, '菲律宾', 'ThePhilippines', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/ThePhilippines.png', '63', 'en_PH', 'PHP', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (46, '葡萄牙', 'Portugal', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Portugal.png', '351', 'pt_PT', 'EUR', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (47, '西班牙', 'Spain (España)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Spain.png', '34', 'es_ES', 'EUR', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (48, '越南', 'Vietnam (Việt Nam)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Vietnam.png', '84', 'en_US', 'USD', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (49, '阿拉伯', 'United Arab Emirates (الإمارات العربية المتحدة‎)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/UnitedArabEmirates.png', '971', 'ar_AE', 'AED', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (50, '阿根廷', 'Argentina', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Argentina.png', '54', 'es_AR', 'ARS', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (51, '韩国', 'South Korea (대한민국)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/SouthKorea.png', '82', 'ko_KR', 'USD', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (52, '马来西亚', 'Malaysia', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Malaysia.png', '60', 'en_US', 'EUR', 0, '', NULL, '', NULL, NULL);
+
+-- ----------------------------
+-- Table structure for coin
+-- ----------------------------
+DROP TABLE IF EXISTS `coin`;
+CREATE TABLE `coin`  (
+                         `id` bigint NOT NULL COMMENT 'id',
+                         `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '货币名称',
+                         `name_cn` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '中文名称',
+                         `unit` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '单位',
+                         `icon_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'logo图url',
+                         `infolink` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '币种资料链接',
+                         `information` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '币种简介',
+                         `sort` bigint NULL DEFAULT NULL COMMENT '排序',
+                         `min_tx_fee` double NULL DEFAULT NULL COMMENT '最小提币手续费',
+                         `min_withdraw_amount` decimal(18, 8) NULL DEFAULT NULL COMMENT '最小提币数量',
+                         `max_tx_fee` double NULL DEFAULT NULL COMMENT '最大提币手续费',
+                         `max_withdraw_amount` decimal(18, 8) NULL DEFAULT NULL COMMENT '最大提币数量',
+                         `cny_rate` double NULL DEFAULT NULL COMMENT '对人民币汇率',
+                         `usd_rate` double NULL DEFAULT NULL COMMENT '对美元汇率',
+                         `can_withdraw` tinyint(1) NULL DEFAULT NULL COMMENT '是否能提币',
+                         `can_recharge` tinyint(1) NULL DEFAULT NULL COMMENT '是否能充币',
+                         `can_transfer` tinyint(1) NULL DEFAULT NULL COMMENT '是否能转账',
+                         `can_auto_withdraw` tinyint(1) NULL DEFAULT NULL COMMENT '是否能自动提币',
+                         `recharge_amount` varchar(18) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '充币阈值',
+                         `withdraw_threshold` decimal(18, 8) NULL DEFAULT NULL COMMENT '提现阈值',
+                         `miner_fee` decimal(18, 8) NULL DEFAULT NULL COMMENT '转账时付给矿工的手续费',
+                         `account_type` int NULL DEFAULT NULL COMMENT '账户类型：0：默认  1：EOS类型',
+                         `deposit_address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '充值地址（仅账户类型为EOS类型有效）',
+                         `status_flag` int NOT NULL DEFAULT 0 COMMENT '状态：0启用，2停用',
+                         `delete_flag` int NOT NULL DEFAULT 0 COMMENT '删除：0未删除，2已删除',
+                         `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
+                         `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                         `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
+                         `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                         `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
+                         PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '货币表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of coin
+-- ----------------------------
+INSERT INTO `coin` VALUES (1, 'Bitcoin', '比特币', 'BTC', NULL, NULL, '比特币（BitCoin）的概念最初由中本聪在2008年提出，根据中本聪的思路设计发布的开源软件以及建构其上的P2P网络。比特币是一种P2P形式的数字货币。点对点的传输意味着一个去中心化的支付系统。', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, '', NULL, '', NULL, NULL);
+
+-- ----------------------------
 -- Table structure for gen_table
 -- ----------------------------
 DROP TABLE IF EXISTS `gen_table`;
 CREATE TABLE `gen_table`  (
-  `table_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '编号',
-  `table_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '表名称',
-  `table_comment` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '表描述',
-  `sub_table_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '关联子表的表名',
-  `sub_table_fk_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '子表关联的外键名',
-  `class_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '实体类名称',
-  `tpl_category` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT 'crud' COMMENT '使用的模板（crud单表操作 tree树表操作）',
-  `package_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '生成包路径',
-  `module_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '生成模块名',
-  `business_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '生成业务名',
-  `function_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '生成功能名',
-  `function_author` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '生成功能作者',
-  `gen_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '生成代码方式（0zip压缩包 1自定义路径）',
-  `gen_path` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '/' COMMENT '生成路径（不填默认项目路径）',
-  `options` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '其它生成选项',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
-  PRIMARY KEY (`table_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '代码生成业务表' ROW_FORMAT = DYNAMIC;
+                              `table_id` bigint NOT NULL AUTO_INCREMENT COMMENT '编号',
+                              `table_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '表名称',
+                              `table_comment` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '表描述',
+                              `sub_table_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '关联子表的表名',
+                              `sub_table_fk_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '子表关联的外键名',
+                              `class_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '实体类名称',
+                              `tpl_category` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT 'crud' COMMENT '使用的模板（crud单表操作 tree树表操作）',
+                              `package_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '生成包路径',
+                              `module_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '生成模块名',
+                              `business_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '生成业务名',
+                              `function_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '生成功能名',
+                              `function_author` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '生成功能作者',
+                              `gen_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '生成代码方式（0zip压缩包 1自定义路径）',
+                              `gen_path` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '/' COMMENT '生成路径（不填默认项目路径）',
+                              `options` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '其它生成选项',
+                              `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
+                              `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                              `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
+                              `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                              `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
+                              PRIMARY KEY (`table_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '代码生成业务表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of gen_table
 -- ----------------------------
-INSERT INTO `gen_table` VALUES (21, 'user_vip', '会员', NULL, NULL, 'UserVip', 'crud', 'com.cloud.system', 'system', 'vip', '会员', 'ai-cloud', '0', '/', NULL, 'admin', '2022-11-11 10:36:53', '', NULL, NULL);
-INSERT INTO `gen_table` VALUES (22, 'user_vip_equity', '会员权益', NULL, NULL, 'UserVipEquity', 'crud', 'com.cloud.system', 'system', 'equity', '会员权益', 'ai-cloud', '0', '/', NULL, 'admin', '2022-11-11 10:36:55', '', NULL, NULL);
-INSERT INTO `gen_table` VALUES (23, 'user_set', '用户设置', NULL, NULL, 'UserSet', 'crud', 'com.cloud.system', 'system', 'set', '用户设置', 'ai-cloud', '0', '/', NULL, 'admin', '2022-11-11 11:04:45', '', NULL, NULL);
-INSERT INTO `gen_table` VALUES (24, 'user_auth', '用户第三方授权表', NULL, NULL, 'UserAuth', 'crud', 'com.cloud.system', 'system', 'auth', '用户第三方授权', 'ai-cloud', '0', '/', NULL, 'admin', '2022-11-11 16:25:47', '', NULL, NULL);
+INSERT INTO `gen_table` VALUES (28, 'ai_bank', '银行信息表', NULL, NULL, 'AiBank', 'crud', 'com.cloud.system', 'system', 'bank', '银行信息', 'ai-cloud', '0', '/', NULL, 'admin', '2023-02-20 20:50:09', '', NULL, NULL);
+INSERT INTO `gen_table` VALUES (29, 'ai_country', '国家信息表', NULL, NULL, 'AiCountry', 'crud', 'com.cloud.system', 'system', 'country', '国家信息', 'ai-cloud', '0', '/', NULL, 'admin', '2023-02-20 20:50:09', '', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for gen_table_column
 -- ----------------------------
 DROP TABLE IF EXISTS `gen_table_column`;
 CREATE TABLE `gen_table_column`  (
-  `column_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '编号',
-  `table_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '归属表编号',
-  `column_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '列名称',
-  `column_comment` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '列描述',
-  `column_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '列类型',
-  `java_type` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'JAVA类型',
-  `java_field` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'JAVA字段名',
-  `is_pk` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '是否主键（1是）',
-  `is_increment` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '是否自增（1是）',
-  `is_required` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '是否必填（1是）',
-  `is_insert` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '是否为插入字段（1是）',
-  `is_edit` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '是否编辑字段（1是）',
-  `is_list` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '是否列表字段（1是）',
-  `is_query` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '是否查询字段（1是）',
-  `query_type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT 'EQ' COMMENT '查询方式（等于、不等于、大于、小于、范围）',
-  `html_type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '显示类型（文本框、文本域、下拉框、复选框、单选框、日期控件）',
-  `dict_type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '字典类型',
-  `sort` int(11) NULL DEFAULT NULL COMMENT '排序',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`column_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 486 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '代码生成业务表字段' ROW_FORMAT = DYNAMIC;
+                                     `column_id` bigint NOT NULL AUTO_INCREMENT COMMENT '编号',
+                                     `table_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '归属表编号',
+                                     `column_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '列名称',
+                                     `column_comment` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '列描述',
+                                     `column_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '列类型',
+                                     `java_type` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'JAVA类型',
+                                     `java_field` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'JAVA字段名',
+                                     `is_pk` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '是否主键（1是）',
+                                     `is_increment` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '是否自增（1是）',
+                                     `is_required` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '是否必填（1是）',
+                                     `is_insert` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '是否为插入字段（1是）',
+                                     `is_edit` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '是否编辑字段（1是）',
+                                     `is_list` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '是否列表字段（1是）',
+                                     `is_query` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '是否查询字段（1是）',
+                                     `query_type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT 'EQ' COMMENT '查询方式（等于、不等于、大于、小于、范围）',
+                                     `html_type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '显示类型（文本框、文本域、下拉框、复选框、单选框、日期控件）',
+                                     `dict_type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '字典类型',
+                                     `sort` int NULL DEFAULT NULL COMMENT '排序',
+                                     `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
+                                     `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                     `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
+                                     `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                                     PRIMARY KEY (`column_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 553 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '代码生成业务表字段' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of gen_table_column
 -- ----------------------------
-INSERT INTO `gen_table_column` VALUES (428, '21', 'id', 'id', 'char(32)', 'String', 'id', '1', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2022-11-11 10:36:54', '', NULL);
-INSERT INTO `gen_table_column` VALUES (429, '21', 'name', '会员名称', 'varchar(20)', 'String', 'name', '0', '0', NULL, '1', '1', '1', '1', 'LIKE', 'input', '', 2, 'admin', '2022-11-11 10:36:54', '', NULL);
-INSERT INTO `gen_table_column` VALUES (430, '21', 'introduce', '会员介绍', 'varchar(200)', 'String', 'introduce', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 3, 'admin', '2022-11-11 10:36:54', '', NULL);
-INSERT INTO `gen_table_column` VALUES (431, '21', 'coverimg', '会员封面图', 'varchar(200)', 'String', 'coverimg', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 4, 'admin', '2022-11-11 10:36:54', '', NULL);
-INSERT INTO `gen_table_column` VALUES (432, '21', 'icon', '会员图标', 'varchar(200)', 'String', 'icon', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 5, 'admin', '2022-11-11 10:36:54', '', NULL);
-INSERT INTO `gen_table_column` VALUES (433, '21', 'month_price', '会员月费价格', 'decimal(10,2)', 'BigDecimal', 'monthPrice', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 6, 'admin', '2022-11-11 10:36:54', '', NULL);
-INSERT INTO `gen_table_column` VALUES (434, '21', 'year_price', '会员年费价格', 'decimal(10,2)', 'BigDecimal', 'yearPrice', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 7, 'admin', '2022-11-11 10:36:54', '', NULL);
-INSERT INTO `gen_table_column` VALUES (435, '21', 'weight', '权重值', 'int(11)', 'Long', 'weight', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 8, 'admin', '2022-11-11 10:36:54', '', NULL);
-INSERT INTO `gen_table_column` VALUES (436, '21', 'status_flag', '状态：1：启用，0：停用', 'int(11)', 'Long', 'statusFlag', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 9, 'admin', '2022-11-11 10:36:54', '', NULL);
-INSERT INTO `gen_table_column` VALUES (437, '21', 'delete_flag', '1:删除，0：未删除', 'int(11)', 'Long', 'deleteFlag', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 10, 'admin', '2022-11-11 10:36:54', '', NULL);
-INSERT INTO `gen_table_column` VALUES (438, '21', 'create_by', '创建人', 'char(32)', 'String', 'createBy', '0', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 11, 'admin', '2022-11-11 10:36:54', '', NULL);
-INSERT INTO `gen_table_column` VALUES (439, '21', 'create_time', '创建时间', 'timestamp', 'Date', 'createTime', '0', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'datetime', '', 12, 'admin', '2022-11-11 10:36:54', '', NULL);
-INSERT INTO `gen_table_column` VALUES (440, '21', 'update_by', '修改人', 'char(32)', 'String', 'updateBy', '0', '0', NULL, '1', '1', NULL, NULL, 'EQ', 'input', '', 13, 'admin', '2022-11-11 10:36:55', '', NULL);
-INSERT INTO `gen_table_column` VALUES (441, '21', 'update_time', '修改时间', 'timestamp', 'Date', 'updateTime', '0', '0', NULL, '1', '1', NULL, NULL, 'EQ', 'datetime', '', 14, 'admin', '2022-11-11 10:36:55', '', NULL);
-INSERT INTO `gen_table_column` VALUES (442, '22', 'id', 'id', 'char(32)', 'String', 'id', '1', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2022-11-11 10:36:55', '', NULL);
-INSERT INTO `gen_table_column` VALUES (443, '22', 'vip_id', '会员主表id', 'char(32)', 'String', 'vipId', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 2, 'admin', '2022-11-11 10:36:55', '', NULL);
-INSERT INTO `gen_table_column` VALUES (444, '22', 'name', '会员权益名称', 'varchar(20)', 'String', 'name', '0', '0', NULL, '1', '1', '1', '1', 'LIKE', 'input', '', 3, 'admin', '2022-11-11 10:36:55', '', NULL);
-INSERT INTO `gen_table_column` VALUES (445, '22', 'introduce', '会员权益介绍', 'varchar(200)', 'String', 'introduce', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 4, 'admin', '2022-11-11 10:36:55', '', NULL);
-INSERT INTO `gen_table_column` VALUES (446, '22', 'icon', '会员权益图标', 'varchar(200)', 'String', 'icon', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 5, 'admin', '2022-11-11 10:36:55', '', NULL);
-INSERT INTO `gen_table_column` VALUES (447, '22', 'weight', '会员权益权重值', 'int(11)', 'Long', 'weight', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 6, 'admin', '2022-11-11 10:36:55', '', NULL);
-INSERT INTO `gen_table_column` VALUES (448, '22', 'link', '会员权益跳转链接', 'varchar(100)', 'String', 'link', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 7, 'admin', '2022-11-11 10:36:55', '', NULL);
-INSERT INTO `gen_table_column` VALUES (449, '22', 'status_flag', '状态：1：启用，0：停用', 'int(11)', 'Long', 'statusFlag', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 8, 'admin', '2022-11-11 10:36:55', '', NULL);
-INSERT INTO `gen_table_column` VALUES (450, '22', 'delete_flag', '1:删除，0：未删除', 'int(11)', 'Long', 'deleteFlag', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 9, 'admin', '2022-11-11 10:36:56', '', NULL);
-INSERT INTO `gen_table_column` VALUES (451, '22', 'create_by', '创建人', 'char(32)', 'String', 'createBy', '0', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 10, 'admin', '2022-11-11 10:36:56', '', NULL);
-INSERT INTO `gen_table_column` VALUES (452, '22', 'create_time', '创建时间', 'timestamp', 'Date', 'createTime', '0', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'datetime', '', 11, 'admin', '2022-11-11 10:36:56', '', NULL);
-INSERT INTO `gen_table_column` VALUES (453, '22', 'update_by', '修改人', 'char(32)', 'String', 'updateBy', '0', '0', NULL, '1', '1', NULL, NULL, 'EQ', 'input', '', 12, 'admin', '2022-11-11 10:36:56', '', NULL);
-INSERT INTO `gen_table_column` VALUES (454, '22', 'update_time', '修改时间', 'timestamp', 'Date', 'updateTime', '0', '0', NULL, '1', '1', NULL, NULL, 'EQ', 'datetime', '', 13, 'admin', '2022-11-11 10:36:56', '', NULL);
-INSERT INTO `gen_table_column` VALUES (455, '23', 'id', NULL, 'char(32)', 'String', 'id', '1', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2022-11-11 11:04:45', '', NULL);
-INSERT INTO `gen_table_column` VALUES (456, '23', 'user_id', '用户id', 'char(32)', 'String', 'userId', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 2, 'admin', '2022-11-11 11:04:45', '', NULL);
-INSERT INTO `gen_table_column` VALUES (457, '23', 'headimg', '用户头像', 'varchar(200)', 'String', 'headimg', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 3, 'admin', '2022-11-11 11:04:45', '', NULL);
-INSERT INTO `gen_table_column` VALUES (458, '23', 'nick_name', '用户昵称', 'varchar(20)', 'String', 'nickName', '0', '0', NULL, '1', '1', '1', '1', 'LIKE', 'input', '', 4, 'admin', '2022-11-11 11:04:46', '', NULL);
-INSERT INTO `gen_table_column` VALUES (459, '23', 'uuid', '设备唯一标识', 'char(32)', 'String', 'uuid', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 5, 'admin', '2022-11-11 11:04:46', '', NULL);
-INSERT INTO `gen_table_column` VALUES (460, '23', 'message_shake', '消息推送是否开启震动；1：开启，0：未开启', 'int(11)', 'Long', 'messageShake', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 6, 'admin', '2022-11-11 11:04:46', '', NULL);
-INSERT INTO `gen_table_column` VALUES (461, '23', 'message_alarm', '消息推送是否开启铃声；1：开启，0：未开启', 'int(11)', 'Long', 'messageAlarm', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 7, 'admin', '2022-11-11 11:04:46', '', NULL);
-INSERT INTO `gen_table_column` VALUES (462, '23', 'like_remind', '点赞提醒是否开启；1：开启，0：未开启', 'int(11)', 'Long', 'likeRemind', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 8, 'admin', '2022-11-11 11:04:46', '', NULL);
-INSERT INTO `gen_table_column` VALUES (463, '23', 'attention_remind', '关注提醒是否开启；1：开启，0：未开启', 'int(11)', 'Long', 'attentionRemind', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 9, 'admin', '2022-11-11 11:04:46', '', NULL);
-INSERT INTO `gen_table_column` VALUES (464, '23', 'notification', '系统通知提醒是否开启；1：开启，0：未开启', 'int(11)', 'Long', 'notification', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 10, 'admin', '2022-11-11 11:04:46', '', NULL);
-INSERT INTO `gen_table_column` VALUES (465, '23', 'comment_remind', '评论提醒是否开启；1：开启，0：未开启', 'int(11)', 'Long', 'commentRemind', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 11, 'admin', '2022-11-11 11:04:46', '', NULL);
-INSERT INTO `gen_table_column` VALUES (466, '23', 'status_flag', '状态：1：启用，0：停用', 'int(11)', 'Long', 'statusFlag', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 12, 'admin', '2022-11-11 11:04:46', '', NULL);
-INSERT INTO `gen_table_column` VALUES (467, '23', 'delete_flag', '1:删除，0：未删除', 'int(11)', 'Long', 'deleteFlag', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 13, 'admin', '2022-11-11 11:04:46', '', NULL);
-INSERT INTO `gen_table_column` VALUES (468, '23', 'create_by', '创建人', 'char(32)', 'String', 'createBy', '0', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 14, 'admin', '2022-11-11 11:04:46', '', NULL);
-INSERT INTO `gen_table_column` VALUES (469, '23', 'create_time', '创建时间', 'timestamp', 'Date', 'createTime', '0', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'datetime', '', 15, 'admin', '2022-11-11 11:04:47', '', NULL);
-INSERT INTO `gen_table_column` VALUES (470, '23', 'update_by', '修改人', 'char(32)', 'String', 'updateBy', '0', '0', NULL, '1', '1', NULL, NULL, 'EQ', 'input', '', 16, 'admin', '2022-11-11 11:04:47', '', NULL);
-INSERT INTO `gen_table_column` VALUES (471, '23', 'update_time', '修改时间', 'timestamp', 'Date', 'updateTime', '0', '0', NULL, '1', '1', NULL, NULL, 'EQ', 'datetime', '', 17, 'admin', '2022-11-11 11:04:47', '', NULL);
-INSERT INTO `gen_table_column` VALUES (472, '24', 'id', '授权ID', 'bigint(20)', 'Long', 'id', '1', '1', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2022-11-11 16:25:47', '', NULL);
-INSERT INTO `gen_table_column` VALUES (473, '24', 'user_id', '系统用户ID', 'bigint(20)', 'Long', 'userId', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 2, 'admin', '2022-11-11 16:25:47', '', NULL);
-INSERT INTO `gen_table_column` VALUES (474, '24', 'uuid', '第三方平台用户唯一ID', 'varchar(500)', 'String', 'uuid', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'textarea', '', 3, 'admin', '2022-11-11 16:25:47', '', NULL);
-INSERT INTO `gen_table_column` VALUES (475, '24', 'login_name', '登录账号', 'varchar(30)', 'String', 'loginName', '0', '0', '1', '1', '1', '1', '1', 'LIKE', 'input', '', 4, 'admin', '2022-11-11 16:25:47', '', NULL);
-INSERT INTO `gen_table_column` VALUES (476, '24', 'user_name', '用户昵称', 'varchar(30)', 'String', 'userName', '0', '0', NULL, '1', '1', '1', '1', 'LIKE', 'input', '', 5, 'admin', '2022-11-11 16:25:47', '', NULL);
-INSERT INTO `gen_table_column` VALUES (477, '24', 'avatar', '头像地址', 'varchar(500)', 'String', 'avatar', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'textarea', '', 6, 'admin', '2022-11-11 16:25:47', '', NULL);
-INSERT INTO `gen_table_column` VALUES (478, '24', 'email', '用户邮箱', 'varchar(255)', 'String', 'email', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 7, 'admin', '2022-11-11 16:25:47', '', NULL);
-INSERT INTO `gen_table_column` VALUES (479, '24', 'source', '用户来源', 'varchar(255)', 'String', 'source', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 8, 'admin', '2022-11-11 16:25:48', '', NULL);
-INSERT INTO `gen_table_column` VALUES (480, '24', 'status_flag', '状态：0：启用，2：停用', 'int(11)', 'Long', 'statusFlag', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 9, 'admin', '2022-11-11 16:25:48', '', NULL);
-INSERT INTO `gen_table_column` VALUES (481, '24', 'delete_flag', '删除：0：未删除，2：已删除', 'int(11)', 'Long', 'deleteFlag', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 10, 'admin', '2022-11-11 16:25:48', '', NULL);
-INSERT INTO `gen_table_column` VALUES (482, '24', 'create_by', '创建者', 'varchar(64)', 'String', 'createBy', '0', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 11, 'admin', '2022-11-11 16:25:48', '', NULL);
-INSERT INTO `gen_table_column` VALUES (483, '24', 'create_time', '创建时间', 'datetime', 'Date', 'createTime', '0', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'datetime', '', 12, 'admin', '2022-11-11 16:25:48', '', NULL);
-INSERT INTO `gen_table_column` VALUES (484, '24', 'update_by', '更新者', 'varchar(64)', 'String', 'updateBy', '0', '0', NULL, '1', '1', NULL, NULL, 'EQ', 'input', '', 13, 'admin', '2022-11-11 16:25:48', '', NULL);
-INSERT INTO `gen_table_column` VALUES (485, '24', 'update_time', '更新时间', 'datetime', 'Date', 'updateTime', '0', '0', NULL, '1', '1', NULL, NULL, 'EQ', 'datetime', '', 14, 'admin', '2022-11-11 16:25:48', '', NULL);
+INSERT INTO `gen_table_column` VALUES (531, '28', 'id', NULL, 'bigint', 'Long', 'id', '1', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2023-02-20 20:50:09', '', NULL);
+INSERT INTO `gen_table_column` VALUES (532, '28', 'bank_name', '银行名称', 'varchar(255)', 'String', 'bankName', '1', '0', NULL, '1', NULL, NULL, NULL, 'LIKE', 'input', '', 2, 'admin', '2023-02-20 20:50:09', '', NULL);
+INSERT INTO `gen_table_column` VALUES (533, '28', 'bank_icon', 'icon', 'varchar(255)', 'String', 'bankIcon', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 3, 'admin', '2023-02-20 20:50:09', '', NULL);
+INSERT INTO `gen_table_column` VALUES (534, '28', 'sort', '排序', 'int', 'Long', 'sort', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 4, 'admin', '2023-02-20 20:50:09', '', NULL);
+INSERT INTO `gen_table_column` VALUES (535, '28', 'create_by', '创建者', 'varchar(64)', 'String', 'createBy', '0', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 5, 'admin', '2023-02-20 20:50:09', '', NULL);
+INSERT INTO `gen_table_column` VALUES (536, '28', 'create_time', '创建时间', 'datetime', 'Date', 'createTime', '0', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'datetime', '', 6, 'admin', '2023-02-20 20:50:09', '', NULL);
+INSERT INTO `gen_table_column` VALUES (537, '28', 'update_by', '更新者', 'varchar(64)', 'String', 'updateBy', '0', '0', NULL, '1', '1', NULL, NULL, 'EQ', 'input', '', 7, 'admin', '2023-02-20 20:50:09', '', NULL);
+INSERT INTO `gen_table_column` VALUES (538, '28', 'update_time', '更新时间', 'datetime', 'Date', 'updateTime', '0', '0', NULL, '1', '1', NULL, NULL, 'EQ', 'datetime', '', 8, 'admin', '2023-02-20 20:50:09', '', NULL);
+INSERT INTO `gen_table_column` VALUES (539, '28', 'remark', '备注', 'varchar(500)', 'String', 'remark', '0', '0', NULL, '1', '1', '1', NULL, 'EQ', 'textarea', '', 9, 'admin', '2023-02-20 20:50:09', '', NULL);
+INSERT INTO `gen_table_column` VALUES (540, '29', 'id', 'id', 'bigint', 'Long', 'id', '1', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2023-02-20 20:50:09', '', NULL);
+INSERT INTO `gen_table_column` VALUES (541, '29', 'zh_name', '中文名称', 'varchar(255)', 'String', 'zhName', '1', '0', NULL, '1', NULL, NULL, NULL, 'LIKE', 'input', '', 2, 'admin', '2023-02-20 20:50:09', '', NULL);
+INSERT INTO `gen_table_column` VALUES (542, '29', 'en_name', '英文名称', 'varchar(255)', 'String', 'enName', '0', '0', NULL, '1', '1', '1', '1', 'LIKE', 'input', '', 3, 'admin', '2023-02-20 20:50:09', '', NULL);
+INSERT INTO `gen_table_column` VALUES (543, '29', 'country_icon', 'icon', 'varchar(255)', 'String', 'countryIcon', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 4, 'admin', '2023-02-20 20:50:09', '', NULL);
+INSERT INTO `gen_table_column` VALUES (544, '29', 'area_code', '区号', 'varchar(255)', 'String', 'areaCode', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 5, 'admin', '2023-02-20 20:50:09', '', NULL);
+INSERT INTO `gen_table_column` VALUES (545, '29', 'language', '语言', 'varchar(255)', 'String', 'language', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 6, 'admin', '2023-02-20 20:50:09', '', NULL);
+INSERT INTO `gen_table_column` VALUES (546, '29', 'local_currency', '当地货币缩写', 'varchar(255)', 'String', 'localCurrency', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 7, 'admin', '2023-02-20 20:50:09', '', NULL);
+INSERT INTO `gen_table_column` VALUES (547, '29', 'sort', '排序', 'int', 'Long', 'sort', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 8, 'admin', '2023-02-20 20:50:10', '', NULL);
+INSERT INTO `gen_table_column` VALUES (548, '29', 'create_by', '创建者', 'varchar(64)', 'String', 'createBy', '0', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 9, 'admin', '2023-02-20 20:50:10', '', NULL);
+INSERT INTO `gen_table_column` VALUES (549, '29', 'create_time', '创建时间', 'datetime', 'Date', 'createTime', '0', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'datetime', '', 10, 'admin', '2023-02-20 20:50:10', '', NULL);
+INSERT INTO `gen_table_column` VALUES (550, '29', 'update_by', '更新者', 'varchar(64)', 'String', 'updateBy', '0', '0', NULL, '1', '1', NULL, NULL, 'EQ', 'input', '', 11, 'admin', '2023-02-20 20:50:10', '', NULL);
+INSERT INTO `gen_table_column` VALUES (551, '29', 'update_time', '更新时间', 'datetime', 'Date', 'updateTime', '0', '0', NULL, '1', '1', NULL, NULL, 'EQ', 'datetime', '', 12, 'admin', '2023-02-20 20:50:10', '', NULL);
+INSERT INTO `gen_table_column` VALUES (552, '29', 'remark', '备注', 'varchar(500)', 'String', 'remark', '0', '0', NULL, '1', '1', '1', NULL, 'EQ', 'textarea', '', 13, 'admin', '2023-02-20 20:50:10', '', NULL);
 
 -- ----------------------------
 -- Table structure for qrtz_blob_triggers
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_blob_triggers`;
 CREATE TABLE `qrtz_blob_triggers`  (
-  `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
-  `trigger_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_name的外键',
-  `trigger_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_group的外键',
-  `blob_data` blob NULL COMMENT '存放持久化Trigger对象',
-  PRIMARY KEY (`sched_name`, `trigger_name`, `trigger_group`) USING BTREE,
-  CONSTRAINT `qrtz_blob_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = 'Blob类型的触发器表' ROW_FORMAT = DYNAMIC;
+                                       `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
+                                       `trigger_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_name的外键',
+                                       `trigger_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_group的外键',
+                                       `blob_data` blob NULL COMMENT '存放持久化Trigger对象',
+                                       PRIMARY KEY (`sched_name`, `trigger_name`, `trigger_group`) USING BTREE,
+                                       CONSTRAINT `qrtz_blob_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = 'Blob类型的触发器表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of qrtz_blob_triggers
@@ -167,11 +273,11 @@ CREATE TABLE `qrtz_blob_triggers`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_calendars`;
 CREATE TABLE `qrtz_calendars`  (
-  `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
-  `calendar_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '日历名称',
-  `calendar` blob NOT NULL COMMENT '存放持久化calendar对象',
-  PRIMARY KEY (`sched_name`, `calendar_name`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '日历信息表' ROW_FORMAT = DYNAMIC;
+                                   `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
+                                   `calendar_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '日历名称',
+                                   `calendar` blob NOT NULL COMMENT '存放持久化calendar对象',
+                                   PRIMARY KEY (`sched_name`, `calendar_name`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '日历信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of qrtz_calendars
@@ -182,14 +288,14 @@ CREATE TABLE `qrtz_calendars`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_cron_triggers`;
 CREATE TABLE `qrtz_cron_triggers`  (
-  `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
-  `trigger_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_name的外键',
-  `trigger_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_group的外键',
-  `cron_expression` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'cron表达式',
-  `time_zone_id` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '时区',
-  PRIMARY KEY (`sched_name`, `trigger_name`, `trigger_group`) USING BTREE,
-  CONSTRAINT `qrtz_cron_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = 'Cron类型的触发器表' ROW_FORMAT = DYNAMIC;
+                                       `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
+                                       `trigger_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_name的外键',
+                                       `trigger_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_group的外键',
+                                       `cron_expression` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'cron表达式',
+                                       `time_zone_id` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '时区',
+                                       PRIMARY KEY (`sched_name`, `trigger_name`, `trigger_group`) USING BTREE,
+                                       CONSTRAINT `qrtz_cron_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = 'Cron类型的触发器表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of qrtz_cron_triggers
@@ -203,21 +309,21 @@ INSERT INTO `qrtz_cron_triggers` VALUES ('Scheduler', 'TASK_CLASS_NAME3', 'DEFAU
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_fired_triggers`;
 CREATE TABLE `qrtz_fired_triggers`  (
-  `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
-  `entry_id` varchar(95) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度器实例id',
-  `trigger_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_name的外键',
-  `trigger_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_group的外键',
-  `instance_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度器实例名',
-  `fired_time` bigint(20) NOT NULL COMMENT '触发的时间',
-  `sched_time` bigint(20) NOT NULL COMMENT '定时器制定的时间',
-  `priority` int(11) NOT NULL COMMENT '优先级',
-  `state` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '状态',
-  `job_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '任务名称',
-  `job_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '任务组名',
-  `is_nonconcurrent` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '是否并发',
-  `requests_recovery` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '是否接受恢复执行',
-  PRIMARY KEY (`sched_name`, `entry_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '已触发的触发器表' ROW_FORMAT = DYNAMIC;
+                                        `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
+                                        `entry_id` varchar(95) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度器实例id',
+                                        `trigger_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_name的外键',
+                                        `trigger_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_group的外键',
+                                        `instance_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度器实例名',
+                                        `fired_time` bigint NOT NULL COMMENT '触发的时间',
+                                        `sched_time` bigint NOT NULL COMMENT '定时器制定的时间',
+                                        `priority` int NOT NULL COMMENT '优先级',
+                                        `state` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '状态',
+                                        `job_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '任务名称',
+                                        `job_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '任务组名',
+                                        `is_nonconcurrent` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '是否并发',
+                                        `requests_recovery` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '是否接受恢复执行',
+                                        PRIMARY KEY (`sched_name`, `entry_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '已触发的触发器表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of qrtz_fired_triggers
@@ -228,18 +334,18 @@ CREATE TABLE `qrtz_fired_triggers`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_job_details`;
 CREATE TABLE `qrtz_job_details`  (
-  `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
-  `job_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '任务名称',
-  `job_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '任务组名',
-  `description` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '相关介绍',
-  `job_class_name` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '执行任务类名称',
-  `is_durable` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '是否持久化',
-  `is_nonconcurrent` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '是否并发',
-  `is_update_data` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '是否更新数据',
-  `requests_recovery` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '是否接受恢复执行',
-  `job_data` blob NULL COMMENT '存放持久化job对象',
-  PRIMARY KEY (`sched_name`, `job_name`, `job_group`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '任务详细信息表' ROW_FORMAT = DYNAMIC;
+                                     `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
+                                     `job_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '任务名称',
+                                     `job_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '任务组名',
+                                     `description` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '相关介绍',
+                                     `job_class_name` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '执行任务类名称',
+                                     `is_durable` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '是否持久化',
+                                     `is_nonconcurrent` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '是否并发',
+                                     `is_update_data` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '是否更新数据',
+                                     `requests_recovery` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '是否接受恢复执行',
+                                     `job_data` blob NULL COMMENT '存放持久化job对象',
+                                     PRIMARY KEY (`sched_name`, `job_name`, `job_group`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '任务详细信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of qrtz_job_details
@@ -253,10 +359,10 @@ INSERT INTO `qrtz_job_details` VALUES ('Scheduler', 'TASK_CLASS_NAME3', 'DEFAULT
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_locks`;
 CREATE TABLE `qrtz_locks`  (
-  `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
-  `lock_name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '悲观锁名称',
-  PRIMARY KEY (`sched_name`, `lock_name`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '存储的悲观锁信息表' ROW_FORMAT = DYNAMIC;
+                               `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
+                               `lock_name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '悲观锁名称',
+                               PRIMARY KEY (`sched_name`, `lock_name`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '存储的悲观锁信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of qrtz_locks
@@ -269,10 +375,10 @@ INSERT INTO `qrtz_locks` VALUES ('Scheduler', 'TRIGGER_ACCESS');
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_paused_trigger_grps`;
 CREATE TABLE `qrtz_paused_trigger_grps`  (
-  `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
-  `trigger_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_group的外键',
-  PRIMARY KEY (`sched_name`, `trigger_group`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '暂停的触发器表' ROW_FORMAT = DYNAMIC;
+                                             `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
+                                             `trigger_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_group的外键',
+                                             PRIMARY KEY (`sched_name`, `trigger_group`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '暂停的触发器表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of qrtz_paused_trigger_grps
@@ -283,32 +389,32 @@ CREATE TABLE `qrtz_paused_trigger_grps`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_scheduler_state`;
 CREATE TABLE `qrtz_scheduler_state`  (
-  `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
-  `instance_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '实例名称',
-  `last_checkin_time` bigint(20) NOT NULL COMMENT '上次检查时间',
-  `checkin_interval` bigint(20) NOT NULL COMMENT '检查间隔时间',
-  PRIMARY KEY (`sched_name`, `instance_name`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '调度器状态表' ROW_FORMAT = DYNAMIC;
+                                         `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
+                                         `instance_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '实例名称',
+                                         `last_checkin_time` bigint NOT NULL COMMENT '上次检查时间',
+                                         `checkin_interval` bigint NOT NULL COMMENT '检查间隔时间',
+                                         PRIMARY KEY (`sched_name`, `instance_name`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '调度器状态表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of qrtz_scheduler_state
 -- ----------------------------
-INSERT INTO `qrtz_scheduler_state` VALUES ('Scheduler', 'DESKTOP-65BIL2N1673683045454', 1673683240515, 15000);
+INSERT INTO `qrtz_scheduler_state` VALUES ('Scheduler', 'DESKTOP-418N6571676896804740', 1676909455140, 15000);
 
 -- ----------------------------
 -- Table structure for qrtz_simple_triggers
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_simple_triggers`;
 CREATE TABLE `qrtz_simple_triggers`  (
-  `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
-  `trigger_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_name的外键',
-  `trigger_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_group的外键',
-  `repeat_count` bigint(20) NOT NULL COMMENT '重复的次数统计',
-  `repeat_interval` bigint(20) NOT NULL COMMENT '重复的间隔时间',
-  `times_triggered` bigint(20) NOT NULL COMMENT '已经触发的次数',
-  PRIMARY KEY (`sched_name`, `trigger_name`, `trigger_group`) USING BTREE,
-  CONSTRAINT `qrtz_simple_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '简单触发器的信息表' ROW_FORMAT = DYNAMIC;
+                                         `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
+                                         `trigger_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_name的外键',
+                                         `trigger_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_group的外键',
+                                         `repeat_count` bigint NOT NULL COMMENT '重复的次数统计',
+                                         `repeat_interval` bigint NOT NULL COMMENT '重复的间隔时间',
+                                         `times_triggered` bigint NOT NULL COMMENT '已经触发的次数',
+                                         PRIMARY KEY (`sched_name`, `trigger_name`, `trigger_group`) USING BTREE,
+                                         CONSTRAINT `qrtz_simple_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '简单触发器的信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of qrtz_simple_triggers
@@ -319,23 +425,23 @@ CREATE TABLE `qrtz_simple_triggers`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_simprop_triggers`;
 CREATE TABLE `qrtz_simprop_triggers`  (
-  `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
-  `trigger_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_name的外键',
-  `trigger_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_group的外键',
-  `str_prop_1` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'String类型的trigger的第一个参数',
-  `str_prop_2` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'String类型的trigger的第二个参数',
-  `str_prop_3` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'String类型的trigger的第三个参数',
-  `int_prop_1` int(11) NULL DEFAULT NULL COMMENT 'int类型的trigger的第一个参数',
-  `int_prop_2` int(11) NULL DEFAULT NULL COMMENT 'int类型的trigger的第二个参数',
-  `long_prop_1` bigint(20) NULL DEFAULT NULL COMMENT 'long类型的trigger的第一个参数',
-  `long_prop_2` bigint(20) NULL DEFAULT NULL COMMENT 'long类型的trigger的第二个参数',
-  `dec_prop_1` decimal(13, 4) NULL DEFAULT NULL COMMENT 'decimal类型的trigger的第一个参数',
-  `dec_prop_2` decimal(13, 4) NULL DEFAULT NULL COMMENT 'decimal类型的trigger的第二个参数',
-  `bool_prop_1` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'Boolean类型的trigger的第一个参数',
-  `bool_prop_2` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'Boolean类型的trigger的第二个参数',
-  PRIMARY KEY (`sched_name`, `trigger_name`, `trigger_group`) USING BTREE,
-  CONSTRAINT `qrtz_simprop_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '同步机制的行锁表' ROW_FORMAT = DYNAMIC;
+                                          `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
+                                          `trigger_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_name的外键',
+                                          `trigger_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_group的外键',
+                                          `str_prop_1` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'String类型的trigger的第一个参数',
+                                          `str_prop_2` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'String类型的trigger的第二个参数',
+                                          `str_prop_3` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'String类型的trigger的第三个参数',
+                                          `int_prop_1` int NULL DEFAULT NULL COMMENT 'int类型的trigger的第一个参数',
+                                          `int_prop_2` int NULL DEFAULT NULL COMMENT 'int类型的trigger的第二个参数',
+                                          `long_prop_1` bigint NULL DEFAULT NULL COMMENT 'long类型的trigger的第一个参数',
+                                          `long_prop_2` bigint NULL DEFAULT NULL COMMENT 'long类型的trigger的第二个参数',
+                                          `dec_prop_1` decimal(13, 4) NULL DEFAULT NULL COMMENT 'decimal类型的trigger的第一个参数',
+                                          `dec_prop_2` decimal(13, 4) NULL DEFAULT NULL COMMENT 'decimal类型的trigger的第二个参数',
+                                          `bool_prop_1` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'Boolean类型的trigger的第一个参数',
+                                          `bool_prop_2` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'Boolean类型的trigger的第二个参数',
+                                          PRIMARY KEY (`sched_name`, `trigger_name`, `trigger_group`) USING BTREE,
+                                          CONSTRAINT `qrtz_simprop_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '同步机制的行锁表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of qrtz_simprop_triggers
@@ -346,51 +452,51 @@ CREATE TABLE `qrtz_simprop_triggers`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_triggers`;
 CREATE TABLE `qrtz_triggers`  (
-  `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
-  `trigger_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '触发器的名字',
-  `trigger_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '触发器所属组的名字',
-  `job_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_job_details表job_name的外键',
-  `job_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_job_details表job_group的外键',
-  `description` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '相关介绍',
-  `next_fire_time` bigint(20) NULL DEFAULT NULL COMMENT '上一次触发时间（毫秒）',
-  `prev_fire_time` bigint(20) NULL DEFAULT NULL COMMENT '下一次触发时间（默认为-1表示不触发）',
-  `priority` int(11) NULL DEFAULT NULL COMMENT '优先级',
-  `trigger_state` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '触发器状态',
-  `trigger_type` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '触发器的类型',
-  `start_time` bigint(20) NOT NULL COMMENT '开始时间',
-  `end_time` bigint(20) NULL DEFAULT NULL COMMENT '结束时间',
-  `calendar_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '日程表名称',
-  `misfire_instr` smallint(6) NULL DEFAULT NULL COMMENT '补偿执行的策略',
-  `job_data` blob NULL COMMENT '存放持久化job对象',
-  PRIMARY KEY (`sched_name`, `trigger_name`, `trigger_group`) USING BTREE,
-  INDEX `sched_name`(`sched_name` ASC, `job_name` ASC, `job_group` ASC) USING BTREE,
-  CONSTRAINT `qrtz_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `job_name`, `job_group`) REFERENCES `qrtz_job_details` (`sched_name`, `job_name`, `job_group`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '触发器详细信息表' ROW_FORMAT = DYNAMIC;
+                                  `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
+                                  `trigger_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '触发器的名字',
+                                  `trigger_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '触发器所属组的名字',
+                                  `job_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_job_details表job_name的外键',
+                                  `job_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_job_details表job_group的外键',
+                                  `description` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '相关介绍',
+                                  `next_fire_time` bigint NULL DEFAULT NULL COMMENT '上一次触发时间（毫秒）',
+                                  `prev_fire_time` bigint NULL DEFAULT NULL COMMENT '下一次触发时间（默认为-1表示不触发）',
+                                  `priority` int NULL DEFAULT NULL COMMENT '优先级',
+                                  `trigger_state` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '触发器状态',
+                                  `trigger_type` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '触发器的类型',
+                                  `start_time` bigint NOT NULL COMMENT '开始时间',
+                                  `end_time` bigint NULL DEFAULT NULL COMMENT '结束时间',
+                                  `calendar_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '日程表名称',
+                                  `misfire_instr` smallint NULL DEFAULT NULL COMMENT '补偿执行的策略',
+                                  `job_data` blob NULL COMMENT '存放持久化job对象',
+                                  PRIMARY KEY (`sched_name`, `trigger_name`, `trigger_group`) USING BTREE,
+                                  INDEX `sched_name`(`sched_name` ASC, `job_name` ASC, `job_group` ASC) USING BTREE,
+                                  CONSTRAINT `qrtz_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `job_name`, `job_group`) REFERENCES `qrtz_job_details` (`sched_name`, `job_name`, `job_group`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '触发器详细信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of qrtz_triggers
 -- ----------------------------
-INSERT INTO `qrtz_triggers` VALUES ('Scheduler', 'TASK_CLASS_NAME1', 'DEFAULT', 'TASK_CLASS_NAME1', 'DEFAULT', NULL, 1673683050000, -1, 5, 'PAUSED', 'CRON', 1673683048000, 0, NULL, 2, '');
-INSERT INTO `qrtz_triggers` VALUES ('Scheduler', 'TASK_CLASS_NAME2', 'DEFAULT', 'TASK_CLASS_NAME2', 'DEFAULT', NULL, 1673683050000, -1, 5, 'PAUSED', 'CRON', 1673683049000, 0, NULL, 2, '');
-INSERT INTO `qrtz_triggers` VALUES ('Scheduler', 'TASK_CLASS_NAME3', 'DEFAULT', 'TASK_CLASS_NAME3', 'DEFAULT', NULL, 1673683060000, -1, 5, 'PAUSED', 'CRON', 1673683050000, 0, NULL, 2, '');
+INSERT INTO `qrtz_triggers` VALUES ('Scheduler', 'TASK_CLASS_NAME1', 'DEFAULT', 'TASK_CLASS_NAME1', 'DEFAULT', NULL, 1676896810000, -1, 5, 'PAUSED', 'CRON', 1676896807000, 0, NULL, 2, '');
+INSERT INTO `qrtz_triggers` VALUES ('Scheduler', 'TASK_CLASS_NAME2', 'DEFAULT', 'TASK_CLASS_NAME2', 'DEFAULT', NULL, 1676896815000, -1, 5, 'PAUSED', 'CRON', 1676896807000, 0, NULL, 2, '');
+INSERT INTO `qrtz_triggers` VALUES ('Scheduler', 'TASK_CLASS_NAME3', 'DEFAULT', 'TASK_CLASS_NAME3', 'DEFAULT', NULL, 1676896820000, -1, 5, 'PAUSED', 'CRON', 1676896808000, 0, NULL, 2, '');
 
 -- ----------------------------
 -- Table structure for sys_config
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_config`;
 CREATE TABLE `sys_config`  (
-  `config_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '参数主键',
-  `config_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '参数名称',
-  `config_key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '参数键名',
-  `config_value` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '参数键值',
-  `config_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT 'N' COMMENT '系统内置（Y是 N否）',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
-  PRIMARY KEY (`config_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '参数配置表' ROW_FORMAT = DYNAMIC;
+                               `config_id` int NOT NULL AUTO_INCREMENT COMMENT '参数主键',
+                               `config_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '参数名称',
+                               `config_key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '参数键名',
+                               `config_value` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '参数键值',
+                               `config_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT 'N' COMMENT '系统内置（Y是 N否）',
+                               `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
+                               `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                               `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
+                               `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                               `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
+                               PRIMARY KEY (`config_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '参数配置表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_config
@@ -405,22 +511,22 @@ INSERT INTO `sys_config` VALUES (4, '账号自助-是否开启用户注册功能
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_dept`;
 CREATE TABLE `sys_dept`  (
-  `dept_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '部门id',
-  `parent_id` bigint(20) NULL DEFAULT 0 COMMENT '父部门id',
-  `ancestors` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '祖级列表',
-  `dept_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '部门名称',
-  `order_num` int(11) NULL DEFAULT 0 COMMENT '显示顺序',
-  `leader` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '负责人',
-  `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '联系电话',
-  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '邮箱',
-  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '部门状态（0正常 1停用）',
-  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`dept_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 200 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '部门表' ROW_FORMAT = DYNAMIC;
+                             `dept_id` bigint NOT NULL AUTO_INCREMENT COMMENT '部门id',
+                             `parent_id` bigint NULL DEFAULT 0 COMMENT '父部门id',
+                             `ancestors` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '祖级列表',
+                             `dept_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '部门名称',
+                             `order_num` int NULL DEFAULT 0 COMMENT '显示顺序',
+                             `leader` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '负责人',
+                             `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '联系电话',
+                             `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '邮箱',
+                             `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '部门状态（0正常 1停用）',
+                             `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
+                             `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
+                             `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                             `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
+                             `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                             PRIMARY KEY (`dept_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 200 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '部门表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_dept
@@ -441,22 +547,22 @@ INSERT INTO `sys_dept` VALUES (109, 102, '0,100,102', '财务部门', 2, 'aiclou
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_dict_data`;
 CREATE TABLE `sys_dict_data`  (
-  `dict_code` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '字典编码',
-  `dict_sort` int(11) NULL DEFAULT 0 COMMENT '字典排序',
-  `dict_label` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '字典标签',
-  `dict_value` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '字典键值',
-  `dict_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '字典类型',
-  `css_class` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '样式属性（其他样式扩展）',
-  `list_class` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '表格回显样式',
-  `is_default` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT 'N' COMMENT '是否默认（Y是 N否）',
-  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '状态（0正常 1停用）',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
-  PRIMARY KEY (`dict_code`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '字典数据表' ROW_FORMAT = DYNAMIC;
+                                  `dict_code` bigint NOT NULL AUTO_INCREMENT COMMENT '字典编码',
+                                  `dict_sort` int NULL DEFAULT 0 COMMENT '字典排序',
+                                  `dict_label` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '字典标签',
+                                  `dict_value` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '字典键值',
+                                  `dict_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '字典类型',
+                                  `css_class` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '样式属性（其他样式扩展）',
+                                  `list_class` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '表格回显样式',
+                                  `is_default` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT 'N' COMMENT '是否默认（Y是 N否）',
+                                  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '状态（0正常 1停用）',
+                                  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
+                                  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
+                                  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                                  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
+                                  PRIMARY KEY (`dict_code`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '字典数据表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_dict_data
@@ -496,18 +602,18 @@ INSERT INTO `sys_dict_data` VALUES (29, 2, '失败', '1', 'sys_common_status', '
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_dict_type`;
 CREATE TABLE `sys_dict_type`  (
-  `dict_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '字典主键',
-  `dict_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '字典名称',
-  `dict_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '字典类型',
-  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '状态（0正常 1停用）',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
-  PRIMARY KEY (`dict_id`) USING BTREE,
-  UNIQUE INDEX `dict_type`(`dict_type` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '字典类型表' ROW_FORMAT = DYNAMIC;
+                                  `dict_id` bigint NOT NULL AUTO_INCREMENT COMMENT '字典主键',
+                                  `dict_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '字典名称',
+                                  `dict_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '字典类型',
+                                  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '状态（0正常 1停用）',
+                                  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
+                                  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
+                                  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                                  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
+                                  PRIMARY KEY (`dict_id`) USING BTREE,
+                                  UNIQUE INDEX `dict_type`(`dict_type` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '字典类型表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_dict_type
@@ -528,21 +634,21 @@ INSERT INTO `sys_dict_type` VALUES (10, '系统状态', 'sys_common_status', '0'
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_job`;
 CREATE TABLE `sys_job`  (
-  `job_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '任务ID',
-  `job_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '任务名称',
-  `job_group` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'DEFAULT' COMMENT '任务组名',
-  `invoke_target` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调用目标字符串',
-  `cron_expression` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT 'cron执行表达式',
-  `misfire_policy` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '3' COMMENT '计划执行错误策略（1立即执行 2执行一次 3放弃执行）',
-  `concurrent` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '1' COMMENT '是否并发执行（0允许 1禁止）',
-  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '状态（0正常 1暂停）',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '备注信息',
-  PRIMARY KEY (`job_id`, `job_name`, `job_group`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '定时任务调度表' ROW_FORMAT = DYNAMIC;
+                            `job_id` bigint NOT NULL AUTO_INCREMENT COMMENT '任务ID',
+                            `job_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '任务名称',
+                            `job_group` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'DEFAULT' COMMENT '任务组名',
+                            `invoke_target` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调用目标字符串',
+                            `cron_expression` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT 'cron执行表达式',
+                            `misfire_policy` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '3' COMMENT '计划执行错误策略（1立即执行 2执行一次 3放弃执行）',
+                            `concurrent` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '1' COMMENT '是否并发执行（0允许 1禁止）',
+                            `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '状态（0正常 1暂停）',
+                            `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
+                            `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                            `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
+                            `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                            `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '备注信息',
+                            PRIMARY KEY (`job_id`, `job_name`, `job_group`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '定时任务调度表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_job
@@ -556,16 +662,16 @@ INSERT INTO `sys_job` VALUES (3, '系统默认（多参）', 'DEFAULT', 'ryTask.
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_job_log`;
 CREATE TABLE `sys_job_log`  (
-  `job_log_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '任务日志ID',
-  `job_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '任务名称',
-  `job_group` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '任务组名',
-  `invoke_target` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调用目标字符串',
-  `job_message` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '日志信息',
-  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '执行状态（0正常 1失败）',
-  `exception_info` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '异常信息',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  PRIMARY KEY (`job_log_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '定时任务调度日志表' ROW_FORMAT = DYNAMIC;
+                                `job_log_id` bigint NOT NULL AUTO_INCREMENT COMMENT '任务日志ID',
+                                `job_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '任务名称',
+                                `job_group` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '任务组名',
+                                `invoke_target` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调用目标字符串',
+                                `job_message` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '日志信息',
+                                `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '执行状态（0正常 1失败）',
+                                `exception_info` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '异常信息',
+                                `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                PRIMARY KEY (`job_log_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '定时任务调度日志表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_job_log
@@ -576,175 +682,68 @@ CREATE TABLE `sys_job_log`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_logininfor`;
 CREATE TABLE `sys_logininfor`  (
-  `info_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '访问ID',
-  `user_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '用户账号',
-  `ipaddr` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '登录IP地址',
-  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '登录状态（0成功 1失败）',
-  `msg` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '提示信息',
-  `access_time` datetime NULL DEFAULT NULL COMMENT '访问时间',
-  PRIMARY KEY (`info_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 526 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统访问记录' ROW_FORMAT = DYNAMIC;
+                                   `info_id` bigint NOT NULL AUTO_INCREMENT COMMENT '访问ID',
+                                   `user_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '用户账号',
+                                   `ipaddr` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '登录IP地址',
+                                   `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '登录状态（0成功 1失败）',
+                                   `msg` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '提示信息',
+                                   `access_time` datetime NULL DEFAULT NULL COMMENT '访问时间',
+                                   PRIMARY KEY (`info_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 582 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_logininfor
 -- ----------------------------
-INSERT INTO `sys_logininfor` VALUES (403, 'olLW56SPiYjul8ZPnyjGd9_AHwzs', '127.0.0.1', '0', '注册成功', '2023-01-12 16:14:12');
-INSERT INTO `sys_logininfor` VALUES (404, 'olLW56SPiYjul8ZPnyjGd9_AHwzs', '127.0.0.1', '0', '登录成功', '2023-01-12 16:14:12');
-INSERT INTO `sys_logininfor` VALUES (405, '80b70e7d52894157aa357c8cff5a3404', '127.0.0.1', '0', '退出成功', '2023-01-12 16:14:25');
-INSERT INTO `sys_logininfor` VALUES (406, 'olLW56SPiYjul8ZPnyjGd9_AHwzs', '127.0.0.1', '0', '更新成功', '2023-01-12 16:14:30');
-INSERT INTO `sys_logininfor` VALUES (407, 'olLW56SPiYjul8ZPnyjGd9_AHwzs', '127.0.0.1', '0', '登录成功', '2023-01-12 16:14:30');
-INSERT INTO `sys_logininfor` VALUES (408, '80b70e7d52894157aa357c8cff5a3404', '127.0.0.1', '0', '退出成功', '2023-01-12 16:48:53');
-INSERT INTO `sys_logininfor` VALUES (409, 'ai168', '127.0.0.1', '0', '登录成功', '2023-01-12 16:50:13');
-INSERT INTO `sys_logininfor` VALUES (410, 'ai168', '127.0.0.1', '0', '退出成功', '2023-01-12 16:50:17');
-INSERT INTO `sys_logininfor` VALUES (411, 'ai168', '127.0.0.1', '0', '登录成功', '2023-01-12 17:12:51');
-INSERT INTO `sys_logininfor` VALUES (412, 'ai168', '127.0.0.1', '0', '登录成功', '2023-01-12 17:14:18');
-INSERT INTO `sys_logininfor` VALUES (413, 'ai168', '127.0.0.1', '0', '登录成功', '2023-01-13 14:15:24');
-INSERT INTO `sys_logininfor` VALUES (414, 'ai168', '127.0.0.1', '0', '登录成功', '2023-01-13 14:15:56');
-INSERT INTO `sys_logininfor` VALUES (415, 'ai168', '127.0.0.1', '0', '退出成功', '2023-01-13 14:16:11');
-INSERT INTO `sys_logininfor` VALUES (416, 'ai168', '127.0.0.1', '0', '登录成功', '2023-01-13 14:16:17');
-INSERT INTO `sys_logininfor` VALUES (417, 'ai168', '127.0.0.1', '0', '退出成功', '2023-01-13 14:16:50');
-INSERT INTO `sys_logininfor` VALUES (418, 'olLW56SPiYjul8ZPnyjGd9_AHwzs', '127.0.0.1', '0', '更新成功', '2023-01-13 14:17:05');
-INSERT INTO `sys_logininfor` VALUES (419, 'olLW56SPiYjul8ZPnyjGd9_AHwzs', '127.0.0.1', '0', '登录成功', '2023-01-13 14:17:05');
-INSERT INTO `sys_logininfor` VALUES (420, '80b70e7d52894157aa357c8cff5a3404', '127.0.0.1', '0', '退出成功', '2023-01-13 14:17:22');
-INSERT INTO `sys_logininfor` VALUES (421, 'ai168', '127.0.0.1', '0', '登录成功', '2023-01-13 14:27:46');
-INSERT INTO `sys_logininfor` VALUES (422, 'ai168', '127.0.0.1', '0', '退出成功', '2023-01-13 14:28:44');
-INSERT INTO `sys_logininfor` VALUES (423, 'ai168', '127.0.0.1', '0', '登录成功', '2023-01-13 14:28:48');
-INSERT INTO `sys_logininfor` VALUES (424, 'ai168', '10.10.10.26', '1', '登录用户不存在', '2023-01-13 14:33:38');
-INSERT INTO `sys_logininfor` VALUES (425, 'ai168', '10.10.10.37', '0', '登录成功', '2023-01-13 14:33:39');
-INSERT INTO `sys_logininfor` VALUES (426, 'ai168', '10.10.10.37', '0', '登录成功', '2023-01-13 14:33:39');
-INSERT INTO `sys_logininfor` VALUES (427, 'ai168', '10.10.10.26', '1', '登录用户不存在', '2023-01-13 14:33:44');
-INSERT INTO `sys_logininfor` VALUES (428, 'ai168', '10.10.10.37', '0', '登录成功', '2023-01-13 14:34:14');
-INSERT INTO `sys_logininfor` VALUES (429, 'ai168', '10.10.10.26', '0', '登录成功', '2023-01-13 14:35:12');
-INSERT INTO `sys_logininfor` VALUES (430, 'ai168', '10.10.10.26', '0', '退出成功', '2023-01-13 14:36:55');
-INSERT INTO `sys_logininfor` VALUES (431, 'ai168', '10.10.10.26', '0', '登录成功', '2023-01-13 14:37:31');
-INSERT INTO `sys_logininfor` VALUES (432, 'ai168', '10.10.10.26', '0', '退出成功', '2023-01-13 14:38:07');
-INSERT INTO `sys_logininfor` VALUES (433, 'ai168', '10.10.10.26', '0', '登录成功', '2023-01-13 14:40:06');
-INSERT INTO `sys_logininfor` VALUES (434, 'ai168', '10.10.10.37', '0', '登录成功', '2023-01-13 14:40:34');
-INSERT INTO `sys_logininfor` VALUES (435, 'ai168', '10.10.10.26', '0', '退出成功', '2023-01-13 14:46:10');
-INSERT INTO `sys_logininfor` VALUES (436, 'ai168', '10.10.10.26', '0', '登录成功', '2023-01-13 14:46:16');
-INSERT INTO `sys_logininfor` VALUES (437, 'ai168', '10.10.10.26', '0', '退出成功', '2023-01-13 14:46:22');
-INSERT INTO `sys_logininfor` VALUES (438, 'ai168', '10.10.10.37', '0', '登录成功', '2023-01-13 14:50:09');
-INSERT INTO `sys_logininfor` VALUES (439, 'ai168', '10.10.10.37', '0', '退出成功', '2023-01-13 14:50:15');
-INSERT INTO `sys_logininfor` VALUES (440, 'ai168', '10.10.10.26', '0', '登录成功', '2023-01-13 14:51:17');
-INSERT INTO `sys_logininfor` VALUES (441, 'ai168', '10.10.10.26', '0', '退出成功', '2023-01-13 14:51:24');
-INSERT INTO `sys_logininfor` VALUES (442, 'olLW56SPiYjul8ZPnyjGd9_AHwzs', '10.10.10.26', '0', '更新成功', '2023-01-13 14:55:37');
-INSERT INTO `sys_logininfor` VALUES (443, 'olLW56SPiYjul8ZPnyjGd9_AHwzs', '10.10.10.26', '0', '登录成功', '2023-01-13 14:55:37');
-INSERT INTO `sys_logininfor` VALUES (444, 'ai168', '10.10.10.26', '0', '登录成功', '2023-01-13 16:08:46');
-INSERT INTO `sys_logininfor` VALUES (445, 'ai168', '10.10.10.26', '0', '退出成功', '2023-01-13 16:15:44');
-INSERT INTO `sys_logininfor` VALUES (446, 'ai168', '10.10.10.26', '0', '登录成功', '2023-01-13 16:17:12');
-INSERT INTO `sys_logininfor` VALUES (447, 'ai168', '10.10.10.37', '0', '登录成功', '2023-01-13 16:23:59');
-INSERT INTO `sys_logininfor` VALUES (448, 'ai168', '10.10.10.26', '0', '退出成功', '2023-01-13 16:25:38');
-INSERT INTO `sys_logininfor` VALUES (449, 'ai168', '10.10.10.26', '0', '登录成功', '2023-01-13 16:28:39');
-INSERT INTO `sys_logininfor` VALUES (450, 'olLW56SPiYjul8ZPnyjGd9_AHwzs', '10.10.10.26', '0', '更新成功', '2023-01-13 16:29:00');
-INSERT INTO `sys_logininfor` VALUES (451, 'olLW56SPiYjul8ZPnyjGd9_AHwzs', '10.10.10.26', '0', '登录成功', '2023-01-13 16:29:01');
-INSERT INTO `sys_logininfor` VALUES (452, 'ai168', '10.10.10.26', '0', '登录成功', '2023-01-13 16:31:06');
-INSERT INTO `sys_logininfor` VALUES (453, 'ai168', '10.10.10.26', '0', '退出成功', '2023-01-13 16:33:37');
-INSERT INTO `sys_logininfor` VALUES (454, 'ai168', '10.10.10.26', '0', '登录成功', '2023-01-13 16:33:46');
-INSERT INTO `sys_logininfor` VALUES (455, 'ai168', '10.10.10.26', '0', '登录成功', '2023-01-13 16:35:36');
-INSERT INTO `sys_logininfor` VALUES (456, 'ai168', '10.10.10.26', '0', '退出成功', '2023-01-13 16:36:11');
-INSERT INTO `sys_logininfor` VALUES (457, 'olLW56SPiYjul8ZPnyjGd9_AHwzs', '10.10.10.26', '0', '更新成功', '2023-01-13 16:42:05');
-INSERT INTO `sys_logininfor` VALUES (458, 'olLW56SPiYjul8ZPnyjGd9_AHwzs', '10.10.10.26', '0', '登录成功', '2023-01-13 16:42:05');
-INSERT INTO `sys_logininfor` VALUES (459, 'ai168', '10.10.10.37', '0', '登录成功', '2023-01-13 16:43:37');
-INSERT INTO `sys_logininfor` VALUES (460, 'ai168', '10.10.10.37', '0', '登录成功', '2023-01-13 16:44:51');
-INSERT INTO `sys_logininfor` VALUES (461, 'ai168', '10.10.10.26', '0', '登录成功', '2023-01-13 16:45:16');
-INSERT INTO `sys_logininfor` VALUES (462, 'olLW56SPiYjul8ZPnyjGd9_AHwzs', '10.10.10.26', '0', '更新成功', '2023-01-13 16:45:32');
-INSERT INTO `sys_logininfor` VALUES (463, 'olLW56SPiYjul8ZPnyjGd9_AHwzs', '10.10.10.26', '0', '登录成功', '2023-01-13 16:45:32');
-INSERT INTO `sys_logininfor` VALUES (464, 'ai168', '10.10.10.37', '0', '登录成功', '2023-01-13 16:45:51');
-INSERT INTO `sys_logininfor` VALUES (465, 'ai168', '10.10.10.26', '0', '退出成功', '2023-01-13 16:47:08');
-INSERT INTO `sys_logininfor` VALUES (466, 'ai168', '10.10.10.26', '0', '登录成功', '2023-01-13 16:47:36');
-INSERT INTO `sys_logininfor` VALUES (467, 'ai168', '10.10.10.26', '0', '退出成功', '2023-01-13 16:51:25');
-INSERT INTO `sys_logininfor` VALUES (468, 'ai168', '10.10.10.26', '0', '登录成功', '2023-01-13 17:01:15');
-INSERT INTO `sys_logininfor` VALUES (469, 'ai168', '10.10.10.26', '0', '退出成功', '2023-01-13 17:37:45');
-INSERT INTO `sys_logininfor` VALUES (470, 'ai168', '10.10.10.26', '0', '登录成功', '2023-01-13 17:37:55');
-INSERT INTO `sys_logininfor` VALUES (471, 'ai168', '10.10.10.26', '0', '退出成功', '2023-01-13 17:37:59');
-INSERT INTO `sys_logininfor` VALUES (472, 'ai168', '10.10.10.26', '0', '登录成功', '2023-01-13 17:38:02');
-INSERT INTO `sys_logininfor` VALUES (473, 'ai168', '10.10.10.26', '0', '退出成功', '2023-01-13 17:38:33');
-INSERT INTO `sys_logininfor` VALUES (474, 'ai168', '10.10.10.26', '0', '登录成功', '2023-01-13 17:38:36');
-INSERT INTO `sys_logininfor` VALUES (475, 'olLW56SPiYjul8ZPnyjGd9_AHwzs', '10.10.10.26', '0', '更新成功', '2023-01-13 17:46:09');
-INSERT INTO `sys_logininfor` VALUES (476, 'olLW56SPiYjul8ZPnyjGd9_AHwzs', '10.10.10.26', '0', '登录成功', '2023-01-13 17:46:09');
-INSERT INTO `sys_logininfor` VALUES (477, 'ai168', '10.10.10.26', '0', '登录成功', '2023-01-13 17:46:39');
-INSERT INTO `sys_logininfor` VALUES (478, 'ai168', '10.10.10.37', '0', '登录成功', '2023-01-13 17:48:48');
-INSERT INTO `sys_logininfor` VALUES (479, 'ai168', '10.10.10.26', '0', '退出成功', '2023-01-13 17:51:06');
-INSERT INTO `sys_logininfor` VALUES (480, 'ai168', '10.10.10.26', '0', '登录成功', '2023-01-13 17:51:14');
-INSERT INTO `sys_logininfor` VALUES (481, 'ai168', '10.10.10.26', '0', '退出成功', '2023-01-13 17:51:17');
-INSERT INTO `sys_logininfor` VALUES (482, 'ai168', '10.10.10.26', '0', '登录成功', '2023-01-13 17:51:23');
-INSERT INTO `sys_logininfor` VALUES (483, 'ai168', '10.10.10.26', '0', '退出成功', '2023-01-13 17:51:26');
-INSERT INTO `sys_logininfor` VALUES (484, 'ai168', '10.10.10.26', '0', '登录成功', '2023-01-13 17:51:32');
-INSERT INTO `sys_logininfor` VALUES (485, 'ai168', '10.10.10.26', '0', '退出成功', '2023-01-13 17:54:43');
-INSERT INTO `sys_logininfor` VALUES (486, 'ai168', '10.10.10.26', '1', '密码输入错误1次', '2023-01-13 17:54:49');
-INSERT INTO `sys_logininfor` VALUES (487, 'ai168', '10.10.10.26', '1', '密码输入错误2次', '2023-01-13 17:54:53');
-INSERT INTO `sys_logininfor` VALUES (488, 'ai168', '10.10.10.26', '1', '密码输入错误3次', '2023-01-13 17:54:58');
-INSERT INTO `sys_logininfor` VALUES (489, 'ai168', '10.10.10.26', '1', '密码输入错误4次', '2023-01-13 17:55:02');
-INSERT INTO `sys_logininfor` VALUES (490, 'ai168', '10.10.10.26', '1', '密码输入错误5次', '2023-01-13 17:55:06');
-INSERT INTO `sys_logininfor` VALUES (491, 'ai168', '10.10.10.26', '1', '密码输入错误5次，帐户锁定10分钟', '2023-01-13 17:55:10');
-INSERT INTO `sys_logininfor` VALUES (492, 'ai168', '10.10.10.26', '1', '密码输入错误5次，帐户锁定10分钟', '2023-01-13 17:55:15');
-INSERT INTO `sys_logininfor` VALUES (493, 'ceshi', '127.0.0.1', '0', '登录成功', '2023-01-13 18:32:05');
-INSERT INTO `sys_logininfor` VALUES (494, 'ceshi', '127.0.0.1', '0', '登录成功', '2023-01-14 09:39:51');
-INSERT INTO `sys_logininfor` VALUES (495, 'ceshi', '127.0.0.1', '0', '退出成功', '2023-01-14 09:50:30');
-INSERT INTO `sys_logininfor` VALUES (496, 'admin', '127.0.0.1', '0', '登录成功', '2023-01-14 09:50:40');
-INSERT INTO `sys_logininfor` VALUES (497, 'ai168', '10.10.10.26', '0', '登录成功', '2023-01-14 10:17:09');
-INSERT INTO `sys_logininfor` VALUES (498, 'ai168', '10.10.10.26', '0', '退出成功', '2023-01-14 10:17:16');
-INSERT INTO `sys_logininfor` VALUES (499, 'ai168', '10.10.10.26', '0', '登录成功', '2023-01-14 10:17:20');
-INSERT INTO `sys_logininfor` VALUES (500, 'ai168', '10.10.10.26', '0', '退出成功', '2023-01-14 10:18:28');
-INSERT INTO `sys_logininfor` VALUES (501, 'ai168', '10.10.10.26', '0', '登录成功', '2023-01-14 10:18:33');
-INSERT INTO `sys_logininfor` VALUES (502, 'ai168', '10.10.10.26', '0', '退出成功', '2023-01-14 10:20:41');
-INSERT INTO `sys_logininfor` VALUES (503, 'olLW56SPiYjul8ZPnyjGd9_AHwzs', '10.10.10.26', '0', '更新成功', '2023-01-14 15:37:36');
-INSERT INTO `sys_logininfor` VALUES (504, 'olLW56SPiYjul8ZPnyjGd9_AHwzs', '10.10.10.26', '0', '登录成功', '2023-01-14 15:37:37');
-INSERT INTO `sys_logininfor` VALUES (505, 'olLW56SPiYjul8ZPnyjGd9_AHwzs', '10.10.10.26', '0', '注册成功', '2023-01-14 15:38:15');
-INSERT INTO `sys_logininfor` VALUES (506, 'olLW56SPiYjul8ZPnyjGd9_AHwzs', '10.10.10.26', '0', '登录成功', '2023-01-14 15:38:15');
-INSERT INTO `sys_logininfor` VALUES (507, '10f5477e16ac42c9b41a1a24df507344', '10.10.10.26', '0', '退出成功', '2023-01-14 15:38:19');
-INSERT INTO `sys_logininfor` VALUES (508, 'olLW56SPiYjul8ZPnyjGd9_AHwzs', '10.10.10.26', '0', '更新成功', '2023-01-14 15:38:24');
-INSERT INTO `sys_logininfor` VALUES (509, 'olLW56SPiYjul8ZPnyjGd9_AHwzs', '10.10.10.26', '0', '登录成功', '2023-01-14 15:38:24');
-INSERT INTO `sys_logininfor` VALUES (510, 'ai168', '10.10.10.26', '1', '密码输入错误1次', '2023-01-14 15:53:29');
-INSERT INTO `sys_logininfor` VALUES (511, 'ai168', '10.10.10.26', '1', '密码输入错误2次', '2023-01-14 15:53:36');
-INSERT INTO `sys_logininfor` VALUES (512, 'ai168', '10.10.10.26', '1', '密码输入错误3次', '2023-01-14 15:53:40');
-INSERT INTO `sys_logininfor` VALUES (513, 'ai168', '10.10.10.26', '1', '密码输入错误4次', '2023-01-14 15:53:45');
-INSERT INTO `sys_logininfor` VALUES (514, 'ai168', '10.10.10.26', '1', '密码输入错误5次', '2023-01-14 15:53:48');
-INSERT INTO `sys_logininfor` VALUES (515, 'ai168', '10.10.10.26', '1', '密码输入错误5次，帐户锁定10分钟', '2023-01-14 15:53:52');
-INSERT INTO `sys_logininfor` VALUES (516, 'ai168', '10.10.10.26', '1', '密码输入错误5次，帐户锁定10分钟', '2023-01-14 15:54:09');
-INSERT INTO `sys_logininfor` VALUES (517, 'olLW56SPiYjul8ZPnyjGd9_AHwzs', '10.10.10.26', '0', '更新成功', '2023-01-14 15:54:16');
-INSERT INTO `sys_logininfor` VALUES (518, 'olLW56SPiYjul8ZPnyjGd9_AHwzs', '10.10.10.26', '0', '登录成功', '2023-01-14 15:54:16');
-INSERT INTO `sys_logininfor` VALUES (519, 'olLW56SPiYjul8ZPnyjGd9_AHwzs', '10.10.10.26', '0', '更新成功', '2023-01-14 15:55:59');
-INSERT INTO `sys_logininfor` VALUES (520, 'olLW56SPiYjul8ZPnyjGd9_AHwzs', '10.10.10.26', '0', '登录成功', '2023-01-14 15:55:59');
-INSERT INTO `sys_logininfor` VALUES (521, '10f5477e16ac42c9b41a1a24df507344', '10.10.10.26', '0', '退出成功', '2023-01-14 15:57:29');
-INSERT INTO `sys_logininfor` VALUES (522, 'ai168', '10.10.10.26', '0', '登录成功', '2023-01-14 16:34:11');
-INSERT INTO `sys_logininfor` VALUES (523, 'ai168', '10.10.10.26', '0', '退出成功', '2023-01-14 16:34:42');
-INSERT INTO `sys_logininfor` VALUES (524, 'ai168', '10.10.10.26', '0', '登录成功', '2023-01-14 16:55:39');
-INSERT INTO `sys_logininfor` VALUES (525, 'ai168', '10.10.10.26', '0', '退出成功', '2023-01-14 16:57:22');
+INSERT INTO `sys_logininfor` VALUES (567, 'ceshi', '127.0.0.1', '0', '登录成功', '2023-02-20 18:05:07');
+INSERT INTO `sys_logininfor` VALUES (568, 'ceshi', '127.0.0.1', '0', '退出成功', '2023-02-20 18:06:09');
+INSERT INTO `sys_logininfor` VALUES (569, 'admin', '127.0.0.1', '0', '登录成功', '2023-02-20 18:06:15');
+INSERT INTO `sys_logininfor` VALUES (570, 'admin', '127.0.0.1', '0', '登录成功', '2023-02-20 20:45:01');
+INSERT INTO `sys_logininfor` VALUES (571, 'admin', '127.0.0.1', '0', '退出成功', '2023-02-20 22:50:24');
+INSERT INTO `sys_logininfor` VALUES (572, 'ceshi', '127.0.0.1', '0', '登录成功', '2023-02-20 22:50:31');
+INSERT INTO `sys_logininfor` VALUES (573, 'admin', '127.0.0.1', '0', '登录成功', '2023-02-21 09:14:52');
+INSERT INTO `sys_logininfor` VALUES (574, 'admin', '127.0.0.1', '0', '登录成功', '2023-02-21 11:01:33');
+INSERT INTO `sys_logininfor` VALUES (575, 'admin', '127.0.0.1', '0', '退出成功', '2023-02-21 11:28:45');
+INSERT INTO `sys_logininfor` VALUES (576, 'admin', '127.0.0.1', '0', '登录成功', '2023-02-21 11:29:38');
+INSERT INTO `sys_logininfor` VALUES (577, 'ceshi', '127.0.0.1', '0', '登录成功', '2023-02-21 11:49:25');
+INSERT INTO `sys_logininfor` VALUES (578, 'ceshi', '127.0.0.1', '0', '退出成功', '2023-02-21 13:39:40');
+INSERT INTO `sys_logininfor` VALUES (579, 'ceshi', '127.0.0.1', '0', '登录成功', '2023-02-21 13:43:13');
+INSERT INTO `sys_logininfor` VALUES (580, 'ceshi', '127.0.0.1', '0', '退出成功', '2023-02-21 14:06:48');
+INSERT INTO `sys_logininfor` VALUES (581, 'ceshi', '127.0.0.1', '0', '登录成功', '2023-02-21 14:15:09');
 
 -- ----------------------------
 -- Table structure for sys_menu
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_menu`;
 CREATE TABLE `sys_menu`  (
-  `menu_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '菜单ID',
-  `menu_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '菜单名称',
-  `parent_id` bigint(20) NULL DEFAULT 0 COMMENT '父菜单ID',
-  `order_num` int(11) NULL DEFAULT 0 COMMENT '显示顺序',
-  `path` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '路由地址',
-  `component` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '组件路径',
-  `query` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '路由参数',
-  `is_frame` int(11) NULL DEFAULT 1 COMMENT '是否为外链（0是 1否）',
-  `is_cache` int(11) NULL DEFAULT 0 COMMENT '是否缓存（0缓存 1不缓存）',
-  `menu_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '菜单类型（M目录 C菜单 F按钮）',
-  `visible` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '菜单状态（0显示 1隐藏）',
-  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '菜单状态（0正常 1停用）',
-  `perms` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '权限标识',
-  `icon` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '#' COMMENT '菜单图标',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '备注',
-  PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2000 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '菜单权限表' ROW_FORMAT = DYNAMIC;
+                             `menu_id` bigint NOT NULL AUTO_INCREMENT COMMENT '菜单ID',
+                             `menu_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '菜单名称',
+                             `parent_id` bigint NULL DEFAULT 0 COMMENT '父菜单ID',
+                             `order_num` int NULL DEFAULT 0 COMMENT '显示顺序',
+                             `path` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '路由地址',
+                             `component` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '组件路径',
+                             `query` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '路由参数',
+                             `is_frame` int NULL DEFAULT 1 COMMENT '是否为外链（0是 1否）',
+                             `is_cache` int NULL DEFAULT 0 COMMENT '是否缓存（0缓存 1不缓存）',
+                             `menu_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '菜单类型（M目录 C菜单 F按钮）',
+                             `visible` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '菜单状态（0显示 1隐藏）',
+                             `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '菜单状态（0正常 1停用）',
+                             `perms` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '权限标识',
+                             `icon` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '#' COMMENT '菜单图标',
+                             `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
+                             `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                             `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
+                             `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                             `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '备注',
+                             PRIMARY KEY (`menu_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2015 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '菜单权限表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
-INSERT INTO `sys_menu` VALUES (1, '系统管理', 0, 1, 'system', NULL, '', 1, 0, 'M', '0', '0', '', 'system', 'admin', '2022-08-28 20:42:08', '', NULL, '系统管理目录');
-INSERT INTO `sys_menu` VALUES (2, '系统监控', 0, 2, 'monitor', NULL, '', 1, 0, 'M', '0', '0', '', 'monitor', 'admin', '2022-08-28 20:42:08', '', NULL, '系统监控目录');
-INSERT INTO `sys_menu` VALUES (3, '系统工具', 0, 3, 'tool', NULL, '', 1, 0, 'M', '0', '0', '', 'tool', 'admin', '2022-08-28 20:42:08', '', NULL, '系统工具目录');
+INSERT INTO `sys_menu` VALUES (1, '系统管理', 0, 10, 'system', NULL, '', 1, 0, 'M', '0', '0', '', 'system', 'admin', '2022-08-28 20:42:08', 'ceshi', '2023-02-20 15:35:45', '系统管理目录');
+INSERT INTO `sys_menu` VALUES (2, '系统监控', 0, 11, 'monitor', NULL, '', 1, 0, 'M', '0', '0', '', 'monitor', 'admin', '2022-08-28 20:42:08', 'ceshi', '2023-02-20 15:35:58', '系统监控目录');
+INSERT INTO `sys_menu` VALUES (3, '系统工具', 0, 12, 'tool', NULL, '', 1, 0, 'M', '0', '0', '', 'tool', 'admin', '2022-08-28 20:42:08', 'ceshi', '2023-02-20 15:36:05', '系统工具目录');
+INSERT INTO `sys_menu` VALUES (4, '资源管理', 0, 1, 'resource', NULL, NULL, 1, 0, 'M', '0', '0', '', 'validCode', 'ceshi', '2023-02-20 18:05:39', 'admin', '2023-02-20 18:07:05', '');
 INSERT INTO `sys_menu` VALUES (100, '用户管理', 1, 1, 'user', 'system/user/index', '', 1, 0, 'C', '0', '0', 'system:user:list', 'user', 'admin', '2022-08-28 20:42:08', '', NULL, '用户管理菜单');
 INSERT INTO `sys_menu` VALUES (101, '角色管理', 1, 2, 'role', 'system/role/index', '', 1, 0, 'C', '0', '0', 'system:role:list', 'peoples', 'admin', '2022-08-28 20:42:08', '', NULL, '角色管理菜单');
 INSERT INTO `sys_menu` VALUES (102, '菜单管理', 1, 3, 'menu', 'system/menu/index', '', 1, 0, 'C', '0', '0', 'system:menu:list', 'tree-table', 'admin', '2022-08-28 20:42:08', '', NULL, '菜单管理菜单');
@@ -828,24 +827,36 @@ INSERT INTO `sys_menu` VALUES (1057, '生成删除', 115, 3, '#', '', '', 1, 0, 
 INSERT INTO `sys_menu` VALUES (1058, '导入代码', 115, 2, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:import', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
 INSERT INTO `sys_menu` VALUES (1059, '预览代码', 115, 4, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:preview', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
 INSERT INTO `sys_menu` VALUES (1060, '生成代码', 115, 5, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:code', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2003, '国家信息', 4, 1, 'country', 'resource/country/index', NULL, 1, 0, 'C', '0', '0', 'resource:country:list', 'international', 'admin', '2023-02-20 21:24:01', 'admin', '2023-02-20 21:33:43', '国家信息菜单');
+INSERT INTO `sys_menu` VALUES (2004, '国家查询', 2003, 1, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:country:query', '#', 'admin', '2023-02-20 21:24:01', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2005, '国家新增', 2003, 2, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:country:add', '#', 'admin', '2023-02-20 21:24:01', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2006, '国家修改', 2003, 3, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:country:edit', '#', 'admin', '2023-02-20 21:24:01', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2007, '国家删除', 2003, 4, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:country:remove', '#', 'admin', '2023-02-20 21:24:01', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2008, '国家导出', 2003, 5, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:country:export', '#', 'admin', '2023-02-20 21:24:01', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2009, '银行信息', 4, 1, 'bank', 'resource/bank/index', NULL, 1, 0, 'C', '0', '0', 'resource:bank:list', 'nested', 'admin', '2023-02-20 21:28:57', 'admin', '2023-02-20 21:30:39', '银行信息菜单');
+INSERT INTO `sys_menu` VALUES (2010, '银行查询', 2009, 1, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:bank:query', '#', 'admin', '2023-02-20 21:28:57', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2011, '银行新增', 2009, 2, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:bank:add', '#', 'admin', '2023-02-20 21:28:57', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2012, '银行修改', 2009, 3, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:bank:edit', '#', 'admin', '2023-02-20 21:28:57', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2013, '银行删除', 2009, 4, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:bank:remove', '#', 'admin', '2023-02-20 21:28:57', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2014, '银行导出', 2009, 5, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:bank:export', '#', 'admin', '2023-02-20 21:28:57', '', NULL, '');
 
 -- ----------------------------
 -- Table structure for sys_notice
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_notice`;
 CREATE TABLE `sys_notice`  (
-  `notice_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '公告ID',
-  `notice_title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '公告标题',
-  `notice_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '公告类型（1通知 2公告）',
-  `notice_content` longblob NULL COMMENT '公告内容',
-  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '公告状态（0正常 1关闭）',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
-  PRIMARY KEY (`notice_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '通知公告表' ROW_FORMAT = DYNAMIC;
+                               `notice_id` int NOT NULL AUTO_INCREMENT COMMENT '公告ID',
+                               `notice_title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '公告标题',
+                               `notice_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '公告类型（1通知 2公告）',
+                               `notice_content` longblob NULL COMMENT '公告内容',
+                               `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '公告状态（0正常 1关闭）',
+                               `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
+                               `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                               `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
+                               `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                               `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
+                               PRIMARY KEY (`notice_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '通知公告表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_notice
@@ -856,169 +867,61 @@ CREATE TABLE `sys_notice`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_oper_log`;
 CREATE TABLE `sys_oper_log`  (
-  `oper_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '日志主键',
-  `title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '模块标题',
-  `business_type` int(11) NULL DEFAULT 0 COMMENT '业务类型（0其它 1新增 2修改 3删除）',
-  `method` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '方法名称',
-  `request_method` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '请求方式',
-  `operator_type` int(11) NULL DEFAULT 0 COMMENT '操作类别（0其它 1后台用户 2手机端用户）',
-  `oper_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '操作人员',
-  `dept_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '部门名称',
-  `oper_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '请求URL',
-  `oper_ip` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '主机地址',
-  `oper_location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '操作地点',
-  `oper_param` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '请求参数',
-  `json_result` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '返回参数',
-  `status` int(11) NULL DEFAULT 0 COMMENT '操作状态（0正常 1异常）',
-  `error_msg` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '错误消息',
-  `oper_time` datetime NULL DEFAULT NULL COMMENT '操作时间',
-  PRIMARY KEY (`oper_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 679 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
+                                 `oper_id` bigint NOT NULL AUTO_INCREMENT COMMENT '日志主键',
+                                 `title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '模块标题',
+                                 `business_type` int NULL DEFAULT 0 COMMENT '业务类型（0其它 1新增 2修改 3删除）',
+                                 `method` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '方法名称',
+                                 `request_method` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '请求方式',
+                                 `operator_type` int NULL DEFAULT 0 COMMENT '操作类别（0其它 1后台用户 2手机端用户）',
+                                 `oper_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '操作人员',
+                                 `dept_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '部门名称',
+                                 `oper_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '请求URL',
+                                 `oper_ip` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '主机地址',
+                                 `oper_location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '操作地点',
+                                 `oper_param` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '请求参数',
+                                 `json_result` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '返回参数',
+                                 `status` int NULL DEFAULT 0 COMMENT '操作状态（0正常 1异常）',
+                                 `error_msg` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '错误消息',
+                                 `oper_time` datetime NULL DEFAULT NULL COMMENT '操作时间',
+                                 PRIMARY KEY (`oper_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 733 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '操作日志记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_oper_log
 -- ----------------------------
-INSERT INTO `sys_oper_log` VALUES (556, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-12 16:09:44');
-INSERT INTO `sys_oper_log` VALUES (557, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-12 16:09:53');
-INSERT INTO `sys_oper_log` VALUES (558, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '11d288a647184223bc529629031c35f3', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/11/01/4b6ba5f2368f4af2adda768645115da5d.png\",\"likes\":0,\"nickName\":\"喜你入三分\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-12 16:10:00');
-INSERT INTO `sys_oper_log` VALUES (559, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '11d288a647184223bc529629031c35f3', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/11/01/4b6ba5f2368f4af2adda768645115da5d.png\",\"likes\":0,\"nickName\":\"喜你入三分\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-12 16:10:01');
-INSERT INTO `sys_oper_log` VALUES (560, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '11d288a647184223bc529629031c35f3', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/11/01/4b6ba5f2368f4af2adda768645115da5d.png\",\"likes\":0,\"nickName\":\"喜你入三分\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-12 16:11:35');
-INSERT INTO `sys_oper_log` VALUES (561, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '11d288a647184223bc529629031c35f3', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/11/01/4b6ba5f2368f4af2adda768645115da5d.png\",\"likes\":0,\"nickName\":\"喜你入三分\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-12 16:13:18');
-INSERT INTO `sys_oper_log` VALUES (562, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '80b70e7d52894157aa357c8cff5a3404', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"莫名的情愫\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-12 16:14:12');
-INSERT INTO `sys_oper_log` VALUES (563, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '80b70e7d52894157aa357c8cff5a3404', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"莫名的情愫\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-12 16:14:23');
-INSERT INTO `sys_oper_log` VALUES (564, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '80b70e7d52894157aa357c8cff5a3404', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"莫名的情愫\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-12 16:14:30');
-INSERT INTO `sys_oper_log` VALUES (565, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '80b70e7d52894157aa357c8cff5a3404', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"莫名的情愫\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-12 16:14:46');
-INSERT INTO `sys_oper_log` VALUES (566, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-12 16:50:13');
-INSERT INTO `sys_oper_log` VALUES (567, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-12 16:50:15');
-INSERT INTO `sys_oper_log` VALUES (568, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-12 17:12:51');
-INSERT INTO `sys_oper_log` VALUES (569, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-12 17:12:55');
-INSERT INTO `sys_oper_log` VALUES (570, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-12 17:14:19');
-INSERT INTO `sys_oper_log` VALUES (571, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:15:25');
-INSERT INTO `sys_oper_log` VALUES (572, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:15:27');
-INSERT INTO `sys_oper_log` VALUES (573, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:15:56');
-INSERT INTO `sys_oper_log` VALUES (574, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:16:07');
-INSERT INTO `sys_oper_log` VALUES (575, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:16:17');
-INSERT INTO `sys_oper_log` VALUES (576, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:16:18');
-INSERT INTO `sys_oper_log` VALUES (577, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '80b70e7d52894157aa357c8cff5a3404', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"莫名的情愫\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:17:05');
-INSERT INTO `sys_oper_log` VALUES (578, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '80b70e7d52894157aa357c8cff5a3404', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"莫名的情愫\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:17:07');
-INSERT INTO `sys_oper_log` VALUES (579, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:27:46');
-INSERT INTO `sys_oper_log` VALUES (580, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:27:48');
-INSERT INTO `sys_oper_log` VALUES (581, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:28:39');
-INSERT INTO `sys_oper_log` VALUES (582, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:28:43');
-INSERT INTO `sys_oper_log` VALUES (583, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:28:49');
-INSERT INTO `sys_oper_log` VALUES (584, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:28:50');
-INSERT INTO `sys_oper_log` VALUES (585, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.37', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:33:39');
-INSERT INTO `sys_oper_log` VALUES (586, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.37', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:33:47');
-INSERT INTO `sys_oper_log` VALUES (587, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.37', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:34:14');
-INSERT INTO `sys_oper_log` VALUES (588, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.37', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:34:16');
-INSERT INTO `sys_oper_log` VALUES (589, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:35:12');
-INSERT INTO `sys_oper_log` VALUES (590, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:36:54');
-INSERT INTO `sys_oper_log` VALUES (591, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:37:31');
-INSERT INTO `sys_oper_log` VALUES (592, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:37:47');
-INSERT INTO `sys_oper_log` VALUES (593, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:38:05');
-INSERT INTO `sys_oper_log` VALUES (594, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:40:06');
-INSERT INTO `sys_oper_log` VALUES (595, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.37', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:40:34');
-INSERT INTO `sys_oper_log` VALUES (596, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:46:17');
-INSERT INTO `sys_oper_log` VALUES (597, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:46:18');
-INSERT INTO `sys_oper_log` VALUES (598, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.37', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:50:09');
-INSERT INTO `sys_oper_log` VALUES (599, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.37', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:50:11');
-INSERT INTO `sys_oper_log` VALUES (600, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:51:18');
-INSERT INTO `sys_oper_log` VALUES (601, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:51:22');
-INSERT INTO `sys_oper_log` VALUES (602, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '80b70e7d52894157aa357c8cff5a3404', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"莫名的情愫\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:55:38');
-INSERT INTO `sys_oper_log` VALUES (603, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '80b70e7d52894157aa357c8cff5a3404', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"莫名的情愫\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 14:55:48');
-INSERT INTO `sys_oper_log` VALUES (604, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:08:46');
-INSERT INTO `sys_oper_log` VALUES (605, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:11:07');
-INSERT INTO `sys_oper_log` VALUES (606, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:12:44');
-INSERT INTO `sys_oper_log` VALUES (607, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:17:13');
-INSERT INTO `sys_oper_log` VALUES (608, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:17:15');
-INSERT INTO `sys_oper_log` VALUES (609, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.37', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:23:59');
-INSERT INTO `sys_oper_log` VALUES (610, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.37', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:24:16');
-INSERT INTO `sys_oper_log` VALUES (611, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:28:39');
-INSERT INTO `sys_oper_log` VALUES (612, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '80b70e7d52894157aa357c8cff5a3404', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"莫名的情愫\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:29:01');
-INSERT INTO `sys_oper_log` VALUES (613, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '80b70e7d52894157aa357c8cff5a3404', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"莫名的情愫\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:29:08');
-INSERT INTO `sys_oper_log` VALUES (614, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:31:07');
-INSERT INTO `sys_oper_log` VALUES (615, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:31:08');
-INSERT INTO `sys_oper_log` VALUES (616, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:32:26');
-INSERT INTO `sys_oper_log` VALUES (617, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:33:46');
-INSERT INTO `sys_oper_log` VALUES (618, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:33:47');
-INSERT INTO `sys_oper_log` VALUES (619, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:35:36');
-INSERT INTO `sys_oper_log` VALUES (620, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:35:38');
-INSERT INTO `sys_oper_log` VALUES (621, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:35:56');
-INSERT INTO `sys_oper_log` VALUES (622, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '80b70e7d52894157aa357c8cff5a3404', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"莫名的情愫\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:42:05');
-INSERT INTO `sys_oper_log` VALUES (623, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '80b70e7d52894157aa357c8cff5a3404', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"莫名的情愫\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:42:10');
-INSERT INTO `sys_oper_log` VALUES (624, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.37', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:43:38');
-INSERT INTO `sys_oper_log` VALUES (625, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.37', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:43:46');
-INSERT INTO `sys_oper_log` VALUES (626, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.37', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:44:51');
-INSERT INTO `sys_oper_log` VALUES (627, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.37', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:44:56');
-INSERT INTO `sys_oper_log` VALUES (628, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:45:16');
-INSERT INTO `sys_oper_log` VALUES (629, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '80b70e7d52894157aa357c8cff5a3404', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"莫名的情愫\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:45:32');
-INSERT INTO `sys_oper_log` VALUES (630, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.37', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:45:51');
-INSERT INTO `sys_oper_log` VALUES (631, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '80b70e7d52894157aa357c8cff5a3404', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"莫名的情愫\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:47:01');
-INSERT INTO `sys_oper_log` VALUES (632, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:47:36');
-INSERT INTO `sys_oper_log` VALUES (633, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 16:49:14');
-INSERT INTO `sys_oper_log` VALUES (634, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 17:01:15');
-INSERT INTO `sys_oper_log` VALUES (635, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 17:01:19');
-INSERT INTO `sys_oper_log` VALUES (636, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 17:27:48');
-INSERT INTO `sys_oper_log` VALUES (637, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 17:28:38');
-INSERT INTO `sys_oper_log` VALUES (638, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 17:37:56');
-INSERT INTO `sys_oper_log` VALUES (639, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 17:37:57');
-INSERT INTO `sys_oper_log` VALUES (640, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 17:38:02');
-INSERT INTO `sys_oper_log` VALUES (641, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 17:38:03');
-INSERT INTO `sys_oper_log` VALUES (642, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 17:38:36');
-INSERT INTO `sys_oper_log` VALUES (643, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 17:38:42');
-INSERT INTO `sys_oper_log` VALUES (644, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 17:45:51');
-INSERT INTO `sys_oper_log` VALUES (645, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '80b70e7d52894157aa357c8cff5a3404', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"莫名的情愫\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 17:46:10');
-INSERT INTO `sys_oper_log` VALUES (646, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '80b70e7d52894157aa357c8cff5a3404', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"莫名的情愫\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 17:46:11');
-INSERT INTO `sys_oper_log` VALUES (647, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 17:46:39');
-INSERT INTO `sys_oper_log` VALUES (648, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 17:46:41');
-INSERT INTO `sys_oper_log` VALUES (649, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.37', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 17:48:48');
-INSERT INTO `sys_oper_log` VALUES (650, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.37', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 17:48:51');
-INSERT INTO `sys_oper_log` VALUES (651, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 17:51:14');
-INSERT INTO `sys_oper_log` VALUES (652, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 17:51:15');
-INSERT INTO `sys_oper_log` VALUES (653, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 17:51:23');
-INSERT INTO `sys_oper_log` VALUES (654, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 17:51:24');
-INSERT INTO `sys_oper_log` VALUES (655, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 17:51:32');
-INSERT INTO `sys_oper_log` VALUES (656, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-13 17:51:34');
-INSERT INTO `sys_oper_log` VALUES (657, '账户解锁', 0, 'com.cloud.system.controller.SysLogininforController.unlock()', 'GET', 1, 'ceshi', NULL, '/logininfor/unlock/ai168', '127.0.0.1', '', '{}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-01-13 18:32:47');
-INSERT INTO `sys_oper_log` VALUES (658, '在线用户', 8, 'com.cloud.system.controller.SysUserOnlineController.forceLogout()', 'DELETE', 1, 'ceshi', NULL, '/online/fe9796f0de0246998905e5b8a5d93603', '127.0.0.1', '', '{}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-01-14 09:50:29');
-INSERT INTO `sys_oper_log` VALUES (659, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-14 10:17:10');
-INSERT INTO `sys_oper_log` VALUES (660, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-14 10:17:11');
-INSERT INTO `sys_oper_log` VALUES (661, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-14 10:17:20');
-INSERT INTO `sys_oper_log` VALUES (662, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-14 10:17:21');
-INSERT INTO `sys_oper_log` VALUES (663, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-14 10:18:33');
-INSERT INTO `sys_oper_log` VALUES (664, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-14 10:18:35');
-INSERT INTO `sys_oper_log` VALUES (665, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '80b70e7d52894157aa357c8cff5a3404', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"莫名的情愫\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-14 15:37:37');
-INSERT INTO `sys_oper_log` VALUES (666, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '80b70e7d52894157aa357c8cff5a3404', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"莫名的情愫\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-14 15:37:39');
-INSERT INTO `sys_oper_log` VALUES (667, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '10f5477e16ac42c9b41a1a24df507344', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/11/01/5f8d9ee99ff44eb684cee75649647861a.png\",\"likes\":0,\"nickName\":\"习惯性想你\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-14 15:38:16');
-INSERT INTO `sys_oper_log` VALUES (668, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '10f5477e16ac42c9b41a1a24df507344', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/11/01/5f8d9ee99ff44eb684cee75649647861a.png\",\"likes\":0,\"nickName\":\"习惯性想你\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-14 15:38:17');
-INSERT INTO `sys_oper_log` VALUES (669, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '10f5477e16ac42c9b41a1a24df507344', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/11/01/5f8d9ee99ff44eb684cee75649647861a.png\",\"likes\":0,\"nickName\":\"习惯性想你\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-14 15:38:24');
-INSERT INTO `sys_oper_log` VALUES (670, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '10f5477e16ac42c9b41a1a24df507344', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/11/01/5f8d9ee99ff44eb684cee75649647861a.png\",\"likes\":0,\"nickName\":\"习惯性想你\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-14 15:38:25');
-INSERT INTO `sys_oper_log` VALUES (671, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '10f5477e16ac42c9b41a1a24df507344', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/11/01/5f8d9ee99ff44eb684cee75649647861a.png\",\"likes\":0,\"nickName\":\"习惯性想你\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-14 15:54:16');
-INSERT INTO `sys_oper_log` VALUES (672, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '10f5477e16ac42c9b41a1a24df507344', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/11/01/5f8d9ee99ff44eb684cee75649647861a.png\",\"likes\":0,\"nickName\":\"习惯性想你\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-14 15:54:19');
-INSERT INTO `sys_oper_log` VALUES (673, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '10f5477e16ac42c9b41a1a24df507344', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/11/01/5f8d9ee99ff44eb684cee75649647861a.png\",\"likes\":0,\"nickName\":\"习惯性想你\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-14 15:56:00');
-INSERT INTO `sys_oper_log` VALUES (674, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, '10f5477e16ac42c9b41a1a24df507344', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/11/01/5f8d9ee99ff44eb684cee75649647861a.png\",\"likes\":0,\"nickName\":\"习惯性想你\",\"phone\":\"15368714206\",\"vipType\":1},\"msg\":\"成功\"}', 0, NULL, '2023-01-14 15:56:01');
-INSERT INTO `sys_oper_log` VALUES (675, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-14 16:34:12');
-INSERT INTO `sys_oper_log` VALUES (676, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-14 16:34:14');
-INSERT INTO `sys_oper_log` VALUES (677, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-14 16:55:39');
-INSERT INTO `sys_oper_log` VALUES (678, '查询我的信息', 1, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '10.10.10.26', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"vipEndTime\":\"2032-11-09 19:51:07\",\"vipStartTime\":\"2022-11-01 19:50:43\",\"vipType\":3},\"msg\":\"成功\"}', 0, NULL, '2023-01-14 16:55:40');
+INSERT INTO `sys_oper_log` VALUES (718, '菜单管理', 2, 'com.cloud.system.controller.SysMenuController.add()', 'POST', 1, 'ceshi', NULL, '/menu', '127.0.0.1', '', '{\"children\":[],\"createBy\":\"ceshi\",\"icon\":\"validCode\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuName\":\"资源管理\",\"menuType\":\"M\",\"orderNum\":1,\"params\":{},\"parentId\":0,\"path\":\"res\",\"status\":\"0\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-02-20 18:05:39');
+INSERT INTO `sys_oper_log` VALUES (719, '菜单管理', 3, 'com.cloud.system.controller.SysMenuController.edit()', 'PUT', 1, 'admin', NULL, '/menu', '127.0.0.1', '', '{\"children\":[],\"createTime\":\"2023-02-20 18:05:39\",\"icon\":\"validCode\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2000,\"menuName\":\"资源管理\",\"menuType\":\"M\",\"orderNum\":1,\"params\":{},\"parentId\":0,\"path\":\"resource\",\"perms\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-02-20 18:07:05');
+INSERT INTO `sys_oper_log` VALUES (720, '菜单管理', 2, 'com.cloud.system.controller.SysMenuController.add()', 'POST', 1, 'admin', NULL, '/menu', '127.0.0.1', '', '{\"children\":[],\"component\":\"res\",\"createBy\":\"admin\",\"icon\":\"international\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuName\":\"国家管理\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":0,\"path\":\"res\",\"status\":\"0\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-02-20 18:31:20');
+INSERT INTO `sys_oper_log` VALUES (721, '菜单管理', 4, 'com.cloud.system.controller.SysMenuController.remove()', 'DELETE', 1, 'admin', NULL, '/menu/2001', '127.0.0.1', '', '{}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-02-20 18:31:28');
+INSERT INTO `sys_oper_log` VALUES (722, '菜单管理', 2, 'com.cloud.system.controller.SysMenuController.add()', 'POST', 1, 'admin', NULL, '/menu', '127.0.0.1', '', '{\"children\":[],\"component\":\"res\",\"createBy\":\"admin\",\"icon\":\"international\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuName\":\"国家管理\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"res\",\"status\":\"0\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-02-20 18:31:55');
+INSERT INTO `sys_oper_log` VALUES (723, '代码生成', 7, 'com.cloud.gen.controller.GenController.importTableSave()', 'POST', 1, 'admin', NULL, '/gen/importTable', '127.0.0.1', '', '\"ai_country,ai_bank\"', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-02-20 20:45:22');
+INSERT INTO `sys_oper_log` VALUES (724, '代码生成', 9, 'com.cloud.gen.controller.GenController.batchGenCode()', 'GET', 1, 'admin', NULL, '/gen/batchGenCode', '127.0.0.1', '', '{\"tables\":\"ai_country\"}', NULL, 0, NULL, '2023-02-20 20:45:33');
+INSERT INTO `sys_oper_log` VALUES (725, '代码生成', 7, 'com.cloud.gen.controller.GenController.importTableSave()', 'POST', 1, 'admin', NULL, '/gen/importTable', '127.0.0.1', '', '\"ai_country,ai_bank\"', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-02-20 20:50:10');
+INSERT INTO `sys_oper_log` VALUES (726, '代码生成', 9, 'com.cloud.gen.controller.GenController.batchGenCode()', 'GET', 1, 'admin', NULL, '/gen/batchGenCode', '127.0.0.1', '', '{\"tables\":\"ai_bank,ai_country\"}', NULL, 0, NULL, '2023-02-20 20:50:13');
+INSERT INTO `sys_oper_log` VALUES (727, '代码生成', 9, 'com.cloud.gen.controller.GenController.batchGenCode()', 'GET', 1, 'admin', NULL, '/gen/batchGenCode', '127.0.0.1', '', '{\"tables\":\"ai_bank,ai_country\"}', NULL, 0, NULL, '2023-02-20 21:16:20');
+INSERT INTO `sys_oper_log` VALUES (728, '代码生成', 9, 'com.cloud.gen.controller.GenController.batchGenCode()', 'GET', 1, 'admin', NULL, '/gen/batchGenCode', '127.0.0.1', '', '{\"tables\":\"ai_bank,ai_country\"}', NULL, 0, NULL, '2023-02-20 21:21:52');
+INSERT INTO `sys_oper_log` VALUES (729, '菜单管理', 3, 'com.cloud.system.system.controller.SysMenuController.edit()', 'PUT', 1, 'admin', NULL, '/menu', '127.0.0.1', '', '{\"children\":[],\"component\":\"resource/bank/index\",\"createTime\":\"2023-02-20 21:28:57\",\"icon\":\"nested\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2009,\"menuName\":\"银行信息\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":4,\"path\":\"bank\",\"perms\":\"resource:bank:list\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-02-20 21:30:39');
+INSERT INTO `sys_oper_log` VALUES (730, '菜单管理', 3, 'com.cloud.system.system.controller.SysMenuController.edit()', 'PUT', 1, 'admin', NULL, '/menu', '127.0.0.1', '', '{\"children\":[],\"component\":\"resource/country/index\",\"createTime\":\"2023-02-20 21:24:01\",\"icon\":\"international\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2003,\"menuName\":\"国家信息\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":4,\"path\":\"country\",\"perms\":\"resource:country:list\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-02-20 21:33:43');
+INSERT INTO `sys_oper_log` VALUES (731, '角色管理', 3, 'com.cloud.system.system.controller.SysRoleController.edit()', 'PUT', 1, 'admin', NULL, '/role', '127.0.0.1', '', '{\"admin\":false,\"createTime\":\"2022-08-28 20:42:08\",\"dataScope\":\"2\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[4,2009,2010,2011,2012,2013,2014,2003,2004,2005,2006,2007,2008,1,100,1000,1001,1002,1003,1004,1005,1006,101,1007,1008,1009,1010,1011,102,1012,1013,1014,1015,103,1016,1017,1018,1019,104,1020,1021,1022,1023,1024,105,1025,1026,1027,1028,1029,106,1030,1031,1032,1033,1034,107,1035,1036,1037,1038,108,500,1039,1040,1041,501,1042,1043,1044,1045,2,109,1046,1047,1048,110,1049,1050,1051,1052,1053,1054,117,118,119,113,112,111,3,114,115,1055,1058,1056,1057,1059,1060,116],\"params\":{},\"remark\":\"普通角色\",\"roleId\":2,\"roleKey\":\"common\",\"roleName\":\"普通角色\",\"roleSort\":\"2\",\"status\":\"0\",\"updateBy\":\"admin\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-02-20 22:50:19');
+INSERT INTO `sys_oper_log` VALUES (732, '银行信息', 6, 'com.cloud.system.resource.controller.AiBankController.export()', 'POST', 1, 'ceshi', NULL, '/bank/export', '127.0.0.1', '', '{\"params\":{}}', NULL, 0, NULL, '2023-02-21 15:47:49');
 
 -- ----------------------------
 -- Table structure for sys_post
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_post`;
 CREATE TABLE `sys_post`  (
-  `post_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '岗位ID',
-  `post_code` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '岗位编码',
-  `post_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '岗位名称',
-  `post_sort` int(11) NOT NULL COMMENT '显示顺序',
-  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '状态（0正常 1停用）',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
-  PRIMARY KEY (`post_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '岗位信息表' ROW_FORMAT = DYNAMIC;
+                             `post_id` bigint NOT NULL AUTO_INCREMENT COMMENT '岗位ID',
+                             `post_code` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '岗位编码',
+                             `post_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '岗位名称',
+                             `post_sort` int NOT NULL COMMENT '显示顺序',
+                             `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '状态（0正常 1停用）',
+                             `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
+                             `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                             `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
+                             `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                             `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
+                             PRIMARY KEY (`post_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '岗位信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_post
@@ -1033,38 +936,38 @@ INSERT INTO `sys_post` VALUES (4, 'user', '普通员工', 4, '0', 'admin', '2022
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role`  (
-  `role_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '角色ID',
-  `role_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '角色名称',
-  `role_key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '角色权限字符串',
-  `role_sort` int(11) NOT NULL COMMENT '显示顺序',
-  `data_scope` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '1' COMMENT '数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）',
-  `menu_check_strictly` tinyint(1) NULL DEFAULT 1 COMMENT '菜单树选择项是否关联显示',
-  `dept_check_strictly` tinyint(1) NULL DEFAULT 1 COMMENT '部门树选择项是否关联显示',
-  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '角色状态（0正常 1停用）',
-  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
-  PRIMARY KEY (`role_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '角色信息表' ROW_FORMAT = DYNAMIC;
+                             `role_id` bigint NOT NULL AUTO_INCREMENT COMMENT '角色ID',
+                             `role_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '角色名称',
+                             `role_key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '角色权限字符串',
+                             `role_sort` int NOT NULL COMMENT '显示顺序',
+                             `data_scope` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '1' COMMENT '数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）',
+                             `menu_check_strictly` tinyint(1) NULL DEFAULT 1 COMMENT '菜单树选择项是否关联显示',
+                             `dept_check_strictly` tinyint(1) NULL DEFAULT 1 COMMENT '部门树选择项是否关联显示',
+                             `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '角色状态（0正常 1停用）',
+                             `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
+                             `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
+                             `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                             `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
+                             `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                             `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
+                             PRIMARY KEY (`role_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '角色信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES (1, '超级管理员', 'admin', 1, '1', 1, 1, '0', '0', 'admin', '2022-08-28 20:42:08', '', NULL, '超级管理员');
-INSERT INTO `sys_role` VALUES (2, '普通角色', 'common', 2, '2', 1, 1, '0', '0', 'admin', '2022-08-28 20:42:08', 'admin', '2022-10-08 11:54:11', '普通角色');
+INSERT INTO `sys_role` VALUES (2, '普通角色', 'common', 2, '2', 1, 1, '0', '0', 'admin', '2022-08-28 20:42:08', 'admin', '2023-02-20 22:50:19', '普通角色');
 
 -- ----------------------------
 -- Table structure for sys_role_dept
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role_dept`;
 CREATE TABLE `sys_role_dept`  (
-  `role_id` bigint(20) NOT NULL COMMENT '角色ID',
-  `dept_id` bigint(20) NOT NULL COMMENT '部门ID',
-  PRIMARY KEY (`role_id`, `dept_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '角色和部门关联表' ROW_FORMAT = DYNAMIC;
+                                  `role_id` bigint NOT NULL COMMENT '角色ID',
+                                  `dept_id` bigint NOT NULL COMMENT '部门ID',
+                                  PRIMARY KEY (`role_id`, `dept_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '角色和部门关联表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role_dept
@@ -1078,10 +981,10 @@ INSERT INTO `sys_role_dept` VALUES (2, 105);
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role_menu`;
 CREATE TABLE `sys_role_menu`  (
-  `role_id` bigint(20) NOT NULL COMMENT '角色ID',
-  `menu_id` bigint(20) NOT NULL COMMENT '菜单ID',
-  PRIMARY KEY (`role_id`, `menu_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '角色和菜单关联表' ROW_FORMAT = DYNAMIC;
+                                  `role_id` bigint NOT NULL COMMENT '角色ID',
+                                  `menu_id` bigint NOT NULL COMMENT '菜单ID',
+                                  PRIMARY KEY (`role_id`, `menu_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '角色和菜单关联表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role_menu
@@ -1089,6 +992,7 @@ CREATE TABLE `sys_role_menu`  (
 INSERT INTO `sys_role_menu` VALUES (2, 1);
 INSERT INTO `sys_role_menu` VALUES (2, 2);
 INSERT INTO `sys_role_menu` VALUES (2, 3);
+INSERT INTO `sys_role_menu` VALUES (2, 4);
 INSERT INTO `sys_role_menu` VALUES (2, 100);
 INSERT INTO `sys_role_menu` VALUES (2, 101);
 INSERT INTO `sys_role_menu` VALUES (2, 102);
@@ -1172,33 +1076,45 @@ INSERT INTO `sys_role_menu` VALUES (2, 1057);
 INSERT INTO `sys_role_menu` VALUES (2, 1058);
 INSERT INTO `sys_role_menu` VALUES (2, 1059);
 INSERT INTO `sys_role_menu` VALUES (2, 1060);
+INSERT INTO `sys_role_menu` VALUES (2, 2003);
+INSERT INTO `sys_role_menu` VALUES (2, 2004);
+INSERT INTO `sys_role_menu` VALUES (2, 2005);
+INSERT INTO `sys_role_menu` VALUES (2, 2006);
+INSERT INTO `sys_role_menu` VALUES (2, 2007);
+INSERT INTO `sys_role_menu` VALUES (2, 2008);
+INSERT INTO `sys_role_menu` VALUES (2, 2009);
+INSERT INTO `sys_role_menu` VALUES (2, 2010);
+INSERT INTO `sys_role_menu` VALUES (2, 2011);
+INSERT INTO `sys_role_menu` VALUES (2, 2012);
+INSERT INTO `sys_role_menu` VALUES (2, 2013);
+INSERT INTO `sys_role_menu` VALUES (2, 2014);
 
 -- ----------------------------
 -- Table structure for sys_user
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user`  (
-  `user_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
-  `dept_id` bigint(20) NULL DEFAULT NULL COMMENT '部门ID',
-  `user_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '用户账号',
-  `nick_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '用户昵称',
-  `user_type` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '00' COMMENT '用户类型（00系统用户）',
-  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '用户邮箱',
-  `phonenumber` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '手机号码',
-  `sex` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '用户性别（0男 1女 2未知）',
-  `avatar` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '头像地址',
-  `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '密码',
-  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '帐号状态（0正常 1停用）',
-  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
-  `login_ip` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '最后登录IP',
-  `login_date` datetime NULL DEFAULT NULL COMMENT '最后登录时间',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
-  PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2230566429 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户信息表' ROW_FORMAT = DYNAMIC;
+                             `user_id` bigint NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+                             `dept_id` bigint NULL DEFAULT NULL COMMENT '部门ID',
+                             `user_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '用户账号',
+                             `nick_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '用户昵称',
+                             `user_type` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '00' COMMENT '用户类型（00系统用户）',
+                             `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '用户邮箱',
+                             `phonenumber` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '手机号码',
+                             `sex` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '用户性别（0男 1女 2未知）',
+                             `avatar` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '头像地址',
+                             `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '密码',
+                             `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '帐号状态（0正常 1停用）',
+                             `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
+                             `login_ip` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '最后登录IP',
+                             `login_date` datetime NULL DEFAULT NULL COMMENT '最后登录时间',
+                             `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
+                             `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                             `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
+                             `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                             `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
+                             PRIMARY KEY (`user_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2230566429 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user
@@ -1212,10 +1128,10 @@ INSERT INTO `sys_user` VALUES (2230566428, 105, 'ceshi', '测试员', '00', 'aic
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user_post`;
 CREATE TABLE `sys_user_post`  (
-  `user_id` bigint(20) NOT NULL COMMENT '用户ID',
-  `post_id` bigint(20) NOT NULL COMMENT '岗位ID',
-  PRIMARY KEY (`user_id`, `post_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户与岗位关联表' ROW_FORMAT = DYNAMIC;
+                                  `user_id` bigint NOT NULL COMMENT '用户ID',
+                                  `post_id` bigint NOT NULL COMMENT '岗位ID',
+                                  PRIMARY KEY (`user_id`, `post_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户与岗位关联表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user_post
@@ -1229,10 +1145,10 @@ INSERT INTO `sys_user_post` VALUES (2230566428, 4);
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user_role`;
 CREATE TABLE `sys_user_role`  (
-  `user_id` bigint(20) NOT NULL COMMENT '用户ID',
-  `role_id` bigint(20) NOT NULL COMMENT '角色ID',
-  PRIMARY KEY (`user_id`, `role_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户和角色关联表' ROW_FORMAT = DYNAMIC;
+                                  `user_id` bigint NOT NULL COMMENT '用户ID',
+                                  `role_id` bigint NOT NULL COMMENT '角色ID',
+                                  PRIMARY KEY (`user_id`, `role_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户和角色关联表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user_role
@@ -1246,58 +1162,58 @@ INSERT INTO `sys_user_role` VALUES (2230566428, 2);
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
-  `id` bigint(32) NOT NULL COMMENT '用户id',
-  `user_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '用户账号',
-  `nick_name` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户昵称',
-  `password` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户密码',
-  `uuid` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '设备唯一标识',
-  `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户绑定手机号',
-  `head_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '头像',
-  `sex` int(11) NULL DEFAULT NULL COMMENT '性别 (0男 1女 2未知)',
-  `age` int(11) NULL DEFAULT NULL COMMENT '年龄',
-  `birthday` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '出生年月',
-  `sign` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '签名',
-  `state` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '国家',
-  `capital` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '省份',
-  `city` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '城市',
-  `counties` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '县区',
-  `bind_qq_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'QQ绑定的id',
-  `bind_wechat_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '绑定微信id',
-  `bind_sina_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '绑定微博id',
-  `bind_alipay_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '绑定支付宝id',
-  `activate` int(11) NULL DEFAULT 1 COMMENT '是否激活; 用户注册后未登录过，即为此用户未激活 1：未激活 2：已激活',
-  `activate_time` datetime NULL DEFAULT NULL COMMENT '激活时间',
-  `fans` int(11) NULL DEFAULT 0 COMMENT '粉丝数',
-  `attention` int(11) NULL DEFAULT 0 COMMENT '用户关注数',
-  `opus` int(11) NULL DEFAULT 0 COMMENT '用户作品数量',
-  `likes` int(11) NULL DEFAULT 0 COMMENT '点赞数',
-  `kbs` decimal(13, 4) NULL DEFAULT 0.0000 COMMENT '获取的总KB值',
-  `invitation_code` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户邀请码',
-  `invitation_qrcode` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '邀请者二维码',
-  `invitation_id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '邀请者id',
-  `invitation_url_and` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '推广安卓URL',
-  `invitation_url_ios` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '推广IOSURL',
-  `invitation_url_weixin` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '推广微信小程序URL',
-  `invitation_ids` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT '推广链',
-  `user_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '1' COMMENT '用户类型（1普通用户 ，2会员用户）',
-  `vip_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '1' COMMENT '会员类型（1非会员 ，2普通会员 ，3VIP会员 ，4SVIP会员）',
-  `vip_start_time` datetime NULL DEFAULT NULL COMMENT '会员开始时间',
-  `vip_end_time` datetime NULL DEFAULT NULL COMMENT '会员结束时间',
-  `realname_auth` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '1' COMMENT '是否实名认证（1未验证，2已验证）',
-  `open_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '微信登录openid',
-  `session_key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '微信登录会话KEY',
-  `login_ip` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '最后登录IP',
-  `login_date` datetime NULL DEFAULT NULL COMMENT '最后登录时间',
-  `status_flag` int(11) NOT NULL DEFAULT 0 COMMENT '状态：0启用，2停用',
-  `delete_flag` int(11) NOT NULL DEFAULT 0 COMMENT '删除：0未删除，2已删除',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `user_name`(`user_name` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户信息表' ROW_FORMAT = DYNAMIC;
+                         `id` bigint NOT NULL COMMENT '用户id',
+                         `user_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '用户账号',
+                         `nick_name` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户昵称',
+                         `password` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户密码',
+                         `uuid` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '设备唯一标识',
+                         `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户绑定手机号',
+                         `head_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '头像',
+                         `sex` int NULL DEFAULT NULL COMMENT '性别 (0男 1女 2未知)',
+                         `age` int NULL DEFAULT NULL COMMENT '年龄',
+                         `birthday` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '出生年月',
+                         `sign` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '签名',
+                         `state` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '国家',
+                         `capital` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '省份',
+                         `city` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '城市',
+                         `counties` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '县区',
+                         `bind_qq_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'QQ绑定的id',
+                         `bind_wechat_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '绑定微信id',
+                         `bind_sina_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '绑定微博id',
+                         `bind_alipay_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '绑定支付宝id',
+                         `activate` int NULL DEFAULT 1 COMMENT '是否激活; 用户注册后未登录过，即为此用户未激活 1：未激活 2：已激活',
+                         `activate_time` datetime NULL DEFAULT NULL COMMENT '激活时间',
+                         `fans` int NULL DEFAULT 0 COMMENT '粉丝数',
+                         `attention` int NULL DEFAULT 0 COMMENT '用户关注数',
+                         `opus` int NULL DEFAULT 0 COMMENT '用户作品数量',
+                         `likes` int NULL DEFAULT 0 COMMENT '点赞数',
+                         `kbs` decimal(13, 4) NULL DEFAULT 0.0000 COMMENT '获取的总KB值',
+                         `invitation_code` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户邀请码',
+                         `invitation_qrcode` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '邀请者二维码',
+                         `invitation_id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '邀请者id',
+                         `invitation_url_and` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '推广安卓URL',
+                         `invitation_url_ios` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '推广IOSURL',
+                         `invitation_url_weixin` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '推广微信小程序URL',
+                         `invitation_ids` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT '推广链',
+                         `user_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '1' COMMENT '用户类型（1普通用户 ，2会员用户）',
+                         `vip_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '1' COMMENT '会员类型（1非会员 ，2普通会员 ，3VIP会员 ，4SVIP会员）',
+                         `vip_start_time` datetime NULL DEFAULT NULL COMMENT '会员开始时间',
+                         `vip_end_time` datetime NULL DEFAULT NULL COMMENT '会员结束时间',
+                         `realname_auth` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '1' COMMENT '是否实名认证（1未验证，2已验证）',
+                         `open_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '微信登录openid',
+                         `session_key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '微信登录会话KEY',
+                         `login_ip` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '最后登录IP',
+                         `login_date` datetime NULL DEFAULT NULL COMMENT '最后登录时间',
+                         `status_flag` int NOT NULL DEFAULT 0 COMMENT '状态：0启用，2停用',
+                         `delete_flag` int NOT NULL DEFAULT 0 COMMENT '删除：0未删除，2已删除',
+                         `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
+                         `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                         `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
+                         `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                         `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
+                         PRIMARY KEY (`id`) USING BTREE,
+                         UNIQUE INDEX `user_name`(`user_name` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
@@ -1311,38 +1227,38 @@ INSERT INTO `user` VALUES (1614164971296526336, '10f5477e16ac42c9b41a1a24df50734
 -- ----------------------------
 DROP TABLE IF EXISTS `user_account`;
 CREATE TABLE `user_account`  (
-  `id` bigint(32) NOT NULL COMMENT '账户id',
-  `user_id` bigint(32) NULL DEFAULT NULL COMMENT '用户id',
-  `uuid` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '设备唯一标识',
-  `number` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '账户号',
-  `password` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '账户支付密码',
-  `salt` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '支付密码加密盐',
-  `type` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '账户类型；1：余额账户 2：kb账户',
-  `user_type` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户类型；1：个人  2：商家',
-  `grade` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '账户等级；1：普通账户 2：金卡账户 3：铂金账户',
-  `deal_commission_ratio` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '交易手续费比例(账户等级不同，交易手续费比例不同)',
-  `withdrawal_commission_ratio` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '提现手续费比例(账户等级不同，交易手续费比例不同)',
-  `daily_trading_limit` decimal(32, 4) NULL DEFAULT NULL COMMENT '日交易限额',
-  `month_trading_limit` decimal(32, 4) NULL DEFAULT NULL COMMENT '月交易限额',
-  `daily_withdrawal_limit` decimal(32, 4) NULL DEFAULT NULL COMMENT '日提现限额',
-  `month_withdrawal_limit` decimal(32, 4) NULL DEFAULT NULL COMMENT '月提现限额',
-  `available_balance` decimal(32, 4) NOT NULL DEFAULT 0.0000 COMMENT '账户可用余额',
-  `frozen_amount` decimal(32, 4) NOT NULL DEFAULT 0.0000 COMMENT '账户冻结金额',
-  `status_flag` int(11) NOT NULL DEFAULT 0 COMMENT '状态：0：启用，2：停用',
-  `delete_flag` int(11) NOT NULL DEFAULT 0 COMMENT '删除：0：未删除，2：已删除',
-  `create_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `number`(`number` ASC) USING BTREE,
-  INDEX `user_id`(`number` ASC, `user_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户账户信息' ROW_FORMAT = Dynamic;
+                                 `id` bigint NOT NULL COMMENT '账户id',
+                                 `user_id` bigint NULL DEFAULT NULL COMMENT '用户id',
+                                 `uuid` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '设备唯一标识',
+                                 `number` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '账户号',
+                                 `password` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '账户支付密码',
+                                 `salt` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '支付密码加密盐',
+                                 `type` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '账户类型；1：余额账户 2：kb账户',
+                                 `user_type` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户类型；1：个人  2：商家',
+                                 `grade` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '账户等级；1：普通账户 2：金卡账户 3：铂金账户',
+                                 `deal_commission_ratio` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '交易手续费比例(账户等级不同，交易手续费比例不同)',
+                                 `withdrawal_commission_ratio` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '提现手续费比例(账户等级不同，交易手续费比例不同)',
+                                 `daily_trading_limit` decimal(32, 4) NULL DEFAULT NULL COMMENT '日交易限额',
+                                 `month_trading_limit` decimal(32, 4) NULL DEFAULT NULL COMMENT '月交易限额',
+                                 `daily_withdrawal_limit` decimal(32, 4) NULL DEFAULT NULL COMMENT '日提现限额',
+                                 `month_withdrawal_limit` decimal(32, 4) NULL DEFAULT NULL COMMENT '月提现限额',
+                                 `available_balance` decimal(32, 4) NOT NULL DEFAULT 0.0000 COMMENT '账户可用余额',
+                                 `frozen_amount` decimal(32, 4) NOT NULL DEFAULT 0.0000 COMMENT '账户冻结金额',
+                                 `status_flag` int NOT NULL DEFAULT 0 COMMENT '状态：0：启用，2：停用',
+                                 `delete_flag` int NOT NULL DEFAULT 0 COMMENT '删除：0：未删除，2：已删除',
+                                 `create_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
+                                 `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                 `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
+                                 `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
+                                 PRIMARY KEY (`id`) USING BTREE,
+                                 UNIQUE INDEX `number`(`number` ASC) USING BTREE,
+                                 INDEX `user_id`(`number` ASC, `user_id` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户账户信息' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_account
 -- ----------------------------
-INSERT INTO `user_account` VALUES (1587399165784354818, 1587399165414084608, 'c0db8b3c91d5bf22646cd1252b768357', 'cb8946830a454421b758f96f1781cff4', '102234fd16214ac59cfa732c39da79bd', 'EZVMAXOL', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 99859994.9600, 0.0000, 0, 0, '', '2022-11-01 19:00:28', NULL, NULL);
+INSERT INTO `user_account` VALUES (1587399165784354818, 1587399165414084608, 'c0db8b3c91d5bf22646cd1252b768357', 'cb8946830a454421b758f96f1781cff4', '102234fd16214ac59cfa732c39da79bd', 'EZVMAXOL', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 99859994.9601, 0.0001, 0, 0, '', '2022-11-01 19:00:28', NULL, NULL);
 INSERT INTO `user_account` VALUES (1587399166237339650, 1587399165414084608, 'c0db8b3c91d5bf22646cd1252b768357', 'ccb104e80e364a77952caf1def20a797', '102234fd16214ac59cfa732c39da79bd', 'EZVMAXOL', '2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 566521.0000, 0.0000, 0, 0, '', '2022-11-01 19:00:28', NULL, NULL);
 INSERT INTO `user_account` VALUES (1587400634373763073, 1587400633995104256, 'eeca1af23504d95b8bbe1043bfa1ad6a', 'dac071e4f2604729ac676ed4c782dc8d', NULL, NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.0000, 0.0000, 0, 0, '', '2022-11-01 19:06:18', NULL, NULL);
 INSERT INTO `user_account` VALUES (1587400634768027649, 1587400633995104256, 'eeca1af23504d95b8bbe1043bfa1ad6a', 'a8fd4690e03b4398a62395eee0afa597', NULL, NULL, '2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.0000, 0.0000, 0, 0, '', '2022-11-01 19:06:18', NULL, NULL);
@@ -1354,35 +1270,35 @@ INSERT INTO `user_account` VALUES (1614164972107198466, 1614164971296526336, NUL
 -- ----------------------------
 DROP TABLE IF EXISTS `user_account_detail`;
 CREATE TABLE `user_account_detail`  (
-  `id` bigint(32) NOT NULL COMMENT '交易记录id',
-  `account_id` bigint(32) NULL DEFAULT NULL COMMENT '账户id',
-  `account_number` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '账户号',
-  `account_type` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '账户类型；1：余额账户  2：kb账户',
-  `type` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '记录类型；1：收入 2：支出',
-  `debit_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '收款方类型',
-  `debit_number` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '收款方账户号',
-  `debit_phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '收款方手机号',
-  `credit_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '付款方类型',
-  `credit_number` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '付款方账户号',
-  `credit_phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '付款方手机号',
-  `order_price` decimal(32, 4) NULL DEFAULT NULL COMMENT '交易金额',
-  `before_available_balance` decimal(32, 4) NULL DEFAULT NULL COMMENT '交易前账户可用余额',
-  `after_available_balance` decimal(32, 4) NULL DEFAULT NULL COMMENT '交易后账户可用余额',
-  `deal_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '交易名称',
-  `order_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '订单号',
-  `deal_serial_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '交易流水号',
-  `merchant_serial_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '第三方交易流水号',
-  `img` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '图像',
-  `service_charge` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '手续费',
-  `deal_type` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '交易类型；1：充值 2：提现 3：消费 4：转账 5：红包 6： 退款 7：其他',
-  `remarks` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
-  `status_flag` int(11) NOT NULL DEFAULT 0 COMMENT '状态：0：启用，2：停用',
-  `delete_flag` int(11) NOT NULL DEFAULT 0 COMMENT '删除：0：未删除，2：已删除',
-  `create_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
-  PRIMARY KEY (`id`) USING BTREE
+                                        `id` bigint NOT NULL COMMENT '交易记录id',
+                                        `account_id` bigint NULL DEFAULT NULL COMMENT '账户id',
+                                        `account_number` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '账户号',
+                                        `account_type` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '账户类型；1：余额账户  2：kb账户',
+                                        `type` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '记录类型；1：收入 2：支出',
+                                        `debit_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '收款方类型',
+                                        `debit_number` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '收款方账户号',
+                                        `debit_phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '收款方手机号',
+                                        `credit_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '付款方类型',
+                                        `credit_number` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '付款方账户号',
+                                        `credit_phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '付款方手机号',
+                                        `order_price` decimal(32, 4) NULL DEFAULT NULL COMMENT '交易金额',
+                                        `before_available_balance` decimal(32, 4) NULL DEFAULT NULL COMMENT '交易前账户可用余额',
+                                        `after_available_balance` decimal(32, 4) NULL DEFAULT NULL COMMENT '交易后账户可用余额',
+                                        `deal_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '交易名称',
+                                        `order_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '订单号',
+                                        `deal_serial_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '交易流水号',
+                                        `merchant_serial_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '第三方交易流水号',
+                                        `img` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '图像',
+                                        `service_charge` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '手续费',
+                                        `deal_type` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '交易类型；1：充值 2：提现 3：消费 4：转账 5：红包 6： 退款 7：其他',
+                                        `remarks` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
+                                        `status_flag` int NOT NULL DEFAULT 0 COMMENT '状态：0：启用，2：停用',
+                                        `delete_flag` int NOT NULL DEFAULT 0 COMMENT '删除：0：未删除，2：已删除',
+                                        `create_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
+                                        `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                        `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
+                                        `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
+                                        PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户账户明细记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -1408,21 +1324,21 @@ INSERT INTO `user_account_detail` VALUES (1590958496882589698, 15873991657843548
 -- ----------------------------
 DROP TABLE IF EXISTS `user_auth`;
 CREATE TABLE `user_auth`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '授权ID',
-  `user_id` bigint(20) NOT NULL COMMENT '用户ID',
-  `uuid` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '第三方平台用户唯一ID',
-  `login_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '登录账号',
-  `user_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '用户昵称',
-  `avatar` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '头像地址',
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '用户邮箱',
-  `source` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '用户来源',
-  `status_flag` int(11) NOT NULL DEFAULT 0 COMMENT '状态：0：启用，2：停用',
-  `delete_flag` int(11) NOT NULL DEFAULT 0 COMMENT '删除：0：未删除，2：已删除',
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`id`) USING BTREE
+                              `id` bigint NOT NULL AUTO_INCREMENT COMMENT '授权ID',
+                              `user_id` bigint NOT NULL COMMENT '用户ID',
+                              `uuid` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '第三方平台用户唯一ID',
+                              `login_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '登录账号',
+                              `user_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '用户昵称',
+                              `avatar` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '头像地址',
+                              `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '用户邮箱',
+                              `source` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '用户来源',
+                              `status_flag` int NOT NULL DEFAULT 0 COMMENT '状态：0：启用，2：停用',
+                              `delete_flag` int NOT NULL DEFAULT 0 COMMENT '删除：0：未删除，2：已删除',
+                              `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
+                              `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                              `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
+                              `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                              PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户第三方授权表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -1434,24 +1350,24 @@ CREATE TABLE `user_auth`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `user_bind`;
 CREATE TABLE `user_bind`  (
-  `id` bigint(32) NOT NULL COMMENT 'id',
-  `user_id` bigint(32) NULL DEFAULT NULL COMMENT '用户id',
-  `uuid` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '设备唯一标识',
-  `belong_bank` int(11) NULL DEFAULT NULL COMMENT '所属银行；1：支付宝 2：银行卡',
-  `bank_card` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '银行卡卡号',
-  `bank_name` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '银行卡开户行名称 如:工商银行',
-  `bank_account` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '银行卡开户账户',
-  `alipay_account` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '支付宝账号',
-  `alipay_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '支付宝认证姓名',
-  `bind_time` datetime NULL DEFAULT NULL COMMENT '绑定时间',
-  `status_flag` int(11) NOT NULL DEFAULT 0 COMMENT '状态：0：启用，2：停用',
-  `delete_flag` int(11) NOT NULL DEFAULT 0 COMMENT '删除：0：未删除，2：已删除',
-  `create_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `user_id`(`user_id` ASC) USING BTREE
+                              `id` bigint NOT NULL COMMENT 'id',
+                              `user_id` bigint NULL DEFAULT NULL COMMENT '用户id',
+                              `uuid` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '设备唯一标识',
+                              `belong_bank` int NULL DEFAULT NULL COMMENT '所属银行；1：支付宝 2：银行卡',
+                              `bank_card` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '银行卡卡号',
+                              `bank_name` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '银行卡开户行名称 如:工商银行',
+                              `bank_account` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '银行卡开户账户',
+                              `alipay_account` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '支付宝账号',
+                              `alipay_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '支付宝认证姓名',
+                              `bind_time` datetime NULL DEFAULT NULL COMMENT '绑定时间',
+                              `status_flag` int NOT NULL DEFAULT 0 COMMENT '状态：0：启用，2：停用',
+                              `delete_flag` int NOT NULL DEFAULT 0 COMMENT '删除：0：未删除，2：已删除',
+                              `create_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
+                              `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                              `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
+                              `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
+                              PRIMARY KEY (`id`) USING BTREE,
+                              INDEX `user_id`(`user_id` ASC) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户绑定银行卡或支付宝' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -1465,17 +1381,17 @@ INSERT INTO `user_bind` VALUES (1590958588704292865, 1587399165414084608, 'e1e4c
 -- ----------------------------
 DROP TABLE IF EXISTS `user_mock_data`;
 CREATE TABLE `user_mock_data`  (
-  `id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'id',
-  `type` int(11) NULL DEFAULT NULL COMMENT '类型：1：昵称 2：头像',
-  `value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '昵称或者头像值',
-  `status_flag` int(11) NOT NULL DEFAULT 0 COMMENT '状态：0：启用，2：停用',
-  `delete_flag` int(11) NOT NULL DEFAULT 0 COMMENT '删除：0：未删除，2：已删除',
-  `create_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户随机信息' ROW_FORMAT = DYNAMIC;
+                                   `id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'id',
+                                   `type` int NULL DEFAULT NULL COMMENT '类型：1：昵称 2：头像',
+                                   `value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '昵称或者头像值',
+                                   `status_flag` int NOT NULL DEFAULT 0 COMMENT '状态：0：启用，2：停用',
+                                   `delete_flag` int NOT NULL DEFAULT 0 COMMENT '删除：0：未删除，2：已删除',
+                                   `create_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
+                                   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                   `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
+                                   `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
+                                   PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户随机信息' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_mock_data
@@ -1526,36 +1442,31 @@ INSERT INTO `user_mock_data` VALUES ('94', 2, 'https://aicloud888.oss-cn-hangzho
 -- ----------------------------
 DROP TABLE IF EXISTS `user_order`;
 CREATE TABLE `user_order`  (
-  `id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `subject` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '商品名称',
-  `number` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '订单号',
-  `body` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '商品介绍',
-  `total_amount` decimal(32, 4) NOT NULL DEFAULT 0.0000 COMMENT '订单金额（分为单位）',
-  `real_amount` decimal(32, 4) NOT NULL DEFAULT 0.0000 COMMENT '交易金额',
-  `kb_amount` decimal(32, 4) NOT NULL DEFAULT 0.0000 COMMENT 'kb账号金额',
-  `yuanli_amount` decimal(32, 4) NOT NULL DEFAULT 0.0000 COMMENT '源力金额',
-  `biz_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '商户绑定用户ID',
-  `biz_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '商户名称',
-  `biz_account` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '商户账号',
-  `biz_phone` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '商户绑定电话',
-  `buyer_id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '买家用户ID',
-  `app_id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '应用ID',
-  `service_order_id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '订单ID',
-  `buyer_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '买家姓名',
-  `buyer_nick_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '买家昵称',
-  `buyer_username` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '买家账号',
-  `buyer_phone` varchar(18) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '买家电话',
-  `buyer_headimg` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '买家头像',
-  `order_status` int(11) NOT NULL DEFAULT 1 COMMENT '支付状态 1.待支付 2.已支付 3.支付失败 4.已取消',
-  `order_type` int(11) NULL DEFAULT NULL COMMENT '订单类型：业务应用定义',
-  `create_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
-  `status_flag` int(11) NOT NULL DEFAULT 0 COMMENT '状态：0启用，2停用',
-  `delete_flag` int(11) NOT NULL DEFAULT 0 COMMENT '删除：0未删除，2已删除',
-  `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '交易订单' ROW_FORMAT = DYNAMIC;
+                               `id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '交易id',
+                               `user_id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '用户ID',
+                               `service_order_id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '订单ID',
+                               `subject` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '商品名称',
+                               `number` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '订单号',
+                               `body` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '商品介绍',
+                               `total_amount` decimal(32, 4) NOT NULL DEFAULT 0.0000 COMMENT '订单金额（分为单位）',
+                               `real_amount` decimal(32, 4) NOT NULL DEFAULT 0.0000 COMMENT '交易金额',
+                               `buyer_id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '买家用户ID',
+                               `buyer_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '买家姓名',
+                               `buyer_nick_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '买家昵称',
+                               `buyer_username` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '买家账号',
+                               `buyer_phone` varchar(18) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '买家电话',
+                               `buyer_headimg` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '买家头像',
+                               `order_status` int NOT NULL DEFAULT 1 COMMENT '支付状态 1.待支付 2.已支付 3.支付失败 4.已取消',
+                               `order_type` int NULL DEFAULT NULL COMMENT '订单类型：业务应用定义',
+                               `status_flag` int NOT NULL DEFAULT 0 COMMENT '状态：0启用，2停用',
+                               `delete_flag` int NOT NULL DEFAULT 0 COMMENT '删除：0未删除，2已删除',
+                               `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
+                               `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                               `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
+                               `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                               `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
+                               PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '交易订单' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_order
@@ -1566,53 +1477,53 @@ CREATE TABLE `user_order`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `user_set`;
 CREATE TABLE `user_set`  (
-  `id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `user_id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '用户id',
-  `head_img` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户头像',
-  `nick_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户昵称',
-  `uuid` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '设备唯一标识',
-  `message_shake` int(11) NULL DEFAULT NULL COMMENT '消息推送是否开启震动；1：开启，0：未开启',
-  `message_alarm` int(11) NULL DEFAULT NULL COMMENT '消息推送是否开启铃声；1：开启，0：未开启',
-  `like_remind` int(11) NULL DEFAULT NULL COMMENT '点赞提醒是否开启；1：开启，0：未开启',
-  `attention_remind` int(11) NULL DEFAULT NULL COMMENT '关注提醒是否开启；1：开启，0：未开启',
-  `notification` int(11) NULL DEFAULT NULL COMMENT '系统通知提醒是否开启；1：开启，0：未开启',
-  `comment_remind` int(11) NULL DEFAULT NULL COMMENT '评论提醒是否开启；1：开启，0：未开启',
-  `status_flag` int(11) NOT NULL DEFAULT 1 COMMENT '状态：1：启用，0：停用',
-  `delete_flag` int(11) NOT NULL DEFAULT 0 COMMENT '1:删除，0：未删除',
-  `create_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
-  `update_time` timestamp NULL DEFAULT NULL COMMENT '修改时间',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户设置' ROW_FORMAT = DYNAMIC;
+                             `id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+                             `user_id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '用户id',
+                             `head_img` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户头像',
+                             `nick_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户昵称',
+                             `uuid` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '设备唯一标识',
+                             `message_shake` int NULL DEFAULT NULL COMMENT '消息推送是否开启震动；1：开启，0：未开启',
+                             `message_alarm` int NULL DEFAULT NULL COMMENT '消息推送是否开启铃声；1：开启，0：未开启',
+                             `like_remind` int NULL DEFAULT NULL COMMENT '点赞提醒是否开启；1：开启，0：未开启',
+                             `attention_remind` int NULL DEFAULT NULL COMMENT '关注提醒是否开启；1：开启，0：未开启',
+                             `notification` int NULL DEFAULT NULL COMMENT '系统通知提醒是否开启；1：开启，0：未开启',
+                             `comment_remind` int NULL DEFAULT NULL COMMENT '评论提醒是否开启；1：开启，0：未开启',
+                             `status_flag` int NOT NULL DEFAULT 1 COMMENT '状态：1：启用，0：停用',
+                             `delete_flag` int NOT NULL DEFAULT 0 COMMENT '1:删除，0：未删除',
+                             `create_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
+                             `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+                             `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
+                             `update_time` timestamp NULL DEFAULT NULL COMMENT '修改时间',
+                             PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户设置' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_set
 -- ----------------------------
-INSERT INTO `user_set` VALUES ('1590957505332346882', '1587399165414084608', 'https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/11/01/5f8d9ee99ff44eb684cee75649647861a.png', '相忆采芙蓉', 'c0db8b3c91d5bf22646cd1252b768357', 1, 1, 1, 0, 1, 1, 1, 0, 'ai168', '2022-11-11 14:40:02', 'ai168', '2022-11-11 14:40:05');
+INSERT INTO `user_set` VALUES ('1590957505332346882', '1587399165414084608', 'https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/11/01/5f8d9ee99ff44eb684cee75649647861a.png', '相忆采芙蓉', 'c0db8b3c91d5bf22646cd1252b768357', 1, 1, 1, 0, 1, 1, 1, 0, 'ai168', '2022-11-11 22:40:02', 'ai168', '2022-11-11 22:40:05');
 
 -- ----------------------------
 -- Table structure for user_share
 -- ----------------------------
 DROP TABLE IF EXISTS `user_share`;
 CREATE TABLE `user_share`  (
-  `id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '主键ID',
-  `like` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '分享链接',
-  `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '分享名称',
-  `img` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '分享图片',
-  `share_id` char(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '分享者ID',
-  `nick_name` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '分享用户名称',
-  `headimg` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '分享用户头像',
-  `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '分享用户手机号',
-  `channel` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '分享渠道 1：微信好友 2：微信朋友圈 3：新浪微博 4：QQ空间 5：qq群 6：qq好友',
-  `status_flag` int(11) NOT NULL DEFAULT 0 COMMENT '状态：0：启用，2：停用',
-  `delete_flag` int(11) NOT NULL DEFAULT 0 COMMENT '删除：0：未删除，2：已删除',
-  `create_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户分享记录' ROW_FORMAT = DYNAMIC;
+                               `id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '主键ID',
+                               `like` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '分享链接',
+                               `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '分享名称',
+                               `img` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '分享图片',
+                               `share_id` char(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '分享者ID',
+                               `nick_name` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '分享用户名称',
+                               `headimg` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '分享用户头像',
+                               `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '分享用户手机号',
+                               `channel` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '分享渠道 1：微信好友 2：微信朋友圈 3：新浪微博 4：QQ空间 5：qq群 6：qq好友',
+                               `status_flag` int NOT NULL DEFAULT 0 COMMENT '状态：0：启用，2：停用',
+                               `delete_flag` int NOT NULL DEFAULT 0 COMMENT '删除：0：未删除，2：已删除',
+                               `create_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
+                               `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                               `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
+                               `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
+                               PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户分享记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_share
@@ -1623,18 +1534,18 @@ CREATE TABLE `user_share`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `user_share_click_log`;
 CREATE TABLE `user_share_click_log`  (
-  `id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '主键ID',
-  `user_id` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户点击ID',
-  `channel` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户来源渠道 1：微信好友 2：微信朋友圈 3：新浪微博 4：QQ空间 5：qq群 6：qq好友',
-  `open_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '第三方开放ID',
-  `nick_name` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '第三方用户昵称',
-  `headimg` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '第三方用户头像',
-  `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '绑定手机号',
-  `sex` char(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户性别',
-  `img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '分享图片',
-  `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户点击分享记录' ROW_FORMAT = DYNAMIC;
+                                         `id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '主键ID',
+                                         `user_id` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户点击ID',
+                                         `channel` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户来源渠道 1：微信好友 2：微信朋友圈 3：新浪微博 4：QQ空间 5：qq群 6：qq好友',
+                                         `open_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '第三方开放ID',
+                                         `nick_name` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '第三方用户昵称',
+                                         `headimg` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '第三方用户头像',
+                                         `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '绑定手机号',
+                                         `sex` char(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户性别',
+                                         `img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '分享图片',
+                                         `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                                         PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户点击分享记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_share_click_log
@@ -1645,90 +1556,90 @@ CREATE TABLE `user_share_click_log`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `user_vip`;
 CREATE TABLE `user_vip`  (
-  `id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'id',
-  `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '会员名称',
-  `introduce` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '会员介绍',
-  `cover_img` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '会员封面图',
-  `icon` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '会员图标',
-  `month_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '会员月费价格',
-  `year_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '会员年费价格',
-  `weight` int(11) NULL DEFAULT NULL COMMENT '权重值',
-  `status_flag` int(11) NOT NULL DEFAULT 1 COMMENT '状态：1：启用，0：停用',
-  `delete_flag` int(11) NOT NULL DEFAULT 0 COMMENT '1:删除，0：未删除',
-  `create_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
-  `update_time` timestamp NULL DEFAULT NULL COMMENT '修改时间',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '会员' ROW_FORMAT = DYNAMIC;
+                             `id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'id',
+                             `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '会员名称',
+                             `introduce` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '会员介绍',
+                             `cover_img` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '会员封面图',
+                             `icon` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '会员图标',
+                             `month_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '会员月费价格',
+                             `year_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '会员年费价格',
+                             `weight` int NULL DEFAULT NULL COMMENT '权重值',
+                             `status_flag` int NOT NULL DEFAULT 1 COMMENT '状态：1：启用，0：停用',
+                             `delete_flag` int NOT NULL DEFAULT 0 COMMENT '1:删除，0：未删除',
+                             `create_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
+                             `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+                             `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
+                             `update_time` timestamp NULL DEFAULT NULL COMMENT '修改时间',
+                             PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '会员' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_vip
 -- ----------------------------
-INSERT INTO `user_vip` VALUES ('1', '超级会员', 'tset', 'test', 'test', 113.00, 1356.00, 1, 1, 0, '1', '2019-11-06 09:52:58', NULL, NULL);
+INSERT INTO `user_vip` VALUES ('1', '超级会员', 'tset', 'test', 'test', 113.00, 1356.00, 1, 1, 0, '1', '2019-11-06 17:52:58', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for user_vip_equity
 -- ----------------------------
 DROP TABLE IF EXISTS `user_vip_equity`;
 CREATE TABLE `user_vip_equity`  (
-  `id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'id',
-  `vip_id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '会员主表id',
-  `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '会员权益名称',
-  `introduce` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '会员权益介绍',
-  `icon` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '会员权益图标',
-  `weight` int(11) NULL DEFAULT NULL COMMENT '会员权益权重值',
-  `link` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '会员权益跳转链接',
-  `status_flag` int(11) NOT NULL DEFAULT 1 COMMENT '状态：1：启用，0：停用',
-  `delete_flag` int(11) NOT NULL DEFAULT 0 COMMENT '1:删除，0：未删除',
-  `create_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
-  `update_time` timestamp NULL DEFAULT NULL COMMENT '修改时间',
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `vip_id`(`vip_id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '会员权益' ROW_FORMAT = DYNAMIC;
+                                    `id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'id',
+                                    `vip_id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '会员主表id',
+                                    `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '会员权益名称',
+                                    `introduce` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '会员权益介绍',
+                                    `icon` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '会员权益图标',
+                                    `weight` int NULL DEFAULT NULL COMMENT '会员权益权重值',
+                                    `link` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '会员权益跳转链接',
+                                    `status_flag` int NOT NULL DEFAULT 1 COMMENT '状态：1：启用，0：停用',
+                                    `delete_flag` int NOT NULL DEFAULT 0 COMMENT '1:删除，0：未删除',
+                                    `create_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
+                                    `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+                                    `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
+                                    `update_time` timestamp NULL DEFAULT NULL COMMENT '修改时间',
+                                    PRIMARY KEY (`id`) USING BTREE,
+                                    INDEX `vip_id`(`vip_id` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '会员权益' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_vip_equity
 -- ----------------------------
-INSERT INTO `user_vip_equity` VALUES ('1', '1', '权益1', '1', '1', 1, '1', 1, 0, '1', '2019-11-06 09:53:12', NULL, NULL);
-INSERT INTO `user_vip_equity` VALUES ('2', '1', '权益2', '2', '2', 2, '1', 1, 0, '1', '2019-11-06 09:53:27', NULL, NULL);
+INSERT INTO `user_vip_equity` VALUES ('1', '1', '权益1', '1', '1', 1, '1', 1, 0, '1', '2019-11-06 17:53:12', NULL, NULL);
+INSERT INTO `user_vip_equity` VALUES ('2', '1', '权益2', '2', '2', 2, '1', 1, 0, '1', '2019-11-06 17:53:27', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for user_vip_open_log
 -- ----------------------------
 DROP TABLE IF EXISTS `user_vip_open_log`;
 CREATE TABLE `user_vip_open_log`  (
-  `id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `vip_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '开通会员id',
-  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '商品名称',
-  `boss_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '商家',
-  `boss_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '商家信息',
-  `pay_way` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '支付方式；1：微信支付 2：支付宝支付 3：余额支付',
-  `user_id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户id',
-  `head_img` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户头像',
-  `nick_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户昵称',
-  `device_id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '设备记录id',
-  `uuid` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '设备唯一标识',
-  `bind_phone` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户绑定手机号',
-  `pay_type` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '支付类型；1：月支付 2：年支付',
-  `number` int(11) NULL DEFAULT NULL COMMENT '开通时长（月）',
-  `order_amount` decimal(12, 2) NULL DEFAULT NULL COMMENT '订单金额',
-  `pay_amount` decimal(12, 2) NULL DEFAULT NULL COMMENT '支付金额',
-  `merchant_serial_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '商户流水号(第三方流水号）',
-  `deal_serial_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '交易流水号 即支付成功的业务流水号',
-  `third_orderno` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '订单号',
-  `pay_status` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '交易状态；1：待付款 2：已付款 3： 付款失败 4.已取消 5：已退款  9.支付结果返回中',
-  `pay_time` datetime NULL DEFAULT NULL COMMENT '支付时间',
-  `status_flag` int(11) NOT NULL DEFAULT 1 COMMENT '状态：1：启用，0：停用',
-  `delete_flag` int(11) NOT NULL DEFAULT 0 COMMENT '1:删除，0：未删除',
-  `create_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
-  `update_time` timestamp NULL DEFAULT NULL COMMENT '修改时间',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '会员开通记录' ROW_FORMAT = DYNAMIC;
+                                      `id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+                                      `vip_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '开通会员id',
+                                      `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '商品名称',
+                                      `boss_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '商家',
+                                      `boss_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '商家信息',
+                                      `pay_way` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '支付方式；1：微信支付 2：支付宝支付 3：余额支付',
+                                      `user_id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户id',
+                                      `head_img` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户头像',
+                                      `nick_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户昵称',
+                                      `device_id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '设备记录id',
+                                      `uuid` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '设备唯一标识',
+                                      `bind_phone` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户绑定手机号',
+                                      `pay_type` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '支付类型；1：月支付 2：年支付',
+                                      `number` int NULL DEFAULT NULL COMMENT '开通时长（月）',
+                                      `order_amount` decimal(12, 2) NULL DEFAULT NULL COMMENT '订单金额',
+                                      `pay_amount` decimal(12, 2) NULL DEFAULT NULL COMMENT '支付金额',
+                                      `merchant_serial_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '商户流水号(第三方流水号）',
+                                      `deal_serial_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '交易流水号 即支付成功的业务流水号',
+                                      `third_orderno` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '订单号',
+                                      `pay_status` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '交易状态；1：待付款 2：已付款 3： 付款失败 4.已取消 5：已退款  9.支付结果返回中',
+                                      `pay_time` datetime NULL DEFAULT NULL COMMENT '支付时间',
+                                      `status_flag` int NOT NULL DEFAULT 1 COMMENT '状态：1：启用，0：停用',
+                                      `delete_flag` int NOT NULL DEFAULT 0 COMMENT '1:删除，0：未删除',
+                                      `create_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
+                                      `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+                                      `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
+                                      `update_time` timestamp NULL DEFAULT NULL COMMENT '修改时间',
+                                      PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '会员开通记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_vip_open_log
@@ -1739,38 +1650,38 @@ CREATE TABLE `user_vip_open_log`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `user_withdraw_apply`;
 CREATE TABLE `user_withdraw_apply`  (
-  `id` bigint(32) NOT NULL COMMENT '提现记录id',
-  `user_id` bigint(32) NULL DEFAULT NULL COMMENT '用户id',
-  `uuid` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '设备唯一标示',
-  `belong_bank` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '提现方式；1：支付宝 2：银行卡',
-  `bank_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '开户行姓名',
-  `bank_account` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '开户行账号',
-  `bank_card` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '卡号',
-  `alipay_account` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '支付宝账户',
-  `alipay_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '支付宝姓名',
-  `amount` decimal(10, 3) NULL DEFAULT NULL COMMENT '提现金额',
-  `deal_serial_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '交易流水号',
-  `merchant_serial_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '商户流水号',
-  `service_charge` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '提现手续费',
-  `settlement_amount` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '结算账金额',
-  `status` int(11) NULL DEFAULT 1 COMMENT '提现状态；1：待审核 2：审核通过 3：审核拒绝',
-  `remit_status` int(11) NULL DEFAULT 1 COMMENT '打款状态 1：待确认 2：已打款 3：拒绝打款',
-  `apply_time` datetime NULL DEFAULT NULL COMMENT '申请时间',
-  `accept_apply_time` datetime NULL DEFAULT NULL COMMENT '审核通过时间',
-  `accept_apply_serial_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '审核通过扣款流水号（冗余）',
-  `remit_time` datetime NULL DEFAULT NULL COMMENT '确认打款时间',
-  `remit_serial_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '确认打款交易流水号(冗余)',
-  `other_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '外部汇款凭证号',
-  `refuse_apply_time` datetime NULL DEFAULT NULL COMMENT '审核/打款 拒绝时间',
-  `refuse_serial_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '打款拒绝退款流水号',
-  `remarks` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT '备注',
-  `delete_flag` int(11) NOT NULL DEFAULT 0 COMMENT '删除：0：未删除，2：已删除',
-  `create_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `user_id`(`user_id` ASC) USING BTREE
+                                        `id` bigint NOT NULL COMMENT '提现记录id',
+                                        `user_id` bigint NULL DEFAULT NULL COMMENT '用户id',
+                                        `uuid` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '设备唯一标示',
+                                        `belong_bank` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '提现方式；1：支付宝 2：银行卡',
+                                        `bank_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '开户行姓名',
+                                        `bank_account` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '开户行账号',
+                                        `bank_card` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '卡号',
+                                        `alipay_account` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '支付宝账户',
+                                        `alipay_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '支付宝姓名',
+                                        `amount` decimal(10, 3) NULL DEFAULT NULL COMMENT '提现金额',
+                                        `deal_serial_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '交易流水号',
+                                        `merchant_serial_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '商户流水号',
+                                        `service_charge` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '提现手续费',
+                                        `settlement_amount` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '结算账金额',
+                                        `status` int NULL DEFAULT 1 COMMENT '提现状态；1：待审核 2：审核通过 3：审核拒绝',
+                                        `remit_status` int NULL DEFAULT 1 COMMENT '打款状态 1：待确认 2：已打款 3：拒绝打款',
+                                        `apply_time` datetime NULL DEFAULT NULL COMMENT '申请时间',
+                                        `accept_apply_time` datetime NULL DEFAULT NULL COMMENT '审核通过时间',
+                                        `accept_apply_serial_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '审核通过扣款流水号（冗余）',
+                                        `remit_time` datetime NULL DEFAULT NULL COMMENT '确认打款时间',
+                                        `remit_serial_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '确认打款交易流水号(冗余)',
+                                        `other_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '外部汇款凭证号',
+                                        `refuse_apply_time` datetime NULL DEFAULT NULL COMMENT '审核/打款 拒绝时间',
+                                        `refuse_serial_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '打款拒绝退款流水号',
+                                        `remarks` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT '备注',
+                                        `delete_flag` int NOT NULL DEFAULT 0 COMMENT '删除：0：未删除，2：已删除',
+                                        `create_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
+                                        `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                        `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
+                                        `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
+                                        PRIMARY KEY (`id`) USING BTREE,
+                                        INDEX `user_id`(`user_id` ASC) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户提现申请记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
