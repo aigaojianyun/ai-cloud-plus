@@ -28,7 +28,7 @@
       <el-form-item label="货币缩写" prop="localCurrency">
         <el-input
           v-model="queryParams.localCurrency"
-          placeholder="请输入当地货币缩写"
+          placeholder="请输入货币缩写"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -48,7 +48,8 @@
           size="mini"
           @click="handleAdd"
           v-hasPermi="['resource:country:add']"
-        >新增</el-button>
+        >新增
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -59,7 +60,8 @@
           :disabled="single"
           @click="handleUpdate"
           v-hasPermi="['resource:country:edit']"
-        >修改</el-button>
+        >修改
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -70,7 +72,8 @@
           :disabled="multiple"
           @click="handleDelete"
           v-hasPermi="['resource:country:remove']"
-        >删除</el-button>
+        >删除
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -80,25 +83,26 @@
           size="mini"
           @click="handleExport"
           v-hasPermi="['resource:country:export']"
-        >导出</el-button>
+        >导出
+        </el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
     <el-table v-loading="loading" :data="countryList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="编号" align="center" prop="id" />
-      <el-table-column label="中文名称" align="center" prop="zhName" />
+      <el-table-column type="selection" width="55" align="center"/>
+      <el-table-column label="编号" align="center" prop="id"/>
+      <el-table-column label="中文名称" align="center" prop="zhName"/>
       <el-table-column label="英文名称" align="center" prop="enName" width="200"/>
-      <el-table-column label="icon" align="center" prop="countryIcon" >
+      <el-table-column label="icon" align="center" prop="countryIcon">
         <template slot-scope="scope">
           　<img :src="scope.row.countryIcon" width="30" height="30" style="border-radius: 50%;"/>
         </template>
       </el-table-column>
-      <el-table-column label="区号" align="center" prop="areaCode" />
-      <el-table-column label="语言" align="center" prop="language" />
-      <el-table-column label="货币缩写" align="center" prop="localCurrency" />
-      <el-table-column label="备注" align="center" prop="remark" />
+      <el-table-column label="区号" align="center" prop="areaCode"/>
+      <el-table-column label="语言" align="center" prop="language"/>
+      <el-table-column label="货币缩写" align="center" prop="localCurrency"/>
+      <el-table-column label="备注" align="center" prop="remark"/>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -107,14 +111,16 @@
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
             v-hasPermi="['resource:country:edit']"
-          >修改</el-button>
+          >修改
+          </el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
             v-hasPermi="['resource:country:remove']"
-          >删除</el-button>
+          >删除
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -131,27 +137,59 @@
     <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="中文名称" prop="enName">
-          <el-input v-model="form.zhName" placeholder="请输入中文名称" />
+          <el-input v-model="form.zhName" placeholder="请输入中文名称"/>
         </el-form-item>
         <el-form-item label="英文名称" prop="enName">
-          <el-input v-model="form.enName" placeholder="请输入英文名称" />
+          <el-input v-model="form.enName" placeholder="请输入英文名称"/>
         </el-form-item>
         <el-form-item label="icon" prop="countryIcon">
+          <div class="component-upload-image">
+            <el-upload
+              v-model="form.countryIcon"
+              list-type="picture-card"
+              name="file"
+              :action="uploadFile"
+              :before-upload="handleBeforeUpload"
+              :on-success="handleUploadSuccess"
+              :on-error="handleUploadError"
+              :show-file-list="false"
+              style="display: inline-block; vertical-align: top">
+              <el-image v-if="!form.countryIcon" :src="form.countryIcon">
+                <div slot="error" class="image-slot">
+                  <i class="el-icon-plus"/>
+                </div>
+              </el-image>
+              <div v-else class="image">
+                <el-image :src="form.countryIcon" :style="`width:150px;height:150px;`" fit="fill"/>
+                <div class="mask">
+                  <div class="actions">
+                <span title="预览" @click.stop="dialogVisible = true"><i class="el-icon-zoom-in"/>
+                </span>
+                    <span title="移除" @click="handleDeleteFile(form.countryIcon)"><i class="el-icon-delete"/>
+                </span>
+                  </div>
+                </div>
+              </div>
+            </el-upload>
+            <el-dialog :visible.sync="dialogVisible" title="预览" width="800" append-to-body>
+              <img :src="form.countryIcon" style="display: block; max-width: 100%; margin: 0 auto;">
+            </el-dialog>
+          </div>
         </el-form-item>
         <el-form-item label="区号" prop="areaCode">
-          <el-input v-model="form.areaCode" placeholder="请输入区号" />
+          <el-input v-model="form.areaCode" placeholder="请输入区号"/>
         </el-form-item>
         <el-form-item label="语言" prop="language">
-          <el-input v-model="form.language" placeholder="请输入语言" />
+          <el-input v-model="form.language" placeholder="请输入语言"/>
         </el-form-item>
         <el-form-item label="货币缩写" prop="localCurrency">
-          <el-input v-model="form.localCurrency" placeholder="请输入当地货币缩写" />
+          <el-input v-model="form.localCurrency" placeholder="请输入当地货币缩写"/>
         </el-form-item>
         <el-form-item label="排序" prop="sort">
-          <el-input v-model="form.sort" placeholder="请输入排序" />
+          <el-input v-model="form.sort" placeholder="请输入排序"/>
         </el-form-item>
         <el-form-item label="备注" prop="remark">
-          <el-input v-model="form.remark" type="textarea" placeholder="请输入内容" />
+          <el-input v-model="form.remark" type="textarea" placeholder="请输入内容"/>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -163,7 +201,8 @@
 </template>
 
 <script>
-import { listCountry, getCountry, delCountry, addCountry, updateCountry } from "@/api/resource/country";
+import {addCountry, delCountry, getCountry, listCountry, updateCountry} from "@/api/resource/country";
+import {uploadFile} from "@/api/upload";
 
 export default {
   name: "Country",
@@ -201,12 +240,15 @@ export default {
       // 表单校验
       rules: {
         zhName: [
-          { required: true, message: "中文名称不能为空", trigger: "blur" }
+          {required: true, message: "中文名称不能为空", trigger: "blur"}
         ],
         enName: [
-          { required: true, message: "英文名称不能为空", trigger: "blur" }
+          {required: true, message: "英文名称不能为空", trigger: "blur"}
         ],
-      }
+      },
+      //上传图片
+      uploadFile,
+      dialogVisible: false,
     };
   },
   created() {
@@ -255,7 +297,7 @@ export default {
     // 多选框选中数据
     handleSelectionChange(selection) {
       this.ids = selection.map(item => item.id)
-      this.single = selection.length!==1
+      this.single = selection.length !== 1
       this.multiple = !selection.length
     },
     /** 新增按钮操作 */
@@ -297,19 +339,70 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const ids = row.id || this.ids;
-      this.$modal.confirm('是否确认删除国家信息编号为"' + ids + '"的数据项？').then(function() {
+      this.$modal.confirm('是否确认删除国家信息编号为"' + ids + '"的数据项？').then(function () {
         return delCountry(ids);
       }).then(() => {
         this.getList();
         this.$modal.msgSuccess("删除成功");
-      }).catch(() => {});
+      }).catch(() => {
+      });
     },
     /** 导出按钮操作 */
     handleExport() {
       this.download('system/country/export', {
         ...this.queryParams
       }, `country_${new Date().getTime()}.xlsx`)
-    }
+    },
+    /** 验证图片格式和大小  */
+    handleBeforeUpload(file) {
+      const isLt1024M = file.size / 1024 / 1024 < 1024;
+      if (['image/jpg', 'image/png', 'image/jpeg', 'image/gif'].indexOf(file.type) == -1) {
+        this.$modal.msgError('请上传正确的图片格式');
+        return false;
+      }
+      if (!isLt1024M) {
+        this.$modal.msgError('上传图片大小不能超过1024MB哦!');
+        return false;
+      }
+    },
+    /** 上传成功回调 */
+    handleUploadSuccess(res, file) {
+      if (res.code == 200) {
+        this.form.countryIcon = res.data.url;
+        this.$modal.msgSuccess(res.msg);
+      } else {
+        this.$modal.msgError('上传失败，请重新上传！');
+      }
+      this.$emit("input", res.url);
+    },
+    /** 上传失败 */
+    handleUploadError(err) {
+      this.$modal.msgError("上传失败, 请重试");
+    },
+    /** 删除文件 */
+    handleDeleteFile(index) {
+      this.form.countryIcon(index);
+      this.$emit("input", '');
+    },
   }
 };
 </script>
+<style scoped lang="scss">
+.image {
+  position: relative;
+
+  .mask {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 150px;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: all 0.3s;
+  }
+
+  &:hover .mask {
+    opacity: 1;
+  }
+}
+</style>
