@@ -1,4 +1,4 @@
-package com.cloud.security.config;
+package com.cloud.mybatis.config;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.cloud.security.utils.SecurityUtils;

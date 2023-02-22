@@ -9,18 +9,24 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ai-cloud-mybatis</artifactId>
+    <artifactId>ai-cloud-satoken</artifactId>
 
     <description>
-        ai-cloud-mybatis数据库服务
+        ai-cloud-satoken分布式事务
     </description>
 
     <dependencies>
 
-        <!--  Security -->
+        <!-- Sa-Token -->
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-spring-boot-starter</artifactId>
+        </dependency>
+
+        <!--  Redis -->
         <dependency>
             <groupId>com.cloud</groupId>
-            <artifactId>ai-cloud-security</artifactId>
+            <artifactId>ai-cloud-redis</artifactId>
         </dependency>
 
     </dependencies>

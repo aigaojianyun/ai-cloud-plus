@@ -17,10 +17,10 @@
 
     <dependencies>
 
-        <!--  Security -->
+        <!--  Mybatis -->
         <dependency>
             <groupId>com.cloud</groupId>
-            <artifactId>ai-cloud-security</artifactId>
+            <artifactId>ai-cloud-mybatis</artifactId>
         </dependency>
 
     </dependencies>

@@ -17,6 +17,7 @@
         <module>ai-cloud-mail</module>
         <module>ai-cloud-mybatis</module>
         <module>ai-cloud-redis</module>
+        <module>ai-cloud-satoken</module>
         <module>ai-cloud-seata</module>
         <module>ai-cloud-security</module>
         <module>ai-cloud-sms</module>

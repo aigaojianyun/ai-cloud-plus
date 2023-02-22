@@ -1,7 +1,7 @@
-package com.cloud.security.annotation;
+package com.cloud.mybatis.annotation;
 
+import com.cloud.mybatis.config.MybatisPlusConfig;
 import com.cloud.security.config.ApplicationConfig;
-import com.cloud.security.config.MybatisPlusConfig;
 import com.cloud.security.feign.FeignAutoConfiguration;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -10,6 +10,11 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 import java.lang.annotation.*;
 
+/**
+ * 配置
+ *
+ * @author ai-cloud
+ */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented

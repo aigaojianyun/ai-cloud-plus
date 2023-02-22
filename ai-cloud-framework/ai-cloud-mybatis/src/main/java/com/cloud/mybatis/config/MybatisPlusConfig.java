@@ -1,4 +1,4 @@
-package com.cloud.security.config;
+package com.cloud.mybatis.config;
 
 
 import com.baomidou.mybatisplus.annotation.DbType;
@@ -15,8 +15,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  *
  * @author ai-cloud
  */
-@EnableTransactionManagement(proxyTargetClass = true)
 @Configuration
+@EnableTransactionManagement(proxyTargetClass = true)
 public class MybatisPlusConfig {
 
     @Bean

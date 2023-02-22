@@ -19,6 +19,7 @@
         <spring-boot-admin.version>2.7.10</spring-boot-admin.version>
         <spring-boot.mybatis>2.2.2</spring-boot.mybatis>
         <spring-boot.mybatis-plus>3.5.1</spring-boot.mybatis-plus>
+        <spring-boot.sa-token>1.34.0</spring-boot.sa-token>
         <spring-kafka.version>2.8.8</spring-kafka.version>
         <alibaba.nacos.version>2.0.4</alibaba.nacos.version>
         <alibaba.seata.version>1.5.2</alibaba.seata.version>
@@ -104,6 +105,13 @@
                 <version>${spring-boot.mybatis-plus}</version>
             </dependency>
 
+            <!-- Sa-Token -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-spring-boot-starter</artifactId>
+                <version>${spring-boot.sa-token}</version>
+            </dependency>
+
             <!-- Kafka -->
             <dependency>
                 <groupId>org.springframework.kafka</groupId>
@@ -115,6 +123,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-websocket</artifactId>
+                <version>${spring-boot.version}</version>
             </dependency>
 
             <!-- Alibaba Nacos 配置 -->
@@ -388,7 +397,7 @@
                 <version>${ai-cloud.version}</version>
             </dependency>
 
-            <!-- mybatis -->
+            <!-- 数据库服务 -->
             <dependency>
                 <groupId>com.cloud</groupId>
                 <artifactId>ai-cloud-mybatis</artifactId>
@@ -399,6 +408,13 @@
             <dependency>
                 <groupId>com.cloud</groupId>
                 <artifactId>ai-cloud-redis</artifactId>
+                <version>${ai-cloud.version}</version>
+            </dependency>
+
+            <!-- 权限认证 -->
+            <dependency>
+                <groupId>com.cloud</groupId>
+                <artifactId>ai-cloud-satoken</artifactId>
                 <version>${ai-cloud.version}</version>
             </dependency>
 

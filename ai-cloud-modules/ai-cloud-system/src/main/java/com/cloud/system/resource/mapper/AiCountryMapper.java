@@ -1,6 +1,5 @@
 package com.cloud.system.resource.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cloud.system.resource.domain.AiCountry;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -12,7 +11,7 @@ import java.util.List;
  * @author ai-cloud
  */
 @Mapper
-public interface AiCountryMapper extends BaseMapper<AiCountry> {
+public interface AiCountryMapper {
     /**
      * 查询国家信息
      *

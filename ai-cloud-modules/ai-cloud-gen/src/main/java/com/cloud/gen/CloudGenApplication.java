@@ -1,6 +1,6 @@
 package com.cloud.gen;
 
-import com.cloud.security.annotation.EnableCustomConfig;
+import com.cloud.mybatis.annotation.EnableCustomConfig;
 import com.cloud.security.annotation.EnableRyFeignClients;
 import com.cloud.swagger.annotation.EnableCustomSwagger2;
 import org.springframework.boot.SpringApplication;
