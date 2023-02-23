@@ -1,6 +1,6 @@
 <template>
   <view class="index-content">
-    <Navbar :hideBtn="true" title="首页" bgColor="#fff" :h5Show="true" :fixed="false"></Navbar>
+    <u-navbar safeAreaInsetTop="true" placeholder="true" title="首页" bgColor="#f3f4f6" leftIcon></u-navbar>
     <view class="index-block">
       <view class="index-block-title">运行统计</view>
       <u-row gutter="16">
@@ -79,7 +79,6 @@
 </template>
 
 <script>
-import Navbar from '@/components/navbar/Navbar'
 
 let _now = new Date();
 let now_time = {};
@@ -89,7 +88,6 @@ now_time.day = _now.getDay()
 
 export default {
   components: {
-    Navbar,
   },
   data () {
     return {
@@ -137,12 +135,12 @@ export default {
 
 <style lang="scss">
 .index-content {
-  background-color: #f3f4f6;
+  background-color: $uni-bg-color;
   min-height: 100vh;
 }
 .index-block {
   padding: 40rpx;
-  background-color: #f3f4f6;
+  background-color: $uni-bg-color;
 }
 .index-block-title {
   font-size: 40rpx;

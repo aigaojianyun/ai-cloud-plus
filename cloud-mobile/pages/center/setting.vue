@@ -1,6 +1,6 @@
 <template>
   <view class="container">
-      <Navbar :hideBtn="true" title="应用设置" bgColor="#fff" :h5Show="false" :fixed="false"></Navbar>
+    <u-navbar :safeAreaInsetTop="true" placeholder="true" leftText="返回" autoBack="true"  title="应用设置" bgColor="#f3f4f6" ></u-navbar>
       <view class="list-cell b-b m-t"  hover-class="cell-hover" :hover-stay-time="50">
         <text class="cell-tit">修改密码</text>
         <text class="cell-more yticon icon-you"></text>
@@ -20,11 +20,10 @@
 </template>
 
 <script>
-import Navbar from '@/components/navbar/Navbar'
 
 export default {
   components: {
-    Navbar
+
   },
   data() {
     return {
@@ -47,29 +46,30 @@ export default {
 
 <style lang='scss' scoped>
 page{
-  background: $u-page-color-base;
+  background-color: $uni-bg-color;
 }
 .list-cell{
   display:flex;
   align-items:baseline;
-  padding: 20rpx $u-page-row-spacing;
+  padding: 20rpx 30rpx;
   line-height:60rpx;
   position:relative;
-  background: #fff;
+  background-color: #fff;
   justify-content: center;
   border-bottom: 0.5px solid #e6ebee;
   &.log-out-btn{
-    margin: 44rpx auto;
-    width: 80%;
+    margin: 60rpx auto;
+    width: 60%;
+    border: 1px solid #14191f;
     border-radius: 20rpx;
     .cell-tit{
-      color: $u-color-primary;
+      color: #dd524d;
       text-align: center;
       margin-right: 0;
     }
   }
   &.cell-hover{
-    background:#fafafa;
+    background-color:#fafafa;
   }
   &.b-b:after{
     left: 30rpx;
@@ -79,19 +79,19 @@ page{
   }
   .cell-more{
     align-self: baseline;
-    font-size:$u-font-lg;
-    color:$u-font-color-light;
+    font-size:34rpx;
+    color: #2479a8;
     margin-left:10rpx;
   }
   .cell-tit{
     flex: 1;
-    font-size: $u-font-base + 2rpx;
-    color: $u-font-color-dark;
+    font-size: 30rpx + 2rpx;
+    color: #14191f;
     margin-right:10rpx;
   }
   .cell-tip{
-    font-size: $u-font-base;
-    color: $u-font-color-light;
+    font-size: 30rpx;
+    color: #8b9Faa;
   }
   switch{
     transform: translateX(16rpx) scale(.84);

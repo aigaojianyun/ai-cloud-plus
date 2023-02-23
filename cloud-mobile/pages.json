@@ -12,7 +12,9 @@
       "path": "pages/login/wxLogin",
       "style": {
         "navigationBarTitleText": "微信授权登录",
-        "enablePullDownRefresh": false
+        "enablePullDownRefresh": false,
+        "navigationStyle": "custom",
+        "navigationBarTextStyle": "white"
       }
     },
     {
@@ -47,21 +49,27 @@
       "path": "pages/wallet/index",
       "style": {
         "navigationBarTitleText": "我的余额",
-        "enablePullDownRefresh": false
+        "enablePullDownRefresh": false,
+        "navigationStyle": "custom",
+        "navigationBarTextStyle": "white"
       }
     },
     {
       "path": "pages/center/about",
       "style": {
         "navigationBarTitleText": "关于我们",
-        "enablePullDownRefresh": false
+        "enablePullDownRefresh": false,
+        "navigationStyle": "custom",
+        "navigationBarTextStyle": "white"
       }
     },
     {
       "path": "pages/center/setting",
       "style": {
         "navigationBarTitleText": "应用设置",
-        "enablePullDownRefresh": false
+        "enablePullDownRefresh": false,
+        "navigationStyle": "custom",
+        "navigationBarTextStyle": "white"
       }
     }
   ],

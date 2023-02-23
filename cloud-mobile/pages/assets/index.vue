@@ -1,6 +1,6 @@
 <template>
 <view class="container">
-  <Navbar :hideBtn="true" title="资产" bgColor="#fff" :h5Show="true" :fixed="false"></Navbar>
+  <u-navbar :safeAreaInsetTop="true" :placeholder="true" title="资产" bgColor="#f3f4f6" leftIcon></u-navbar>
   <view class="total-box">
         <view class="title">总资产约(合USDT)</view>
         <view class="asset">
@@ -129,12 +129,10 @@
 </template>
 
 <script>
-import Navbar from '@/components/navbar/Navbar'
-import {getWallet} from "@/api/account"
 
 export default {
   components: {
-    Navbar
+
   },
   data() {
     return {
@@ -155,7 +153,7 @@ export default {
   padding: 0px 10px;
   min-height: 100vh;
   height: auto;
-  background-color: $u-page-color-base;
+  background-color: $uni-bg-color;
 }
 
 .total-box{

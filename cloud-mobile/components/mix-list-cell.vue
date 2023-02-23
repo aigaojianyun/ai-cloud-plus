@@ -1,7 +1,6 @@
 <template>
 	<view class="content">
-
-		<view class="mix-list-cell" :class="border" @click="eventClick" hover-class="cell-hover"  :hover-stay-time="50">
+    <view class="mix-list-cell" :class="border" @click="eventClick" hover-class="cell-hover"  :hover-stay-time="50">
 			<text
 				v-if="icon"
 				class="cell-icon yticon"
@@ -15,8 +14,7 @@
 				:class="typeList[navigateType]"
 			></text>
 		</view>
-
-	</view>
+  </view>
 </template>
 
 <script>
@@ -105,18 +103,18 @@
 		.cell-more{
 			align-self: center;
 			font-size:30rpx;
-			color:$u-font-color-base;
-			margin-left:$uni-spacing-row-sm;
+			color: #f8f8f8;
+			margin-left:10rpx;
 		}
 		.cell-tit{
 			flex: 1;
-			font-size: $u-font-base;
-			color: $u-font-color-dark;
+			font-size: 28rpx;
+			color: #14191F;
 			margin-right:10rpx;
 		}
 		.cell-tip{
-			font-size: $u-font-sm+2rpx;
-			color: $u-font-color-light;
+			font-size: 30rpx + 2rpx;
+			color: #8B9FAA;
 		}
 		.cell-image{
 			width: 50rpx;

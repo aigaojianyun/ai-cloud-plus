@@ -1,6 +1,6 @@
 <template>
   <view class="container">
-      <Navbar :hideBtn="true" title="我的余额" bgColor="#fff" :h5Show="false" :fixed="false"></Navbar>
+      <u-navbar :safeAreaInsetTop="true" placeholder="true" leftText="返回" autoBack="true"  title="我的余额" bgColor="#f3f4f6" ></u-navbar>
       <view class="total-box">
         <view class="title">余额</view>
         <view class="asset">
@@ -18,12 +18,12 @@
 </template>
 
 <script>
-import Navbar from '@/components/navbar/Navbar'
+
 import {getWallet} from "@/api/account"
 
 export default {
   components: {
-    Navbar
+
   },
   data() {
     return {

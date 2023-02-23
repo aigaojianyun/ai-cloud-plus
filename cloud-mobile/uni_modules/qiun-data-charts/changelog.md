@@ -1,3 +1,77 @@
+## 2.5.0-20230101（2023-01-01）
+- 秋云图表组件 修改条件编译顺序，确保uniapp的cli方式的项目依赖不完整时可以正常显示
+- 秋云图表组件 恢复props属性directory的使用，以修复vue3项目中，开启echarts后，echarts目录识别错误的bug
+- uCharts.js 修复区域图、混合图只有一个数据时图表显示不正确的bug
+- uCharts.js 修复折线图、区域图中时间轴类别图表tooltip指示点显示不正确的bug
+- uCharts.js 修复x轴使用labelCount时，并且boundaryGap = 'justify' 并且关闭Y轴显示的时候，最后一个坐标值不显示的bug
+- uCharts.js 修复折线图只有一组数据时 ios16 渲染颜色不正确的bug
+- uCharts.js 修复玫瑰图半径显示不正确的bug
+- uCharts.js 柱状图、山峰图增加正负图功能，y轴网格如果需要显示0轴则由 min max 及 splitNumber 确定，后续版本优化自动显示0轴
+- uCharts.js 柱状图column增加 opts.extra.column.labelPosition，数据标签位置，有效值为 outside外部, insideTop内顶部, center内中间, bottom内底部
+- uCharts.js 雷达图radar增加 opts.extra.radar.labelShow，否显示各项标识文案是，默认true
+- uCharts.js 提示窗tooltip增加 opts.extra.tooltip.boxPadding，提示窗边框填充距离，默认3px
+- uCharts.js 提示窗tooltip增加 opts.extra.tooltip.fontSize，提示窗字体大小配置，默认13px
+- uCharts.js 提示窗tooltip增加 opts.extra.tooltip.lineHeight，提示窗文字行高，默认20px
+- uCharts.js 提示窗tooltip增加 opts.extra.tooltip.legendShow，是否显示左侧图例，默认true
+- uCharts.js 提示窗tooltip增加 opts.extra.tooltip.legendShape，图例形状，图例标识样式，有效值为 auto自动跟随图例, diamond◆, circle●, triangle▲, square■, rect▬, line-
+- uCharts.js 标记线markLine增加 opts.extra.markLine.labelFontSize，字体大小配置，默认13px
+- uCharts.js 标记线markLine增加 opts.extra.markLine.labelPadding，标签边框内填充距离，默认6px
+- uCharts.js 折线图line增加 opts.extra.line.linearType，渐变色类型，可选值 none关闭渐变色，custom 自定义渐变色。使用自定义渐变色时请赋值serie.linearColor作为颜色值
+- uCharts.js 折线图line增加 serie.linearColor，渐变色数组，格式为2维数组[起始位置，颜色值]，例如[[0,'#0EE2F8'],[0.3,'#2BDCA8'],[0.6,'#1890FF'],[1,'#9A60B4']]
+- uCharts.js 折线图line增加 opts.extra.line.onShadow，是否开启折线阴影，开启后请赋值serie.setShadow阴影设置
+- uCharts.js 折线图line增加 serie.setShadow，阴影配置，格式为4位数组：[offsetX,offsetY,blur,color]
+- uCharts.js 折线图line增加 opts.extra.line.animation，动画效果方向，可选值为vertical 垂直动画效果，horizontal 水平动画效果
+- uCharts.js X轴xAxis增加 opts.xAxis.lineHeight，X轴字体行高，默认20px
+- uCharts.js X轴xAxis增加 opts.xAxis.marginTop，X轴文字距离轴线的距离，默认0px
+- uCharts.js X轴xAxis增加 opts.xAxis.title，当前X轴标题
+- uCharts.js X轴xAxis增加 opts.xAxis.titleFontSize，标题字体大小，默认13px
+- uCharts.js X轴xAxis增加 opts.xAxis.titleOffsetY，标题纵向偏移距离，负数为向上偏移，正数向下偏移
+- uCharts.js X轴xAxis增加 opts.xAxis.titleOffsetX，标题横向偏移距离，负数为向左偏移，正数向右偏移
+- uCharts.js X轴xAxis增加 opts.xAxis.titleFontColor，标题字体颜色，默认#666666
+
+## 报错TypeError: Cannot read properties of undefined (reading 'length')
+- 如果是uni-modules版本组件，请先登录HBuilderX账号；
+- 在HBuilderX中的manifest.json，点击重新获取uniapp的appid，或者删除appid重新粘贴，重新运行；
+- 如果是cli项目请使用码云上的非uniCloud版本组件；
+- 或者添加uniCloud的依赖；
+- 或者使用原生uCharts；
+## 2.4.5-20221130（2022-11-30）
+- uCharts.js 优化tooltip当文字很多变为左侧显示时，如果画布仍显显示不下，提示框错位置变为以左侧0位置起画
+- uCharts.js 折线图修复特殊情况下只有单点数据，并改变线宽后点变为圆形的bug
+- uCharts.js 修复Y轴disabled启用后无效并报错的bug
+- uCharts.js 修复仪表盘起始结束角度特殊情况下显示不正确的bug
+- uCharts.js 雷达图新增参数 opts.extra.radar.radius , 自定义雷达图半径
+- uCharts.js 折线图、区域图增加tooltip指示点，opts.extra.line.activeType/opts.extra.area.activeType，可选值"none"不启用激活指示点,"hollow"空心点模式,"solid"实心点模式
+## 2.4.4-20221102（2022-11-02）
+- 秋云图表组件 修复使用echarts时reload、reshow无法调用重新渲染的bug，[详见码云PR](https://gitee.com/uCharts/uCharts/pulls/40)
+- 秋云图表组件 修复使用echarts时，初始化时宽高不正确的bug，[详见码云PR](https://gitee.com/uCharts/uCharts/pulls/42)
+- 秋云图表组件 修复uniapp的h5使用history模式时，无法加载echarts的bug
+- 秋云图表组件 小程序端@complete、@scrollLeft、@scrollRight、@getTouchStart、@getTouchMove、@getTouchEnd事件增加opts参数传出，方便一些特殊需求的交互获取数据。
+
+- uCharts.js 修复calTooltipYAxisData方法内formatter格式化方法未与y轴方法同步的问题，[详见码云PR](https://gitee.com/uCharts/uCharts/pulls/43)
+- uCharts.js 地图新增参数opts.series[i].fillOpacity，以透明度方式来设置颜色过度效果，[详见码云PR](https://gitee.com/uCharts/uCharts/pulls/38)
+- uCharts.js 地图新增参数opts.extra.map.active，是否启用点击激活变色
+- uCharts.js 地图新增参数opts.extra.map.activeTextColor，是否启用点击激活变色
+- uCharts.js 地图新增渲染完成事件renderComplete
+- uCharts.js 漏斗图修复当部分数据相同时tooltip提示窗点击错误的bug
+- uCharts.js 漏斗图新增参数series.data[i].centerText 居中标签文案
+- uCharts.js 漏斗图新增参数series.data[i].centerTextSize 居中标签文案字体大小，默认opts.fontSize
+- uCharts.js 漏斗图新增参数series.data[i].centerTextColor 居中标签文案字体颜色，默认#FFFFFF
+- uCharts.js 漏斗图新增参数opts.extra.funnel.minSize 最小值的最小宽度，默认0
+- uCharts.js 进度条新增参数opts.extra.arcbar.direction，动画方向，可选值为cw顺时针、ccw逆时针
+- uCharts.js 混合图新增参数opts.extra.mix.line.width，折线的宽度，默认2
+- uCharts.js 修复tooltip开启horizentalLine水平横线标注时，图表显示错位的bug
+- uCharts.js 优化tooltip当文字很多变为左侧显示时，如果画布仍显显示不下，提示框错位置变为以左侧0位置起画
+- uCharts.js 修复开启滚动条后X轴文字超出绘图区域后的隐藏逻辑
+- uCharts.js 柱状图、条状图修复堆叠模式不能通过{value,color}赋值单个柱子颜色的问题
+- uCharts.js 气泡图修复不识别series.textSize和series.textColor的bug
+
+## 报错TypeError: Cannot read properties of undefined (reading 'length')
+1. 如果是uni-modules版本组件，请先登录HBuilderX账号；
+2. 在HBuilderX中的manifest.json，点击重新获取uniapp的appid，或者删除appid重新粘贴，重新运行；
+3. 如果是cli项目请使用码云上的非uniCloud版本组件；
+4. 或者添加uniCloud的依赖；
+5. 或者使用原生uCharts；
 ## 2.4.3-20220505（2022-05-05）
 - 秋云图表组件 修复开启canvas2d后将series赋值为空数组显示加载图标时，再次赋值后画布闪动的bug
 - 秋云图表组件 修复升级hbx最新版后ECharts的highlight方法报错的bug

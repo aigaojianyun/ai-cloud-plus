@@ -1,6 +1,6 @@
 <template>
   <view class="container">
-    <Navbar :hideBtn="true" title="我的" bgColor="#fff" :h5Show="true" :fixed="false"></Navbar>
+    <u-navbar safeAreaInsetTop="true" placeholder="true" title="我的" bgColor="#f3f4f6" leftIcon></u-navbar>
     <view class="user-section">
       <view class="user-info-box">
         <view>
@@ -63,16 +63,15 @@
 </template>
 
 <script>
-import Navbar from '@/components/navbar/Navbar'
+
 import listCell from '@/components/mix-list-cell';
-import {getUserInfo} from "@/api/user"
 import UButton from "../../uni_modules/uview-ui/components/u-button/u-button";
+import {getUserInfo} from "@/api/user"
 
 export default {
   components: {
+    listCell,
     UButton,
-    Navbar,
-    listCell
   },
   data() {
     return {
@@ -116,20 +115,19 @@ export default {
       getUserInfo().then(response => {
         this.user = response.data
       })
-    },
-    // 退出登录
-    handleLogout() {
-      this.$modal.confirm('确定注销并退出系统吗？').then(() => {
-        this.$store.dispatch('LogOut').then(() => {
-          this.$tab.reLaunch('/pages/login/login')
-        })
-      })
     }
   }
 }
 </script>
 
 <style lang="scss">
+.container{
+  width: 100%;
+  min-height:90vh;
+  height: auto;
+  background-color: #f8f8f8;
+  padding-bottom: 100rpx;
+}
 %flex-center {
   display:flex;
   flex-direction: column;
@@ -140,17 +138,9 @@ export default {
   display:flex;
   justify-content: space-around;
   align-content: center;
-  background: #fff;
+  background-color: #ffffff;
   border-radius: 10rpx;
 }
-.container{
-  width: 100%;
-  min-height:90vh;
-  height: auto;
-  background-color: $u-page-color-base;
-  padding-bottom: 100rpx;
-}
-
 .user-section {
   background-color: #1b66ff;
   height: 280rpx;
@@ -199,10 +189,8 @@ export default {
 }
 
 .cover-container{
-  background: #1e1e1e;
   padding: 0 30rpx;
   position:relative;
-  background: #f5f5f5;
 }
 .order-section{
   @extend %section;
@@ -227,13 +215,13 @@ export default {
   padding: 30rpx 0 0;
   margin-top: 20rpx;
   margin-bottom: 100rpx;
-  background: #fff;
+  background-color: #fff;
   border-radius:10rpx;
   .sec-header{
     display:flex;
     align-items: center;
-    font-size: $u-font-base;
-    color: $u-font-color-dark;
+    font-size: 28rpx;
+    color: #14191F;
     line-height: 40rpx;
     margin-left: 30rpx;
     .yticon{

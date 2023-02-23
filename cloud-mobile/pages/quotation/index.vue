@@ -1,6 +1,6 @@
 <template>
   <view class="container">
-    <Navbar :hideBtn="true" title="行情" bgColor="#fff" :h5Show="true" :fixed="false"></Navbar>
+    <u-navbar safeAreaInsetTop="true" placeholder="true" title="行情" bgColor="#f3f4f6" leftIcon></u-navbar>
     <!-- 市值排行 -->
     <view class="coin-section m-t">
       <view class="s-header">
@@ -66,11 +66,9 @@
 </template>
 
 <script>
-import Navbar from '@/components/navbar/Navbar'
 
 export default {
   components: {
-    Navbar,
   },
   data () {
     return {
@@ -88,12 +86,12 @@ export default {
 <style lang="scss">
 .container{
   padding-bottom: 100rpx;
-  background-color: $u-page-color-base;
+  background-color: $uni-bg-color;
 }
 /* 市值排行 */
 .coin-section{
   padding: 4rpx 30rpx 24rpx;
-  background: #fff;
+  background-color: #fff;
   .s-header{
     display:flex;
     align-items:center;

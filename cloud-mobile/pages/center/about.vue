@@ -1,6 +1,6 @@
 <template>
     <view class="container">
-      <Navbar :hideBtn="true" title="关于我们" bgColor="#fff" :h5Show="false" :fixed="false"></Navbar>
+      <u-navbar :safeAreaInsetTop="true" placeholder="true" leftText="返回" autoBack="true"  title="关于我们" bgColor="#f3f4f6" ></u-navbar>
       <view class="logo">
         <image src="/static/logo.png" mode="widthFix"></image>
       </view>
@@ -23,10 +23,10 @@
 </template>
 
 <script>
-import Navbar from '@/components/navbar/Navbar'
+
 export default {
   components: {
-    Navbar
+
   },
 }
 </script>
@@ -45,10 +45,10 @@ export default {
 .list-cell{
   display:flex;
   align-items:baseline;
-  padding: 20rpx $u-page-row-spacing;
+  padding: 20rpx 30rpx;
   line-height:80rpx;
   position:relative;
-  background: #fff;
+  background-color: #fff;
   justify-content: center;
   border-bottom: 0.5px solid #e6ebee;
   &.log-out-btn{
@@ -60,7 +60,7 @@ export default {
     }
   }
   &.cell-hover{
-    background:#fafafa;
+    background-color:#fafafa;
   }
   &.b-b:after{
     left: 30rpx;
@@ -70,19 +70,19 @@ export default {
   }
   .cell-more{
     align-self: baseline;
-    font-size:$u-font-lg;
-    color:$u-font-color-light;
+    font-size:34rpx;
+    color: #2479a8;
     margin-left:10rpx;
   }
   .cell-tit{
     flex: 1;
-    font-size: $u-font-md + 2rpx;
-    color: $u-font-color-dark;
+    font-size: 30rpx + 2rpx;
+    color: #14191f;
     margin-right:10rpx;
   }
   .cell-tip{
-    font-size: $u-font-md;
-    color: $u-font-color-light;
+    font-size: 30rpx;
+    color: #8b9Faa;
   }
   switch{
     transform: translateX(16rpx) scale(.84);

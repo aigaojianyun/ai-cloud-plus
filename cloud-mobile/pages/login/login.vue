@@ -130,7 +130,7 @@ export default {
   height: 64rpx;
   line-height: 64rpx;
   margin-bottom: 52rpx;
-  background: #f8f7fc;
+  background-color: #f8f7fc;
   border: 2rpx solid #e9e9e9;
   font-size: 28rpx;
   border-radius: 52rpx;
@@ -166,7 +166,7 @@ export default {
 
 .t-login button {
   font-size: 28rpx;
-  background: #5677fc;
+  background-color: #5677fc;
   color: #fff;
   height: 90rpx;
   line-height: 90rpx;

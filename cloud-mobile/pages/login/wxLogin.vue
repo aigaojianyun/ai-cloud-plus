@@ -1,5 +1,6 @@
 <template>
   <view>
+    <u-navbar :safeAreaInsetTop="true" placeholder="true" leftText="返回" autoBack="true"  title="微信授权登录" bgColor="#f3f4f6" ></u-navbar>
     <view class="header">
       <image mode="" src="/static/images/weixin/logo.png">
       </image>
@@ -17,11 +18,9 @@
 </template>
 
 <script>
-import Navbar from '@/components/navbar/Navbar'
 let that;
 export default {
   components: {
-    Navbar
   },
   data() {
     return {
@@ -106,7 +105,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
 .header {
   margin: 90rpx 0 90rpx 50rpx;
   border-bottom: 1px solid #ccc;
