@@ -118,14 +118,14 @@ public class SysUserController extends BaseController {
     @ApiOperation(value = "获取当前用户信息", notes = "获取当前用户信息")
     public R<SysLoginUser> info(@PathVariable("username") String username) {
         //系统用户信息
-        SysUser sysUser = userService.selectUserByUserName(username);
+        SysUser user = userService.selectUserByUserName(username);
         SysLoginUser sysUserVo = new SysLoginUser();
-        if (StringUtils.isNotNull(sysUser)) {
+        if (StringUtils.isNotNull(user)) {
             // 角色集合
-            Set<String> roles = permissionService.getRolePermission(sysUser);
+            Set<String> roles = permissionService.getRolePermission(user);
             // 权限集合
-            Set<String> permissions = permissionService.getMenuPermission(sysUser);
-            sysUserVo.setSysUser(sysUser);
+            Set<String> permissions = permissionService.getMenuPermission(user);
+            sysUserVo.setSysUser(user);
             sysUserVo.setRoles(roles);
             sysUserVo.setPermissions(permissions);
         }
@@ -138,15 +138,15 @@ public class SysUserController extends BaseController {
     @InnerAuth
     @PostMapping("/register")
     @ApiOperation(value = "注册用户信息", notes = "注册用户信息")
-    public R<Boolean> register(@RequestBody SysUser sysUser) {
-        String username = sysUser.getUserName();
+    public R<Boolean> register(@RequestBody SysUser user) {
+        String username = user.getUserName();
         if (!("true".equals(configService.selectConfigByKey("sys.account.registerUser")))) {
             return R.fail("当前系统没有开启注册功能！");
         }
-        if (UserConstants.NOT_UNIQUE.equals(userService.checkUserNameUnique(username))) {
+        if (UserConstants.NOT_UNIQUE.equals(userService.checkUserNameUnique(user))) {
             return R.fail("保存用户'" + username + "'失败，注册账号已存在");
         }
-        return R.ok(userService.registerUser(sysUser));
+        return R.ok(userService.registerUser(user));
     }
 
     /**
@@ -182,10 +182,10 @@ public class SysUserController extends BaseController {
         ajax.put("roles", SysUser.isAdmin(userId) ? roles : roles.stream().filter(r -> !r.isAdmin()).collect(Collectors.toList()));
         ajax.put("posts", postService.selectPostAll());
         if (StringUtils.isNotNull(userId)) {
-            SysUser sysUser = userService.selectUserById(userId);
-            ajax.put(AjaxResult.DATA_TAG, sysUser);
+            SysUser user = userService.selectUserById(userId);
+            ajax.put(AjaxResult.DATA_TAG, user);
             ajax.put("postIds", postService.selectPostListByUserId(userId));
-            ajax.put("roleIds", sysUser.getRoles().stream().map(SysRole::getRoleId).collect(Collectors.toList()));
+            ajax.put("roleIds", user.getRoles().stream().map(SysRole::getRoleId).collect(Collectors.toList()));
         }
         return ajax;
     }
@@ -197,20 +197,20 @@ public class SysUserController extends BaseController {
     @Log(title = "用户管理", businessType = BusinessType.INSERT)
     @PostMapping
     @ApiOperation(value = "新增用户", notes = "新增用户")
-    public AjaxResult add(@Validated @RequestBody SysUser sysUser) {
-        if (UserConstants.NOT_UNIQUE.equals(userService.checkUserNameUnique(sysUser.getUserName()))) {
-            return error("新增用户'" + sysUser.getUserName() + "'失败，登录账号已存在");
-        } else if (StringUtils.isNotEmpty(sysUser.getPhonenumber())
-                && UserConstants.NOT_UNIQUE.equals(userService.checkPhoneUnique(sysUser))) {
-            return error("新增用户'" + sysUser.getUserName() + "'失败，手机号码已存在");
-        } else if (StringUtils.isNotEmpty(sysUser.getEmail())
-                && UserConstants.NOT_UNIQUE.equals(userService.checkEmailUnique(sysUser))) {
-            return error("新增用户'" + sysUser.getUserName() + "'失败，邮箱账号已存在");
+    public AjaxResult add(@Validated @RequestBody SysUser user) {
+        if (UserConstants.NOT_UNIQUE.equals(userService.checkUserNameUnique(user))) {
+            return error("新增用户'" + user.getUserName() + "'失败，登录账号已存在");
+        } else if (StringUtils.isNotEmpty(user.getPhonenumber())
+                && UserConstants.NOT_UNIQUE.equals(userService.checkPhoneUnique(user))) {
+            return error("新增用户'" + user.getUserName() + "'失败，手机号码已存在");
+        } else if (StringUtils.isNotEmpty(user.getEmail())
+                && UserConstants.NOT_UNIQUE.equals(userService.checkEmailUnique(user))) {
+            return error("新增用户'" + user.getUserName() + "'失败，邮箱账号已存在");
         }
-        sysUser.setUserId(ShortIdUtils.generateId());
-        sysUser.setCreateBy(SecurityUtils.getUsername());
-        sysUser.setPassword(SecurityUtils.encryptPassword(sysUser.getPassword()));
-        return toAjax(userService.insertUser(sysUser));
+        user.setUserId(ShortIdUtils.generateId());
+        user.setCreateBy(SecurityUtils.getUsername());
+        user.setPassword(SecurityUtils.encryptPassword(user.getPassword()));
+        return toAjax(userService.insertUser(user));
     }
 
     /**
@@ -220,18 +220,18 @@ public class SysUserController extends BaseController {
     @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @PutMapping
     @ApiOperation(value = "修改用户", notes = "修改用户")
-    public AjaxResult edit(@Validated @RequestBody SysUser sysUser) {
-        userService.checkUserAllowed(sysUser);
-        userService.checkUserDataScope(sysUser.getUserId());
-        if (StringUtils.isNotEmpty(sysUser.getPhonenumber())
-                && UserConstants.NOT_UNIQUE.equals(userService.checkPhoneUnique(sysUser))) {
-            return error("修改用户'" + sysUser.getUserName() + "'失败，手机号码已存在");
-        } else if (StringUtils.isNotEmpty(sysUser.getEmail())
-                && UserConstants.NOT_UNIQUE.equals(userService.checkEmailUnique(sysUser))) {
-            return error("修改用户'" + sysUser.getUserName() + "'失败，邮箱账号已存在");
+    public AjaxResult edit(@Validated @RequestBody SysUser user) {
+        userService.checkUserAllowed(user);
+        userService.checkUserDataScope(user.getUserId());
+        if (StringUtils.isNotEmpty(user.getPhonenumber())
+                && UserConstants.NOT_UNIQUE.equals(userService.checkPhoneUnique(user))) {
+            return error("修改用户'" + user.getUserName() + "'失败，手机号码已存在");
+        } else if (StringUtils.isNotEmpty(user.getEmail())
+                && UserConstants.NOT_UNIQUE.equals(userService.checkEmailUnique(user))) {
+            return error("修改用户'" + user.getUserName() + "'失败，邮箱账号已存在");
         }
-        sysUser.setUpdateBy(SecurityUtils.getUsername());
-        return toAjax(userService.updateUser(sysUser));
+        user.setUpdateBy(SecurityUtils.getUsername());
+        return toAjax(userService.updateUser(user));
     }
 
     /**

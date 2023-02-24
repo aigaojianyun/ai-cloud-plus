@@ -42,8 +42,8 @@
           <span v-if="!loading">登 录</span>
           <span v-else>登 录 中...</span>
         </el-button>
-        <div v-if="register" style="float: right;">
-          <router-link :to="'/register'" class="link-type">立即注册</router-link>
+        <div style="float: right;" v-if="register">
+          <router-link class="link-type" :to="'/register'">立即注册</router-link>
         </div>
       </el-form-item>
     </el-form>
@@ -69,6 +69,7 @@ export default {
         password: "123456",
         rememberMe: false,
         code: "",
+        uuid: ""
       },
       loginRules: {
         username: [
@@ -80,13 +81,13 @@ export default {
       },
       loading: false,
       // 注册开关
-      register: false,
+      register: true,
       redirect: undefined
     };
   },
   watch: {
     $route: {
-      handler: function (route) {
+      handler: function(route) {
         this.redirect = route.query && route.query.redirect;
       },
       immediate: true
