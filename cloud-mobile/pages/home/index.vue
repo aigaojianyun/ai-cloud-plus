@@ -1,6 +1,6 @@
 <template>
   <view class="index-content">
-    <u-navbar safeAreaInsetTop="true" placeholder="true" title="首页" bgColor="#f3f4f6" leftIcon></u-navbar>
+    <u-navbar :safeAreaInsetTop="true" :placeholder="true" :fixed="true" leftIcon=" " title="首页" bgColor="#f3f4f6"></u-navbar>
     <view class="index-block">
       <view class="index-block-title">运行统计</view>
       <u-row gutter="16">

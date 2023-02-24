@@ -1,6 +1,6 @@
 <template>
   <view class="container">
-      <u-navbar :safeAreaInsetTop="true" placeholder="true" leftText="返回" autoBack="true"  title="我的余额" bgColor="#f3f4f6" ></u-navbar>
+      <u-navbar :safeAreaInsetTop="true" :placeholder="true" :fixed="true" :autoBack="true" leftText="返回"  title="我的余额" bgColor="#f3f4f6" ></u-navbar>
       <view class="total-box">
         <view class="title">余额</view>
         <view class="asset">

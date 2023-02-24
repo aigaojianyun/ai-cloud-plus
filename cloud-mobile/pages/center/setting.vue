@@ -1,6 +1,6 @@
 <template>
   <view class="container">
-    <u-navbar :safeAreaInsetTop="true" placeholder="true" leftText="返回" autoBack="true"  title="应用设置" bgColor="#f3f4f6" ></u-navbar>
+    <u-navbar :safeAreaInsetTop="true" :placeholder="true" :fixed="true" :autoBack="true" leftText="返回" title="应用设置" bgColor="#f3f4f6" ></u-navbar>
       <view class="list-cell b-b m-t"  hover-class="cell-hover" :hover-stay-time="50">
         <text class="cell-tit">修改密码</text>
         <text class="cell-more yticon icon-you"></text>

@@ -1,6 +1,6 @@
 <template>
   <view>
-    <u-navbar :safeAreaInsetTop="true" placeholder="true" leftText="返回" autoBack="true"  title="微信授权登录" bgColor="#f3f4f6" ></u-navbar>
+    <u-navbar :safeAreaInsetTop="true" :placeholder="true" :fixed="true" :autoBack="true" leftText="返回" title="微信授权登录" bgColor="#f3f4f6" ></u-navbar>
     <view class="header">
       <image mode="" src="/static/images/weixin/logo.png">
       </image>

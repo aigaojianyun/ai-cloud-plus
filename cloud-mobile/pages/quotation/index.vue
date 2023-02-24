@@ -1,6 +1,6 @@
 <template>
   <view class="container">
-    <u-navbar safeAreaInsetTop="true" placeholder="true" title="行情" bgColor="#f3f4f6" leftIcon></u-navbar>
+    <u-navbar :safeAreaInsetTop="true" :placeholder="true" :fixed="true" leftIcon=" " title="行情" bgColor="#f3f4f6"></u-navbar>
     <!-- 市值排行 -->
     <view class="coin-section m-t">
       <view class="s-header">
@@ -58,7 +58,9 @@
          1.36
           <view class="subtitle">$0.063</view>
         </view>
-        <view class="col r"><u-tag :text="0.71 | formatChange" :type="0.71 >= 0 ? 'success' : 'error'"></u-tag></view>
+        <view class="col r" style="width: 100rpx">
+          <u-tag :text="0.71 | formatChange" :type="0.71 >= 0 ? 'success' : 'error'"></u-tag>
+        </view>
       </view>
 
     </view>

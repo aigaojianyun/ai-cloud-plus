@@ -7,5 +7,7 @@ MAINTAINER cloud
 ADD ./db/*.sql /docker-entrypoint-initdb.d/
 
 # 授权
+# docker exec -it mysql /bin/bash
+# mysql -u root -p
 # grant all on *.* to 'root'@'%' with grant option;
 # flush privileges

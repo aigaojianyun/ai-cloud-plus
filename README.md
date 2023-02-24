@@ -90,10 +90,14 @@ ai-cloud-parent
 
 ## 在线体验
 
-* 移动端
+* 移动端H5
 - https://www.aiclouds.vip
 - ai168/123456
-- 
+-
+* 安卓系统安装包
+- https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/cloud-mobile.apk
+- ai168/123456
+-
 - 后台管理
 - https://aiclouds.vip/admin
 - ceshi/123456

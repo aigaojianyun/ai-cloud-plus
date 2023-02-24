@@ -1,6 +1,6 @@
 <template>
 <view class="container">
-  <u-navbar :safeAreaInsetTop="true" :placeholder="true" title="资产" bgColor="#f3f4f6" leftIcon></u-navbar>
+  <u-navbar :safeAreaInsetTop="true" :placeholder="true" :fixed="true" leftIcon=" " title="资产" bgColor="#f3f4f6"></u-navbar>
   <view class="total-box">
         <view class="title">总资产约(合USDT)</view>
         <view class="asset">

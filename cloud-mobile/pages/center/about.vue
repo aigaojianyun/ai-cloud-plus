@@ -1,6 +1,6 @@
 <template>
     <view class="container">
-      <u-navbar :safeAreaInsetTop="true" placeholder="true" leftText="返回" autoBack="true"  title="关于我们" bgColor="#f3f4f6" ></u-navbar>
+      <u-navbar :safeAreaInsetTop="true" :placeholder="true" :fixed="true" :autoBack="true" leftText="返回"  title="关于我们" bgColor="#f3f4f6" ></u-navbar>
       <view class="logo">
         <image src="/static/logo.png" mode="widthFix"></image>
       </view>
