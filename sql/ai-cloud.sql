@@ -4,14 +4,14 @@
  Source Server         : cloud-mysql
  Source Server Type    : MySQL
  Source Server Version : 80032
- Source Host           : 162.14.103.169:3306
+ Source Host           : 127.0.0.1:3306
  Source Schema         : ai-cloud
 
  Target Server Type    : MySQL
  Target Server Version : 80032
  File Encoding         : 65001
 
- Date: 27/02/2023 16:10:56
+ Date: 27/02/2023 16:12:50
 */
 
 SET NAMES utf8mb4;
