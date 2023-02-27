@@ -112,7 +112,7 @@
       <el-table-column align="center" label="参数主键" prop="configId"/>
       <el-table-column :show-overflow-tooltip="true" align="center" label="参数名称" prop="configName"/>
       <el-table-column :show-overflow-tooltip="true" align="center" label="参数键名" prop="configKey"/>
-      <el-table-column align="center" label="参数键值" prop="configValue"/>
+      <el-table-column label="参数键值" align="center" prop="configValue" :show-overflow-tooltip="true" />
       <el-table-column align="center" label="系统内置" prop="configType">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.sys_yes_no" :value="scope.row.configType"/>

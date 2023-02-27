@@ -6,13 +6,13 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
- * 国家信息对象 ai_country
+ * 区域信息对象 ai_country
  *
  * @author ai-cloud
  *
  */
 @Data
-@ApiModel("国家信息")
+@ApiModel("区域信息")
 public class AiCountry extends BaseEntity {
 
 private static final long serialVersionUID=1L;
@@ -22,7 +22,7 @@ private static final long serialVersionUID=1L;
 
     /** 中文名称 */
     @ApiModelProperty(value = "中文名称", example = "String")
-    private String zhName;
+    private String cnName;
 
     /** 英文名称 */
     @ApiModelProperty(value = "英文名称", example = "String")

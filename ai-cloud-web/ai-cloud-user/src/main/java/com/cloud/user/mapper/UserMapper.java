@@ -16,6 +16,22 @@ import org.apache.ibatis.annotations.Param;
 public interface UserMapper extends BaseMapper<User> {
 
     /**
+     * 校验用户名称是否唯一
+     *
+     * @param userName 用户名称
+     * @return 结果
+     */
+    public User checkUserNameUnique(@Param("userName") String userName);
+
+    /**
+     * 校验手机号码是否唯一
+     *
+     * @param phone 手机号码
+     * @return 结果
+     */
+    public User checkPhoneUnique(@Param("phone") String phone);
+
+    /**
      * 通过用户名或手机号查询用户
      *
      * @param param 用户名手机号或openId
@@ -30,22 +46,6 @@ public interface UserMapper extends BaseMapper<User> {
      * @return 用户对象信息
      */
     public User selectByOpenId(@Param("openId") String openId);
-
-    /**
-     * 校验用户名称是否唯一
-     *
-     * @param username 用户名称
-     * @return 结果
-     */
-    public int checkUserNameUnique(@Param("username") String username);
-
-    /**
-     * 校验手机号码是否唯一
-     *
-     * @param phone 手机号码
-     * @return 结果
-     */
-    public User checkPhoneUnique(@Param("phone") String phone);
 
     /**
      * 查询用户信息

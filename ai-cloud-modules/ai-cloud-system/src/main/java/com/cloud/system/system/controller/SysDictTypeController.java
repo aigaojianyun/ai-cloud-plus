@@ -1,6 +1,5 @@
 package com.cloud.system.system.controller;
 
-import com.cloud.common.constant.UserConstants;
 import com.cloud.common.utils.poi.ExcelUtil;
 import com.cloud.common.web.controller.BaseController;
 import com.cloud.common.web.domain.AjaxResult;
@@ -75,7 +74,7 @@ public class SysDictTypeController extends BaseController {
     @PostMapping
     @ApiOperation(value = "新增字典类型", notes = "新增字典类型")
     public AjaxResult add(@Validated @RequestBody SysDictType dict) {
-        if (UserConstants.NOT_UNIQUE.equals(dictTypeService.checkDictTypeUnique(dict))) {
+        if (!dictTypeService.checkDictTypeUnique(dict)) {
             return error("新增字典'" + dict.getDictName() + "'失败，字典类型已存在");
         }
         dict.setCreateBy(SecurityUtils.getUsername());
@@ -90,7 +89,7 @@ public class SysDictTypeController extends BaseController {
     @PutMapping
     @ApiOperation(value = "修改字典类型", notes = "修改字典类型")
     public AjaxResult edit(@Validated @RequestBody SysDictType dict) {
-        if (UserConstants.NOT_UNIQUE.equals(dictTypeService.checkDictTypeUnique(dict))) {
+        if (!dictTypeService.checkDictTypeUnique(dict)) {
             return error("修改字典'" + dict.getDictName() + "'失败，字典类型已存在");
         }
         dict.setUpdateBy(SecurityUtils.getUsername());

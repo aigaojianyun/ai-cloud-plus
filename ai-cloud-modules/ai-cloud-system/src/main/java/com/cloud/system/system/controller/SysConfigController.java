@@ -1,6 +1,5 @@
 package com.cloud.system.system.controller;
 
-import com.cloud.common.constant.UserConstants;
 import com.cloud.common.utils.poi.ExcelUtil;
 import com.cloud.common.web.controller.BaseController;
 import com.cloud.common.web.domain.AjaxResult;
@@ -83,7 +82,7 @@ public class SysConfigController extends BaseController {
     @PostMapping
     @ApiOperation(value = "新增参数配置", notes = "新增参数配置")
     public AjaxResult add(@Validated @RequestBody SysConfig config) {
-        if (UserConstants.NOT_UNIQUE.equals(configService.checkConfigKeyUnique(config))) {
+        if (!configService.checkConfigKeyUnique(config)){
             return error("新增参数'" + config.getConfigName() + "'失败，参数键名已存在");
         }
         config.setCreateBy(SecurityUtils.getUsername());
@@ -98,7 +97,7 @@ public class SysConfigController extends BaseController {
     @PutMapping
     @ApiOperation(value = "修改参数配置", notes = "修改参数配置")
     public AjaxResult edit(@Validated @RequestBody SysConfig config) {
-        if (UserConstants.NOT_UNIQUE.equals(configService.checkConfigKeyUnique(config))) {
+        if (!configService.checkConfigKeyUnique(config)){
             return error("修改参数'" + config.getConfigName() + "'失败，参数键名已存在");
         }
         config.setUpdateBy(SecurityUtils.getUsername());

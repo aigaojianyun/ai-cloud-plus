@@ -1,6 +1,5 @@
 package com.cloud.system.system.controller;
 
-import com.cloud.common.constant.UserConstants;
 import com.cloud.common.domain.R;
 import com.cloud.common.utils.ShortIdUtils;
 import com.cloud.common.utils.StringUtils;
@@ -143,7 +142,7 @@ public class SysUserController extends BaseController {
         if (!("true".equals(configService.selectConfigByKey("sys.account.registerUser")))) {
             return R.fail("当前系统没有开启注册功能！");
         }
-        if (UserConstants.NOT_UNIQUE.equals(userService.checkUserNameUnique(user))) {
+        if (!userService.checkUserNameUnique(user)) {
             return R.fail("保存用户'" + username + "'失败，注册账号已存在");
         }
         return R.ok(userService.registerUser(user));
@@ -198,13 +197,11 @@ public class SysUserController extends BaseController {
     @PostMapping
     @ApiOperation(value = "新增用户", notes = "新增用户")
     public AjaxResult add(@Validated @RequestBody SysUser user) {
-        if (UserConstants.NOT_UNIQUE.equals(userService.checkUserNameUnique(user))) {
+        if (!userService.checkUserNameUnique(user)) {
             return error("新增用户'" + user.getUserName() + "'失败，登录账号已存在");
-        } else if (StringUtils.isNotEmpty(user.getPhonenumber())
-                && UserConstants.NOT_UNIQUE.equals(userService.checkPhoneUnique(user))) {
+        } else if (StringUtils.isNotEmpty(user.getPhonenumber()) && !userService.checkPhoneUnique(user)) {
             return error("新增用户'" + user.getUserName() + "'失败，手机号码已存在");
-        } else if (StringUtils.isNotEmpty(user.getEmail())
-                && UserConstants.NOT_UNIQUE.equals(userService.checkEmailUnique(user))) {
+        } else if (StringUtils.isNotEmpty(user.getEmail()) && !userService.checkEmailUnique(user)) {
             return error("新增用户'" + user.getUserName() + "'失败，邮箱账号已存在");
         }
         user.setUserId(ShortIdUtils.generateId());
@@ -223,11 +220,11 @@ public class SysUserController extends BaseController {
     public AjaxResult edit(@Validated @RequestBody SysUser user) {
         userService.checkUserAllowed(user);
         userService.checkUserDataScope(user.getUserId());
-        if (StringUtils.isNotEmpty(user.getPhonenumber())
-                && UserConstants.NOT_UNIQUE.equals(userService.checkPhoneUnique(user))) {
+        if (!userService.checkUserNameUnique(user)) {
+            return error("修改用户'" + user.getUserName() + "'失败，登录账号已存在");
+        } else if (StringUtils.isNotEmpty(user.getPhonenumber()) && !userService.checkPhoneUnique(user)) {
             return error("修改用户'" + user.getUserName() + "'失败，手机号码已存在");
-        } else if (StringUtils.isNotEmpty(user.getEmail())
-                && UserConstants.NOT_UNIQUE.equals(userService.checkEmailUnique(user))) {
+        } else if (StringUtils.isNotEmpty(user.getEmail()) && !userService.checkEmailUnique(user)) {
             return error("修改用户'" + user.getUserName() + "'失败，邮箱账号已存在");
         }
         user.setUpdateBy(SecurityUtils.getUsername());

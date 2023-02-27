@@ -1,9 +1,9 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="中文名称" prop="zhName">
+      <el-form-item label="中文名称" prop="cnName">
         <el-input
-          v-model="queryParams.zhName"
+          v-model="queryParams.cnName"
           placeholder="请输入中文名称"
           clearable
           @keyup.enter.native="handleQuery"
@@ -92,7 +92,7 @@
     <el-table v-loading="loading" :data="countryList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center"/>
       <el-table-column label="编号" align="center" prop="id"/>
-      <el-table-column label="中文名称" align="center" prop="zhName"/>
+      <el-table-column label="中文名称" align="center" prop="cnName"/>
       <el-table-column label="英文名称" align="center" prop="enName" width="200"/>
       <el-table-column label="icon" align="center" prop="countryIcon">
         <template slot-scope="scope">
@@ -136,8 +136,8 @@
     <!-- 添加或修改国家信息对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="中文名称" prop="enName">
-          <el-input v-model="form.zhName" placeholder="请输入中文名称"/>
+        <el-form-item label="中文名称" prop="cnName">
+          <el-input v-model="form.cnName" placeholder="请输入中文名称"/>
         </el-form-item>
         <el-form-item label="英文名称" prop="enName">
           <el-input v-model="form.enName" placeholder="请输入英文名称"/>
@@ -230,7 +230,7 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
-        zhName: null,
+        cnName: null,
         enName: null,
         areaCode: null,
         localCurrency: null,
@@ -239,7 +239,7 @@ export default {
       form: {},
       // 表单校验
       rules: {
-        zhName: [
+        cnName: [
           {required: true, message: "中文名称不能为空", trigger: "blur"}
         ],
         enName: [
@@ -273,7 +273,7 @@ export default {
     reset() {
       this.form = {
         id: null,
-        zhName: null,
+        cnName: null,
         enName: null,
         countryIcon: null,
         areaCode: null,

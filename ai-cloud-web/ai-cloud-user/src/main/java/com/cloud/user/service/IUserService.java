@@ -12,20 +12,12 @@ import org.apache.ibatis.annotations.Param;
 public interface IUserService {
 
     /**
-     * 通过用户名或手机号查询用户
-     *
-     * @param param 用户名手机号或openId
-     * @return 用户对象信息
-     */
-    public User selectByUserNamePhoneOpenId(@Param("param") String param);
-
-    /**
      * 校验用户名称是否唯一
      *
-     * @param username 用户名称
+     * @param user 用户信息
      * @return 结果
      */
-    public String checkUserNameUnique(String username);
+    public boolean checkUserNameUnique(User user);
 
     /**
      * 校验手机号码是否唯一
@@ -33,7 +25,15 @@ public interface IUserService {
      * @param user 用户信息
      * @return 结果
      */
-    public String checkPhoneUnique(User user);
+    public boolean checkPhoneUnique(User user);
+
+    /**
+     * 通过用户名或手机号查询用户
+     *
+     * @param param 用户名/手机号/openId
+     * @return 用户对象信息
+     */
+    public User selectByUserNamePhoneOpenId(@Param("param") String param);
 
     /**
      * 注册用户信息：新用户创建账号和账户

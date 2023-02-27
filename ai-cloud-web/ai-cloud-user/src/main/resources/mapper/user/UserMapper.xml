@@ -73,10 +73,11 @@
           AND a.delete_flag = 0
     </select>
 
-    <select id="checkUserNameUnique" parameterType="String" resultType="int">
-        SELECT count(1)
-        FROM `user`
-        WHERE user_name = #{username} limit 1
+    <select id="checkUserNameUnique" parameterType="String" resultMap="UserResult">
+        select id,
+               user_name
+        from `user`
+        where user_name = #{userName} limit 1
     </select>
 
     <select id="checkPhoneUnique" parameterType="String" resultMap="UserResult">

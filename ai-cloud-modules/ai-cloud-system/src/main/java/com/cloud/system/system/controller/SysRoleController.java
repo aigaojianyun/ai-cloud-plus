@@ -1,6 +1,5 @@
 package com.cloud.system.system.controller;
 
-import com.cloud.common.constant.UserConstants;
 import com.cloud.common.utils.poi.ExcelUtil;
 import com.cloud.common.web.controller.BaseController;
 import com.cloud.common.web.domain.AjaxResult;
@@ -87,9 +86,9 @@ public class SysRoleController extends BaseController {
     @PostMapping
     @ApiOperation(value = "新增角色", notes = "新增角色")
     public AjaxResult add(@Validated @RequestBody SysRole role) {
-        if (UserConstants.NOT_UNIQUE.equals(roleService.checkRoleNameUnique(role))) {
+        if (!roleService.checkRoleNameUnique(role)){
             return error("新增角色'" + role.getRoleName() + "'失败，角色名称已存在");
-        } else if (UserConstants.NOT_UNIQUE.equals(roleService.checkRoleKeyUnique(role))) {
+        }   else if (!roleService.checkRoleKeyUnique(role)){
             return error("新增角色'" + role.getRoleName() + "'失败，角色权限已存在");
         }
         role.setCreateBy(SecurityUtils.getUsername());
@@ -107,9 +106,9 @@ public class SysRoleController extends BaseController {
     public AjaxResult edit(@Validated @RequestBody SysRole role) {
         roleService.checkRoleAllowed(role);
         roleService.checkRoleDataScope(role.getRoleId());
-        if (UserConstants.NOT_UNIQUE.equals(roleService.checkRoleNameUnique(role))) {
+        if (!roleService.checkRoleNameUnique(role)) {
             return error("修改角色'" + role.getRoleName() + "'失败，角色名称已存在");
-        } else if (UserConstants.NOT_UNIQUE.equals(roleService.checkRoleKeyUnique(role))) {
+        } else if (!roleService.checkRoleKeyUnique(role)) {
             return error("修改角色'" + role.getRoleName() + "'失败，角色权限已存在");
         }
         role.setUpdateBy(SecurityUtils.getUsername());

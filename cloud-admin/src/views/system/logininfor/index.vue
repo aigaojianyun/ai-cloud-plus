@@ -37,12 +37,13 @@
       <el-form-item label="登录时间">
         <el-date-picker
           v-model="dateRange"
-          end-placeholder="结束日期"
+          style="width: 240px"
+          value-format="yyyy-MM-dd HH:mm:ss"
+          type="daterange"
           range-separator="-"
           start-placeholder="开始日期"
-          style="width: 240px"
-          type="daterange"
-          value-format="yyyy-MM-dd"
+          end-placeholder="结束日期"
+          :default-time="['00:00:00', '23:59:59']"
         ></el-date-picker>
       </el-form-item>
       <el-form-item>
@@ -113,7 +114,7 @@
           <dict-tag :options="dict.type.sys_common_status" :value="scope.row.status"/>
         </template>
       </el-table-column>
-      <el-table-column align="center" label="描述" prop="msg"/>
+      <el-table-column label="描述" align="center" prop="msg" :show-overflow-tooltip="true" />
       <el-table-column :sort-orders="['descending', 'ascending']" align="center" label="访问时间" prop="accessTime"
                        sortable="custom" width="180">
         <template slot-scope="scope">
@@ -159,7 +160,7 @@ export default {
       // 日期范围
       dateRange: [],
       // 默认排序
-      defaultSort: {prop: 'loginTime', order: 'descending'},
+    defaultSort: {prop: 'accessTime', order: 'descending'},
       // 查询参数
       queryParams: {
         pageNum: 1,

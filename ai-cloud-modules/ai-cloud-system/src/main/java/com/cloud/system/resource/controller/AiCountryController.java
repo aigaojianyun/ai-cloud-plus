@@ -7,6 +7,7 @@ import com.cloud.common.web.page.TableDataInfo;
 import com.cloud.log.annotation.Log;
 import com.cloud.log.enums.BusinessType;
 import com.cloud.security.annotation.RequiresPermissions;
+import com.cloud.security.utils.SecurityUtils;
 import com.cloud.system.resource.domain.AiCountry;
 import com.cloud.system.resource.service.IAiCountryService;
 import io.swagger.annotations.Api;
@@ -17,11 +18,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * 国家信息Controller
+ * 区域信息Controller
  *
  * @author ai-cloud
  */
-@Api(tags = "国家信息")
+@Api(tags = "区域信息")
 @RestController
 @RequestMapping("/country")
 public class AiCountryController extends BaseController {
@@ -29,7 +30,7 @@ public class AiCountryController extends BaseController {
     private IAiCountryService aiCountryService;
 
     /**
-     * 查询国家信息列表
+     * 查询区域信息列表
      */
     @RequiresPermissions("resource:country:list")
     @GetMapping("/list")
@@ -40,19 +41,19 @@ public class AiCountryController extends BaseController {
     }
 
     /**
-     * 导出国家信息列表
+     * 导出区域信息列表
      */
     @RequiresPermissions("resource:country:export")
-    @Log(title = "国家信息", businessType = BusinessType.EXPORT)
+    @Log(title = "导出区域信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, AiCountry aiCountry) {
         List<AiCountry> list = aiCountryService.selectAiCountryList(aiCountry);
         ExcelUtil<AiCountry> util = new ExcelUtil<AiCountry>(AiCountry. class);
-        util.exportExcel(response, list, "国家信息数据");
+        util.exportExcel(response, list, "区域信息数据");
     }
 
     /**
-     * 获取国家信息详细信息
+     * 获取区域信息详细信息
      */
     @RequiresPermissions("resource:country:query")
     @GetMapping(value = "/{id}")
@@ -61,30 +62,38 @@ public class AiCountryController extends BaseController {
     }
 
     /**
-     * 新增国家信息
+     * 新增区域信息
      */
     @RequiresPermissions("resource:country:add")
-    @Log(title = "国家信息", businessType = BusinessType.INSERT)
+    @Log(title = "新增区域信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody AiCountry aiCountry) {
+        if (!aiCountryService.checkAiCountryUnique(aiCountry)) {
+            return error("新增参数'" + aiCountry.getCnName() + "'失败，区域名称已存在");
+        }
+        aiCountry.setCreateBy(SecurityUtils.getUsername());
         return toAjax(aiCountryService.insertAiCountry(aiCountry));
     }
 
     /**
-     * 修改国家信息
+     * 修改区域信息
      */
     @RequiresPermissions("resource:country:edit")
-    @Log(title = "国家信息", businessType = BusinessType.UPDATE)
+    @Log(title = "修改区域信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody AiCountry aiCountry) {
+        if (!aiCountryService.checkAiCountryUnique(aiCountry)) {
+            return error("新增参数'" + aiCountry.getCnName() + "'失败，区域名称已存在");
+        }
+        aiCountry.setUpdateBy(SecurityUtils.getUsername());
         return toAjax(aiCountryService.updateAiCountry(aiCountry));
     }
 
     /**
-     * 删除国家信息
+     * 删除区域信息
      */
     @RequiresPermissions("resource:country:remove")
-    @Log(title = "国家信息", businessType = BusinessType.DELETE)
+    @Log(title = "删除区域信息", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids) {
         return toAjax(aiCountryService.deleteAiCountryByIds(ids));

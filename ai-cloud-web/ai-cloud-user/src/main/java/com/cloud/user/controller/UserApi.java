@@ -1,6 +1,5 @@
 package com.cloud.user.controller;
 
-import com.cloud.common.constant.UserConstants;
 import com.cloud.common.domain.R;
 import com.cloud.common.utils.StringUtils;
 import com.cloud.security.annotation.InnerAuth;
@@ -28,12 +27,12 @@ public class UserApi {
     /**
      * 通过用户名或手机号查询用户
      *
-     * @param param 用户名手机号或openId
+     * @param param 用户名/手机号/openId
      * @return 用户对象信息
      */
     @InnerAuth
     @GetMapping("/info/{param}")
-    @ApiOperation("通过用户名手机号或openId查询用户")
+    @ApiOperation("通过用户名/手机号/openId查询用户")
     public R<LoginUser> selectByUserInfo(@PathVariable("param") String param) {
         //用户信息
         User user = userService.selectByUserNamePhoneOpenId(param);
@@ -56,10 +55,10 @@ public class UserApi {
     public R<Boolean> register(@RequestBody User user) {
         String username = user.getUserName();
         String phone = user.getPhone();
-        if (UserConstants.NOT_UNIQUE.equals(userService.checkUserNameUnique(username))) {
+        if (!userService.checkUserNameUnique(user)) {
             return R.fail("注册用户'" + username + "'失败，账号已存在");
         }
-        if (UserConstants.NOT_UNIQUE.equals(userService.checkPhoneUnique(user))) {
+        if (!userService.checkPhoneUnique(user)) {
             return R.fail("注册用户'" + phone + "'失败，手机号已存在");
         }
         return R.ok(userService.registerUser(user));

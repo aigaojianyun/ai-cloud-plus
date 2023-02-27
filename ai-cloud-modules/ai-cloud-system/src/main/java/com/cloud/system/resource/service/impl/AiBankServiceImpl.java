@@ -1,6 +1,8 @@
 package com.cloud.system.resource.service.impl;
 
+import com.cloud.common.constant.UserConstants;
 import com.cloud.common.utils.DateUtils;
+import com.cloud.common.utils.StringUtils;
 import com.cloud.system.resource.domain.AiBank;
 import com.cloud.system.resource.mapper.AiBankMapper;
 import com.cloud.system.resource.service.IAiBankService;
@@ -49,8 +51,8 @@ public class AiBankServiceImpl implements IAiBankService {
      */
     @Override
     public int insertAiBank(AiBank aiBank) {
-                aiBank.setCreateTime(DateUtils.getNowDate());
-            return aiBankMapper.insertAiBank(aiBank);
+        aiBank.setCreateTime(DateUtils.getNowDate());
+        return aiBankMapper.insertAiBank(aiBank);
     }
 
     /**
@@ -61,7 +63,7 @@ public class AiBankServiceImpl implements IAiBankService {
      */
     @Override
     public int updateAiBank(AiBank aiBank) {
-                aiBank.setUpdateTime(DateUtils.getNowDate());
+        aiBank.setUpdateTime(DateUtils.getNowDate());
         return aiBankMapper.updateAiBank(aiBank);
     }
 
@@ -85,5 +87,22 @@ public class AiBankServiceImpl implements IAiBankService {
     @Override
     public int deleteAiBankById(Long id) {
         return aiBankMapper.deleteAiBankById(id);
+    }
+
+
+    /**
+     * 校验银行名称是否唯一
+     *
+     * @param aiBank 参数信息
+     * @return 结果
+     */
+    @Override
+    public boolean checkAiBankUnique(AiBank aiBank) {
+        Long bankId = StringUtils.isNull(aiBank.getId()) ? -1L : aiBank.getId();
+        AiBank info = aiBankMapper.checkBankNameUnique(aiBank.getBankName());
+        if (StringUtils.isNotNull(info) && info.getId().longValue() != bankId.longValue()) {
+            return UserConstants.NOT_UNIQUE;
+        }
+        return UserConstants.UNIQUE;
     }
 }

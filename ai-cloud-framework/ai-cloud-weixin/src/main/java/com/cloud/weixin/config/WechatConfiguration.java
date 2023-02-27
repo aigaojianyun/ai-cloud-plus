@@ -2,7 +2,6 @@ package com.cloud.weixin.config;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.api.impl.WxMaServiceImpl;
-import cn.binarywang.wx.miniapp.config.WxMaConfig;
 import cn.binarywang.wx.miniapp.config.impl.WxMaDefaultConfigImpl;
 import com.cloud.weixin.config.properties.WechatMpProperties;
 import com.cloud.weixin.config.properties.WechatPayProperties;
@@ -12,7 +11,6 @@ import com.github.binarywang.wxpay.service.impl.WxPayServiceImpl;
 import lombok.RequiredArgsConstructor;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
-import me.chanjar.weixin.mp.config.WxMpConfigStorage;
 import me.chanjar.weixin.mp.config.impl.WxMpDefaultConfigImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,5 +1,6 @@
 package com.cloud.log.aspect;
 
+import cn.hutool.core.thread.threadlocal.NamedThreadLocal;
 import com.alibaba.fastjson2.JSON;
 import com.cloud.common.utils.ServletUtils;
 import com.cloud.common.utils.StringUtils;
@@ -14,6 +15,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +41,23 @@ public class LogAspect {
      * 排除敏感属性字段
      */
     public static final String[] EXCLUDE_PROPERTIES = {"password", "oldPassword", "newPassword", "confirmPassword"};
+
+    /**
+     * 计算操作消耗时间
+     */
+    private static final ThreadLocal<Long> TIME_THREADLOCAL = new NamedThreadLocal<Long>("Cost Time");
     private static final Logger log = LoggerFactory.getLogger(LogAspect.class);
     @Autowired
     private AsyncLogService asyncLogService;
+
+    /**
+     * 处理请求前执行
+     */
+    @Before(value = "@annotation(controllerLog)")
+    public void boBefore(JoinPoint joinPoint, Log controllerLog) {
+        TIME_THREADLOCAL.set(System.currentTimeMillis());
+    }
+
 
     /**
      * 处理完请求后执行
@@ -70,7 +86,7 @@ public class LogAspect {
             SysOperLog operLog = new SysOperLog();
             operLog.setStatus(BusinessStatus.SUCCESS.ordinal());
             // 请求的地址
-            String ip = IpUtils.getIpAddr(ServletUtils.getRequest());
+            String ip = IpUtils.getIpAddr();
             operLog.setOperIp(ip);
             operLog.setOperUrl(ServletUtils.getRequest().getRequestURI());
             String username = SecurityUtils.getUsername();
@@ -90,12 +106,16 @@ public class LogAspect {
             operLog.setRequestMethod(ServletUtils.getRequest().getMethod());
             // 处理设置注解上的参数
             getControllerMethodDescription(joinPoint, controllerLog, operLog, jsonResult);
+            // 设置消耗时间
+            operLog.setCostTime(System.currentTimeMillis() - TIME_THREADLOCAL.get());
             // 保存数据库
             asyncLogService.saveSysLog(operLog);
         } catch (Exception exp) {
             // 记录本地异常日志
             log.error("异常信息:{}", exp.getMessage());
             exp.printStackTrace();
+        } finally {
+            TIME_THREADLOCAL.remove();
         }
     }
 

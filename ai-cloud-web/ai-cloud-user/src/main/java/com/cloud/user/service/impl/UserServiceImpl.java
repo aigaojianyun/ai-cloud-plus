@@ -35,26 +35,16 @@ public class UserServiceImpl implements IUserService {
     private IUserAccountService userAccountService;
 
     /**
-     * 通过用户名或手机号查询用户
-     *
-     * @param param 用户名手机号或openId
-     * @return 用户对象信息
-     */
-    @Override
-    public User selectByUserNamePhoneOpenId(String param) {
-        return userMapper.selectByUserNamePhoneOpenId(param);
-    }
-
-    /**
      * 校验用户名称是否唯一
      *
-     * @param username 用户名称
+     * @param user 用户信息
      * @return 结果
      */
     @Override
-    public String checkUserNameUnique(String username) {
-        int count = userMapper.checkUserNameUnique(username);
-        if (count > 0) {
+    public boolean checkUserNameUnique(User user) {
+        Long userId = StringUtils.isNull(user.getId()) ? -1L : user.getId();
+        User info = userMapper.checkUserNameUnique(user.getUserName());
+        if (StringUtils.isNotNull(info) && info.getId().longValue() != userId.longValue()) {
             return UserConstants.NOT_UNIQUE;
         }
         return UserConstants.UNIQUE;
@@ -67,15 +57,25 @@ public class UserServiceImpl implements IUserService {
      * @return
      */
     @Override
-    public String checkPhoneUnique(User user) {
+    public boolean checkPhoneUnique(User user) {
         Long userId = StringUtils.isNull(user.getId()) ? -1L : user.getId();
         User info = userMapper.checkPhoneUnique(user.getPhone());
-        if (StringUtils.isNotNull(info) && !info.getId().equals(userId)) {
+        if (StringUtils.isNotNull(info) && info.getId().longValue() != userId.longValue()) {
             return UserConstants.NOT_UNIQUE;
         }
         return UserConstants.UNIQUE;
     }
 
+    /**
+     * 通过用户名或手机号查询用户
+     *
+     * @param param 用户名/手机号/openId
+     * @return 用户对象信息
+     */
+    @Override
+    public User selectByUserNamePhoneOpenId(String param) {
+        return userMapper.selectByUserNamePhoneOpenId(param);
+    }
 
     /**
      * 注册用户信息：新用户创建账号和账户

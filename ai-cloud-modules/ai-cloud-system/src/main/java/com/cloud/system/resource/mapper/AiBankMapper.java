@@ -29,6 +29,14 @@ public interface AiBankMapper {
     public List<AiBank> selectAiBankList(AiBank aiBank);
 
     /**
+     * 校验银行名称
+     *
+     * @param bankName 银行名称
+     * @return 结果
+     */
+    public AiBank checkBankNameUnique(String bankName);
+
+    /**
      * 新增银行信息
      *
      * @param aiBank 银行信息

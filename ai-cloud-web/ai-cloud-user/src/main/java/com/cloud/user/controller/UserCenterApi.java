@@ -36,7 +36,7 @@ public class UserCenterApi extends BaseController {
      * @param
      * @return 用户信息
      */
-    @Log(title = "查询我的信息", businessType = BusinessType.QUERY)
+    @Log(title = "查询我的信息", businessType = BusinessType.OTHER)
     @PostMapping(value = "info")
     @ApiOperation("查询我的信息")
     public R<UserInfoDto> userInfo() {
@@ -49,6 +49,7 @@ public class UserCenterApi extends BaseController {
      * @param
      * @param sign -- 签名信息
      */
+    @Log(title = "设置签名", businessType = BusinessType.OTHER)
     @PostMapping("sign")
     @ApiOperation(value = "设置签名")
     public R sign(@ApiParam(value = "签名", required = true) @RequestParam("sign") String sign) {
@@ -62,7 +63,7 @@ public class UserCenterApi extends BaseController {
      * @param
      * @return 二维码信息
      */
-    @Log(title = "查询二维码所需信息", businessType = BusinessType.QUERY)
+    @Log(title = "查询二维码所需信息", businessType = BusinessType.OTHER)
     @PostMapping("qrcode")
     @ApiOperation(value = "我的二维码")
     public R<QrCodeDto> qrcode() {
@@ -75,7 +76,7 @@ public class UserCenterApi extends BaseController {
      * @param param
      * @return
      */
-    @Log(title = "保存我的信息", businessType = BusinessType.UPDATE)
+    @Log(title = "保存我的信息", businessType = BusinessType.OTHER)
     @PostMapping(value = "save")
     @ApiOperation("保存我的信息")
     public R userSave(@RequestBody UserParam param) {
@@ -89,7 +90,7 @@ public class UserCenterApi extends BaseController {
      * @param
      * @return
      */
-    @Log(title = "查询钱包余额", businessType = BusinessType.QUERY)
+    @Log(title = "查询钱包余额", businessType = BusinessType.OTHER)
     @PostMapping(value = "wallet")
     @ApiOperation(value = "查询钱包余额")
     public R<BalanceDto> wallet() {
@@ -102,7 +103,7 @@ public class UserCenterApi extends BaseController {
      * @param param
      * @return
      */
-    @Log(title = "用户申请提现", businessType = BusinessType.QUERY)
+    @Log(title = "用户申请提现", businessType = BusinessType.OTHER)
     @PostMapping(value = "wallet/withdraw")
     @ApiOperation(value = "用户申请提现")
     public R<Boolean> walletWithdraw(@RequestBody WalletWithdrawParam param) {
@@ -115,7 +116,7 @@ public class UserCenterApi extends BaseController {
      * @param param
      * @return
      */
-    @Log(title = "查询钱包账单", businessType = BusinessType.QUERY)
+    @Log(title = "查询钱包账单", businessType = BusinessType.OTHER)
     @PostMapping(value = "wallet/bill")
     @ApiOperation(value = "查询钱包账单")
     public R<PageInfo<BillDto>> walletBill(@RequestBody WalletBillParam param) {
@@ -128,7 +129,7 @@ public class UserCenterApi extends BaseController {
      * @param param
      * @return
      */
-    @Log(title = "查询账单明细", businessType = BusinessType.QUERY)
+    @Log(title = "查询账单明细", businessType = BusinessType.OTHER)
     @PostMapping(value = "wallet/bill/detail")
     @ApiOperation(value = "查询账单明细")
     public R<List<BillDetailDto>> walletBillDetail(@RequestBody WalletBillDetailParam param) {
@@ -141,7 +142,7 @@ public class UserCenterApi extends BaseController {
      * @param
      * @return
      */
-    @Log(title = "查询银行卡绑定信息", businessType = BusinessType.QUERY)
+    @Log(title = "查询银行卡绑定信息", businessType = BusinessType.OTHER)
     @PostMapping(value = "wallet/bindBank/info")
     @ApiOperation(value = "查询银行卡绑定信息")
     public R<List<BindBankDto>> walletBindBankInfo() {
@@ -154,7 +155,7 @@ public class UserCenterApi extends BaseController {
      * @param param
      * @return
      */
-    @Log(title = "保存绑定银行卡信息", businessType = BusinessType.QUERY)
+    @Log(title = "保存绑定银行卡信息", businessType = BusinessType.OTHER)
     @PostMapping("wallet/bindBank/save")
     @ApiOperation(value = "保存绑定银行卡信息")
     public R<Boolean> walletBindBankSave(@RequestBody BindBankParam param) {
@@ -167,7 +168,7 @@ public class UserCenterApi extends BaseController {
      * @param
      * @return
      */
-    @Log(title = "查询支付宝绑定信息", businessType = BusinessType.QUERY)
+    @Log(title = "查询支付宝绑定信息", businessType = BusinessType.OTHER)
     @PostMapping("wallet/bindAlipay/Info")
     @ApiOperation(value = "查询支付宝绑定信息")
     public R<List<BindAlipayDto>> walletBindAlipayInfo() {
@@ -180,7 +181,7 @@ public class UserCenterApi extends BaseController {
      * @param param
      * @return
      */
-    @Log(title = "保存绑定支付宝信息", businessType = BusinessType.QUERY)
+    @Log(title = "保存绑定支付宝信息", businessType = BusinessType.OTHER)
     @PostMapping("wallet/bindAlipay/save")
     @ApiOperation(value = "保存绑定支付宝信息")
     public R<Boolean> walletBindAlipaySave(@RequestBody BindAlipayParam param) {
@@ -193,7 +194,7 @@ public class UserCenterApi extends BaseController {
      * @param
      * @return
      */
-    @Log(title = "是否设置支付密码", businessType = BusinessType.QUERY)
+    @Log(title = "是否设置支付密码", businessType = BusinessType.OTHER)
     @PostMapping("wallet/isSetPassword")
     @ApiOperation(value = "是否设置支付密码")
     public R<Boolean> walletIsSetPassword() {
@@ -206,7 +207,7 @@ public class UserCenterApi extends BaseController {
      * @param param
      * @return
      */
-    @Log(title = "设置支付密码", businessType = BusinessType.QUERY)
+    @Log(title = "设置支付密码", businessType = BusinessType.OTHER)
     @PostMapping("wallet/setPassword")
     @ApiOperation(value = "设置支付密码")
     public R walletSetPassword(@RequestBody WalletSetPasswordParam param) {
@@ -220,7 +221,7 @@ public class UserCenterApi extends BaseController {
      * @param param
      * @return
      */
-    @Log(title = "验证支付密码", businessType = BusinessType.QUERY)
+    @Log(title = "验证支付密码", businessType = BusinessType.OTHER)
     @PostMapping("wallet/verifyPassword")
     @ApiOperation(value = "验证支付密码")
     public R<Boolean> walletVerifyPassword(@RequestBody WalletVerifyPasswordParam param) {
@@ -233,7 +234,7 @@ public class UserCenterApi extends BaseController {
      * @param
      * @return
      */
-    @Log(title = "设置信息", businessType = BusinessType.QUERY)
+    @Log(title = "设置信息", businessType = BusinessType.OTHER)
     @PostMapping("setInfo")
     @ApiOperation(value = "设置信息")
     public R<UserSetInfoDto> setinfo() {
@@ -246,7 +247,7 @@ public class UserCenterApi extends BaseController {
      * @param param
      * @return
      */
-    @Log(title = "保存设置信息", businessType = BusinessType.QUERY)
+    @Log(title = "保存设置信息", businessType = BusinessType.OTHER)
     @PostMapping("setInfo/save")
     @ApiOperation(value = "保存设置信息")
     public R setInfoSave(@RequestBody UserSetInfoParam param) {

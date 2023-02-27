@@ -62,6 +62,11 @@ public class CacheConstants {
     public static final String PWD_ERR_CNT_KEY = "pwd_err_cnt:";
 
     /**
+     * 登录IP黑名单 cache key
+     */
+    public static final String SYS_LOGIN_BLACKIPLIST = SYS_CONFIG_KEY + "sys.login.blackIPList";
+
+    /**
      * 清除缓存信息 user_id_key key
      */
     public static final String LOGIN_SYS_USER_KEY = "user_id_key";

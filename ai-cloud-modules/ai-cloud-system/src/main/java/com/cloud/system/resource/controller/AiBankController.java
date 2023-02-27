@@ -7,6 +7,7 @@ import com.cloud.common.web.page.TableDataInfo;
 import com.cloud.log.annotation.Log;
 import com.cloud.log.enums.BusinessType;
 import com.cloud.security.annotation.RequiresPermissions;
+import com.cloud.security.utils.SecurityUtils;
 import com.cloud.system.resource.domain.AiBank;
 import com.cloud.system.resource.service.IAiBankService;
 import io.swagger.annotations.Api;
@@ -43,11 +44,11 @@ public class AiBankController extends BaseController {
      * 导出银行信息列表
      */
     @RequiresPermissions("resource:bank:export")
-    @Log(title = "银行信息", businessType = BusinessType.EXPORT)
+    @Log(title = "导出银行信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, AiBank aiBank) {
         List<AiBank> list = aiBankService.selectAiBankList(aiBank);
-        ExcelUtil<AiBank> util = new ExcelUtil<AiBank>(AiBank. class);
+        ExcelUtil<AiBank> util = new ExcelUtil<AiBank>(AiBank.class);
         util.exportExcel(response, list, "银行信息数据");
     }
 
@@ -64,9 +65,13 @@ public class AiBankController extends BaseController {
      * 新增银行信息
      */
     @RequiresPermissions("resource:bank:add")
-    @Log(title = "银行信息", businessType = BusinessType.INSERT)
+    @Log(title = "新增银行信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody AiBank aiBank) {
+        if (!aiBankService.checkAiBankUnique(aiBank)) {
+            return error("新增参数'" + aiBank.getBankName() + "'失败，银行名称已存在");
+        }
+        aiBank.setCreateBy(SecurityUtils.getUsername());
         return toAjax(aiBankService.insertAiBank(aiBank));
     }
 
@@ -74,9 +79,13 @@ public class AiBankController extends BaseController {
      * 修改银行信息
      */
     @RequiresPermissions("resource:bank:edit")
-    @Log(title = "银行信息", businessType = BusinessType.UPDATE)
+    @Log(title = "修改银行信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody AiBank aiBank) {
+        if (!aiBankService.checkAiBankUnique(aiBank)) {
+            return error("新增参数'" + aiBank.getBankName() + "'失败，银行名称已存在");
+        }
+        aiBank.setUpdateBy(SecurityUtils.getUsername());
         return toAjax(aiBankService.updateAiBank(aiBank));
     }
 
@@ -84,7 +93,7 @@ public class AiBankController extends BaseController {
      * 删除银行信息
      */
     @RequiresPermissions("resource:bank:remove")
-    @Log(title = "银行信息", businessType = BusinessType.DELETE)
+    @Log(title = "删除银行信息", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids) {
         return toAjax(aiBankService.deleteAiBankByIds(ids));

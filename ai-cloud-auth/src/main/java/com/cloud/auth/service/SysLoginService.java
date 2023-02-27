@@ -3,6 +3,7 @@ package com.cloud.auth.service;
 import com.anji.captcha.model.common.ResponseModel;
 import com.anji.captcha.model.vo.CaptchaVO;
 import com.anji.captcha.service.CaptchaService;
+import com.cloud.common.constant.CacheConstants;
 import com.cloud.common.constant.Constants;
 import com.cloud.common.constant.SecurityConstants;
 import com.cloud.common.constant.UserConstants;
@@ -10,7 +11,10 @@ import com.cloud.common.domain.R;
 import com.cloud.common.enums.UserStatus;
 import com.cloud.common.exception.CaptchaException;
 import com.cloud.common.exception.ServiceException;
+import com.cloud.common.text.Convert;
 import com.cloud.common.utils.StringUtils;
+import com.cloud.common.utils.ip.IpUtils;
+import com.cloud.redis.service.RedisService;
 import com.cloud.security.utils.SecurityUtils;
 import com.cloud.system.api.domain.SysUser;
 import com.cloud.system.api.model.SysLoginUser;
@@ -36,6 +40,9 @@ public class SysLoginService {
 
     @Autowired
     private CaptchaService captchaService;
+
+    @Autowired
+    private RedisService redisService;
 
     /**
      * 账号密码登录
@@ -70,6 +77,12 @@ public class SysLoginService {
                 || username.length() > UserConstants.USERNAME_MAX_LENGTH) {
             sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "用户名不在指定范围");
             throw new ServiceException("用户名不在指定范围!");
+        }
+        // IP黑名单校验
+        String blackStr = Convert.toStr(redisService.getCacheObject(CacheConstants.SYS_LOGIN_BLACKIPLIST));
+        if (IpUtils.isMatchedIp(blackStr, IpUtils.getIpAddr())) {
+            sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "很遗憾，访问IP已被列入系统黑名单");
+            throw new ServiceException("很遗憾，访问IP已被列入系统黑名单");
         }
         // 查询用户信息
         R<SysLoginUser> userResult = remoteSysUserService.getSysUserInfo(username, SecurityConstants.INNER);

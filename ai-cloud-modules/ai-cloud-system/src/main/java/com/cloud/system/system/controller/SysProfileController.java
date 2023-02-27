@@ -1,6 +1,5 @@
 package com.cloud.system.system.controller;
 
-import com.cloud.common.constant.UserConstants;
 import com.cloud.common.domain.R;
 import com.cloud.common.utils.StringUtils;
 import com.cloud.common.utils.file.FileTypeUtils;
@@ -66,11 +65,9 @@ public class SysProfileController extends BaseController {
         SysLoginUser sysLoginUser = SecurityUtils.getLoginUser();
         SysUser sysUser = sysLoginUser.getSysUser();
         user.setUserName(sysUser.getUserName());
-        if (StringUtils.isNotEmpty(user.getPhonenumber())
-                && UserConstants.NOT_UNIQUE.equals(userService.checkPhoneUnique(user))) {
+        if (StringUtils.isNotEmpty(user.getPhonenumber()) && !userService.checkPhoneUnique(user)){
             return error("修改用户'" + user.getUserName() + "'失败，手机号码已存在");
-        } else if (StringUtils.isNotEmpty(user.getEmail())
-                && UserConstants.NOT_UNIQUE.equals(userService.checkEmailUnique(user))) {
+        }   else if (StringUtils.isNotEmpty(user.getEmail()) && !userService.checkEmailUnique(user)) {
             return error("修改用户'" + user.getUserName() + "'失败，邮箱账号已存在");
         }
         user.setUserId(sysUser.getUserId());

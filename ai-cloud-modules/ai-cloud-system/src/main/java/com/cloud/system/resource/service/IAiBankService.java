@@ -57,4 +57,12 @@ public interface IAiBankService {
      * @return 结果
      */
     public int deleteAiBankById(Long id);
+
+    /**
+     * 校验银行名称是否唯一
+     *
+     * @param aiBank 参数信息
+     * @return 结果
+     */
+    public boolean  checkAiBankUnique(AiBank aiBank);
 }

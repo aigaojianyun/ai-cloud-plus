@@ -107,12 +107,6 @@
             <artifactId>commons-io</artifactId>
         </dependency>
 
-        <!-- Commons Fileupload -->
-        <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-        </dependency>
-
         <!-- Excel -->
         <dependency>
             <groupId>org.apache.poi</groupId>

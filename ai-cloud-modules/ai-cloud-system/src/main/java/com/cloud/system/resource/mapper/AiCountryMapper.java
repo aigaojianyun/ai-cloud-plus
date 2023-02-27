@@ -6,54 +6,62 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 /**
- * 国家信息Mapper接口
+ * 区域信息Mapper接口
  *
  * @author ai-cloud
  */
 @Mapper
 public interface AiCountryMapper {
     /**
-     * 查询国家信息
+     * 查询区域信息
      *
-     * @param id 国家信息主键
-     * @return 国家信息
+     * @param id 区域信息主键
+     * @return 区域信息
      */
     public AiCountry selectAiCountryById(Long id);
 
     /**
-     * 查询国家信息列表
+     * 查询区域信息列表
      *
-     * @param aiCountry 国家信息
-     * @return 国家信息集合
+     * @param aiCountry 区域信息
+     * @return 区域信息集合
      */
     public List<AiCountry> selectAiCountryList(AiCountry aiCountry);
 
     /**
-     * 新增国家信息
+     * 校验区域名称
      *
-     * @param aiCountry 国家信息
+     * @param cnName 区域名称
+     * @return 结果
+     */
+    public AiCountry checkcnNameUnique(String cnName);
+
+    /**
+     * 新增区域信息
+     *
+     * @param aiCountry 区域信息
      * @return 结果
      */
     public int insertAiCountry(AiCountry aiCountry);
 
     /**
-     * 修改国家信息
+     * 修改区域信息
      *
-     * @param aiCountry 国家信息
+     * @param aiCountry 区域信息
      * @return 结果
      */
     public int updateAiCountry(AiCountry aiCountry);
 
     /**
-     * 删除国家信息
+     * 删除区域信息
      *
-     * @param id 国家信息主键
+     * @param id 区域信息主键
      * @return 结果
      */
     public int deleteAiCountryById(Long id);
 
     /**
-     * 批量删除国家信息
+     * 批量删除区域信息
      *
      * @param ids 需要删除的数据主键集合
      * @return 结果

@@ -30,10 +30,9 @@
         <kaptcha.version>2.3.3</kaptcha.version>
         <captcha.version>1.3.0</captcha.version>
         <pagehelper.boot.version>1.4.5</pagehelper.boot.version>
-        <druid.version>1.2.15</druid.version>
+        <druid.version>1.2.16</druid.version>
         <dynamic-ds.version>3.5.2</dynamic-ds.version>
         <commons.io.version>2.11.0</commons.io.version>
-        <commons.fileupload.version>1.4</commons.fileupload.version>
         <velocity.version>2.3</velocity.version>
         <fastjson.version>2.0.23</fastjson.version>
         <oshi.version>6.2.2</oshi.version>
@@ -227,13 +226,6 @@
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
                 <version>${commons.io.version}</version>
-            </dependency>
-
-            <!-- 文件上传工具类 -->
-            <dependency>
-                <groupId>commons-fileupload</groupId>
-                <artifactId>commons-fileupload</artifactId>
-                <version>${commons.fileupload.version}</version>
             </dependency>
 
             <!-- 代码生成使用模板 -->

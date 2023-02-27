@@ -43,7 +43,7 @@ public class SysTokenService {
         sysLoginUser.setToken(token);
         sysLoginUser.setUserid(userId);
         sysLoginUser.setUsername(userName);
-        sysLoginUser.setIpaddr(IpUtils.getIpAddr(ServletUtils.getRequest()));
+        sysLoginUser.setIpaddr(IpUtils.getIpAddr());
         refreshToken(sysLoginUser);
 
         // Jwt存储信息

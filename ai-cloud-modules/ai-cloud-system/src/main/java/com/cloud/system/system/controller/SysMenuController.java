@@ -85,7 +85,7 @@ public class SysMenuController extends BaseController {
     @PostMapping
     @ApiOperation(value = "新增菜单", notes = "新增菜单")
     public AjaxResult add(@Validated @RequestBody SysMenu menu) {
-        if (UserConstants.NOT_UNIQUE.equals(menuService.checkMenuNameUnique(menu))) {
+        if (!menuService.checkMenuNameUnique(menu)) {
             return error("新增菜单'" + menu.getMenuName() + "'失败，菜单名称已存在");
         } else if (UserConstants.YES_FRAME.equals(menu.getIsFrame()) && !StringUtils.ishttp(menu.getPath())) {
             return error("新增菜单'" + menu.getMenuName() + "'失败，地址必须以http(s)://开头");
@@ -102,7 +102,7 @@ public class SysMenuController extends BaseController {
     @PutMapping
     @ApiOperation(value = "修改菜单", notes = "修改菜单")
     public AjaxResult edit(@Validated @RequestBody SysMenu menu) {
-        if (UserConstants.NOT_UNIQUE.equals(menuService.checkMenuNameUnique(menu))) {
+        if (!menuService.checkMenuNameUnique(menu)){
             return error("修改菜单'" + menu.getMenuName() + "'失败，菜单名称已存在");
         } else if (UserConstants.YES_FRAME.equals(menu.getIsFrame()) && !StringUtils.ishttp(menu.getPath())) {
             return error("修改菜单'" + menu.getMenuName() + "'失败，地址必须以http(s)://开头");

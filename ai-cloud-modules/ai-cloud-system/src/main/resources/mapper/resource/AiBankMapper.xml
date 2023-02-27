@@ -41,6 +41,12 @@
         where id = #{id}
     </select>
 
+
+    <select id="checkBankNameUnique" parameterType="String" resultMap="AiBankResult">
+        <include refid="selectAiBankVo"/>
+        where bank_name=#{bankName} limit 1
+    </select>
+
     <insert id="insertAiBank" parameterType="AiBank">
         insert into ai_bank
         <trim prefix="(" suffix=")" suffixOverrides=",">
