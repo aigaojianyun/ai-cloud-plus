@@ -22,12 +22,6 @@
             <artifactId>spring-webmvc</artifactId>
         </dependency>
 
-        <!-- Captcha  -->
-        <dependency>
-            <groupId>com.anji-plus</groupId>
-            <artifactId>spring-boot-starter-captcha</artifactId>
-        </dependency>
-
         <!--  Sa Token -->
         <dependency>
             <groupId>com.cloud</groupId>

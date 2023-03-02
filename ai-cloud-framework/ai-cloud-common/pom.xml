@@ -125,6 +125,12 @@
             <artifactId>swagger-annotations</artifactId>
         </dependency>
 
+        <!-- Captcha  -->
+        <dependency>
+            <groupId>com.anji-plus</groupId>
+            <artifactId>spring-boot-starter-captcha</artifactId>
+        </dependency>
+
         <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
