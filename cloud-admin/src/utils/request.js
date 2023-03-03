@@ -147,8 +147,8 @@ export function download(url, params, filename) {
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
     responseType: 'blob'
   }).then(async (data) => {
-    const isLogin = await blobValidate(data);
-    if (isLogin) {
+    const isBlob = blobValidate(data);
+    if (isBlob) {
       const blob = new Blob([data])
       saveAs(blob, filename)
     } else {

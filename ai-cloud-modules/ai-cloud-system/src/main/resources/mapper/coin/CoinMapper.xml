@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.system.coin.mapper.CoinMapper">
+
+    <resultMap type="Coin" id="CoinResult">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="cnName" column="cn_name"/>
+        <result property="enName" column="en_name"/>
+        <result property="iconUrl" column="icon_url"/>
+        <result property="infolink" column="infolink"/>
+        <result property="information" column="information"/>
+        <result property="minTxFee" column="min_tx_fee"/>
+        <result property="minWithdrawAmount" column="min_withdraw_amount"/>
+        <result property="maxTxFee" column="max_tx_fee"/>
+        <result property="maxWithdrawAmount" column="max_withdraw_amount"/>
+        <result property="cnyRate" column="cny_rate"/>
+        <result property="usdRate" column="usd_rate"/>
+        <result property="canWithdraw" column="can_withdraw"/>
+        <result property="canRecharge" column="can_recharge"/>
+        <result property="canTransfer" column="can_transfer"/>
+        <result property="canAutoWithdraw" column="can_auto_withdraw"/>
+        <result property="rechargeAmount" column="recharge_amount"/>
+        <result property="withdrawThreshold" column="withdraw_threshold"/>
+        <result property="minerFee" column="miner_fee"/>
+        <result property="accountType" column="account_type"/>
+        <result property="depositAddress" column="deposit_address"/>
+        <result property="sort" column="sort"/>
+        <result property="statusFlag" column="status_flag"/>
+        <result property="deleteFlag" column="delete_flag"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <sql id="selectCoinVo">
+        select id,
+               name,
+               cn_name,
+               en_name,
+               icon_url,
+               infolink,
+               information,
+               min_tx_fee,
+               min_withdraw_amount,
+               max_tx_fee,
+               max_withdraw_amount,
+               cny_rate,
+               usd_rate,
+               can_withdraw,
+               can_recharge,
+               can_transfer,
+               can_auto_withdraw,
+               recharge_amount,
+               withdraw_threshold,
+               miner_fee,
+               account_type,
+               deposit_address,
+               sort,
+               status_flag,
+               delete_flag,
+               create_by,
+               create_time,
+               update_by,
+               update_time,
+               remark
+        from coin
+    </sql>
+
+    <select id="selectCoinList" parameterType="Coin" resultMap="CoinResult">
+        <include refid="selectCoinVo"/>
+        <where>
+            <if test="name != null  and name != ''">and name like concat('%', #{name}, '%')</if>
+            <if test="cnName != null  and cnName != ''">and cn_name like concat('%', #{cnName}, '%')</if>
+            <if test="enName != null  and enName != ''">and en_name like concat('%', #{enName}, '%')</if>
+            <if test="iconUrl != null  and iconUrl != ''">and icon_url = #{iconUrl}</if>
+            <if test="infolink != null  and infolink != ''">and infolink = #{infolink}</if>
+            <if test="information != null  and information != ''">and information = #{information}</if>
+            <if test="minTxFee != null ">and min_tx_fee = #{minTxFee}</if>
+            <if test="minWithdrawAmount != null ">and min_withdraw_amount = #{minWithdrawAmount}</if>
+            <if test="maxTxFee != null ">and max_tx_fee = #{maxTxFee}</if>
+            <if test="maxWithdrawAmount != null ">and max_withdraw_amount = #{maxWithdrawAmount}</if>
+            <if test="cnyRate != null ">and cny_rate = #{cnyRate}</if>
+            <if test="usdRate != null ">and usd_rate = #{usdRate}</if>
+            <if test="canWithdraw != null ">and can_withdraw = #{canWithdraw}</if>
+            <if test="canRecharge != null ">and can_recharge = #{canRecharge}</if>
+            <if test="canTransfer != null ">and can_transfer = #{canTransfer}</if>
+            <if test="canAutoWithdraw != null ">and can_auto_withdraw = #{canAutoWithdraw}</if>
+            <if test="rechargeAmount != null ">and recharge_amount = #{rechargeAmount}</if>
+            <if test="withdrawThreshold != null ">and withdraw_threshold = #{withdrawThreshold}</if>
+            <if test="minerFee != null ">and miner_fee = #{minerFee}</if>
+            <if test="accountType != null ">and account_type = #{accountType}</if>
+            <if test="depositAddress != null  and depositAddress != ''">and deposit_address = #{depositAddress}</if>
+            <if test="sort != null ">and sort = #{sort}</if>
+            <if test="statusFlag != null ">and status_flag = #{statusFlag}</if>
+            <if test="deleteFlag != null ">and delete_flag = #{deleteFlag}</if>
+        </where>
+    </select>
+
+    <select id="selectCoinById" parameterType="Long" resultMap="CoinResult">
+        <include refid="selectCoinVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertCoin" parameterType="Coin" useGeneratedKeys="true" keyProperty="id">
+        insert into coin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="cnName != null">cn_name,</if>
+            <if test="enName != null">en_name,</if>
+            <if test="iconUrl != null">icon_url,</if>
+            <if test="infolink != null">infolink,</if>
+            <if test="information != null">information,</if>
+            <if test="minTxFee != null">min_tx_fee,</if>
+            <if test="minWithdrawAmount != null">min_withdraw_amount,</if>
+            <if test="maxTxFee != null">max_tx_fee,</if>
+            <if test="maxWithdrawAmount != null">max_withdraw_amount,</if>
+            <if test="cnyRate != null">cny_rate,</if>
+            <if test="usdRate != null">usd_rate,</if>
+            <if test="canWithdraw != null">can_withdraw,</if>
+            <if test="canRecharge != null">can_recharge,</if>
+            <if test="canTransfer != null">can_transfer,</if>
+            <if test="canAutoWithdraw != null">can_auto_withdraw,</if>
+            <if test="rechargeAmount != null">recharge_amount,</if>
+            <if test="withdrawThreshold != null">withdraw_threshold,</if>
+            <if test="minerFee != null">miner_fee,</if>
+            <if test="accountType != null">account_type,</if>
+            <if test="depositAddress != null">deposit_address,</if>
+            <if test="sort != null">sort,</if>
+            <if test="statusFlag != null">status_flag,</if>
+            <if test="deleteFlag != null">delete_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="cnName != null">#{cnName},</if>
+            <if test="enName != null">#{enName},</if>
+            <if test="iconUrl != null">#{iconUrl},</if>
+            <if test="infolink != null">#{infolink},</if>
+            <if test="information != null">#{information},</if>
+            <if test="minTxFee != null">#{minTxFee},</if>
+            <if test="minWithdrawAmount != null">#{minWithdrawAmount},</if>
+            <if test="maxTxFee != null">#{maxTxFee},</if>
+            <if test="maxWithdrawAmount != null">#{maxWithdrawAmount},</if>
+            <if test="cnyRate != null">#{cnyRate},</if>
+            <if test="usdRate != null">#{usdRate},</if>
+            <if test="canWithdraw != null">#{canWithdraw},</if>
+            <if test="canRecharge != null">#{canRecharge},</if>
+            <if test="canTransfer != null">#{canTransfer},</if>
+            <if test="canAutoWithdraw != null">#{canAutoWithdraw},</if>
+            <if test="rechargeAmount != null">#{rechargeAmount},</if>
+            <if test="withdrawThreshold != null">#{withdrawThreshold},</if>
+            <if test="minerFee != null">#{minerFee},</if>
+            <if test="accountType != null">#{accountType},</if>
+            <if test="depositAddress != null">#{depositAddress},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="statusFlag != null">#{statusFlag},</if>
+            <if test="deleteFlag != null">#{deleteFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+        </trim>
+    </insert>
+
+    <update id="updateCoin" parameterType="Coin">
+        update coin
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="cnName != null">cn_name = #{cnName},</if>
+            <if test="enName != null">en_name = #{enName},</if>
+            <if test="iconUrl != null">icon_url = #{iconUrl},</if>
+            <if test="infolink != null">infolink = #{infolink},</if>
+            <if test="information != null">information = #{information},</if>
+            <if test="minTxFee != null">min_tx_fee = #{minTxFee},</if>
+            <if test="minWithdrawAmount != null">min_withdraw_amount = #{minWithdrawAmount},</if>
+            <if test="maxTxFee != null">max_tx_fee = #{maxTxFee},</if>
+            <if test="maxWithdrawAmount != null">max_withdraw_amount = #{maxWithdrawAmount},</if>
+            <if test="cnyRate != null">cny_rate = #{cnyRate},</if>
+            <if test="usdRate != null">usd_rate = #{usdRate},</if>
+            <if test="canWithdraw != null">can_withdraw = #{canWithdraw},</if>
+            <if test="canRecharge != null">can_recharge = #{canRecharge},</if>
+            <if test="canTransfer != null">can_transfer = #{canTransfer},</if>
+            <if test="canAutoWithdraw != null">can_auto_withdraw = #{canAutoWithdraw},</if>
+            <if test="rechargeAmount != null">recharge_amount = #{rechargeAmount},</if>
+            <if test="withdrawThreshold != null">withdraw_threshold = #{withdrawThreshold},</if>
+            <if test="minerFee != null">miner_fee = #{minerFee},</if>
+            <if test="accountType != null">account_type = #{accountType},</if>
+            <if test="depositAddress != null">deposit_address = #{depositAddress},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="statusFlag != null">status_flag = #{statusFlag},</if>
+            <if test="deleteFlag != null">delete_flag = #{deleteFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCoinById" parameterType="Long">
+        delete
+        from coin
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteCoinByIds" parameterType="String">
+        delete from coin where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

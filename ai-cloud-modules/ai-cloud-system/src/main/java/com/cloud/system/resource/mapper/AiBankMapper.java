@@ -1,5 +1,7 @@
 package com.cloud.system.resource.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.cloud.system.coin.domain.Coin;
 import com.cloud.system.resource.domain.AiBank;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -11,7 +13,7 @@ import java.util.List;
  * @author ai-cloud
  */
 @Mapper
-public interface AiBankMapper {
+public interface AiBankMapper extends BaseMapper<AiBank> {
     /**
      * 查询银行信息
      *
