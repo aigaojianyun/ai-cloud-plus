@@ -91,6 +91,7 @@ ai-cloud-parent
 ## 在线体验
 
 * 移动端H5
+* 移动端滑块验证码必须要在移动设备上，或者pc端选择手机调试模式下，才能滑动
 - https://www.aiclouds.vip
 - ai168/123456
 -
