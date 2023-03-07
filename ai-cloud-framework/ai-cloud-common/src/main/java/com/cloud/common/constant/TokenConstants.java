@@ -10,7 +10,7 @@ public class TokenConstants {
     /**
      * 移动端令牌自定义标识
      */
-    public static final String SATOKEN = "SaToken";
+    public static final String SATOKEN = "satoken";
 
     /**
      * 后台管理令牌自定义标识

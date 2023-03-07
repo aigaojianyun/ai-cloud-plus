@@ -1,6 +1,5 @@
 package com.cloud.auth.controller;
 
-import cn.dev33.satoken.stp.StpUtil;
 import com.cloud.auth.param.LoginParam;
 import com.cloud.auth.param.WeiXinLoginParam;
 import com.cloud.auth.service.LoginService;
@@ -8,7 +7,6 @@ import com.cloud.common.domain.R;
 import com.cloud.common.utils.JwtUtils;
 import com.cloud.common.utils.StringUtils;
 import com.cloud.common.utils.sign.RsaUtils;
-import com.cloud.satoken.utils.SaTokenUtil;
 import com.cloud.security.auth.AuthUtil;
 import com.cloud.security.service.WebTokenService;
 import com.cloud.security.utils.SecurityUtils;
@@ -45,9 +43,10 @@ public class LoginController {
         // 校验用户信息
         LoginUser userInfo = loginService.login(param.getUsername(), RsaUtils.decryptByPrivateKey(param.getPassword()), param.getCode(), param.getUuid());
         // 登录
-        SaTokenUtil.login(userInfo);
+        // SaTokenUtil.login(userInfo);
+        // StpUtil.getTokenValue()
         // 获取登录token
-        return R.ok(StpUtil.getTokenValue());
+        return R.ok(webTokenService.createToken(userInfo));
     }
 
     /**

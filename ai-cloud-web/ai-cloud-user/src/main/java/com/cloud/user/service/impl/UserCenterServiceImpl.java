@@ -65,7 +65,7 @@ public class UserCenterServiceImpl implements IUserCenterService {
     @Override
     public UserInfoDto userInfo() {
         //获取userId
-        Long userId = SaTokenUtil.getUserId();
+        Long userId = SecurityUtils.getUserId();
         return userMapper.selectByUserInfo(userId);
     }
 
