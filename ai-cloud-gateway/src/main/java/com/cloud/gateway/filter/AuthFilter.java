@@ -1,5 +1,9 @@
 package com.cloud.gateway.filter;
 
+import cn.dev33.satoken.reactor.filter.SaReactorFilter;
+import cn.dev33.satoken.router.SaRouter;
+import cn.dev33.satoken.stp.StpUtil;
+import cn.dev33.satoken.util.SaResult;
 import com.cloud.common.constant.CacheConstants;
 import com.cloud.common.constant.HttpStatus;
 import com.cloud.common.constant.SecurityConstants;
@@ -15,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.Ordered;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
@@ -37,6 +42,28 @@ public class AuthFilter implements GlobalFilter, Ordered {
     @Autowired
     private RedisService redisService;
 
+    /**
+     * 注册 Sa-Token 全局过滤器
+     */
+    @Bean
+    public SaReactorFilter getSaReactorFilter() {
+        return new SaReactorFilter()
+                // 拦截地址全部path
+                .addInclude("/**")
+                // 开放地址
+                .addExclude("/favicon.ico")
+                // 鉴权方法：每次访问进入
+                .setAuth(obj -> {
+                    // 登录校验 -- 拦截所有路由
+                    SaRouter.match("/**")
+                            .notMatch(ignoreWhite.getWhites())
+                            .check(r -> {
+                                // 检查是否登录 是否有token
+                                StpUtil.checkLogin();
+                            });
+                })
+                .setError(e -> SaResult.error("认证失败，无法访问系统资源").setCode(HttpStatus.UNAUTHORIZED));
+    }
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -75,6 +102,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
         removeHeader(mutate, SecurityConstants.FROM_SOURCE);
         return chain.filter(exchange.mutate().request(mutate.build()).build());
     }
+
 
     private void addHeader(ServerHttpRequest.Builder mutate, String name, Object value) {
         if (value == null) {

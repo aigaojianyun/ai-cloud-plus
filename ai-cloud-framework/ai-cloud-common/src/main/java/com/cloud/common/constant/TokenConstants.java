@@ -6,15 +6,21 @@ package com.cloud.common.constant;
  * @author ai-cloud
  */
 public class TokenConstants {
+
     /**
-     * 令牌自定义标识
+     * 移动端令牌自定义标识
+     */
+    public static final String SATOKEN = "SaToken";
+
+    /**
+     * 后台管理令牌自定义标识
      */
     public static final String AUTHENTICATION = "Authorization";
 
     /**
      * 令牌前缀
      */
-    public static final String PREFIX = "Bearer ";
+    public static final String PREFIX = "Bearer";
 
     /**
      * 令牌秘钥

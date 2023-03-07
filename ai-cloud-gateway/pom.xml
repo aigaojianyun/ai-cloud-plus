@@ -70,10 +70,10 @@
             <artifactId>kaptcha</artifactId>
         </dependency>
 
-        <!-- Redis -->
+        <!--  Sa Token -->
         <dependency>
             <groupId>com.cloud</groupId>
-            <artifactId>ai-cloud-redis</artifactId>
+            <artifactId>ai-cloud-satoken</artifactId>
         </dependency>
 
         <!-- Swagger -->

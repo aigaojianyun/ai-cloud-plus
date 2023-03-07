@@ -40,12 +40,6 @@
             <artifactId>ai-cloud-system-api</artifactId>
         </dependency>
 
-        <!-- Api User -->
-        <dependency>
-            <groupId>com.cloud</groupId>
-            <artifactId>ai-cloud-user-api</artifactId>
-        </dependency>
-
     </dependencies>
 
 </project>

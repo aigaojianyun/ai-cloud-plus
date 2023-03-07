@@ -11,6 +11,7 @@ import com.cloud.common.utils.SerialNumberUtils;
 import com.cloud.common.utils.StringUtils;
 import com.cloud.common.utils.sign.MathUtil;
 import com.cloud.common.utils.sign.Md5Util;
+import com.cloud.satoken.utils.SaTokenUtil;
 import com.cloud.security.utils.SecurityUtils;
 import com.cloud.user.api.domain.User;
 import com.cloud.user.domain.*;
@@ -64,7 +65,7 @@ public class UserCenterServiceImpl implements IUserCenterService {
     @Override
     public UserInfoDto userInfo() {
         //获取userId
-        Long userId = SecurityUtils.getUserId();
+        Long userId = SaTokenUtil.getUserId();
         return userMapper.selectByUserInfo(userId);
     }
 

@@ -1,26 +1,23 @@
 package com.cloud.auth.controller;
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.cloud.auth.param.LoginParam;
 import com.cloud.auth.param.WeiXinLoginParam;
 import com.cloud.auth.service.LoginService;
 import com.cloud.common.domain.R;
 import com.cloud.common.utils.JwtUtils;
+import com.cloud.common.utils.StringUtils;
 import com.cloud.common.utils.sign.RsaUtils;
+import com.cloud.satoken.utils.SaTokenUtil;
 import com.cloud.security.auth.AuthUtil;
 import com.cloud.security.service.WebTokenService;
 import com.cloud.security.utils.SecurityUtils;
 import com.cloud.user.api.model.LoginUser;
 import io.swagger.annotations.Api;
-import me.zhyd.oauth.cache.AuthStateCache;
-import me.zhyd.oauth.request.AuthRequest;
-import me.zhyd.oauth.utils.AuthStateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * token 控制
@@ -32,8 +29,6 @@ import java.util.Map;
 @RequestMapping("/web")
 public class LoginController {
 
-    private final static Map<String, String> auths = new HashMap<String, String>();
-    private AuthStateCache authStateCache;
     @Autowired
     private WebTokenService webTokenService;
     @Autowired
@@ -47,10 +42,12 @@ public class LoginController {
      */
     @PostMapping("/login")
     public R<?> login(@RequestBody LoginParam param) throws Exception {
-        // 用户登录
+        // 校验用户信息
         LoginUser userInfo = loginService.login(param.getUsername(), RsaUtils.decryptByPrivateKey(param.getPassword()), param.getCode(), param.getUuid());
+        // 登录
+        SaTokenUtil.login(userInfo);
         // 获取登录token
-        return R.ok(webTokenService.createToken(userInfo));
+        return R.ok(StpUtil.getTokenValue());
     }
 
     /**
@@ -76,7 +73,7 @@ public class LoginController {
     @PostMapping("refresh")
     public R<?> refresh(HttpServletRequest request) {
         LoginUser loginUser = webTokenService.getLoginUser(request);
-        if (com.cloud.common.utils.StringUtils.isNotNull(loginUser)) {
+        if (StringUtils.isNotNull(loginUser)) {
             // 刷新令牌有效期
             webTokenService.refreshToken(loginUser);
             return R.ok();
@@ -93,7 +90,7 @@ public class LoginController {
     @DeleteMapping("logout")
     public R<?> logout(HttpServletRequest request) {
         String token = SecurityUtils.getToken(request);
-        if (com.cloud.common.utils.StringUtils.isNotEmpty(token)) {
+        if (StringUtils.isNotEmpty(token)) {
             String username = JwtUtils.getUserName(token);
             // 删除用户缓存记录
             AuthUtil.logoutByToken(token);

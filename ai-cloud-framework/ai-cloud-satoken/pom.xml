@@ -17,16 +17,32 @@
 
     <dependencies>
 
-        <!-- Sa-Token -->
+        <!-- Sa-Token 权限认证（Reactor响应式集成） -->
         <dependency>
             <groupId>cn.dev33</groupId>
-            <artifactId>sa-token-spring-boot-starter</artifactId>
+            <artifactId>sa-token-reactor-spring-boot-starter</artifactId>
+        </dependency>
+
+        <!-- Sa-Token整合redis -->
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-dao-redis-jackson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
         </dependency>
 
         <!--  Redis -->
         <dependency>
             <groupId>com.cloud</groupId>
             <artifactId>ai-cloud-redis</artifactId>
+        </dependency>
+
+        <!-- Api User -->
+        <dependency>
+            <groupId>com.cloud</groupId>
+            <artifactId>ai-cloud-user-api</artifactId>
         </dependency>
 
     </dependencies>
