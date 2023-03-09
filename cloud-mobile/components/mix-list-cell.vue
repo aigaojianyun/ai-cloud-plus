@@ -44,7 +44,7 @@
 			},
 			title: {
 				type: String,
-				default: '设置'
+				default: ''
 			},
 			tips: {
 				type: String,

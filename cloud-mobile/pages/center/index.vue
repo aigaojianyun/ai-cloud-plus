@@ -65,13 +65,11 @@
 <script>
 
 import listCell from '@/components/mix-list-cell';
-import UButton from "../../uni_modules/uview-ui/components/u-button/u-button";
 import {getUserInfo} from "@/api/user"
 
 export default {
   components: {
     listCell,
-    UButton,
   },
   data() {
     return {
@@ -100,7 +98,7 @@ export default {
     },
     // 跳转到我的余额
     handleToBalance(){
-      this.$tab.navigateTo('/pages/wallet/index')
+      this.$tab.navigateTo('/pages/balance/index')
     },
     // 跳转到关于我们
     handleToAbout(){

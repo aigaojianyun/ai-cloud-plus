@@ -46,7 +46,7 @@
       }
     },
     {
-      "path": "pages/wallet/index",
+      "path": "pages/balance/index",
       "style": {
         "navigationBarTitleText": "我的余额",
         "enablePullDownRefresh": false,
