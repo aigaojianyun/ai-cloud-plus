@@ -25,7 +25,7 @@
       }
     },
     {
-      "path": "pages/quotation/index",
+      "path": "pages/market/index",
       "style": {
         "navigationBarTitleText": "行情",
         "navigationStyle": "custom"
@@ -86,9 +86,9 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/quotation/index",
-        "iconPath": "static/images/tabbar/quotation.png",
-        "selectedIconPath": "static/images/tabbar/quotation_art.png",
+        "pagePath": "pages/market/index",
+        "iconPath": "static/images/tabbar/market.png",
+        "selectedIconPath": "static/images/tabbar/market_art.png",
         "text": "行情"
       },
       {

@@ -1,6 +1,7 @@
 <template>
   <view class="container">
-    <u-navbar :safeAreaInsetTop="true" :placeholder="true" :fixed="true" leftIcon=" " title="我的" bgColor="#f3f4f6"></u-navbar>
+    <u-navbar :safeAreaInsetTop="true" :placeholder="true" :fixed="true" leftIcon=" " :title="i18n.tabBar.me" bgColor="#f3f4f6"></u-navbar>
+
     <view class="user-section">
       <view class="user-info-box">
         <view>
@@ -16,12 +17,12 @@
           <u-row>
             <u-col span="8">
               <view class="vip-info-type">
-                {{ user.userType == 1 ? '普通用户' : '会员用户' }}
+                {{ user.userType == 1 ? i18n.my.normal : i18n.my.member }}
               </view>
             </u-col>
             <u-col span="4">
               <view class="vip-info-button">
-                <u-button  :text="user.vipType == 1  ? '开通会员' : user.vipEndTime"></u-button>
+                <u-button  :text="user.vipType == 1  ? i18n.my.vip : user.vipEndTime"></u-button>
               </view>
             </u-col>
           </u-row>
@@ -32,49 +33,71 @@
       <view class="order-section">
         <view class="order-item"  hover-class="common-hover"  :hover-stay-time="50" @click="handleToNotice">
           <image class="icon" src="/static/images/my/icon-notice.png"></image>
-          <text>公告</text>
+          <text>{{i18n.my.notice}}</text>
         </view>
         <view class="order-item" hover-class="common-hover" :hover-stay-time="50" @click="handleToSign">
           <image class="icon" src="/static/images/my/icon-sign.png"></image>
-          <text>签到</text>
+          <text>{{i18n.my.sign}}</text>
         </view>
         <view class="order-item" hover-class="common-hover"  :hover-stay-time="50" @click="handleToLottery">
           <image class="icon" src="/static/images/my/icon-lottery.png"></image>
-          <text>抽奖</text>
+          <text>{{i18n.my.reward}}</text>
         </view>
         <view class="order-item"  hover-class="common-hover"  :hover-stay-time="50" @click="handleToRecommend">
           <image class="icon" src="/static/images/my/icon-recommend.png"></image>
-          <text>推荐</text>
+          <text>{{i18n.my.recomment}}</text>
         </view>
       </view>
       <view class="history-section icon">
         <view @click="handleToBalance">
-          <list-cell image="/static/images/my/icon-balance.png" iconColor="#e07472"  title="我的余额" ></list-cell>
+          <list-cell image="/static/images/my/icon-balance.png" iconColor="#e07472"  :title="i18n.my.balance" ></list-cell>
         </view>
         <view @click="handleToAbout">
-        <list-cell image="/static/images/my/icon-about.png" iconColor="#e07472"  title="关于我们" ></list-cell>
+          <list-cell image="/static/images/my/icon-about.png" iconColor="#e07472"  :title="i18n.my.about" ></list-cell>
+        </view>
+        <view @click="handleToLang">
+          <list-cell image="/static/images/my/icon-language.png" iconColor="#e07472"  :title="i18n.my.lang" ></list-cell>
         </view>
         <view @click="handleToSetting">
-        <list-cell image="/static/images/my/icon-setting.png" iconColor="#e07472"  title="应用设置" ></list-cell>
+        <list-cell image="/static/images/my/icon-setting.png" iconColor="#e07472"  :title="i18n.my.set" ></list-cell>
         </view>
       </view>
     </view>
+
+    <u-action-sheet :cancelText="i18n.common.cancel" :actions="langList" :show="showLang" @select="clickLang"></u-action-sheet>
+
   </view>
 </template>
 
 <script>
 
 import listCell from '@/components/mix-list-cell';
+import {commonMixin} from '@/common/mixin/mixin.js'
 import {getUserInfo} from "@/api/user"
 
 export default {
   components: {
     listCell,
   },
+  mixins: [commonMixin],
   data() {
     return {
-      user: {}
+      user: {},
+      showLang: false,
+      langList: []
     }
+  },
+  onShow(){
+    uni.setNavigationBarTitle({
+      title: this.i18n.tabBar.me
+    })
+    this.langList = [{
+      name: this.i18n.common.lang.en,
+      lang: 'en_US'
+    }, {
+      name: this.i18n.common.lang.zh,
+      lang: 'zh_CN'
+    }]
   },
   created() {
     this.getInfo()
@@ -103,6 +126,33 @@ export default {
     // 跳转到关于我们
     handleToAbout(){
       this.$tab.navigateTo('/pages/center/about')
+    },
+    // 打开系统语言设置
+    handleToLang(){
+      this.showLang = true
+    },
+    clickLang(index){
+      let lang = index.lang
+      console.log(lang);
+      uni.setStorageSync('language', lang);
+      // 改变在main.js中定义的locale
+      this._i18n.locale = lang;
+      uni.setTabBarItem({
+        index: 0,
+        text: this.$t('message').tabBar.home
+      })
+      uni.setTabBarItem({
+        index: 1,
+        text: this.$t('message').tabBar.assets
+      })
+      uni.setTabBarItem({
+        index: 2,
+        text: this.$t('message').tabBar.market
+      })
+      uni.setTabBarItem({
+        index: 3,
+        text: this.$t('message').tabBar.me
+      })
     },
     // 跳转到应用设置
     handleToSetting(){
