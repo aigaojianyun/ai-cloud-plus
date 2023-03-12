@@ -1,0 +1,10 @@
+{
+  "name": "cloud-mobile",
+  "version": "1.0.0",
+  "description": "币币钱包",
+  "author": "cloud-mobile",
+  "license": "MIT",
+  "dependencies": {
+    "crypto-js": "^4.1.1"
+  }
+}

@@ -64,7 +64,7 @@
       </view>
     </view>
 
-    <u-action-sheet :cancelText="i18n.common.cancel" :actions="langList" :show="showLang" @select="clickLang"></u-action-sheet>
+    <u-action-sheet  :actions="langList" :show="showLang" @select="clickLang" :cancelText="i18n.common.cancel" @close="showLang = false"></u-action-sheet>
 
   </view>
 </template>
@@ -133,10 +133,10 @@ export default {
     },
     clickLang(index){
       let lang = index.lang
-      console.log(lang);
       uni.setStorageSync('language', lang);
       // 改变在main.js中定义的locale
       this._i18n.locale = lang;
+      console.log(lang);
       uni.setTabBarItem({
         index: 0,
         text: this.$t('message').tabBar.home
@@ -153,6 +153,7 @@ export default {
         index: 3,
         text: this.$t('message').tabBar.me
       })
+      // this.showLang = false
     },
     // 跳转到应用设置
     handleToSetting(){
