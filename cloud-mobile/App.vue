@@ -36,11 +36,11 @@ export default {
     })
     uni.setTabBarItem({
       index: 1,
-      text: this.$t('message').tabBar.assets
+      text: this.$t('message').tabBar.market
     })
     uni.setTabBarItem({
       index: 2,
-      text: this.$t('message').tabBar.market
+      text: this.$t('message').tabBar.assets
     })
     uni.setTabBarItem({
       index: 3,

@@ -14,8 +14,8 @@ module.exports = {
         },
         tabBar: {
             home: 'Home',
-            assets: 'Assets',
             market: 'Market',
+            assets: 'Assets',
             me: 'Me',
         },
         my: {

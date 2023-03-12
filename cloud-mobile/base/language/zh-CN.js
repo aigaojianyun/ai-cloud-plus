@@ -14,8 +14,8 @@ module.exports = {
         },
         tabBar: {
             home: '首页',
-            assets: '资产',
             market: '行情',
+            assets: '资产',
             me: '我的',
         },
         my: {
