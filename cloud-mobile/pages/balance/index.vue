@@ -1,35 +1,42 @@
 <template>
   <view class="container">
-      <u-navbar :safeAreaInsetTop="true" :placeholder="true" :fixed="true" :autoBack="true" leftText="返回"  title="我的余额" bgColor="#f3f4f6" ></u-navbar>
-      <view class="total-box">
-        <view class="title">余额</view>
-        <view class="asset">
-          <text class="amount">
-            <u-count-to :startVal="0" :endVal="data.availableBalance" separator="," :decimals="4" color="#ffffff"></u-count-to>
-          </text>
-        </view>
-        <view class="operat">
-          <view class="btn" >充值</view>
-          <view class="btn" >提现</view>
-          <view class="btn" >兑换</view>
-        </view>
+    <u-navbar :safeAreaInsetTop="true" :placeholder="true" :fixed="true" :autoBack="true" :leftText="i18n.common.regain"
+              :title="i18n.my.balance" bgColor="#f3f4f6"></u-navbar>
+    <view class="total-box">
+      <view class="title">{{ i18n.balance.available }}</view>
+      <view class="asset">
+        <text class="amount">
+          <u-count-to :startVal="0" :endVal="data.availableBalance" separator="," :decimals="4"
+                      color="#ffffff"></u-count-to>
+        </text>
       </view>
+      <view class="operat">
+        <view class="btn">{{ i18n.balance.recharge }}</view>
+        <view class="btn">{{ i18n.balance.withdraw }}</view>
+        <view class="btn">{{ i18n.balance.exchange }}</view>
+      </view>
+    </view>
   </view>
 </template>
 
 <script>
 
 import {getWallet} from "@/api/account"
+import {commonMixin} from '@/common/mixin/mixin.js'
 
 export default {
-  components: {
-
-  },
+  components: {},
+  mixins: [commonMixin],
   data() {
     return {
       data: {},
       autoplay: true
     }
+  },
+  onShow() {
+    uni.setNavigationBarTitle({
+      title: this.i18n.my.balance
+    })
   },
   created() {
     this.getWallet()
@@ -48,13 +55,16 @@ export default {
 
 <style lang="scss">
 .container{
-  padding: 0 40rpx;
+  padding: 0px 10px;
+  min-height: 100vh;
+  height: auto;
+  background-color: $uni-bg-color;
 }
 .total-box{
   background: url(../../static/images/wallet/wallet-bg.png);
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  font-size: 20px;
+  font-size: 10px;
   padding: 60rpx 30rpx 40rpx 30rpx;
   color: #8db3fe;
   .title{

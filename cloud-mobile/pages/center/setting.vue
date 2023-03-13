@@ -1,40 +1,50 @@
 <template>
   <view class="container">
-    <u-navbar :safeAreaInsetTop="true" :placeholder="true" :fixed="true" :autoBack="true" leftText="返回" title="应用设置" bgColor="#f3f4f6" ></u-navbar>
-      <view class="list-cell b-b m-t"  hover-class="cell-hover" :hover-stay-time="50">
-        <text class="cell-tit">登录密码</text>
-        <text class="cell-more yticon icon-you"></text>
-      </view>
-      <view class="list-cell b-b "  hover-class="cell-hover" :hover-stay-time="50">
-        <text class="cell-tit">交易密码</text>
-        <text class="cell-more yticon icon-you"></text>
-      </view>
-      <view class="list-cell b-b"  hover-class="cell-hover" :hover-stay-time="50">
-        <text class="cell-tit">检查更新</text>
-        <text class="cell-more yticon icon-you"></text>
-      </view>
-      <view class="list-cell log-out-btn" @click="handleLogout">
-        <text class="cell-tit">退出登录</text>
-      </view>
+    <u-navbar :safeAreaInsetTop="true" :placeholder="true" :fixed="true" :autoBack="true" :leftText="i18n.common.regain"
+              :title="i18n.my.set" bgColor="#f3f4f6"></u-navbar>
+    <view class="list-cell b-b m-t" hover-class="cell-hover" :hover-stay-time="50">
+      <text class="cell-tit">{{ i18n.set.loginpwd }}</text>
+      <text class="cell-more yticon icon-you"></text>
+    </view>
+    <view class="list-cell b-b " hover-class="cell-hover" :hover-stay-time="50">
+      <text class="cell-tit">{{ i18n.set.paypwd }}</text>
+      <text class="cell-more yticon icon-you"></text>
+    </view>
+    <view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
+      <text class="cell-tit">{{ i18n.set.renew }}</text>
+      <text class="cell-more yticon icon-you"></text>
+    </view>
+    <view class="list-cell log-out-btn" @click="handleLogout">
+      <text class="cell-tit">{{ i18n.set.out }}</text>
+    </view>
   </view>
 </template>
 
 <script>
 
-export default {
-  components: {
+import {commonMixin} from '@/common/mixin/mixin.js'
 
-  },
+export default {
+  components: {},
+  mixins: [commonMixin],
   data() {
     return {
+      data: {},
+      autoplay: true
     }
   },
+  onShow() {
+    uni.setNavigationBarTitle({
+      title: this.i18n.my.set
+    })
+  },
   created() {
+
   },
   methods: {
     // 退出登录
     handleLogout() {
-      this.$modal.confirm('确定注销并退出系统吗？').then(() => {
+      this.$modal.confirm(this.i18n.set.outfirm).then(() => {
         this.$store.dispatch('LogOut').then(() => {
           this.$tab.reLaunch('/pages/login/login')
         })
@@ -59,7 +69,7 @@ page{
   border-bottom: 0.5px solid #e6ebee;
   &.log-out-btn{
     margin: 60rpx auto;
-    width: 60%;
+    width: 80%;
     border: 1px solid #14191f;
     border-radius: 20rpx;
     .cell-tit{

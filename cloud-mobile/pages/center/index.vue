@@ -1,6 +1,7 @@
 <template>
   <view class="container">
-    <u-navbar :safeAreaInsetTop="true" :placeholder="true" :fixed="true" leftIcon=" " :title="i18n.tabBar.me" bgColor="#f3f4f6"></u-navbar>
+    <u-navbar :safeAreaInsetTop="true" :placeholder="true" :fixed="true" leftIcon=" " :title="i18n.tabBar.me"
+              bgColor="#f3f4f6"></u-navbar>
 
     <view class="user-section">
       <view class="user-info-box">
@@ -8,8 +9,8 @@
           <u-avatar :src="user.headImg" size="120rpx"></u-avatar>
         </view>
         <view>
-          <view class="user-info-box--name">{{  user.nickName }}</view>
-          <text class="user-info-box--account">{{ user.phone  == null? '':user.phone }}</text>
+          <view class="user-info-box--name">{{ user.nickName }}</view>
+          <text class="user-info-box--account">{{ user.phone == null ? '' : user.phone }}</text>
         </view>
       </view>
       <view class="vip-section">
@@ -22,7 +23,7 @@
             </u-col>
             <u-col span="4">
               <view class="vip-info-button">
-                <u-button  :text="user.vipType == 1  ? i18n.my.vip : user.vipEndTime"></u-button>
+                <u-button :text="user.vipType == 1  ? i18n.my.vip : user.vipEndTime"></u-button>
               </view>
             </u-col>
           </u-row>
@@ -31,40 +32,42 @@
     </view>
     <view class="cover-container">
       <view class="order-section">
-        <view class="order-item"  hover-class="common-hover"  :hover-stay-time="50" @click="handleToNotice">
+        <view class="order-item" hover-class="common-hover" :hover-stay-time="50" @click="handleToNotice">
           <image class="icon" src="/static/images/my/icon-notice.png"></image>
-          <text>{{i18n.my.notice}}</text>
+          <text>{{ i18n.my.notice }}</text>
         </view>
         <view class="order-item" hover-class="common-hover" :hover-stay-time="50" @click="handleToSign">
           <image class="icon" src="/static/images/my/icon-sign.png"></image>
-          <text>{{i18n.my.sign}}</text>
+          <text>{{ i18n.my.sign }}</text>
         </view>
-        <view class="order-item" hover-class="common-hover"  :hover-stay-time="50" @click="handleToLottery">
+        <view class="order-item" hover-class="common-hover" :hover-stay-time="50" @click="handleToLottery">
           <image class="icon" src="/static/images/my/icon-lottery.png"></image>
-          <text>{{i18n.my.reward}}</text>
+          <text>{{ i18n.my.reward }}</text>
         </view>
-        <view class="order-item"  hover-class="common-hover"  :hover-stay-time="50" @click="handleToRecommend">
+        <view class="order-item" hover-class="common-hover" :hover-stay-time="50" @click="handleToRecommend">
           <image class="icon" src="/static/images/my/icon-recommend.png"></image>
-          <text>{{i18n.my.recomment}}</text>
+          <text>{{ i18n.my.recomment }}</text>
         </view>
       </view>
       <view class="history-section icon">
         <view @click="handleToBalance">
-          <list-cell image="/static/images/my/icon-balance.png" iconColor="#e07472"  :title="i18n.my.balance" ></list-cell>
+          <list-cell image="/static/images/my/icon-balance.png" iconColor="#e07472"
+                     :title="i18n.my.balance"></list-cell>
         </view>
         <view @click="handleToAbout">
-          <list-cell image="/static/images/my/icon-about.png" iconColor="#e07472"  :title="i18n.my.about" ></list-cell>
+          <list-cell image="/static/images/my/icon-about.png" iconColor="#e07472" :title="i18n.my.about"></list-cell>
         </view>
         <view @click="handleToLang">
-          <list-cell image="/static/images/my/icon-language.png" iconColor="#e07472"  :title="i18n.my.lang" ></list-cell>
+          <list-cell image="/static/images/my/icon-language.png" iconColor="#e07472" :title="i18n.my.lang"></list-cell>
         </view>
         <view @click="handleToSetting">
-        <list-cell image="/static/images/my/icon-setting.png" iconColor="#e07472"  :title="i18n.my.set" ></list-cell>
+          <list-cell image="/static/images/my/icon-setting.png" iconColor="#e07472" :title="i18n.my.set"></list-cell>
         </view>
       </view>
     </view>
 
-    <u-action-sheet  :actions="langList" :show="showLang" @select="clickLang" :cancelText="i18n.common.cancel" @close="showLang = false"></u-action-sheet>
+    <u-action-sheet :actions="langList" :show="showLang" @select="clickLang" :cancelText="i18n.common.cancel"
+                    @close="showLang = false"></u-action-sheet>
 
   </view>
 </template>
@@ -87,7 +90,7 @@ export default {
       langList: []
     }
   },
-  onShow(){
+  onShow() {
     uni.setNavigationBarTitle({
       title: this.i18n.tabBar.me
     })
@@ -105,33 +108,33 @@ export default {
   methods: {
     // 跳转到公告
     handleToNotice() {
-      this.$modal.showToast("敬请期待!")
+      this.$modal.showToast(this.i18n.common.coming)
     },
     // 跳转到签到
-    handleToSign(){
-      this.$modal.showToast("敬请期待!")
+    handleToSign() {
+      this.$modal.showToast(this.i18n.common.coming)
     },
     // 跳转到抽奖
-    handleToLottery(){
-      this.$modal.showToast("敬请期待!")
+    handleToLottery() {
+      this.$modal.showToast(this.i18n.common.coming)
     },
     // 跳转到推荐
-    handleToRecommend(){
-      this.$modal.showToast("敬请期待!")
+    handleToRecommend() {
+      this.$modal.showToast(this.i18n.common.coming)
     },
     // 跳转到我的余额
-    handleToBalance(){
+    handleToBalance() {
       this.$tab.navigateTo('/pages/balance/index')
     },
     // 跳转到关于我们
-    handleToAbout(){
+    handleToAbout() {
       this.$tab.navigateTo('/pages/center/about')
     },
     // 打开系统语言设置
-    handleToLang(){
+    handleToLang() {
       this.showLang = true
     },
-    clickLang(index){
+    clickLang(index) {
       let lang = index.lang
       uni.setStorageSync('language', lang);
       // 改变在main.js中定义的locale
@@ -155,7 +158,7 @@ export default {
       })
     },
     // 跳转到应用设置
-    handleToSetting(){
+    handleToSetting() {
       this.$tab.navigateTo('/pages/center/setting')
     },
     // 获取用户详细信息
@@ -291,9 +294,5 @@ export default {
     }
   }
 }
-
-
-
-
 
 </style>

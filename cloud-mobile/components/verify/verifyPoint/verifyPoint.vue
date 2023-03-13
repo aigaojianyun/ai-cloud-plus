@@ -11,7 +11,7 @@
                 <view class="verify-refresh" style="z-index:3" @click="refresh" v-show="showRefresh">
                     <text class="iconfont icon-refresh"></text>
                 </view>
-                <image :src="pointBackImgBase?('data:image/png;base64,'+pointBackImgBase):defaultImg" 
+                <image :src="pointBackImgBase?('data:image/png;base64,'+pointBackImgBase):defaultImg"
                 id="image"
                 ref="canvas"
                 style="width:100%;height:100%;display:block"
@@ -46,6 +46,7 @@
     </view>
 </template>
 <script type="text/babel">
+    import {commonMixin} from '@/common/mixin/mixin.js'
     /**
      * VerifyPoints
      * @description 点选
@@ -53,6 +54,7 @@
     import {aesEncrypt} from "./../utils/ase.js"
 	import {myRequest} from "../utils/request.js"
     export default {
+        mixins: [commonMixin],
         name: 'VerifyPoints',
         props: {
             //弹出式pop，固定fixed
@@ -134,7 +136,7 @@
                 const query = uni.createSelectorQuery().in(this);
                 query.select('#image').boundingClientRect(data => {
                     this.imgLeft =Math.ceil(data.left)
-                    this.imgTop =Math.ceil(data.top) 
+                    this.imgTop =Math.ceil(data.top)
                     this.checkPosArr.push(this.getMousePos(this.$refs.canvas, e));
                     if (this.num == this.checkNum) {
                         this.num = this.createPoint(this.getMousePos(this.$refs.canvas, e));
@@ -150,7 +152,7 @@
                                 "token":this.backToken
                             }
                             myRequest({
-                                url: `/captcha/check`, 
+                                url: `/captcha/check`,
                                 data,
                                 method:"POST",
                             }).then(result => {
@@ -158,7 +160,7 @@
                                     if (res.repCode == "0000") {
                                         this.barAreaColor = '#4cae4c'
                                         this.barAreaBorderColor = '#5cb85c'
-                                        this.text = '验证成功'
+                                        this.text = this.i18n.login.captcha.verifySuccess
                                         this.bindingClick = false
 										setTimeout(()=>{
 											if (this.mode=='pop') {
@@ -171,12 +173,12 @@
                                         this.$parent.$emit('error', this)
                                         this.barAreaColor = '#d9534f'
                                         this.barAreaBorderColor = '#d9534f'
-                                        this.text = '验证失败'
+                                        this.text = this.i18n.login.captcha.verifyError
                                         setTimeout(() => {
                                             this.refresh();
                                         }, 700);
                                     }
-                                })    
+                                })
                         }, 400);
                     }
                     if (this.num < this.checkNum) {
@@ -241,8 +243,8 @@
             //坐标转换函数
             pointTransfrom(pointArr,imgSize){
                 var newPointArr = pointArr.map(p=>{
-                    let x = Math.round(310 * p.x/parseInt(imgSize.width)) 
-                    let y =Math.round(155 * p.y/parseInt(imgSize.height)) 
+                    let x = Math.round(310 * p.x/parseInt(imgSize.width))
+                    let y =Math.round(155 * p.y/parseInt(imgSize.height))
                     return {x,y}
                 })
                 // console.log(newPointArr,"newPointArr");
@@ -376,8 +378,8 @@
         border: none;
         margin-top: 10px;
     }
-    
-    
+
+
     /*滑动验证码*/
     .verify-bar-area {
         position: relative;

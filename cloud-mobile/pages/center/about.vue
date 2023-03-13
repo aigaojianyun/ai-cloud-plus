@@ -1,34 +1,52 @@
 <template>
-    <view class="container">
-      <u-navbar :safeAreaInsetTop="true" :placeholder="true" :fixed="true" :autoBack="true" leftText="返回"  title="关于我们" bgColor="#f3f4f6" ></u-navbar>
-      <view class="logo">
-        <image src="/static/logo.png" mode="widthFix"></image>
-      </view>
-      <view class="list-cell b-b m-t"  hover-class="cell-hover" :hover-stay-time="50">
-        <text class="cell-tit">版本信息</text>
-        <text class="cell-tip">1.0.0</text>
-        <text class="cell-more yticon icon-you"></text>
-      </view>
-      <view class="list-cell b-b"  hover-class="cell-hover" :hover-stay-time="50">
-        <text class="cell-tit">官方邮箱</text>
-        <text class="cell-tip">aicloud888@163.com</text>
-        <text class="cell-more yticon icon-you"></text>
-      </view>
-      <view class="list-cell b-b"  hover-class="cell-hover" :hover-stay-time="50">
-        <text class="cell-tit">服务热线</text>
-        <text class="cell-tip">13888888888</text>
-        <text class="cell-more yticon icon-you"></text>
-      </view>
+  <view class="container">
+    <u-navbar :safeAreaInsetTop="true" :placeholder="true" :fixed="true" :autoBack="true" :leftText="i18n.common.regain"
+              :title="i18n.my.about" bgColor="#f3f4f6"></u-navbar>
+    <view class="logo">
+      <image src="/static/logo.png" mode="widthFix"></image>
     </view>
+    <view class="list-cell b-b m-t" hover-class="cell-hover" :hover-stay-time="50">
+      <text class="cell-tit">{{ i18n.about.version }}</text>
+      <text class="cell-tip">1.0.0</text>
+      <text class="cell-more yticon icon-you"></text>
+    </view>
+    <view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
+      <text class="cell-tit">{{ i18n.about.mailbox }}</text>
+      <text class="cell-tip">aicloud888@163.com</text>
+      <text class="cell-more yticon icon-you"></text>
+    </view>
+    <view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
+      <text class="cell-tit">{{ i18n.about.serve }}</text>
+      <text class="cell-tip">13888888888</text>
+      <text class="cell-more yticon icon-you"></text>
+    </view>
+  </view>
 </template>
 
 <script>
 
+import {commonMixin} from '@/common/mixin/mixin.js'
+
 export default {
-  components: {
+  components: {},
+  mixins: [commonMixin],
+  data() {
+    return {
+      data: {},
+      autoplay: true
+    }
+  },
+  onShow() {
+    uni.setNavigationBarTitle({
+      title: this.i18n.my.about
+    })
+  },
+  created() {
 
   },
+  methods: {}
 }
+
 </script>
 
 <style lang='scss' scoped>
@@ -89,4 +107,5 @@ export default {
   }
 }
 </style>
+
 

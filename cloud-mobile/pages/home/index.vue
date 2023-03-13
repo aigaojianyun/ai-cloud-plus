@@ -1,6 +1,7 @@
 <template>
   <view class="index-content">
-    <u-navbar :safeAreaInsetTop="true" :placeholder="true" :fixed="true" leftIcon=" " title="首页" bgColor="#f3f4f6"></u-navbar>
+    <u-navbar :safeAreaInsetTop="true" :placeholder="true" :fixed="true" leftIcon=" " title="首页"
+              bgColor="#f3f4f6"></u-navbar>
     <view class="index-block">
       <view class="index-block-title">运行统计</view>
       <u-row gutter="16">
@@ -50,13 +51,13 @@
       <view>
         <qiun-data-charts type="line" canvasId="finance_a" :canvas2d="isCanvas2d" :resshow="delayload"
                           :opts="{xAxis:{itemCount:12,disableGrid:true},yAxis:{disableGrid:true,data:[{disabled:true}]}}"
-                          :chartData="historyData" />
+                          :chartData="historyData"/>
       </view>
       <view class="index-block-title">访问量统计</view>
       <view>
         <qiun-data-charts type="bar" canvasId="finance_b" :canvas2d="isCanvas2d" :resshow="delayload"
                           :opts="{xAxis:{disabled: true,disableGrid:true},extra:{bar:{barBorderCircle:true,width:20}},legend:{show:false}}"
-                          :chartData="historyData" />
+                          :chartData="historyData"/>
       </view>
     </view>
     <view class="index-block">
@@ -64,13 +65,15 @@
       <view class="detail_list">
         <view v-for="(item,index) in detail_list" :key="index" class="detail_item">
           <view>
-            <view class="font-middle">{{item.date}}</view>
-            <view class="font-small">{{item.time}}</view>
+            <view class="font-middle">{{ item.date }}</view>
+            <view class="font-small">{{ item.time }}</view>
           </view>
-          <view class="icon"><li :class="['iconfont',item.type == 'income'?'icon-income':'icon-expend']"></li></view>
+          <view class="icon">
+            <li :class="['iconfont',item.type == 'income'?'icon-income':'icon-expend']"></li>
+          </view>
           <view class="right_content">
-            <view class="money">{{item.type == 'income'?'+':'-'}}{{item.money}}</view>
-            <view class="text-gray font-middle">{{item.desc}}</view>
+            <view class="money">{{ item.type == 'income' ? '+' : '-' }}{{ item.money }}</view>
+            <view class="text-gray font-middle">{{ item.desc }}</view>
           </view>
         </view>
       </view>
@@ -87,9 +90,8 @@ now_time.month = _now.getMonth() + 1
 now_time.day = _now.getDay()
 
 export default {
-  components: {
-  },
-  data () {
+  components: {},
+  data() {
     return {
       isCanvas2d: true,
       delayload: false,
@@ -104,29 +106,38 @@ export default {
         "series": [
           {
             "name": "收入情况",
-            "data": [1601,1840.5,1900,1760,1500.85],
+            "data": [1601, 1840.5, 1900, 1760, 1500.85],
             "type": "line",
             "style": "curve",
             "color": "#4ECDB6",
-            "unit":""
+            "unit": ""
           }
         ],
-        "yAxis":[
-          {"calibration":true,"position":"left","title":"单位/元","titleFontSize":12,"unit":"","tofix":0,"min":0,"disableGrid":true}
+        "yAxis": [
+          {
+            "calibration": true,
+            "position": "left",
+            "title": "单位/元",
+            "titleFontSize": 12,
+            "unit": "",
+            "tofix": 0,
+            "min": 0,
+            "disableGrid": true
+          }
         ]
       },
-      detail_list:[
-        {date:now_time.month + "-01",time:"11:01","type":"extend",money:"10.00",desc:"银行卡转出"},
-        {date:now_time.month + "-01",time:"13:45","type":"income",money:"18.00",desc:"银行卡收入"},
-        {date:now_time.month + "-02",time:"06:21","type":"extend",money:"123.45",desc:"信用卡转出"},
-        {date:now_time.month + "-03",time:"07:38","type":"income",money:"23.00",desc:"银行卡收入"},
-        {date:now_time.month + "-08",time:"16:28","type":"extend",money:"23.56",desc:"信用卡转出"},
-        {date:now_time.month + "-09",time:"15:25","type":"income",money:"850.12",desc:"银行卡收入"},
-        {date:now_time.month + "-09",time:"18:52","type":"income",money:"1.88",desc:"银行卡收入"},
-        {date:now_time.month + "-11",time:"21:12","type":"extend",money:"220.21",desc:"银行卡转出"},
-        {date:now_time.month + "-12",time:"13:08","type":"income",money:"32.28",desc:"银行卡收入"},
-        {date:now_time.month + "-12",time:"12:41","type":"extend",money:"122.12",desc:"信用卡转出"},
-        {date:now_time.month + "-13",time:"17:21","type":"income",money:"10.00",desc:"银行卡收入"},
+      detail_list: [
+        {date: now_time.month + "-01", time: "11:01", "type": "extend", money: "10.00", desc: "银行卡转出"},
+        {date: now_time.month + "-01", time: "13:45", "type": "income", money: "18.00", desc: "银行卡收入"},
+        {date: now_time.month + "-02", time: "06:21", "type": "extend", money: "123.45", desc: "信用卡转出"},
+        {date: now_time.month + "-03", time: "07:38", "type": "income", money: "23.00", desc: "银行卡收入"},
+        {date: now_time.month + "-08", time: "16:28", "type": "extend", money: "23.56", desc: "信用卡转出"},
+        {date: now_time.month + "-09", time: "15:25", "type": "income", money: "850.12", desc: "银行卡收入"},
+        {date: now_time.month + "-09", time: "18:52", "type": "income", money: "1.88", desc: "银行卡收入"},
+        {date: now_time.month + "-11", time: "21:12", "type": "extend", money: "220.21", desc: "银行卡转出"},
+        {date: now_time.month + "-12", time: "13:08", "type": "income", money: "32.28", desc: "银行卡收入"},
+        {date: now_time.month + "-12", time: "12:41", "type": "extend", money: "122.12", desc: "信用卡转出"},
+        {date: now_time.month + "-13", time: "17:21", "type": "income", money: "10.00", desc: "银行卡收入"},
       ]
     }
   }

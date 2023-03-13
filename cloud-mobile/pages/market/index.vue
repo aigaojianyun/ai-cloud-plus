@@ -1,12 +1,12 @@
 <template>
   <view class="container">
-    <u-navbar :safeAreaInsetTop="true" :placeholder="true" :fixed="true" leftIcon=" " title="行情" bgColor="#f3f4f6"></u-navbar>
+    <u-navbar :safeAreaInsetTop="true" :placeholder="true" :fixed="true" leftIcon=" " :title="i18n.tabBar.market" bgColor="#f3f4f6"></u-navbar>
     <!-- 市值排行 -->
     <view class="coin-section m-t">
       <view class="s-header">
-        <view class="col">币种/流通市值</view>
-        <view class="col r">全球指数</view>
-        <view class="col r">24小时涨幅</view>
+        <view class="col">{{ i18n.market.title1 }}</view>
+        <view class="col r">{{ i18n.market.title2 }}</view>
+        <view class="col r">{{ i18n.market.title3 }}</view>
       </view>
 
       <view class="s-row little-line">
@@ -69,13 +69,39 @@
 
 <script>
 
+import {commonMixin} from '@/common/mixin/mixin.js'
+
 export default {
   components: {
+
   },
+  mixins: [commonMixin],
   data () {
     return {
-
+      marketList: [],
     }
+  },
+  onShow() {
+    uni.setNavigationBarTitle({
+      title: this.i18n.tabBar.market
+    })
+    this.marketList = [
+      {
+        fullName: "Bitcoin",
+        enName: "BTC",
+        icon: "https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/coin/BTC.png",
+        normalBalance: 9.99,
+        frozenBalance: 1.01,
+        priceCny: 2448730.9179,
+        priceUsd: 387770.3415
+      },
+    ]
+  },
+  created() {
+
+  },
+  methods: {
+
   },
   filters:{
     formatChange(v){

@@ -5,18 +5,18 @@
     <image class="img-a" src="/../../static/images/background/b-1.png"></image>
     <image class="img-b" src="/../../static/images/background/b-2.png"></image>
     <!-- 标题 -->
-    <view class="t-b">{{ title }}</view>
-    <view class="t-b2">{{ subTitle }}</view>
+    <view class="t-b">{{ i18n.login.title }}</view>
+    <view class="t-b2">{{ i18n.login.subTitle }}</view>
     <form class="cl">
       <!-- 登录账号 -->
       <view class="login-form-item">
-        <u-input v-model="loginForm.username" placeholder="请输入登录用户名" maxlength="30">
+        <u-input v-model="loginForm.username" :placeholder="i18n.login.username" maxlength="30">
           <u-icon slot="prefix" name="account" size="35px"></u-icon>
         </u-input>
       </view>
       <!-- 登录密码 -->
       <view class="login-form-item">
-        <u-input v-model="loginForm.password" type="password" placeholder="请输入登录密码" maxlength="16">
+        <u-input v-model="loginForm.password" type="password" :placeholder="i18n.login.password" maxlength="16">
           <u-icon slot="prefix" name="lock" size="35px"></u-icon>
         </u-input>
       </view>
@@ -28,35 +28,38 @@
           ref="verify"
           :imgSize="{width:'310px',height:'155px'}">
       </Verify>
-      <button type="primary" @click="handleLogin">登 录</button>
-      <!-- 更多登录方式 -->
-      <view class="login-bottom-box">
-        <u-divider> 更多登录方式 </u-divider>
-        <view class="oauth2">
-          <u-icon class="u-icon" size="40" color="#36c956" name="weixin-circle-fill" @click="wxLogin"></u-icon>
-          <u-icon class="u-icon" size="40" color="#23a0f0" name="qq-circle-fill" @click="qqLogin"></u-icon>
-          <u-icon class="u-icon" size="40" color="#23a0f0" name="zhifubao-circle-fill" @click="zhifubaoLogin"></u-icon>
-          <u-icon class="u-icon" size="40" color="" name="github-circle-fill" @click="githubLogin"></u-icon>
-        </view>
-        <view class="copyright">
-          登录即代表您已阅读并同意<u-link href="#">用户协议</u-link> 与 <u-link href="#">隐私政策</u-link>
-        </view>
-      </view>
+      <button type="primary" @click="handleLogin">{{ i18n.login.login }}</button>
     </form>
+    <!-- 更多登录方式 -->
+    <view class="login-bottom-box">
+      <u-divider> {{i18n.login.more}}</u-divider>
+      <view class="oauth2">
+        <u-icon class="u-icon" size="40" color="#36c956" name="weixin-circle-fill" @click="wxLogin"></u-icon>
+        <u-icon class="u-icon" size="40" color="#23a0f0" name="qq-circle-fill" @click="qqLogin"></u-icon>
+        <u-icon class="u-icon" size="40" color="#23a0f0" name="zhifubao-circle-fill" @click="zhifubaoLogin"></u-icon>
+        <u-icon class="u-icon" size="40" color="" name="github-circle-fill" @click="githubLogin"></u-icon>
+      </view>
+      <view class="copyright">
+        {{i18n.login.agree}}
+        <u-link href="#">{{i18n.login.agreement}}</u-link>
+        {{i18n.login.and}}
+        <u-link href="#">{{i18n.login.privacy}}</u-link>
+      </view>
+    </view>
   </view>
 </template>
 <script>
 
 import Verify from "@/components/verify/verify";
+import {commonMixin} from '@/common/mixin/mixin.js'
 
 export default {
   components: {
     Verify,
   },
+  mixins: [commonMixin],
   data() {
     return {
-      title: '未来 已来!',
-      subTitle: '币币钱包',
       loginForm: {
         username: "ai168",
         password: "123456",
@@ -71,9 +74,9 @@ export default {
     // 打开验证码
     async handleLogin() {
       if (this.loginForm.username === "") {
-        this.$modal.msgError("请输入您的账号")
+        this.$modal.msgError(this.i18n.login.inputUserName)
       } else if (this.loginForm.password === "") {
-        this.$modal.msgError("请输入您的密码")
+        this.$modal.msgError(this.i18n.login.inputPassword)
       } else {
         this.$refs.verify.show();
       }
@@ -84,7 +87,7 @@ export default {
       this.loginForm.code = data.captchaVerification;
       this.$store.dispatch('Login', this.loginForm).then(() => {
         this.$refs.verify.hide();
-        this.$modal.showToast("登录中，请耐心等待...")
+        this.$modal.showToast(this.i18n.login.loginLog)
         this.loginSuccess()
       }).catch(() => {
         this.$refs.verify.hide();
@@ -99,19 +102,19 @@ export default {
     },
     // 微信授权登录
     wxLogin() {
-      this.$tab.navigateTo('/pages/login/wxLogin')
+      this.$modal.showToast(this.i18n.common.coming)
     },
     // QQ授权登录
     qqLogin() {
-      this.$modal.showToast("QQ授权登录")
+      this.$modal.showToast(this.i18n.common.coming)
     },
     // 支付宝授权登录
     zhifubaoLogin() {
-      this.$modal.showToast("支付宝授权登录")
+      this.$modal.showToast(this.i18n.common.coming)
     },
     // GitHub授权登录
     githubLogin() {
-      this.$modal.showToast("GitHub授权登录")
+      this.$modal.showToast(this.i18n.common.coming)
     },
   }
 };
