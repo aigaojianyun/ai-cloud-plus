@@ -19,7 +19,7 @@
               :arith="arith"
               :mode="mode"
               :vSpace="vSpace"
-              :explain="explain"
+              :explain=this.i18n.login.captcha.verifyFoot
               :imgSize="imgSize"
               :blockSize="blockSize"
               :barSize="barSize"
@@ -36,7 +36,7 @@
               :arith="arith"
               :mode="mode"
               :vSpace="vSpace"
-              :explain="explain"
+              :explain=this.i18n.login.captcha.verifyFoot
               :imgSize="imgSize"
               :blockSize="blockSize"
               :barSize="barSize"
@@ -411,6 +411,7 @@ export default {
 
 .verify-bar-area .verify-msg {
   z-index: 3;
+  margin-left: 30px;
 }
 
 /*字体图标的css*/

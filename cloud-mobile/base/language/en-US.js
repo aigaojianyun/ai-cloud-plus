@@ -22,6 +22,7 @@ module.exports = {
             me: 'Me',
         },
         login: {
+            language: 'Change language',
             title: 'The future has come!',
             subTitle: 'Coin wallet',
             inputUserName: 'Please enter your account',

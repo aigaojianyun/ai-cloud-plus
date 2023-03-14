@@ -22,6 +22,7 @@ module.exports = {
             me: '我的',
         },
         login: {
+            language: '切换语言',
             title: '未来 已来!',
             subTitle: '币币钱包',
             inputUserName: '请输入您的帐号',

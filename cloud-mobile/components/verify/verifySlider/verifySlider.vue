@@ -550,6 +550,7 @@
 
     .verify-bar-area .verify-msg {
         z-index: 3;
+        margin-left: 30px;
     }
 
     /*字体图标的css*/
