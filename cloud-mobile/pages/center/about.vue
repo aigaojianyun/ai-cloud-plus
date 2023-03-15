@@ -41,10 +41,9 @@ export default {
       title: this.i18n.my.about
     })
   },
-  created() {
+  methods: {
 
-  },
-  methods: {}
+  }
 }
 
 </script>

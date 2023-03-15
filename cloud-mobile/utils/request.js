@@ -13,6 +13,7 @@ const request = config => {
     config.header = config.header || {}
     if (getToken() && !isToken) {
         config.header['Authorization'] = 'Bearer ' + getToken()
+        //config.header['Language'] = uni.getStorageSync('language')
     }
     // get请求映射params参数
     if (config.params) {
@@ -31,8 +32,8 @@ const request = config => {
         }).then(response => {
             let [error, res] = response
             if (error) {
-                toast('服务器连接异常')
-                reject('服务器连接异常')
+                toast('服务器连接异常!')
+                reject('服务器连接异常!')
                 return
             }
             const code = res.data.code || 200
@@ -45,7 +46,7 @@ const request = config => {
                         })
                     }
                 })
-                reject('无效的会话，或者会话已过期，请重新登录。')
+                reject('无效的会话，或者会话已过期，请重新登录!')
             } else if (code === 500) {
                 toast(msg)
                 reject('500')
@@ -58,11 +59,11 @@ const request = config => {
             .catch(error => {
                 let {message} = error
                 if (message === 'Network Error') {
-                    message = '服务器连接异常'
+                    message = '服务器连接异常!'
                 } else if (message.includes('timeout')) {
-                    message = '服务器请求超时'
+                    message = '服务器请求超时!'
                 } else if (message.includes('Request failed with status code')) {
-                    message = '服务器' + message.substr(message.length - 3) + '异常'
+                    message = '服务器' + message.substr(message.length - 3) + '异常!'
                 }
                 toast(message)
                 reject(error)

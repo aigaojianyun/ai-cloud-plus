@@ -9,58 +9,17 @@
         <view class="col r">{{ i18n.market.title3 }}</view>
       </view>
 
-      <view class="s-row little-line">
+      <view class="s-row little-line" v-for="(item, i) in marketList" :key="item.symbol">
         <view class="col light">
-          <image src="/static/images/coin/BTC.png" class="coinLogo"></image>
-          BTC
-          <view class="subtitle">4.65MB</view>
+          <image :src="item.icon" class="coinLogo"></image>
+          {{item.symbol}}
+          <view class="subtitle">{{item.marketcap | formatMarketcap}}</view>
         </view>
         <view class="col r light">
-          210000.36
-          <view class="subtitle">$29832.63</view>
+          {{item.priceCny}}
+          <view class="subtitle">${{item.priceUsd}}</view>
         </view>
-        <view class="col r"><u-tag :text="0.71 | formatChange" :type="0.71 >= 0 ? 'success' : 'error'"></u-tag></view>
-      </view>
-
-      <view class="s-row little-line">
-        <view class="col light">
-          <image src="/static/images/coin/ETH.png" class="coinLogo"></image>
-          ETH
-          <view class="subtitle">4.65MB</view>
-        </view>
-        <view class="col r light">
-          1963.36
-          <view class="subtitle">$120.63</view>
-        </view>
-        <view class="col r"><u-tag :text="0.71 | formatChange" :type="0.71 >= 0 ? 'success' : 'error'"></u-tag></view>
-      </view>
-
-      <view class="s-row little-line">
-        <view class="col light">
-          <image src="/static/images/coin/TRX.png" class="coinLogo"></image>
-          TRX
-          <view class="subtitle">4.65MB</view>
-        </view>
-        <view class="col r light">
-          1.36
-          <view class="subtitle">$0.63</view>
-        </view>
-        <view class="col r"><u-tag :text="-0.71 | formatChange" :type="-0.71 >= 0 ? 'success' : 'error'"></u-tag></view>
-      </view>
-
-      <view class="s-row little-line">
-        <view class="col light">
-          <image src="/static/images/coin/USDT.png" class="coinLogo"></image>
-          USDT
-          <view class="subtitle">4.65MB</view>
-        </view>
-        <view class="col r light">
-         1.36
-          <view class="subtitle">$0.063</view>
-        </view>
-        <view class="col r" style="width: 100rpx">
-          <u-tag :text="0.71 | formatChange" :type="0.71 >= 0 ? 'success' : 'error'"></u-tag>
-        </view>
+        <view class="col r tag"><u-tag :text="item.changePercent | formatChange" :type="item.changePercent >= 0 ? 'success' : 'error'"></u-tag></view>
       </view>
 
     </view>
@@ -69,6 +28,7 @@
 
 <script>
 
+import {formatUnit} from '../../utils/number'
 import {commonMixin} from '@/common/mixin/mixin.js'
 
 export default {
@@ -87,18 +47,50 @@ export default {
     })
     this.marketList = [
       {
+        symbol: "BTC",
         fullName: "Bitcoin",
-        enName: "BTC",
         icon: "https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/coin/BTC.png",
-        normalBalance: 9.99,
-        frozenBalance: 1.01,
-        priceCny: 2448730.9179,
-        priceUsd: 387770.3415
+        change: 0.002639,
+        changePercent: 0.26,
+        marketcap: 512130521262,
+        priceCny: 6.395,
+        priceUsd: 1.0127,
+        showPrecision: 4,
+      },
+      {
+        symbol: "ETH",
+        fullName: "Ethereum",
+        icon: "https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/coin/ETH.png",
+        change: 0.002639,
+        changePercent: 0.26,
+        marketcap: 512130521262,
+        priceCny: 6.395,
+        priceUsd: 1.0127,
+        showPrecision: 4,
+      },
+      {
+        symbol: "TRX",
+        fullName: "TRX",
+        icon: "https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/coin/TRX.png",
+        change: -0.002639,
+        changePercent: -0.26,
+        marketcap: 512130521262,
+        priceCny: 6.395,
+        priceUsd: 1.0127,
+        showPrecision: 4,
+      },
+      {
+        symbol: "USDT",
+        fullName: "USDT",
+        icon: "https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/coin/USDT.png",
+        change: -0.002639,
+        changePercent: -0.26,
+        marketcap: 512130521262,
+        priceCny: 6.395,
+        priceUsd: 1.0127,
+        showPrecision: 4,
       },
     ]
-  },
-  created() {
-
   },
   methods: {
 
@@ -106,6 +98,9 @@ export default {
   filters:{
     formatChange(v){
       return (v > 0 ? '+' : '') + parseFloat(v).toFixed(2) + '%'
+    },
+    formatMarketcap(v){
+      return formatUnit(v);
     }
   },
 }

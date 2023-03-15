@@ -1,5 +1,6 @@
 import {commonMixin} from '@/common/mixin/mixin.js'
 export default {
+    components: {},
     mixins: [commonMixin],
     // 消息提示
     msg(content) {

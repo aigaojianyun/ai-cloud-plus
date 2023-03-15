@@ -18,10 +18,10 @@
     </view>
 
     <view class="wrap">
-      <view class="list" v-for="(item, i) in assetsList" :key="item.enName">
+      <view class="list" v-for="(item, i) in assetsList" :key="item.symbol">
         <view class="title">
           <image class="image" :src="item.icon"></image>
-          <view class="title">{{ item.enName }}</view>
+          <view class="title">{{ item.symbol }}</view>
         </view>
         <u-grid :col="3">
           <u-grid-item>
@@ -64,8 +64,8 @@ export default {
     })
     this.assetsList = [
       {
+        symbol: "BTC",
         fullName: "Bitcoin",
-        enName: "BTC",
         icon: "https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/coin/BTC.png",
         normalBalance: 9.99,
         frozenBalance: 1.01,
@@ -73,8 +73,8 @@ export default {
         priceUsd: 387770.3415
       },
       {
+        symbol: "ETH",
         fullName: "Ethereum",
-        enName: "ETH",
         icon: "https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/coin/ETH.png",
         normalBalance: 8.99,
         frozenBalance: 1.01,
@@ -82,8 +82,8 @@ export default {
         priceUsd: 155226.3415,
       },
       {
+        symbol: "TRX",
         fullName: "TRX",
-        enName: "TRX",
         icon: "https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/coin/TRX.png",
         normalBalance: 6.09,
         frozenBalance: 1.01,
@@ -91,8 +91,8 @@ export default {
         priceUsd: 1024.3415,
       },
       {
+        symbol: "USDT",
         fullName: "USDT",
-        enName: "USDT",
         icon: "https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/coin/USDT.png",
         normalBalance: 1.99,
         frozenBalance: 1.01,
@@ -101,10 +101,9 @@ export default {
       },
     ]
   },
-  created() {
+  methods: {
 
-  },
-  methods: {}
+  }
 }
 
 </script>

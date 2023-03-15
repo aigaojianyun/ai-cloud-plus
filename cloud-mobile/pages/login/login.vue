@@ -4,6 +4,9 @@
     <!-- 页面装饰图片 -->
     <image class="img-a" src="/../../static/images/background/b-1.png"></image>
     <image class="img-b" src="/../../static/images/background/b-2.png"></image>
+    <view class="top-right" @click="handleToLang">
+      {{ i18n.login.language }}》
+    </view>
     <!-- 标题 -->
     <view class="t-b">{{ i18n.login.title }}</view>
     <view class="t-b2">{{ i18n.login.subTitle }}</view>
@@ -46,6 +49,9 @@
         <u-link href="#">{{i18n.login.privacy}}</u-link>
       </view>
     </view>
+
+    <u-action-sheet :actions="langList" :show="showLang" @select="clickLang" :cancelText="i18n.common.cancel" @close="showLang = false"></u-action-sheet>
+
   </view>
 </template>
 <script>
@@ -65,12 +71,48 @@ export default {
         password: "123456",
         code: "",
         uuid: ""
-      }
+      },
+      showLang: false,
+      langList: []
     };
   },
-  created() {
+  onShow(){
+    this.langList = [{
+      name: this.i18n.common.lang.en,
+      lang: 'en_US'
+    }, {
+      name: this.i18n.common.lang.zh,
+      lang: 'zh_CN'
+    }]
   },
   methods: {
+    // 打开系统语言设置
+    handleToLang() {
+      this.showLang = true
+    },
+    clickLang(index) {
+      let lang = index.lang
+      uni.setStorageSync('language', lang);
+      // 改变在main.js中定义的locale
+      this._i18n.locale = lang;
+      console.log(lang);
+      uni.setTabBarItem({
+        index: 0,
+        text: this.$t('message').tabBar.home
+      })
+      uni.setTabBarItem({
+        index: 1,
+        text: this.$t('message').tabBar.market
+      })
+      uni.setTabBarItem({
+        index: 2,
+        text: this.$t('message').tabBar.assets
+      })
+      uni.setTabBarItem({
+        index: 3,
+        text: this.$t('message').tabBar.me
+      })
+    },
     // 打开验证码
     async handleLogin() {
       if (this.loginForm.username === "") {
@@ -97,7 +139,7 @@ export default {
     async loginSuccess(result) {
       // 设置用户信息
       this.$store.dispatch('GetUserInfo').then(res => {
-        this.$tab.reLaunch('/pages/home/index')
+        this.$tab.reLaunch('/pages/center/index')
       })
     },
     // 微信授权登录
@@ -126,6 +168,12 @@ export default {
   margin: 0 auto;
   font-size: 28rpx;
   color: #000;
+}
+
+.top-right{
+  position: fixed;
+  inset: 30rpx 30rpx auto auto;
+  font-size: 30rpx;
 }
 
 /deep/ .login-form-item .u-input {

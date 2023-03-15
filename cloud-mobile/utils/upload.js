@@ -42,7 +42,8 @@ const upload = config => {
                             })
                         }
                     })
-                    reject('无效的会话，或者会话已过期，请重新登录。')
+                    reject('无效的会话，或者会话已过期，请重新登录!')
+
                 } else if (code === 500) {
                     toast(msg)
                     reject('500')
@@ -53,12 +54,12 @@ const upload = config => {
             },
             fail: (error) => {
                 let {message} = error
-                if (message == 'Network Error') {
+                if (message == 'Network Error!') {
                     message = '服务器连接异常'
                 } else if (message.includes('timeout')) {
                     message = '服务器请求超时'
                 } else if (message.includes('Request failed with status code')) {
-                    message = '服务器' + message.substr(message.length - 3) + '异常'
+                    message = '服务器' + message.substr(message.length - 3) + '异常!'
                 }
                 toast(message)
                 reject(error)

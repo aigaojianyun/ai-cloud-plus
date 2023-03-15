@@ -38,9 +38,6 @@ export default {
       title: this.i18n.my.set
     })
   },
-  created() {
-
-  },
   methods: {
     // 退出登录
     handleLogout() {

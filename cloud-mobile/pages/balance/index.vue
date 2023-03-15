@@ -37,8 +37,6 @@ export default {
     uni.setNavigationBarTitle({
       title: this.i18n.my.balance
     })
-  },
-  created() {
     this.getWallet()
   },
   methods: {

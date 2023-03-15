@@ -94,6 +94,7 @@ export default {
     uni.setNavigationBarTitle({
       title: this.i18n.tabBar.me
     })
+    this.getInfo()
     this.langList = [{
       name: this.i18n.common.lang.en,
       lang: 'en_US'
@@ -101,9 +102,6 @@ export default {
       name: this.i18n.common.lang.zh,
       lang: 'zh_CN'
     }]
-  },
-  created() {
-    this.getInfo()
   },
   methods: {
     // 跳转到公告

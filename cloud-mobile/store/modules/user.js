@@ -1,6 +1,5 @@
 import config from '@/config'
 import storage from '@/utils/storage'
-import constant from '@/utils/constant'
 import {login,loginWx, logout } from '@/api/login'
 import {getToken, removeToken, setToken} from '@/utils/auth'
 import {getUserInfo} from '@/api/user'
@@ -11,16 +10,11 @@ const user = {
 
     state: {
         token: getToken(),
-        name: storage.get(constant.name)
     },
 
     mutations: {
         SET_TOKEN: (state, token) => {
             state.token = token
-        },
-        SET_NAME: (state, name) => {
-            state.name = name
-            storage.set(constant.name, name)
         }
     },
 
@@ -66,8 +60,6 @@ const user = {
             return new Promise((resolve, reject) => {
                 getUserInfo().then(res => {
                     const user = res.data
-                    const nickname = (user == null || user.nickName == "" || user.nickName == null) ? "" : user.nickName
-                    commit('SET_NAME', nickname)
                     resolve(res)
                 }).catch(error => {
                     reject(error)

@@ -1,6 +1,5 @@
 const constant = {
-    systemInfo: 'vuex_systemInfo',
-    name: 'vuex_name'
+    systemInfo: 'vuex_systemInfo'
 }
 
 export default constant
