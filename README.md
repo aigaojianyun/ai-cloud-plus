@@ -21,14 +21,18 @@
 
 ~~~
 ai-cloud-parent
-├── ai-cloud-gateway         // 网关模块 [8080]
-├── ai-cloud-auth            // 认证中心 [9200]
-├── ai-cloud-coin            // 币币模块
-│       └── ai-cloud-wallet                              // 钱包模块 [9600]
 ├── ai-cloud-api             // 接口模块
 │       └── ai-cloud-file-api                            // 文件接口模块
 │       └── ai-cloud-system-api                          // 系统接口模块
 │       └── ai-cloud-user-api                            // 用户接口模块
+├── ai-cloud-app             // 移动端模块
+│       └── ai-cloud-pay                                 // 支付模块 [9403]
+│       └── ai-cloud-resource                            // 资源服务 [9402]
+│       └── ai-cloud-user                                // 用户模块 [9401]
+├── ai-cloud-auth            // 认证中心 [9100]
+├── ai-cloud-coin            // 币币模块
+│       └── ai-cloud-market                              // 行情模块 [9502]
+│       └── ai-cloud-wallet                              // 钱包模块 [9501]
 ├── ai-cloud-framework       // 核心模块
 │       └── ai-cloud-common                              // 通用模块
 │       └── ai-cloud-datascope                           // 权限范围
@@ -44,17 +48,14 @@ ai-cloud-parent
 │       └── ai-cloud-sms                                 // 短信模块
 │       └── ai-cloud-swagger                             // 系统接口
 │       └── ai-cloud-weixin                              // 微信模块
+├── ai-cloud-gateway         // 网关模块 [8080]
 ├── ai-cloud-modules         // 后台业务模块
-│       └── ai-cloud-system                              // 系统模块 [9201]
-│       └── ai-cloud-gen                                 // 代码生成 [9202]
-│       └── ai-cloud-job                                 // 定时任务 [9203]
-│       └── ai-cloud-file                                // 文件服务 [9300]
+│       └── ai-cloud-file                                // 文件服务 [9304]
+│       └── ai-cloud-gen                                 // 代码生成 [9303]
+│       └── ai-cloud-job                                 // 定时任务 [9302]
+│       └── ai-cloud-system                              // 系统模块 [9301]
 ├── ai-cloud-visual          // 图形化管理模块
-│       └── ai-cloud-monitor                             // 监控中心 [9100]
-├── ai-cloud-web             // 用户端模块
-│       └── ai-cloud-pay                                 // 支付模块 [9402]
-│       └── ai-cloud-resource                            // 资源服务 [9403]
-│       └── ai-cloud-user                                // 用户模块 [9401]
+│       └── ai-cloud-monitor                             // 监控中心 [9201]
 ├── cloud-admin              //element-ui后台管理 [9091]
 ├── cloud-mobile             //uin-app+uview-ui移动端[9090] 
 ├── docker                   // 一键部署

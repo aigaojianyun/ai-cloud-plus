@@ -22,9 +22,9 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author ai-cloud
  */
-@Api(tags = "登录接口")
+@Api(tags = "移动端登录接口")
 @RestController
-@RequestMapping("/web")
+@RequestMapping("/app")
 public class LoginController {
 
     @Autowired

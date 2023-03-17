@@ -171,9 +171,10 @@ export default {
 }
 
 .top-right{
-  position: fixed;
-  inset: 30rpx 30rpx auto auto;
-  font-size: 30rpx;
+  position: absolute;
+  inset: 45rpx 45rpx auto auto;
+  font-size: 31rpx;
+  color: #aaaaaa;
 }
 
 /deep/ .login-form-item .u-input {

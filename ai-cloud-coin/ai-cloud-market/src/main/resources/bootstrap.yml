@@ -1,12 +1,12 @@
 # Tomcat
 server:
-  port: 9402
+  port: 9502
 
 # Spring
 spring:
   application:
     # 应用名称
-    name: ai-cloud-pay
+    name: ai-cloud-market
   profiles:
     # 环境配置
     active: dev

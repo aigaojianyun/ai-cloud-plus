@@ -2,7 +2,7 @@ import config from '@/config'
 import storage from '@/utils/storage'
 import {login,loginWx, logout } from '@/api/login'
 import {getToken, removeToken, setToken} from '@/utils/auth'
-import {getUserInfo} from '@/api/user'
+import {getUserInfo} from '@/api/center/user'
 
 const baseUrl = config.baseUrl
 

@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author ai-cloud
  */
-@Api(tags = "注册接口")
+@Api(tags = "移动端注册接口")
 @RestController
-@RequestMapping("/web")
+@RequestMapping("/app")
 public class RegisterController {
 
     @Autowired

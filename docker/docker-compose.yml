@@ -144,7 +144,7 @@ services:
   ai-cloud-user:
     container_name: ai-cloud-user
     build:
-      context: ./cloud/web/user
+      context: ./cloud/app/user
       dockerfile: dockerfile
     ports:
       - "9401:9401"
@@ -157,7 +157,7 @@ services:
   ai-cloud-resource:
     container_name: ai-cloud-resource
     build:
-      context: ./cloud/web/resource
+      context: ./cloud/app/resource
       dockerfile: dockerfile
     ports:
       - "9403:9403"
@@ -170,7 +170,7 @@ services:
   ai-cloud-pay:
     container_name: ai-cloud-pay
     build:
-      context: ./cloud/web/pay
+      context: ./cloud/app/pay
       dockerfile: dockerfile
     ports:
       - "9402:9402"

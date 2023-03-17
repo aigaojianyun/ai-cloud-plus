@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author ai-cloud
  */
-@Api(tags = "登录接口")
+@Api(tags = "后台管理登录注册接口")
 @RestController
 public class SysLoginController {
     @Autowired

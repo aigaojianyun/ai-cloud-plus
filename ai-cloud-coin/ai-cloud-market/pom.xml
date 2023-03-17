@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>ai-cloud</artifactId>
+        <artifactId>ai-cloud-coin</artifactId>
         <groupId>com.cloud</groupId>
         <version>1.0.0</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ai-cloud-pay</artifactId>
+    <artifactId>ai-cloud-market</artifactId>
 
     <description>
-        ai-cloud-pay支付模块
+        ai-cloud-market行情模块
     </description>
 
     <dependencies>
@@ -78,4 +77,6 @@
             </plugin>
         </plugins>
     </build>
+
 </project>
+

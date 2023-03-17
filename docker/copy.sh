@@ -40,11 +40,11 @@ echo "begin copy ai-cloud-gen "
 cp ../ai-cloud-modules/ai-cloud-gen/target/ai-cloud-gen.jar ./cloud/modules/gen/jar
 
 echo "begin copy ai-cloud-pay "
-cp ../ai-cloud-web/ai-cloud-pay/target/ai-cloud-pay.jar ./cloud/web/pay/jar
+cp ../ai-cloud-app/ai-cloud-pay/target/ai-cloud-pay.jar ./cloud/app/pay/jar
 
 echo "begin copy ai-cloud-resource "
-cp ../ai-cloud-web/ai-cloud-resource/target/ai-cloud-resource.jar ./cloud/web/resource/jar
+cp ../ai-cloud-app/ai-cloud-resource/target/ai-cloud-resource.jar ./cloud/app/resource/jar
 
 echo "begin copy ai-cloud-user "
-cp ../ai-cloud-web/ai-cloud-user/target/ai-cloud-user.jar ./cloud/web/user/jar
+cp ../ai-cloud-app/ai-cloud-user/target/ai-cloud-user.jar ./cloud/app/user/jar
 

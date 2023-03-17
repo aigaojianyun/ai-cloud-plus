@@ -470,6 +470,7 @@
     </dependencyManagement>
 
     <modules>
+        <module>ai-cloud-app</module>
         <module>ai-cloud-api</module>
         <module>ai-cloud-auth</module>
         <module>ai-cloud-coin</module>
@@ -477,7 +478,6 @@
         <module>ai-cloud-gateway</module>
         <module>ai-cloud-modules</module>
         <module>ai-cloud-visual</module>
-        <module>ai-cloud-web</module>
     </modules>
 
     <packaging>pom</packaging>

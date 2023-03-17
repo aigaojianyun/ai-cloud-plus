@@ -21,7 +21,7 @@
 
 <script>
 
-import {getWallet} from "@/api/account"
+import {getWallet} from "@/api/balance/account"
 import {commonMixin} from '@/common/mixin/mixin.js'
 
 export default {

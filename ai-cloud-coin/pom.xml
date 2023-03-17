@@ -11,6 +11,7 @@
 
     <modules>
         <module>ai-cloud-wallet</module>
+        <module>ai-cloud-market</module>
     </modules>
 
     <artifactId>ai-cloud-coin</artifactId>
