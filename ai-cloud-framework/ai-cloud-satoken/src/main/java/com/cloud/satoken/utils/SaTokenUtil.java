@@ -26,7 +26,7 @@ public class SaTokenUtil {
      * @param loginUser 登录用户信息
      */
     public static void login(LoginUser loginUser) {
-        SaHolder.getStorage().set(LOGIN_USER_KEY, loginUser);
+        SaHolder.getStorage().set(LOGIN_USER_KEY, loginUser.getUser());
         StpUtil.login(loginUser.getUser().getId());
         setSession(loginUser);
     }
@@ -38,7 +38,7 @@ public class SaTokenUtil {
      * @param loginUser 登录用户信息
      */
     public static void loginByDevice(LoginUser loginUser, DeviceType deviceType) {
-        SaHolder.getStorage().set(LOGIN_USER_KEY, loginUser);
+        SaHolder.getStorage().set(LOGIN_USER_KEY, loginUser.getUser());
         StpUtil.login(loginUser.getUser().getId(), deviceType.getDevice());
         setSession(loginUser);
     }
@@ -47,7 +47,7 @@ public class SaTokenUtil {
      * 设置用户数据(多级缓存)
      */
     public static void setSession(LoginUser loginUser) {
-        StpUtil.getTokenSession().set(LOGIN_USER_KEY, loginUser);
+        StpUtil.getTokenSession().set(LOGIN_USER_KEY, loginUser.getUser());
     }
 
     /**

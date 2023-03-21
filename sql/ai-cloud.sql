@@ -11,7 +11,7 @@
  Target Server Version : 80032
  File Encoding         : 65001
 
- Date: 27/02/2023 16:12:50
+ Date: 21/03/2023 15:42:28
 */
 
 SET NAMES utf8mb4;
@@ -32,12 +32,12 @@ CREATE TABLE `ai_bank`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`, `bank_name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '银行信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '银行信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ai_bank
 -- ----------------------------
-INSERT INTO `ai_bank` VALUES (1, '中国工商', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/bank/yinhang-gongshang.png', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_bank` VALUES (1, '中国工商', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/bank/yinhang-gongshang.png', 0, '', NULL, 'ceshi', '2023-03-21 14:35:59', NULL);
 INSERT INTO `ai_bank` VALUES (2, '中国农业', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/bank/yinhang-nonghang.png', 0, '', NULL, '', NULL, NULL);
 INSERT INTO `ai_bank` VALUES (3, '中国银行', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/bank/yinhang-zhongguoyinhang.png', 0, '', NULL, '', NULL, NULL);
 INSERT INTO `ai_bank` VALUES (4, '中国建设', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/bank/yinhang-jianshe.png', 0, '', NULL, '', NULL, NULL);
@@ -51,7 +51,7 @@ CREATE TABLE `ai_continent`  (
   `cn_name` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '中文名',
   `en_name` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '英文名',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '七大洲表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '区域七大洲表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ai_continent
@@ -84,12 +84,12 @@ CREATE TABLE `ai_country`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`, `cn_name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 56 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '区域信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 56 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '区域信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ai_country
 -- ----------------------------
-INSERT INTO `ai_country` VALUES (1, NULL, '中国', 'China', NULL, '86', 'zh_CN', 'CNY', 0, '', NULL, '', NULL, NULL);
+INSERT INTO `ai_country` VALUES (1, NULL, '中国大陆', 'China', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/China.png', '86', 'zh_CN', 'CNY', 0, '', NULL, '', NULL, NULL);
 INSERT INTO `ai_country` VALUES (2, NULL, '中国台湾', 'Taiwan (台灣)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Taiwan.png', '886', 'zh_TW', 'TWD', 0, '', NULL, '', NULL, NULL);
 INSERT INTO `ai_country` VALUES (3, NULL, '中国澳门', 'Macau (澳門)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/Macau.png', '853', 'zh_MO', 'MOP', 0, '', NULL, '', NULL, NULL);
 INSERT INTO `ai_country` VALUES (4, NULL, '中国香港', 'Hong Kong (香港)', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/country/HongKong.png', '852', 'zh_HK', 'HKD', 0, '', NULL, '', NULL, NULL);
@@ -166,7 +166,7 @@ CREATE TABLE `ai_country_v2`  (
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '区域信息表v2' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '区域信息表v2' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ai_country_v2
@@ -420,6 +420,54 @@ INSERT INTO `ai_country_v2` VALUES (246, 7, '玻利维亚共和国', '玻利维�
 INSERT INTO `ai_country_v2` VALUES (247, 7, '巴西联邦共和国', '巴西', NULL, 'The Federative Republic of Brazil', 'Brazil', 'the federative republic of brazil', 'BRA', 'PT', NULL, NULL, 0, '巴西即巴西联邦共和国，是南美洲最大的国家，享有“足球王国”的美誉。国土总面积854.74万平方公里，居世界第五。[1]  总人口2.02亿。与乌拉圭、阿根廷、巴拉圭、玻利维亚、秘鲁、哥伦比亚、委内瑞拉、圭亚那、苏里南、法属圭亚那十国接壤', '', NULL, '', NULL);
 
 -- ----------------------------
+-- Table structure for coin
+-- ----------------------------
+DROP TABLE IF EXISTS `coin`;
+CREATE TABLE `coin`  (
+  `id` bigint NOT NULL COMMENT 'id',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '货币名称',
+  `cn_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '中文名称',
+  `en_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '英文名称',
+  `icon_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'logo图url',
+  `infolink` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '币种资料链接',
+  `information` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '币种简介',
+  `min_tx_fee` double NULL DEFAULT NULL COMMENT '最小提币手续费',
+  `min_withdraw_amount` decimal(18, 8) NULL DEFAULT NULL COMMENT '最小提币数量',
+  `max_tx_fee` double NULL DEFAULT NULL COMMENT '最大提币手续费',
+  `max_withdraw_amount` decimal(18, 8) NULL DEFAULT NULL COMMENT '最大提币数量',
+  `cny_rate` double NULL DEFAULT NULL COMMENT '对人民币汇率',
+  `usd_rate` double NULL DEFAULT NULL COMMENT '对美元汇率',
+  `can_withdraw` tinyint(1) NULL DEFAULT 0 COMMENT '是否能提币 0:是 1:否',
+  `can_recharge` tinyint(1) NULL DEFAULT 0 COMMENT '是否能充币 0:是 1:否',
+  `can_transfer` tinyint(1) NULL DEFAULT 0 COMMENT '是否能转账 0:是 1:否',
+  `can_auto_withdraw` tinyint(1) NULL DEFAULT 0 COMMENT '是否能自动提币 0:是 1:否',
+  `recharge_amount` decimal(18, 8) NULL DEFAULT NULL COMMENT '充币阈值',
+  `withdraw_threshold` decimal(18, 8) NULL DEFAULT NULL COMMENT '提现阈值',
+  `miner_fee` decimal(18, 8) NULL DEFAULT NULL COMMENT '转账时付给矿工的手续费',
+  `account_type` int NULL DEFAULT NULL COMMENT '账户类型：0：默认  1：EOS类型',
+  `deposit_address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '充值地址（仅账户类型为EOS类型有效）',
+  `sort` tinyint NULL DEFAULT 0 COMMENT '排序',
+  `status_flag` int NOT NULL DEFAULT 0 COMMENT '状态：0启用，2停用',
+  `delete_flag` int NOT NULL DEFAULT 0 COMMENT '删除：0未删除，2已删除',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '货币表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of coin
+-- ----------------------------
+INSERT INTO `coin` VALUES (1, 'Bitcoin', '比特币', 'BTC', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/coin/BTC.png', NULL, NULL, 0.01, 5.00000000, 0.001, 0.00200000, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, '', NULL, '', NULL, NULL);
+INSERT INTO `coin` VALUES (2, 'Ethereum', '以太坊', 'ETC', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/coin/ETH.png', NULL, NULL, 0.1, 1000.00000000, 0.01, 1.00000000, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, '', NULL, '', NULL, NULL);
+INSERT INTO `coin` VALUES (3, 'TRX', '波场币', 'TRX', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/coin/TRX.png', NULL, NULL, 0.1, 1000.00000000, 0.01, 1.00000000, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, '', NULL, '', NULL, NULL);
+INSERT INTO `coin` VALUES (4, 'DASH', '达世币', 'DASH', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/coin/DASH.png', NULL, NULL, 0, 0.00000000, 0, 0.00000000, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, '', NULL, '', NULL, NULL);
+INSERT INTO `coin` VALUES (5, 'DOGE', '狗狗币', 'DOGE', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/coin/DOGE.png', NULL, NULL, 10, 100000.00000000, 4, 10.00000000, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, '', NULL, '', NULL, NULL);
+INSERT INTO `coin` VALUES (6, 'USDT', '泰达币', 'USDT', 'https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/coin/USDT.png', NULL, NULL, 1, 100000.00000000, 0.01, 1.00000000, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, '', NULL, '', NULL, NULL);
+
+-- ----------------------------
 -- Table structure for gen_table
 -- ----------------------------
 DROP TABLE IF EXISTS `gen_table`;
@@ -445,13 +493,14 @@ CREATE TABLE `gen_table`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`table_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '代码生成业务表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '代码生成业务表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of gen_table
 -- ----------------------------
 INSERT INTO `gen_table` VALUES (28, 'ai_bank', '银行信息表', NULL, NULL, 'AiBank', 'crud', 'com.cloud.system', 'system', 'bank', '银行信息', 'ai-cloud', '0', '/', NULL, 'admin', '2023-02-20 20:50:09', '', NULL, NULL);
 INSERT INTO `gen_table` VALUES (29, 'ai_country', '国家信息表', NULL, NULL, 'AiCountry', 'crud', 'com.cloud.system', 'system', 'country', '国家信息', 'ai-cloud', '0', '/', NULL, 'admin', '2023-02-20 20:50:09', '', NULL, NULL);
+INSERT INTO `gen_table` VALUES (30, 'coin', '货币表', NULL, NULL, 'Coin', 'crud', 'com.cloud.system', 'system', 'coin', '货币', 'ai-cloud', '0', '/', NULL, 'admin', '2023-03-21 00:35:14', '', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for gen_table_column
@@ -481,7 +530,7 @@ CREATE TABLE `gen_table_column`  (
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`column_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 553 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '代码生成业务表字段' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 553 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '代码生成业务表字段' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of gen_table_column
@@ -508,6 +557,36 @@ INSERT INTO `gen_table_column` VALUES (549, '29', 'create_time', '创建时间',
 INSERT INTO `gen_table_column` VALUES (550, '29', 'update_by', '更新者', 'varchar(64)', 'String', 'updateBy', '0', '0', NULL, '1', '1', NULL, NULL, 'EQ', 'input', '', 11, 'admin', '2023-02-20 20:50:10', '', NULL);
 INSERT INTO `gen_table_column` VALUES (551, '29', 'update_time', '更新时间', 'datetime', 'Date', 'updateTime', '0', '0', NULL, '1', '1', NULL, NULL, 'EQ', 'datetime', '', 12, 'admin', '2023-02-20 20:50:10', '', NULL);
 INSERT INTO `gen_table_column` VALUES (552, '29', 'remark', '备注', 'varchar(500)', 'String', 'remark', '0', '0', NULL, '1', '1', '1', NULL, 'EQ', 'textarea', '', 13, 'admin', '2023-02-20 20:50:10', '', NULL);
+INSERT INTO `gen_table_column` VALUES (553, '30', 'id', 'id', 'bigint', 'Long', 'id', '1', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2023-03-21 00:35:14', '', NULL);
+INSERT INTO `gen_table_column` VALUES (554, '30', 'name', '货币名称', 'varchar(255)', 'String', 'name', '0', '0', '1', '1', '1', '1', '1', 'LIKE', 'input', '', 2, 'admin', '2023-03-21 00:35:14', '', NULL);
+INSERT INTO `gen_table_column` VALUES (555, '30', 'cn_name', '中文名称', 'varchar(255)', 'String', 'cnName', '0', '0', NULL, '1', '1', '1', '1', 'LIKE', 'input', '', 3, 'admin', '2023-03-21 00:35:14', '', NULL);
+INSERT INTO `gen_table_column` VALUES (556, '30', 'en_name', '英文名称', 'varchar(255)', 'String', 'enName', '0', '0', NULL, '1', '1', '1', '1', 'LIKE', 'input', '', 4, 'admin', '2023-03-21 00:35:15', '', NULL);
+INSERT INTO `gen_table_column` VALUES (557, '30', 'icon_url', 'logo图url', 'varchar(255)', 'String', 'iconUrl', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 5, 'admin', '2023-03-21 00:35:15', '', NULL);
+INSERT INTO `gen_table_column` VALUES (558, '30', 'infolink', '币种资料链接', 'varchar(255)', 'String', 'infolink', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 6, 'admin', '2023-03-21 00:35:15', '', NULL);
+INSERT INTO `gen_table_column` VALUES (559, '30', 'information', '币种简介', 'varchar(255)', 'String', 'information', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 7, 'admin', '2023-03-21 00:35:15', '', NULL);
+INSERT INTO `gen_table_column` VALUES (560, '30', 'min_tx_fee', '最小提币手续费', 'double', 'Long', 'minTxFee', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 8, 'admin', '2023-03-21 00:35:15', '', NULL);
+INSERT INTO `gen_table_column` VALUES (561, '30', 'min_withdraw_amount', '最小提币数量', 'decimal(18,8)', 'BigDecimal', 'minWithdrawAmount', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 9, 'admin', '2023-03-21 00:35:15', '', NULL);
+INSERT INTO `gen_table_column` VALUES (562, '30', 'max_tx_fee', '最大提币手续费', 'double', 'Long', 'maxTxFee', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 10, 'admin', '2023-03-21 00:35:15', '', NULL);
+INSERT INTO `gen_table_column` VALUES (563, '30', 'max_withdraw_amount', '最大提币数量', 'decimal(18,8)', 'BigDecimal', 'maxWithdrawAmount', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 11, 'admin', '2023-03-21 00:35:15', '', NULL);
+INSERT INTO `gen_table_column` VALUES (564, '30', 'cny_rate', '对人民币汇率', 'double', 'Long', 'cnyRate', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 12, 'admin', '2023-03-21 00:35:15', '', NULL);
+INSERT INTO `gen_table_column` VALUES (565, '30', 'usd_rate', '对美元汇率', 'double', 'Long', 'usdRate', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 13, 'admin', '2023-03-21 00:35:15', '', NULL);
+INSERT INTO `gen_table_column` VALUES (566, '30', 'can_withdraw', '是否能提币 0:是 1:否', 'tinyint(1)', 'Integer', 'canWithdraw', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 14, 'admin', '2023-03-21 00:35:15', '', NULL);
+INSERT INTO `gen_table_column` VALUES (567, '30', 'can_recharge', '是否能充币 0:是 1:否', 'tinyint(1)', 'Integer', 'canRecharge', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 15, 'admin', '2023-03-21 00:35:15', '', NULL);
+INSERT INTO `gen_table_column` VALUES (568, '30', 'can_transfer', '是否能转账 0:是 1:否', 'tinyint(1)', 'Integer', 'canTransfer', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 16, 'admin', '2023-03-21 00:35:15', '', NULL);
+INSERT INTO `gen_table_column` VALUES (569, '30', 'can_auto_withdraw', '是否能自动提币 0:是 1:否', 'tinyint(1)', 'Integer', 'canAutoWithdraw', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 17, 'admin', '2023-03-21 00:35:15', '', NULL);
+INSERT INTO `gen_table_column` VALUES (570, '30', 'recharge_amount', '充币阈值', 'decimal(18,8)', 'BigDecimal', 'rechargeAmount', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 18, 'admin', '2023-03-21 00:35:15', '', NULL);
+INSERT INTO `gen_table_column` VALUES (571, '30', 'withdraw_threshold', '提现阈值', 'decimal(18,8)', 'BigDecimal', 'withdrawThreshold', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 19, 'admin', '2023-03-21 00:35:15', '', NULL);
+INSERT INTO `gen_table_column` VALUES (572, '30', 'miner_fee', '转账时付给矿工的手续费', 'decimal(18,8)', 'BigDecimal', 'minerFee', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 20, 'admin', '2023-03-21 00:35:15', '', NULL);
+INSERT INTO `gen_table_column` VALUES (573, '30', 'account_type', '账户类型：0：默认  1：EOS类型', 'int', 'Long', 'accountType', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'select', '', 21, 'admin', '2023-03-21 00:35:15', '', NULL);
+INSERT INTO `gen_table_column` VALUES (574, '30', 'deposit_address', '充值地址（仅账户类型为EOS类型有效）', 'varchar(255)', 'String', 'depositAddress', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 22, 'admin', '2023-03-21 00:35:15', '', NULL);
+INSERT INTO `gen_table_column` VALUES (575, '30', 'sort', '排序', 'tinyint', 'Long', 'sort', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 23, 'admin', '2023-03-21 00:35:15', '', NULL);
+INSERT INTO `gen_table_column` VALUES (576, '30', 'status_flag', '状态：0启用，2停用', 'int', 'Long', 'statusFlag', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 24, 'admin', '2023-03-21 00:35:15', '', NULL);
+INSERT INTO `gen_table_column` VALUES (577, '30', 'delete_flag', '删除：0未删除，2已删除', 'int', 'Long', 'deleteFlag', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 25, 'admin', '2023-03-21 00:35:15', '', NULL);
+INSERT INTO `gen_table_column` VALUES (578, '30', 'create_by', '创建者', 'varchar(64)', 'String', 'createBy', '0', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 26, 'admin', '2023-03-21 00:35:15', '', NULL);
+INSERT INTO `gen_table_column` VALUES (579, '30', 'create_time', '创建时间', 'datetime', 'Date', 'createTime', '0', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'datetime', '', 27, 'admin', '2023-03-21 00:35:15', '', NULL);
+INSERT INTO `gen_table_column` VALUES (580, '30', 'update_by', '更新者', 'varchar(64)', 'String', 'updateBy', '0', '0', NULL, '1', '1', NULL, NULL, 'EQ', 'input', '', 28, 'admin', '2023-03-21 00:35:15', '', NULL);
+INSERT INTO `gen_table_column` VALUES (581, '30', 'update_time', '更新时间', 'datetime', 'Date', 'updateTime', '0', '0', NULL, '1', '1', NULL, NULL, 'EQ', 'datetime', '', 29, 'admin', '2023-03-21 00:35:15', '', NULL);
+INSERT INTO `gen_table_column` VALUES (582, '30', 'remark', '备注', 'varchar(500)', 'String', 'remark', '0', '0', NULL, '1', '1', '1', NULL, 'EQ', 'textarea', '', 30, 'admin', '2023-03-21 00:35:16', '', NULL);
 
 -- ----------------------------
 -- Table structure for qrtz_blob_triggers
@@ -520,7 +599,7 @@ CREATE TABLE `qrtz_blob_triggers`  (
   `blob_data` blob NULL COMMENT '存放持久化Trigger对象',
   PRIMARY KEY (`sched_name`, `trigger_name`, `trigger_group`) USING BTREE,
   CONSTRAINT `qrtz_blob_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = 'Blob类型的触发器表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = 'Blob类型的触发器表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of qrtz_blob_triggers
@@ -535,7 +614,7 @@ CREATE TABLE `qrtz_calendars`  (
   `calendar_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '日历名称',
   `calendar` blob NOT NULL COMMENT '存放持久化calendar对象',
   PRIMARY KEY (`sched_name`, `calendar_name`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '日历信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '日历信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of qrtz_calendars
@@ -553,7 +632,7 @@ CREATE TABLE `qrtz_cron_triggers`  (
   `time_zone_id` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '时区',
   PRIMARY KEY (`sched_name`, `trigger_name`, `trigger_group`) USING BTREE,
   CONSTRAINT `qrtz_cron_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = 'Cron类型的触发器表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = 'Cron类型的触发器表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of qrtz_cron_triggers
@@ -581,7 +660,7 @@ CREATE TABLE `qrtz_fired_triggers`  (
   `is_nonconcurrent` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '是否并发',
   `requests_recovery` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '是否接受恢复执行',
   PRIMARY KEY (`sched_name`, `entry_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '已触发的触发器表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '已触发的触发器表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of qrtz_fired_triggers
@@ -603,7 +682,7 @@ CREATE TABLE `qrtz_job_details`  (
   `requests_recovery` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '是否接受恢复执行',
   `job_data` blob NULL COMMENT '存放持久化job对象',
   PRIMARY KEY (`sched_name`, `job_name`, `job_group`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '任务详细信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '任务详细信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of qrtz_job_details
@@ -620,7 +699,7 @@ CREATE TABLE `qrtz_locks`  (
   `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
   `lock_name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '悲观锁名称',
   PRIMARY KEY (`sched_name`, `lock_name`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '存储的悲观锁信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '存储的悲观锁信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of qrtz_locks
@@ -636,7 +715,7 @@ CREATE TABLE `qrtz_paused_trigger_grps`  (
   `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
   `trigger_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_group的外键',
   PRIMARY KEY (`sched_name`, `trigger_group`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '暂停的触发器表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '暂停的触发器表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of qrtz_paused_trigger_grps
@@ -652,12 +731,12 @@ CREATE TABLE `qrtz_scheduler_state`  (
   `last_checkin_time` bigint NOT NULL COMMENT '上次检查时间',
   `checkin_interval` bigint NOT NULL COMMENT '检查间隔时间',
   PRIMARY KEY (`sched_name`, `instance_name`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '调度器状态表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '调度器状态表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of qrtz_scheduler_state
 -- ----------------------------
-INSERT INTO `qrtz_scheduler_state` VALUES ('Scheduler', 'DESKTOP-65BIL2N1677478873845', 1677485322293, 15000);
+INSERT INTO `qrtz_scheduler_state` VALUES ('Scheduler', 'DESKTOP-65BIL2N1679384369034', 1679384546834, 15000);
 
 -- ----------------------------
 -- Table structure for qrtz_simple_triggers
@@ -672,7 +751,7 @@ CREATE TABLE `qrtz_simple_triggers`  (
   `times_triggered` bigint NOT NULL COMMENT '已经触发的次数',
   PRIMARY KEY (`sched_name`, `trigger_name`, `trigger_group`) USING BTREE,
   CONSTRAINT `qrtz_simple_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '简单触发器的信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '简单触发器的信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of qrtz_simple_triggers
@@ -699,7 +778,7 @@ CREATE TABLE `qrtz_simprop_triggers`  (
   `bool_prop_2` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'Boolean类型的trigger的第二个参数',
   PRIMARY KEY (`sched_name`, `trigger_name`, `trigger_group`) USING BTREE,
   CONSTRAINT `qrtz_simprop_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '同步机制的行锁表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '同步机制的行锁表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of qrtz_simprop_triggers
@@ -727,16 +806,16 @@ CREATE TABLE `qrtz_triggers`  (
   `misfire_instr` smallint NULL DEFAULT NULL COMMENT '补偿执行的策略',
   `job_data` blob NULL COMMENT '存放持久化job对象',
   PRIMARY KEY (`sched_name`, `trigger_name`, `trigger_group`) USING BTREE,
-  INDEX `sched_name`(`sched_name` ASC, `job_name` ASC, `job_group` ASC) USING BTREE,
+  INDEX `sched_name`(`sched_name`, `job_name`, `job_group`) USING BTREE,
   CONSTRAINT `qrtz_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `job_name`, `job_group`) REFERENCES `qrtz_job_details` (`sched_name`, `job_name`, `job_group`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '触发器详细信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '触发器详细信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of qrtz_triggers
 -- ----------------------------
-INSERT INTO `qrtz_triggers` VALUES ('Scheduler', 'TASK_CLASS_NAME1', 'DEFAULT', 'TASK_CLASS_NAME1', 'DEFAULT', NULL, 1677478880000, -1, 5, 'PAUSED', 'CRON', 1677478875000, 0, NULL, 2, '');
-INSERT INTO `qrtz_triggers` VALUES ('Scheduler', 'TASK_CLASS_NAME2', 'DEFAULT', 'TASK_CLASS_NAME2', 'DEFAULT', NULL, 1677478875000, -1, 5, 'PAUSED', 'CRON', 1677478875000, 0, NULL, 2, '');
-INSERT INTO `qrtz_triggers` VALUES ('Scheduler', 'TASK_CLASS_NAME3', 'DEFAULT', 'TASK_CLASS_NAME3', 'DEFAULT', NULL, 1677478880000, -1, 5, 'PAUSED', 'CRON', 1677478876000, 0, NULL, 2, '');
+INSERT INTO `qrtz_triggers` VALUES ('Scheduler', 'TASK_CLASS_NAME1', 'DEFAULT', 'TASK_CLASS_NAME1', 'DEFAULT', NULL, 1679384380000, -1, 5, 'PAUSED', 'CRON', 1679384371000, 0, NULL, 2, '');
+INSERT INTO `qrtz_triggers` VALUES ('Scheduler', 'TASK_CLASS_NAME2', 'DEFAULT', 'TASK_CLASS_NAME2', 'DEFAULT', NULL, 1679384385000, -1, 5, 'PAUSED', 'CRON', 1679384371000, 0, NULL, 2, '');
+INSERT INTO `qrtz_triggers` VALUES ('Scheduler', 'TASK_CLASS_NAME3', 'DEFAULT', 'TASK_CLASS_NAME3', 'DEFAULT', NULL, 1679384380000, -1, 5, 'PAUSED', 'CRON', 1679384372000, 0, NULL, 2, '');
 
 -- ----------------------------
 -- Table structure for sys_config
@@ -754,7 +833,7 @@ CREATE TABLE `sys_config`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`config_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '参数配置表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '参数配置表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_config
@@ -785,7 +864,7 @@ CREATE TABLE `sys_dept`  (
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`dept_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 200 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '部门表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 200 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '部门表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_dept
@@ -821,7 +900,7 @@ CREATE TABLE `sys_dict_data`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`dict_code`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '字典数据表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '字典数据表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_dict_data
@@ -871,8 +950,8 @@ CREATE TABLE `sys_dict_type`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`dict_id`) USING BTREE,
-  UNIQUE INDEX `dict_type`(`dict_type` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '字典类型表' ROW_FORMAT = Dynamic;
+  UNIQUE INDEX `dict_type`(`dict_type`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '字典类型表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_dict_type
@@ -907,7 +986,7 @@ CREATE TABLE `sys_job`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '备注信息',
   PRIMARY KEY (`job_id`, `job_name`, `job_group`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '定时任务调度表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '定时任务调度表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_job
@@ -930,7 +1009,7 @@ CREATE TABLE `sys_job_log`  (
   `exception_info` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '异常信息',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`job_log_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '定时任务调度日志表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '定时任务调度日志表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_job_log
@@ -947,12 +1026,79 @@ CREATE TABLE `sys_logininfor`  (
   `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '登录状态（0成功 1失败）',
   `msg` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '提示信息',
   `access_time` datetime NULL DEFAULT NULL COMMENT '访问时间',
-  PRIMARY KEY (`info_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 617 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`info_id`) USING BTREE,
+  INDEX `idx_sys_logininfor_s`(`status`) USING BTREE,
+  INDEX `idx_sys_logininfor_lt`(`access_time`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 617 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统访问记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_logininfor
 -- ----------------------------
+INSERT INTO `sys_logininfor` VALUES (636, 'ai168', '220.165.207.210', '0', '登录成功', '2023-03-21 01:12:04');
+INSERT INTO `sys_logininfor` VALUES (637, 'ai168', '61.166.195.21', '0', '登录成功', '2023-03-21 09:37:35');
+INSERT INTO `sys_logininfor` VALUES (638, 'ceshi', '27.227.135.239', '0', '登录成功', '2023-03-21 10:52:24');
+INSERT INTO `sys_logininfor` VALUES (639, 'ai168', '127.0.0.1', '0', '退出成功', '2023-03-21 10:55:03');
+INSERT INTO `sys_logininfor` VALUES (640, 'ai168', '127.0.0.1', '0', '登录成功', '2023-03-21 10:55:07');
+INSERT INTO `sys_logininfor` VALUES (641, 'ai168', '61.166.195.21', '0', '登录成功', '2023-03-21 11:39:32');
+INSERT INTO `sys_logininfor` VALUES (642, 'ceshi', '61.166.195.21', '0', '登录成功', '2023-03-21 11:45:48');
+INSERT INTO `sys_logininfor` VALUES (643, 'ceshi', '106.57.83.24', '0', '登录成功', '2023-03-21 12:18:08');
+INSERT INTO `sys_logininfor` VALUES (644, 'ai168', '120.229.243.150', '0', '登录成功', '2023-03-21 12:18:34');
+INSERT INTO `sys_logininfor` VALUES (645, 'ceshi', '61.140.183.226', '0', '登录成功', '2023-03-21 12:23:56');
+INSERT INTO `sys_logininfor` VALUES (646, 'ai168', '60.27.158.86', '0', '登录成功', '2023-03-21 12:39:16');
+INSERT INTO `sys_logininfor` VALUES (647, 'ai168', '39.144.169.138', '0', '登录成功', '2023-03-21 13:35:42');
+INSERT INTO `sys_logininfor` VALUES (648, 'ai168', '106.108.18.228', '0', '登录成功', '2023-03-21 13:38:24');
+INSERT INTO `sys_logininfor` VALUES (649, 'ai168', '220.202.152.106', '0', '登录成功', '2023-03-21 13:43:29');
+INSERT INTO `sys_logininfor` VALUES (650, 'ceshi', '221.221.158.97', '0', '登录成功', '2023-03-21 14:25:37');
+INSERT INTO `sys_logininfor` VALUES (651, 'ai168', '113.246.64.223', '0', '登录成功', '2023-03-21 14:27:30');
+INSERT INTO `sys_logininfor` VALUES (652, 'ceshi', '111.203.183.178', '0', '登录成功', '2023-03-21 14:27:49');
+INSERT INTO `sys_logininfor` VALUES (653, 'ceshi', '221.180.206.96', '0', '登录成功', '2023-03-21 14:29:15');
+INSERT INTO `sys_logininfor` VALUES (654, 'ceshi', '111.203.183.178', '0', '退出成功', '2023-03-21 14:29:22');
+INSERT INTO `sys_logininfor` VALUES (655, 'ceshi', '111.203.183.178', '0', '登录成功', '2023-03-21 14:29:28');
+INSERT INTO `sys_logininfor` VALUES (656, 'ceshi', '221.180.206.96', '0', '退出成功', '2023-03-21 14:29:40');
+INSERT INTO `sys_logininfor` VALUES (657, 'ceshi', '221.180.206.96', '0', '登录成功', '2023-03-21 14:29:45');
+INSERT INTO `sys_logininfor` VALUES (658, 'ai168', '220.248.226.18', '0', '登录成功', '2023-03-21 14:33:11');
+INSERT INTO `sys_logininfor` VALUES (659, 'ceshi', '111.183.47.135', '0', '登录成功', '2023-03-21 14:33:20');
+INSERT INTO `sys_logininfor` VALUES (660, 'ceshi', '121.235.194.29', '0', '登录成功', '2023-03-21 14:33:32');
+INSERT INTO `sys_logininfor` VALUES (661, 'ceshi', '111.183.47.135', '0', '退出成功', '2023-03-21 14:33:59');
+INSERT INTO `sys_logininfor` VALUES (662, 'ceshi', '111.183.47.135', '0', '登录成功', '2023-03-21 14:34:23');
+INSERT INTO `sys_logininfor` VALUES (663, 'ceshi', '121.235.194.29', '0', '退出成功', '2023-03-21 14:34:25');
+INSERT INTO `sys_logininfor` VALUES (664, 'ceshi', '121.235.194.29', '0', '登录成功', '2023-03-21 14:34:32');
+INSERT INTO `sys_logininfor` VALUES (665, 'ceshi', '111.183.47.135', '0', '退出成功', '2023-03-21 14:35:03');
+INSERT INTO `sys_logininfor` VALUES (666, 'ceshi', '111.183.47.135', '0', '登录成功', '2023-03-21 14:35:13');
+INSERT INTO `sys_logininfor` VALUES (667, 'ai168', '121.235.194.29', '0', '登录成功', '2023-03-21 14:35:38');
+INSERT INTO `sys_logininfor` VALUES (668, 'ceshi', '117.22.171.70', '0', '登录成功', '2023-03-21 14:36:15');
+INSERT INTO `sys_logininfor` VALUES (669, 'ceshi', '111.203.183.178', '0', '退出成功', '2023-03-21 14:37:41');
+INSERT INTO `sys_logininfor` VALUES (670, 'ai168', '117.22.171.70', '0', '登录成功', '2023-03-21 14:37:42');
+INSERT INTO `sys_logininfor` VALUES (671, 'ai168', '123.172.82.176', '0', '登录成功', '2023-03-21 14:37:43');
+INSERT INTO `sys_logininfor` VALUES (672, 'ceshi', '111.203.183.178', '0', '登录成功', '2023-03-21 14:37:50');
+INSERT INTO `sys_logininfor` VALUES (673, 'ai168', '117.22.171.70', '0', '退出成功', '2023-03-21 14:38:03');
+INSERT INTO `sys_logininfor` VALUES (674, 'ai168', '117.22.171.70', '0', '登录成功', '2023-03-21 14:38:07');
+INSERT INTO `sys_logininfor` VALUES (675, 'ceshi', '106.57.86.37', '0', '登录成功', '2023-03-21 14:38:52');
+INSERT INTO `sys_logininfor` VALUES (676, 'ceshi', '220.163.134.55', '0', '登录成功', '2023-03-21 14:39:15');
+INSERT INTO `sys_logininfor` VALUES (677, 'ai168', '220.163.134.55', '0', '登录成功', '2023-03-21 14:40:14');
+INSERT INTO `sys_logininfor` VALUES (678, 'ai168', '118.74.52.32', '0', '登录成功', '2023-03-21 14:40:19');
+INSERT INTO `sys_logininfor` VALUES (679, 'ai168', '220.163.134.55', '0', '退出成功', '2023-03-21 14:40:41');
+INSERT INTO `sys_logininfor` VALUES (680, 'ai168', '220.163.134.55', '0', '登录成功', '2023-03-21 14:40:46');
+INSERT INTO `sys_logininfor` VALUES (681, 'ai168', '218.77.104.248', '0', '登录成功', '2023-03-21 14:41:32');
+INSERT INTO `sys_logininfor` VALUES (682, 'ceshi', '124.133.0.122', '0', '登录成功', '2023-03-21 14:43:42');
+INSERT INTO `sys_logininfor` VALUES (683, 'ceshi', '220.175.54.50', '0', '登录成功', '2023-03-21 14:51:33');
+INSERT INTO `sys_logininfor` VALUES (684, 'ai168', '223.104.197.160', '0', '登录成功', '2023-03-21 14:51:45');
+INSERT INTO `sys_logininfor` VALUES (685, 'ai168', '223.104.197.160', '0', '退出成功', '2023-03-21 14:53:21');
+INSERT INTO `sys_logininfor` VALUES (686, 'ceshi', '211.144.15.162', '0', '登录成功', '2023-03-21 14:53:36');
+INSERT INTO `sys_logininfor` VALUES (687, 'ceshi', '223.104.197.160', '0', '登录成功', '2023-03-21 14:53:59');
+INSERT INTO `sys_logininfor` VALUES (688, 'ceshi', '211.144.15.162', '0', '退出成功', '2023-03-21 14:54:05');
+INSERT INTO `sys_logininfor` VALUES (689, 'ceshi', '211.144.15.162', '0', '登录成功', '2023-03-21 14:54:11');
+INSERT INTO `sys_logininfor` VALUES (690, 'ceshi', '223.104.197.160', '0', '退出成功', '2023-03-21 14:54:17');
+INSERT INTO `sys_logininfor` VALUES (691, 'ceshi', '223.104.197.160', '0', '登录成功', '2023-03-21 14:54:21');
+INSERT INTO `sys_logininfor` VALUES (692, 'ai168', '221.225.151.34', '0', '登录成功', '2023-03-21 14:59:33');
+INSERT INTO `sys_logininfor` VALUES (693, 'ai168', '221.225.151.34', '0', '退出成功', '2023-03-21 15:00:01');
+INSERT INTO `sys_logininfor` VALUES (694, 'ceshi', '221.225.151.34', '0', '登录成功', '2023-03-21 15:00:34');
+INSERT INTO `sys_logininfor` VALUES (695, 'ceshi', '39.82.201.10', '0', '登录成功', '2023-03-21 15:21:55');
+INSERT INTO `sys_logininfor` VALUES (696, 'ai168', '39.82.201.10', '0', '登录成功', '2023-03-21 15:26:49');
+INSERT INTO `sys_logininfor` VALUES (697, 'ceshi', '39.82.201.10', '0', '登录成功', '2023-03-21 15:28:38');
+INSERT INTO `sys_logininfor` VALUES (698, 'ceshi', '218.62.24.157', '0', '登录成功', '2023-03-21 15:30:07');
+INSERT INTO `sys_logininfor` VALUES (699, 'ai168', '1.192.246.27', '0', '登录成功', '2023-03-21 15:31:27');
+INSERT INTO `sys_logininfor` VALUES (700, 'ceshi', '1.192.246.27', '0', '登录成功', '2023-03-21 15:34:10');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -979,110 +1125,117 @@ CREATE TABLE `sys_menu`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '备注',
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2015 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '菜单权限表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2015 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '菜单权限表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
-INSERT INTO `sys_menu` VALUES (1, '系统管理', 0, 10, 'system', NULL, '', 1, 0, 'M', '0', '0', '', 'system', 'admin', '2022-08-28 20:42:08', 'ceshi', '2023-02-20 15:35:45', '系统管理目录');
-INSERT INTO `sys_menu` VALUES (2, '系统监控', 0, 11, 'monitor', NULL, '', 1, 0, 'M', '0', '0', '', 'monitor', 'admin', '2022-08-28 20:42:08', 'ceshi', '2023-02-20 15:35:58', '系统监控目录');
-INSERT INTO `sys_menu` VALUES (3, '系统工具', 0, 12, 'tool', NULL, '', 1, 0, 'M', '0', '0', '', 'tool', 'admin', '2022-08-28 20:42:08', 'ceshi', '2023-02-20 15:36:05', '系统工具目录');
-INSERT INTO `sys_menu` VALUES (4, '资源管理', 0, 1, 'resource', NULL, NULL, 1, 0, 'M', '0', '0', '', 'validCode', 'ceshi', '2023-02-20 18:05:39', 'admin', '2023-02-20 18:07:05', '');
-INSERT INTO `sys_menu` VALUES (100, '用户管理', 1, 1, 'user', 'system/user/index', '', 1, 0, 'C', '0', '0', 'system:user:list', 'user', 'admin', '2022-08-28 20:42:08', '', NULL, '用户管理菜单');
-INSERT INTO `sys_menu` VALUES (101, '角色管理', 1, 2, 'role', 'system/role/index', '', 1, 0, 'C', '0', '0', 'system:role:list', 'peoples', 'admin', '2022-08-28 20:42:08', '', NULL, '角色管理菜单');
-INSERT INTO `sys_menu` VALUES (102, '菜单管理', 1, 3, 'menu', 'system/menu/index', '', 1, 0, 'C', '0', '0', 'system:menu:list', 'tree-table', 'admin', '2022-08-28 20:42:08', '', NULL, '菜单管理菜单');
-INSERT INTO `sys_menu` VALUES (103, '部门管理', 1, 4, 'dept', 'system/dept/index', '', 1, 0, 'C', '0', '0', 'system:dept:list', 'tree', 'admin', '2022-08-28 20:42:08', '', NULL, '部门管理菜单');
-INSERT INTO `sys_menu` VALUES (104, '岗位管理', 1, 5, 'post', 'system/post/index', '', 1, 0, 'C', '0', '0', 'system:post:list', 'post', 'admin', '2022-08-28 20:42:08', '', NULL, '岗位管理菜单');
-INSERT INTO `sys_menu` VALUES (105, '字典管理', 1, 6, 'dict', 'system/dict/index', '', 1, 0, 'C', '0', '0', 'system:dict:list', 'dict', 'admin', '2022-08-28 20:42:08', '', NULL, '字典管理菜单');
-INSERT INTO `sys_menu` VALUES (106, '参数设置', 1, 7, 'config', 'system/config/index', '', 1, 0, 'C', '0', '0', 'system:config:list', 'edit', 'admin', '2022-08-28 20:42:08', '', NULL, '参数设置菜单');
-INSERT INTO `sys_menu` VALUES (107, '通知公告', 1, 8, 'notice', 'system/notice/index', '', 1, 0, 'C', '0', '0', 'system:notice:list', 'message', 'admin', '2022-08-28 20:42:08', '', NULL, '通知公告菜单');
-INSERT INTO `sys_menu` VALUES (108, '日志管理', 1, 9, 'log', '', '', 1, 0, 'M', '0', '0', '', 'log', 'admin', '2022-08-28 20:42:08', '', NULL, '日志管理菜单');
-INSERT INTO `sys_menu` VALUES (109, '在线用户', 2, 1, 'online', 'monitor/online/index', '', 1, 0, 'C', '0', '0', 'monitor:online:list', 'online', 'admin', '2022-08-28 20:42:08', '', NULL, '在线用户菜单');
-INSERT INTO `sys_menu` VALUES (110, '定时任务', 2, 2, 'job', 'monitor/job/index', '', 1, 0, 'C', '0', '0', 'monitor:job:list', 'job', 'admin', '2022-08-28 20:42:08', '', NULL, '定时任务菜单');
-INSERT INTO `sys_menu` VALUES (111, 'Sentinel监控', 2, 8, 'http://localhost:8718', '', '', 0, 0, 'C', '0', '0', 'monitor:sentinel:list', 'sentinel', 'admin', '2022-08-28 20:42:08', 'aicloud', '2022-10-08 14:24:42', '流量控制菜单');
-INSERT INTO `sys_menu` VALUES (112, 'Nacos监控', 2, 7, 'http://localhost:8848/nacos', '', '', 0, 0, 'C', '0', '0', 'monitor:nacos:list', 'nacos', 'admin', '2022-08-28 20:42:08', 'aicloud', '2022-10-08 14:24:35', '服务治理菜单');
-INSERT INTO `sys_menu` VALUES (113, 'Admin监控', 2, 6, 'admin', 'monitor/admin/index', '', 1, 0, 'C', '0', '0', 'monitor:server:list', 'admin', 'admin', '2022-06-17 15:47:48', 'aicloud', '2022-10-08 14:24:02', '服务监控菜单');
-INSERT INTO `sys_menu` VALUES (114, '表单构建', 3, 1, 'build', 'tool/build/index', '', 1, 0, 'C', '0', '0', 'tool:build:list', 'build', 'admin', '2022-08-28 20:42:08', '', NULL, '表单构建菜单');
-INSERT INTO `sys_menu` VALUES (115, '代码生成', 3, 2, 'gen', 'tool/gen/index', '', 1, 0, 'C', '0', '0', 'tool:gen:list', 'code', 'admin', '2022-08-28 20:42:08', '', NULL, '代码生成菜单');
+INSERT INTO `sys_menu` VALUES (1, '系统管理', 0, 10, 'system', NULL, '', 1, 0, 'M', '0', '0', '', 'system', 'admin', '2022-08-28 20:42:08', 'admin', '2023-02-20 15:35:45', '系统管理目录');
+INSERT INTO `sys_menu` VALUES (2, '系统监控', 0, 11, 'monitor', NULL, '', 1, 0, 'M', '0', '0', '', 'monitor', 'admin', '2022-08-28 20:42:08', 'admin', '2023-02-20 15:35:58', '系统监控目录');
+INSERT INTO `sys_menu` VALUES (3, '系统工具', 0, 12, 'tool', NULL, '', 1, 0, 'M', '0', '0', '', 'tool', 'admin', '2022-08-28 20:42:08', 'admin', '2023-02-20 15:36:05', '系统工具目录');
+INSERT INTO `sys_menu` VALUES (4, '资源管理', 0, 1, 'resource', NULL, NULL, 1, 0, 'M', '0', '0', '', 'international', 'admin', '2023-02-20 18:05:39', 'admin', '2023-03-21 00:39:40', '资源管理目录');
+INSERT INTO `sys_menu` VALUES (5, '货币管理', 0, 2, 'coin', NULL, NULL, 1, 0, 'M', '0', '0', '', 'validCode', 'admin', '2023-03-21 00:38:15', 'admin', '2023-03-21 00:39:24', '货币管理目录');
+INSERT INTO `sys_menu` VALUES (100, '用户管理', 1, 1, 'user', 'system/user/index', '', 1, 0, 'C', '0', '0', 'system:user:list', 'user', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '用户管理菜单');
+INSERT INTO `sys_menu` VALUES (101, '角色管理', 1, 2, 'role', 'system/role/index', '', 1, 0, 'C', '0', '0', 'system:role:list', 'peoples', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '角色管理菜单');
+INSERT INTO `sys_menu` VALUES (102, '菜单管理', 1, 3, 'menu', 'system/menu/index', '', 1, 0, 'C', '0', '0', 'system:menu:list', 'tree-table', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '菜单管理菜单');
+INSERT INTO `sys_menu` VALUES (103, '部门管理', 1, 4, 'dept', 'system/dept/index', '', 1, 0, 'C', '0', '0', 'system:dept:list', 'tree', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '部门管理菜单');
+INSERT INTO `sys_menu` VALUES (104, '岗位管理', 1, 5, 'post', 'system/post/index', '', 1, 0, 'C', '0', '0', 'system:post:list', 'post', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '岗位管理菜单');
+INSERT INTO `sys_menu` VALUES (105, '字典管理', 1, 6, 'dict', 'system/dict/index', '', 1, 0, 'C', '0', '0', 'system:dict:list', 'dict', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '字典管理菜单');
+INSERT INTO `sys_menu` VALUES (106, '参数设置', 1, 7, 'config', 'system/config/index', '', 1, 0, 'C', '0', '0', 'system:config:list', 'edit', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '参数设置菜单');
+INSERT INTO `sys_menu` VALUES (107, '通知公告', 1, 8, 'notice', 'system/notice/index', '', 1, 0, 'C', '0', '0', 'system:notice:list', 'message', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '通知公告菜单');
+INSERT INTO `sys_menu` VALUES (108, '日志管理', 1, 9, 'log', '', '', 1, 0, 'M', '0', '0', '', 'log', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '日志管理菜单');
+INSERT INTO `sys_menu` VALUES (109, '在线用户', 2, 1, 'online', 'monitor/online/index', '', 1, 0, 'C', '0', '0', 'monitor:online:list', 'online', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '在线用户菜单');
+INSERT INTO `sys_menu` VALUES (110, '定时任务', 2, 2, 'job', 'monitor/job/index', '', 1, 0, 'C', '0', '0', 'monitor:job:list', 'job', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '定时任务菜单');
+INSERT INTO `sys_menu` VALUES (111, 'Sentinel监控', 2, 8, 'http://localhost:8718', '', '', 0, 0, 'C', '0', '0', 'monitor:sentinel:list', 'sentinel', 'admin', '2022-08-28 20:42:08', 'admin', '2022-10-08 14:24:42', '流量控制菜单');
+INSERT INTO `sys_menu` VALUES (112, 'Nacos监控', 2, 7, 'http://localhost:8848/nacos', '', '', 0, 0, 'C', '0', '0', 'monitor:nacos:list', 'nacos', 'admin', '2022-08-28 20:42:08', 'admin', '2022-10-08 14:24:35', '服务治理菜单');
+INSERT INTO `sys_menu` VALUES (113, 'Admin监控', 2, 6, 'http://localhost:9201/login', '', '', 0, 0, 'C', '0', '0', 'monitor:server:list', 'admin', 'admin', '2022-06-17 15:47:48', 'ceshi', '2023-03-21 01:01:00', '服务监控菜单');
+INSERT INTO `sys_menu` VALUES (114, '表单构建', 3, 1, 'build', 'tool/build/index', '', 1, 0, 'C', '0', '0', 'tool:build:list', 'build', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '表单构建菜单');
+INSERT INTO `sys_menu` VALUES (115, '代码生成', 3, 2, 'gen', 'tool/gen/index', '', 1, 0, 'C', '0', '0', 'tool:gen:list', 'code', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '代码生成菜单');
 INSERT INTO `sys_menu` VALUES (116, '系统接口', 3, 3, 'http://localhost:8080/swagger-ui/index.html', '', '', 0, 0, 'M', '0', '0', 'tool:swagger:list', 'swagger', 'admin', '2022-08-28 20:42:08', 'admin', '2022-10-17 14:19:55', '系统接口菜单');
 INSERT INTO `sys_menu` VALUES (117, '服务监控', 2, 3, 'server', 'monitor/server/index', '', 1, 0, 'C', '0', '0', 'monitor:server:list', 'server', 'admin', '2022-10-07 23:15:50', 'admin', '2022-10-08 01:09:22', '服务监控菜单');
 INSERT INTO `sys_menu` VALUES (118, '缓存监控', 2, 4, 'cache', 'monitor/cache/index', '', 1, 0, 'C', '0', '0', 'monitor:cache:list', 'redis', 'admin', '2022-10-07 23:15:50', 'admin', '2022-10-17 16:22:34', '缓存监控菜单');
 INSERT INTO `sys_menu` VALUES (119, '缓存列表', 2, 5, 'cacheList', 'monitor/cache/list', '', 1, 0, 'C', '0', '0', 'monitor:cache:list', 'redis-list', 'admin', '2022-10-07 23:15:50', 'admin', '2022-10-17 16:22:46', '缓存列表菜单');
-INSERT INTO `sys_menu` VALUES (500, '操作日志', 108, 1, 'operlog', 'system/operlog/index', '', 1, 0, 'C', '0', '0', 'system:operlog:list', 'form', 'admin', '2022-08-28 20:42:08', '', NULL, '操作日志菜单');
-INSERT INTO `sys_menu` VALUES (501, '登录日志', 108, 2, 'logininfor', 'system/logininfor/index', '', 1, 0, 'C', '0', '0', 'system:logininfor:list', 'logininfor', 'admin', '2022-08-28 20:42:08', '', NULL, '登录日志菜单');
-INSERT INTO `sys_menu` VALUES (1000, '用户查询', 100, 1, '', '', '', 1, 0, 'F', '0', '0', 'system:user:query', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1001, '用户新增', 100, 2, '', '', '', 1, 0, 'F', '0', '0', 'system:user:add', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1002, '用户修改', 100, 3, '', '', '', 1, 0, 'F', '0', '0', 'system:user:edit', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1003, '用户删除', 100, 4, '', '', '', 1, 0, 'F', '0', '0', 'system:user:remove', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1004, '用户导出', 100, 5, '', '', '', 1, 0, 'F', '0', '0', 'system:user:export', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1005, '用户导入', 100, 6, '', '', '', 1, 0, 'F', '0', '0', 'system:user:import', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1006, '重置密码', 100, 7, '', '', '', 1, 0, 'F', '0', '0', 'system:user:resetPwd', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1007, '角色查询', 101, 1, '', '', '', 1, 0, 'F', '0', '0', 'system:role:query', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1008, '角色新增', 101, 2, '', '', '', 1, 0, 'F', '0', '0', 'system:role:add', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1009, '角色修改', 101, 3, '', '', '', 1, 0, 'F', '0', '0', 'system:role:edit', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1010, '角色删除', 101, 4, '', '', '', 1, 0, 'F', '0', '0', 'system:role:remove', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1011, '角色导出', 101, 5, '', '', '', 1, 0, 'F', '0', '0', 'system:role:export', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1012, '菜单查询', 102, 1, '', '', '', 1, 0, 'F', '0', '0', 'system:menu:query', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1013, '菜单新增', 102, 2, '', '', '', 1, 0, 'F', '0', '0', 'system:menu:add', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1014, '菜单修改', 102, 3, '', '', '', 1, 0, 'F', '0', '0', 'system:menu:edit', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1015, '菜单删除', 102, 4, '', '', '', 1, 0, 'F', '0', '0', 'system:menu:remove', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1016, '部门查询', 103, 1, '', '', '', 1, 0, 'F', '0', '0', 'system:dept:query', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1017, '部门新增', 103, 2, '', '', '', 1, 0, 'F', '0', '0', 'system:dept:add', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1018, '部门修改', 103, 3, '', '', '', 1, 0, 'F', '0', '0', 'system:dept:edit', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1019, '部门删除', 103, 4, '', '', '', 1, 0, 'F', '0', '0', 'system:dept:remove', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1020, '岗位查询', 104, 1, '', '', '', 1, 0, 'F', '0', '0', 'system:post:query', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1021, '岗位新增', 104, 2, '', '', '', 1, 0, 'F', '0', '0', 'system:post:add', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1022, '岗位修改', 104, 3, '', '', '', 1, 0, 'F', '0', '0', 'system:post:edit', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1023, '岗位删除', 104, 4, '', '', '', 1, 0, 'F', '0', '0', 'system:post:remove', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1024, '岗位导出', 104, 5, '', '', '', 1, 0, 'F', '0', '0', 'system:post:export', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1025, '字典查询', 105, 1, '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:query', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1026, '字典新增', 105, 2, '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:add', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1027, '字典修改', 105, 3, '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:edit', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1028, '字典删除', 105, 4, '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:remove', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1029, '字典导出', 105, 5, '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:export', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1030, '参数查询', 106, 1, '#', '', '', 1, 0, 'F', '0', '0', 'system:config:query', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1031, '参数新增', 106, 2, '#', '', '', 1, 0, 'F', '0', '0', 'system:config:add', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1032, '参数修改', 106, 3, '#', '', '', 1, 0, 'F', '0', '0', 'system:config:edit', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1033, '参数删除', 106, 4, '#', '', '', 1, 0, 'F', '0', '0', 'system:config:remove', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1034, '参数导出', 106, 5, '#', '', '', 1, 0, 'F', '0', '0', 'system:config:export', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1035, '公告查询', 107, 1, '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:query', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1036, '公告新增', 107, 2, '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:add', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1037, '公告修改', 107, 3, '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:edit', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1038, '公告删除', 107, 4, '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:remove', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1039, '操作查询', 500, 1, '#', '', '', 1, 0, 'F', '0', '0', 'system:operlog:query', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1040, '操作删除', 500, 2, '#', '', '', 1, 0, 'F', '0', '0', 'system:operlog:remove', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1041, '日志导出', 500, 3, '#', '', '', 1, 0, 'F', '0', '0', 'system:operlog:export', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1042, '登录查询', 501, 1, '#', '', '', 1, 0, 'F', '0', '0', 'system:logininfor:query', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1043, '登录删除', 501, 2, '#', '', '', 1, 0, 'F', '0', '0', 'system:logininfor:remove', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1044, '日志导出', 501, 3, '#', '', '', 1, 0, 'F', '0', '0', 'system:logininfor:export', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1045, '账户解锁', 501, 4, '#', '', '', 1, 0, 'F', '0', '0', 'system:logininfor:unlock', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1046, '在线查询', 109, 1, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:query', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1047, '批量强退', 109, 2, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:batchLogout', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1048, '单条强退', 109, 3, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:forceLogout', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1049, '任务查询', 110, 1, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:query', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1050, '任务新增', 110, 2, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:add', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1051, '任务修改', 110, 3, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:edit', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1052, '任务删除', 110, 4, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:remove', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1053, '状态修改', 110, 5, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:changeStatus', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1054, '任务导出', 110, 6, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:export', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1055, '生成查询', 115, 1, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:query', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1056, '生成修改', 115, 2, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:edit', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1057, '生成删除', 115, 3, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:remove', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1058, '导入代码', 115, 2, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:import', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1059, '预览代码', 115, 4, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:preview', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (1060, '生成代码', 115, 5, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:code', '#', 'admin', '2022-08-28 20:42:08', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (500, '操作日志', 108, 1, 'operlog', 'system/operlog/index', '', 1, 0, 'C', '0', '0', 'system:operlog:list', 'form', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '操作日志菜单');
+INSERT INTO `sys_menu` VALUES (501, '登录日志', 108, 2, 'logininfor', 'system/logininfor/index', '', 1, 0, 'C', '0', '0', 'system:logininfor:list', 'logininfor', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '登录日志菜单');
+INSERT INTO `sys_menu` VALUES (1000, '用户查询', 100, 1, '', '', '', 1, 0, 'F', '0', '0', 'system:user:query', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1001, '用户新增', 100, 2, '', '', '', 1, 0, 'F', '0', '0', 'system:user:add', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1002, '用户修改', 100, 3, '', '', '', 1, 0, 'F', '0', '0', 'system:user:edit', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1003, '用户删除', 100, 4, '', '', '', 1, 0, 'F', '0', '0', 'system:user:remove', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1004, '用户导出', 100, 5, '', '', '', 1, 0, 'F', '0', '0', 'system:user:export', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1005, '用户导入', 100, 6, '', '', '', 1, 0, 'F', '0', '0', 'system:user:import', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1006, '重置密码', 100, 7, '', '', '', 1, 0, 'F', '0', '0', 'system:user:resetPwd', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1007, '角色查询', 101, 1, '', '', '', 1, 0, 'F', '0', '0', 'system:role:query', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1008, '角色新增', 101, 2, '', '', '', 1, 0, 'F', '0', '0', 'system:role:add', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1009, '角色修改', 101, 3, '', '', '', 1, 0, 'F', '0', '0', 'system:role:edit', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1010, '角色删除', 101, 4, '', '', '', 1, 0, 'F', '0', '0', 'system:role:remove', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1011, '角色导出', 101, 5, '', '', '', 1, 0, 'F', '0', '0', 'system:role:export', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1012, '菜单查询', 102, 1, '', '', '', 1, 0, 'F', '0', '0', 'system:menu:query', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1013, '菜单新增', 102, 2, '', '', '', 1, 0, 'F', '0', '0', 'system:menu:add', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1014, '菜单修改', 102, 3, '', '', '', 1, 0, 'F', '0', '0', 'system:menu:edit', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1015, '菜单删除', 102, 4, '', '', '', 1, 0, 'F', '0', '0', 'system:menu:remove', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1016, '部门查询', 103, 1, '', '', '', 1, 0, 'F', '0', '0', 'system:dept:query', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1017, '部门新增', 103, 2, '', '', '', 1, 0, 'F', '0', '0', 'system:dept:add', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1018, '部门修改', 103, 3, '', '', '', 1, 0, 'F', '0', '0', 'system:dept:edit', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1019, '部门删除', 103, 4, '', '', '', 1, 0, 'F', '0', '0', 'system:dept:remove', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1020, '岗位查询', 104, 1, '', '', '', 1, 0, 'F', '0', '0', 'system:post:query', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1021, '岗位新增', 104, 2, '', '', '', 1, 0, 'F', '0', '0', 'system:post:add', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1022, '岗位修改', 104, 3, '', '', '', 1, 0, 'F', '0', '0', 'system:post:edit', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1023, '岗位删除', 104, 4, '', '', '', 1, 0, 'F', '0', '0', 'system:post:remove', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1024, '岗位导出', 104, 5, '', '', '', 1, 0, 'F', '0', '0', 'system:post:export', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1025, '字典查询', 105, 1, '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:query', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1026, '字典新增', 105, 2, '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:add', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1027, '字典修改', 105, 3, '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:edit', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1028, '字典删除', 105, 4, '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:remove', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1029, '字典导出', 105, 5, '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:export', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1030, '参数查询', 106, 1, '#', '', '', 1, 0, 'F', '0', '0', 'system:config:query', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1031, '参数新增', 106, 2, '#', '', '', 1, 0, 'F', '0', '0', 'system:config:add', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1032, '参数修改', 106, 3, '#', '', '', 1, 0, 'F', '0', '0', 'system:config:edit', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1033, '参数删除', 106, 4, '#', '', '', 1, 0, 'F', '0', '0', 'system:config:remove', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1034, '参数导出', 106, 5, '#', '', '', 1, 0, 'F', '0', '0', 'system:config:export', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1035, '公告查询', 107, 1, '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:query', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1036, '公告新增', 107, 2, '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:add', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1037, '公告修改', 107, 3, '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:edit', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1038, '公告删除', 107, 4, '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:remove', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1039, '操作查询', 500, 1, '#', '', '', 1, 0, 'F', '0', '0', 'system:operlog:query', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1040, '操作删除', 500, 2, '#', '', '', 1, 0, 'F', '0', '0', 'system:operlog:remove', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1041, '日志导出', 500, 3, '#', '', '', 1, 0, 'F', '0', '0', 'system:operlog:export', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1042, '登录查询', 501, 1, '#', '', '', 1, 0, 'F', '0', '0', 'system:logininfor:query', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1043, '登录删除', 501, 2, '#', '', '', 1, 0, 'F', '0', '0', 'system:logininfor:remove', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1044, '日志导出', 501, 3, '#', '', '', 1, 0, 'F', '0', '0', 'system:logininfor:export', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1045, '账户解锁', 501, 4, '#', '', '', 1, 0, 'F', '0', '0', 'system:logininfor:unlock', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1046, '在线查询', 109, 1, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:query', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1047, '批量强退', 109, 2, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:batchLogout', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1048, '单条强退', 109, 3, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:forceLogout', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1049, '任务查询', 110, 1, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:query', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1050, '任务新增', 110, 2, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:add', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1051, '任务修改', 110, 3, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:edit', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1052, '任务删除', 110, 4, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:remove', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1053, '状态修改', 110, 5, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:changeStatus', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1054, '任务导出', 110, 6, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:export', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1055, '生成查询', 115, 1, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:query', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1056, '生成修改', 115, 2, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:edit', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1057, '生成删除', 115, 3, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:remove', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1058, '导入代码', 115, 2, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:import', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1059, '预览代码', 115, 4, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:preview', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (1060, '生成代码', 115, 5, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:code', '#', 'admin', '2022-08-28 20:42:08', 'admin', NULL, '');
 INSERT INTO `sys_menu` VALUES (2003, '区域信息', 4, 1, 'country', 'resource/country/index', NULL, 1, 0, 'C', '0', '0', 'resource:country:list', 'international', 'admin', '2023-02-20 21:24:01', 'admin', '2023-02-20 21:33:43', '国家信息菜单');
-INSERT INTO `sys_menu` VALUES (2004, '区域查询', 2003, 1, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:country:query', '#', 'admin', '2023-02-20 21:24:01', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2005, '区域新增', 2003, 2, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:country:add', '#', 'admin', '2023-02-20 21:24:01', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2006, '区域修改', 2003, 3, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:country:edit', '#', 'admin', '2023-02-20 21:24:01', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2007, '区域删除', 2003, 4, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:country:remove', '#', 'admin', '2023-02-20 21:24:01', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2008, '区域导出', 2003, 5, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:country:export', '#', 'admin', '2023-02-20 21:24:01', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2004, '区域查询', 2003, 1, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:country:query', '#', 'admin', '2023-02-20 21:24:01', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (2005, '区域新增', 2003, 2, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:country:add', '#', 'admin', '2023-02-20 21:24:01', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (2006, '区域修改', 2003, 3, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:country:edit', '#', 'admin', '2023-02-20 21:24:01', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (2007, '区域删除', 2003, 4, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:country:remove', '#', 'admin', '2023-02-20 21:24:01', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (2008, '区域导出', 2003, 5, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:country:export', '#', 'admin', '2023-02-20 21:24:01', 'admin', NULL, '');
 INSERT INTO `sys_menu` VALUES (2009, '银行信息', 4, 1, 'bank', 'resource/bank/index', NULL, 1, 0, 'C', '0', '0', 'resource:bank:list', 'nested', 'admin', '2023-02-20 21:28:57', 'admin', '2023-02-20 21:30:39', '银行信息菜单');
-INSERT INTO `sys_menu` VALUES (2010, '银行查询', 2009, 1, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:bank:query', '#', 'admin', '2023-02-20 21:28:57', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2011, '银行新增', 2009, 2, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:bank:add', '#', 'admin', '2023-02-20 21:28:57', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2012, '银行修改', 2009, 3, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:bank:edit', '#', 'admin', '2023-02-20 21:28:57', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2013, '银行删除', 2009, 4, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:bank:remove', '#', 'admin', '2023-02-20 21:28:57', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2014, '银行导出', 2009, 5, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:bank:export', '#', 'admin', '2023-02-20 21:28:57', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2010, '银行查询', 2009, 1, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:bank:query', '#', 'admin', '2023-02-20 21:28:57', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (2011, '银行新增', 2009, 2, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:bank:add', '#', 'admin', '2023-02-20 21:28:57', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (2012, '银行修改', 2009, 3, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:bank:edit', '#', 'admin', '2023-02-20 21:28:57', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (2013, '银行删除', 2009, 4, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:bank:remove', '#', 'admin', '2023-02-20 21:28:57', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (2014, '银行导出', 2009, 5, '#', '', NULL, 1, 0, 'F', '0', '0', 'resource:bank:export', '#', 'admin', '2023-02-20 21:28:57', 'admin', NULL, '');
+INSERT INTO `sys_menu` VALUES (2015, '币币管理', 5, 1, 'coin', 'coin/coin/index', NULL, 1, 0, 'C', '0', '0', 'coin:coin:list', 'example', 'admin', '2023-03-21 00:40:04', 'admin', '2023-03-21 00:53:02', '货币菜单');
+INSERT INTO `sys_menu` VALUES (2016, '货币查询', 2015, 1, '#', '', NULL, 1, 0, 'F', '0', '0', 'coin:coin:query', '#', 'admin', '2023-03-21 00:40:04', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2017, '货币新增', 2015, 2, '#', '', NULL, 1, 0, 'F', '0', '0', 'coin:coin:add', '#', 'admin', '2023-03-21 00:40:04', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2018, '货币修改', 2015, 3, '#', '', NULL, 1, 0, 'F', '0', '0', 'coin:coin:edit', '#', 'admin', '2023-03-21 00:40:04', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2019, '货币删除', 2015, 4, '#', '', NULL, 1, 0, 'F', '0', '0', 'coin:coin:remove', '#', 'admin', '2023-03-21 00:40:04', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2020, '货币导出', 2015, 5, '#', '', NULL, 1, 0, 'F', '0', '0', 'coin:coin:export', '#', 'admin', '2023-03-21 00:40:04', '', NULL, '');
 
 -- ----------------------------
 -- Table structure for sys_notice
@@ -1100,7 +1253,7 @@ CREATE TABLE `sys_notice`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`notice_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '通知公告表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '通知公告表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_notice
@@ -1128,12 +1281,107 @@ CREATE TABLE `sys_oper_log`  (
   `error_msg` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '错误消息',
   `oper_time` datetime NULL DEFAULT NULL COMMENT '操作时间',
   `cost_time` bigint NULL DEFAULT NULL COMMENT '消耗时间',
-  PRIMARY KEY (`oper_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 798 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`oper_id`) USING BTREE,
+  INDEX `idx_sys_oper_log_bt`(`business_type`) USING BTREE,
+  INDEX `idx_sys_oper_log_s`(`status`) USING BTREE,
+  INDEX `idx_sys_oper_log_ot`(`oper_time`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 798 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '操作日志记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_oper_log
 -- ----------------------------
+INSERT INTO `sys_oper_log` VALUES (825, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '220.165.207.210', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 01:12:04', 4);
+INSERT INTO `sys_oper_log` VALUES (826, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '220.165.207.210', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 01:12:04', 3);
+INSERT INTO `sys_oper_log` VALUES (827, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '61.166.195.21', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 09:37:35', 4);
+INSERT INTO `sys_oper_log` VALUES (828, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '61.166.195.21', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 09:37:35', 4);
+INSERT INTO `sys_oper_log` VALUES (829, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 10:55:07', 18);
+INSERT INTO `sys_oper_log` VALUES (830, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 10:55:07', 18);
+INSERT INTO `sys_oper_log` VALUES (831, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 10:55:10', 33);
+INSERT INTO `sys_oper_log` VALUES (832, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 10:55:38', 34);
+INSERT INTO `sys_oper_log` VALUES (833, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 11:01:12', 33);
+INSERT INTO `sys_oper_log` VALUES (834, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '127.0.0.1', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 11:01:14', 32);
+INSERT INTO `sys_oper_log` VALUES (835, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '61.166.195.21', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 11:39:32', 3);
+INSERT INTO `sys_oper_log` VALUES (836, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '61.166.195.21', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 11:39:32', 3);
+INSERT INTO `sys_oper_log` VALUES (837, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '61.166.195.21', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 11:39:36', 5);
+INSERT INTO `sys_oper_log` VALUES (838, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '120.229.243.150', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 12:18:34', 6);
+INSERT INTO `sys_oper_log` VALUES (839, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '120.229.243.150', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 12:18:35', 2);
+INSERT INTO `sys_oper_log` VALUES (840, '查询钱包余额', 0, 'com.cloud.user.controller.UserCenterApi.wallet()', 'POST', 1, 'ai168', NULL, '/user/wallet', '120.229.243.150', '', '', '{\"code\":200,\"data\":{\"availableBalance\":99859894.6001,\"frozenAmount\":0.0001},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 12:18:42', 13);
+INSERT INTO `sys_oper_log` VALUES (841, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '60.27.158.86', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 12:39:16', 5);
+INSERT INTO `sys_oper_log` VALUES (842, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '60.27.158.86', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 12:39:17', 7);
+INSERT INTO `sys_oper_log` VALUES (843, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '39.144.169.138', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 13:35:43', 6);
+INSERT INTO `sys_oper_log` VALUES (844, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '39.144.169.138', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 13:35:43', 6);
+INSERT INTO `sys_oper_log` VALUES (845, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '39.144.169.138', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 13:36:01', 4);
+INSERT INTO `sys_oper_log` VALUES (846, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '106.108.18.228', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 13:38:24', 4);
+INSERT INTO `sys_oper_log` VALUES (847, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '106.108.18.228', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 13:38:24', 3);
+INSERT INTO `sys_oper_log` VALUES (848, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '106.108.18.228', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 13:38:41', 3);
+INSERT INTO `sys_oper_log` VALUES (849, '查询钱包余额', 0, 'com.cloud.user.controller.UserCenterApi.wallet()', 'POST', 1, 'ai168', NULL, '/user/wallet', '106.108.18.228', '', '', '{\"code\":200,\"data\":{\"availableBalance\":99859894.6001,\"frozenAmount\":0.0001},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 13:38:46', 3);
+INSERT INTO `sys_oper_log` VALUES (850, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '220.202.152.106', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 13:43:29', 3);
+INSERT INTO `sys_oper_log` VALUES (851, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '220.202.152.106', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 13:43:29', 2);
+INSERT INTO `sys_oper_log` VALUES (852, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '220.202.152.106', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 13:43:39', 2);
+INSERT INTO `sys_oper_log` VALUES (853, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '113.246.64.223', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:27:30', 5);
+INSERT INTO `sys_oper_log` VALUES (854, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '113.246.64.223', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:27:30', 2);
+INSERT INTO `sys_oper_log` VALUES (855, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '113.246.64.223', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:27:39', 3);
+INSERT INTO `sys_oper_log` VALUES (856, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '113.246.64.223', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:27:45', 5);
+INSERT INTO `sys_oper_log` VALUES (857, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '220.248.226.18', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:33:11', 5);
+INSERT INTO `sys_oper_log` VALUES (858, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '220.248.226.18', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:33:12', 3);
+INSERT INTO `sys_oper_log` VALUES (859, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '220.248.226.18', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:33:19', 3);
+INSERT INTO `sys_oper_log` VALUES (860, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '220.248.226.18', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:33:44', 2);
+INSERT INTO `sys_oper_log` VALUES (861, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '121.235.194.29', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:35:38', 3);
+INSERT INTO `sys_oper_log` VALUES (862, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '121.235.194.29', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:35:38', 3);
+INSERT INTO `sys_oper_log` VALUES (863, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '121.235.194.29', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:35:58', 3);
+INSERT INTO `sys_oper_log` VALUES (864, '修改银行信息', 2, 'com.cloud.system.resource.controller.AiBankController.edit()', 'PUT', 1, 'ceshi', NULL, '/bank', '111.183.47.135', '', '{\"bankIcon\":\"https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/bank/yinhang-gongshang.png\",\"bankName\":\"中国工商\",\"createBy\":\"\",\"id\":1,\"params\":{},\"sort\":0,\"updateBy\":\"ceshi\",\"updateTime\":\"2023-03-21 06:35:59\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-03-21 14:35:59', 49);
+INSERT INTO `sys_oper_log` VALUES (865, '查询钱包余额', 0, 'com.cloud.user.controller.UserCenterApi.wallet()', 'POST', 1, 'ai168', NULL, '/user/wallet', '121.235.194.29', '', '', '{\"code\":200,\"data\":{\"availableBalance\":99859894.6001,\"frozenAmount\":0.0001},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:36:01', 2);
+INSERT INTO `sys_oper_log` VALUES (866, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '121.235.194.29', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:36:06', 4);
+INSERT INTO `sys_oper_log` VALUES (867, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '121.235.194.29', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:36:09', 7);
+INSERT INTO `sys_oper_log` VALUES (868, '查询钱包余额', 0, 'com.cloud.user.controller.UserCenterApi.wallet()', 'POST', 1, 'ai168', NULL, '/user/wallet', '121.235.194.29', '', '', '{\"code\":200,\"data\":{\"availableBalance\":99859894.6001,\"frozenAmount\":0.0001},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:36:16', 3);
+INSERT INTO `sys_oper_log` VALUES (869, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '121.235.194.29', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:36:17', 3);
+INSERT INTO `sys_oper_log` VALUES (870, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '117.22.171.70', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:37:42', 3);
+INSERT INTO `sys_oper_log` VALUES (871, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '117.22.171.70', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:37:43', 4);
+INSERT INTO `sys_oper_log` VALUES (872, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '123.172.82.176', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:37:43', 2);
+INSERT INTO `sys_oper_log` VALUES (873, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '123.172.82.176', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:37:44', 2);
+INSERT INTO `sys_oper_log` VALUES (874, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '117.22.171.70', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:38:07', 5);
+INSERT INTO `sys_oper_log` VALUES (875, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '117.22.171.70', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:38:08', 5);
+INSERT INTO `sys_oper_log` VALUES (876, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '117.22.171.70', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:38:18', 4);
+INSERT INTO `sys_oper_log` VALUES (877, '查询钱包余额', 0, 'com.cloud.user.controller.UserCenterApi.wallet()', 'POST', 1, 'ai168', NULL, '/user/wallet', '117.22.171.70', '', '', '{\"code\":200,\"data\":{\"availableBalance\":99859894.6001,\"frozenAmount\":0.0001},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:38:21', 3);
+INSERT INTO `sys_oper_log` VALUES (878, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '117.22.171.70', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:38:27', 2);
+INSERT INTO `sys_oper_log` VALUES (879, '查询钱包余额', 0, 'com.cloud.user.controller.UserCenterApi.wallet()', 'POST', 1, 'ai168', NULL, '/user/wallet', '117.22.171.70', '', '', '{\"code\":200,\"data\":{\"availableBalance\":99859894.6001,\"frozenAmount\":0.0001},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:38:28', 3);
+INSERT INTO `sys_oper_log` VALUES (880, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '117.22.171.70', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:38:32', 2);
+INSERT INTO `sys_oper_log` VALUES (881, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '220.163.134.55', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:40:15', 5);
+INSERT INTO `sys_oper_log` VALUES (882, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '220.163.134.55', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:40:15', 2);
+INSERT INTO `sys_oper_log` VALUES (883, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '118.74.52.32', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:40:19', 2);
+INSERT INTO `sys_oper_log` VALUES (884, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '118.74.52.32', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:40:19', 3);
+INSERT INTO `sys_oper_log` VALUES (885, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '220.163.134.55', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:40:46', 2);
+INSERT INTO `sys_oper_log` VALUES (886, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '220.163.134.55', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:40:46', 2);
+INSERT INTO `sys_oper_log` VALUES (887, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '220.163.134.55', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:40:54', 2);
+INSERT INTO `sys_oper_log` VALUES (888, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '218.77.104.248', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:41:32', 2);
+INSERT INTO `sys_oper_log` VALUES (889, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '218.77.104.248', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:41:32', 2);
+INSERT INTO `sys_oper_log` VALUES (890, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '218.77.104.248', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:41:42', 5);
+INSERT INTO `sys_oper_log` VALUES (891, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '223.104.197.160', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:51:45', 2);
+INSERT INTO `sys_oper_log` VALUES (892, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '223.104.197.160', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:51:46', 5);
+INSERT INTO `sys_oper_log` VALUES (893, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '223.104.197.160', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:52:45', 3);
+INSERT INTO `sys_oper_log` VALUES (894, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '223.104.197.160', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:52:54', 3);
+INSERT INTO `sys_oper_log` VALUES (895, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '223.104.197.160', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:52:57', 4);
+INSERT INTO `sys_oper_log` VALUES (896, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '223.104.197.160', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:53:03', 3);
+INSERT INTO `sys_oper_log` VALUES (897, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '223.104.197.160', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:53:08', 7);
+INSERT INTO `sys_oper_log` VALUES (898, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '223.104.197.160', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:53:12', 3);
+INSERT INTO `sys_oper_log` VALUES (899, '查询钱包余额', 0, 'com.cloud.user.controller.UserCenterApi.wallet()', 'POST', 1, 'ai168', NULL, '/user/wallet', '223.104.197.160', '', '', '{\"code\":200,\"data\":{\"availableBalance\":99859894.6001,\"frozenAmount\":0.0001},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:53:13', 2);
+INSERT INTO `sys_oper_log` VALUES (900, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '223.104.197.160', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:53:17', 2);
+INSERT INTO `sys_oper_log` VALUES (901, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '221.225.151.34', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:59:33', 6);
+INSERT INTO `sys_oper_log` VALUES (902, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '221.225.151.34', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:59:34', 3);
+INSERT INTO `sys_oper_log` VALUES (903, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '221.225.151.34', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:59:39', 5);
+INSERT INTO `sys_oper_log` VALUES (904, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '221.225.151.34', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:59:43', 3);
+INSERT INTO `sys_oper_log` VALUES (905, '查询钱包余额', 0, 'com.cloud.user.controller.UserCenterApi.wallet()', 'POST', 1, 'ai168', NULL, '/user/wallet', '221.225.151.34', '', '', '{\"code\":200,\"data\":{\"availableBalance\":99859894.6001,\"frozenAmount\":0.0001},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:59:44', 8);
+INSERT INTO `sys_oper_log` VALUES (906, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '221.225.151.34', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:59:51', 3);
+INSERT INTO `sys_oper_log` VALUES (907, '查询钱包余额', 0, 'com.cloud.user.controller.UserCenterApi.wallet()', 'POST', 1, 'ai168', NULL, '/user/wallet', '221.225.151.34', '', '', '{\"code\":200,\"data\":{\"availableBalance\":99859894.6001,\"frozenAmount\":0.0001},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:59:54', 2);
+INSERT INTO `sys_oper_log` VALUES (908, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '221.225.151.34', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:59:55', 3);
+INSERT INTO `sys_oper_log` VALUES (909, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '221.225.151.34', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 14:59:57', 2);
+INSERT INTO `sys_oper_log` VALUES (910, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '39.82.201.10', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 15:26:49', 4);
+INSERT INTO `sys_oper_log` VALUES (911, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '39.82.201.10', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 15:26:49', 2);
+INSERT INTO `sys_oper_log` VALUES (912, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '39.82.201.10', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 15:26:56', 3);
+INSERT INTO `sys_oper_log` VALUES (913, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '39.82.201.10', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 15:27:06', 3);
+INSERT INTO `sys_oper_log` VALUES (914, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '1.192.246.27', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 15:31:27', 3);
+INSERT INTO `sys_oper_log` VALUES (915, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '1.192.246.27', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 15:31:27', 2);
+INSERT INTO `sys_oper_log` VALUES (916, '查询我的信息', 0, 'com.cloud.user.controller.UserCenterApi.userInfo()', 'POST', 1, 'ai168', NULL, '/user/info', '1.192.246.27', '', '', '{\"code\":200,\"data\":{\"age\":\"19\",\"attention\":0,\"fans\":0,\"headImg\":\"https://aicloud888.oss-cn-hangzhou.aliyuncs.com/2022/10/27/8e7115fbad004b409190a47cc5f7001dauth.jpg\",\"likes\":0,\"nickName\":\"少女与日记\",\"phone\":\"13888888888\",\"sex\":\"1\",\"sign\":\"这个世界本就是平衡的，想要得到什么就要付出什么\",\"userType\":2,\"vipEndTime\":\"2032-11-09\",\"vipStartTime\":\"2022-11-01\",\"vipType\":2},\"msg\":\"成功\"}', 0, NULL, '2023-03-21 15:31:40', 3);
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -1151,7 +1399,7 @@ CREATE TABLE `sys_post`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`post_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '岗位信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '岗位信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_post
@@ -1181,13 +1429,13 @@ CREATE TABLE `sys_role`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`role_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '角色信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '角色信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES (1, '超级管理员', 'admin', 1, '1', 1, 1, '0', '0', 'admin', '2022-08-28 20:42:08', '', NULL, '超级管理员');
-INSERT INTO `sys_role` VALUES (2, '普通角色', 'common', 2, '2', 1, 1, '0', '0', 'admin', '2022-08-28 20:42:08', 'admin', '2023-02-20 22:50:19', '普通角色');
+INSERT INTO `sys_role` VALUES (2, '普通角色', 'common', 2, '2', 1, 1, '0', '0', 'admin', '2022-08-28 20:42:08', 'admin', '2023-03-21 00:54:56', '普通角色');
 
 -- ----------------------------
 -- Table structure for sys_role_dept
@@ -1197,14 +1445,21 @@ CREATE TABLE `sys_role_dept`  (
   `role_id` bigint NOT NULL COMMENT '角色ID',
   `dept_id` bigint NOT NULL COMMENT '部门ID',
   PRIMARY KEY (`role_id`, `dept_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '角色和部门关联表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '角色和部门关联表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_role_dept
 -- ----------------------------
 INSERT INTO `sys_role_dept` VALUES (2, 100);
 INSERT INTO `sys_role_dept` VALUES (2, 101);
+INSERT INTO `sys_role_dept` VALUES (2, 102);
+INSERT INTO `sys_role_dept` VALUES (2, 103);
+INSERT INTO `sys_role_dept` VALUES (2, 104);
 INSERT INTO `sys_role_dept` VALUES (2, 105);
+INSERT INTO `sys_role_dept` VALUES (2, 106);
+INSERT INTO `sys_role_dept` VALUES (2, 107);
+INSERT INTO `sys_role_dept` VALUES (2, 108);
+INSERT INTO `sys_role_dept` VALUES (2, 109);
 
 -- ----------------------------
 -- Table structure for sys_role_menu
@@ -1214,7 +1469,7 @@ CREATE TABLE `sys_role_menu`  (
   `role_id` bigint NOT NULL COMMENT '角色ID',
   `menu_id` bigint NOT NULL COMMENT '菜单ID',
   PRIMARY KEY (`role_id`, `menu_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '角色和菜单关联表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '角色和菜单关联表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_role_menu
@@ -1223,6 +1478,7 @@ INSERT INTO `sys_role_menu` VALUES (2, 1);
 INSERT INTO `sys_role_menu` VALUES (2, 2);
 INSERT INTO `sys_role_menu` VALUES (2, 3);
 INSERT INTO `sys_role_menu` VALUES (2, 4);
+INSERT INTO `sys_role_menu` VALUES (2, 5);
 INSERT INTO `sys_role_menu` VALUES (2, 100);
 INSERT INTO `sys_role_menu` VALUES (2, 101);
 INSERT INTO `sys_role_menu` VALUES (2, 102);
@@ -1310,14 +1566,14 @@ INSERT INTO `sys_role_menu` VALUES (2, 2003);
 INSERT INTO `sys_role_menu` VALUES (2, 2004);
 INSERT INTO `sys_role_menu` VALUES (2, 2005);
 INSERT INTO `sys_role_menu` VALUES (2, 2006);
-INSERT INTO `sys_role_menu` VALUES (2, 2007);
-INSERT INTO `sys_role_menu` VALUES (2, 2008);
 INSERT INTO `sys_role_menu` VALUES (2, 2009);
 INSERT INTO `sys_role_menu` VALUES (2, 2010);
 INSERT INTO `sys_role_menu` VALUES (2, 2011);
 INSERT INTO `sys_role_menu` VALUES (2, 2012);
-INSERT INTO `sys_role_menu` VALUES (2, 2013);
-INSERT INTO `sys_role_menu` VALUES (2, 2014);
+INSERT INTO `sys_role_menu` VALUES (2, 2015);
+INSERT INTO `sys_role_menu` VALUES (2, 2016);
+INSERT INTO `sys_role_menu` VALUES (2, 2017);
+INSERT INTO `sys_role_menu` VALUES (2, 2018);
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -1344,7 +1600,7 @@ CREATE TABLE `sys_user`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2230566430 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2230566430 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_user
@@ -1361,7 +1617,7 @@ CREATE TABLE `sys_user_post`  (
   `user_id` bigint NOT NULL COMMENT '用户ID',
   `post_id` bigint NOT NULL COMMENT '岗位ID',
   PRIMARY KEY (`user_id`, `post_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户与岗位关联表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户与岗位关联表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_user_post
@@ -1378,13 +1634,12 @@ CREATE TABLE `sys_user_role`  (
   `user_id` bigint NOT NULL COMMENT '用户ID',
   `role_id` bigint NOT NULL COMMENT '角色ID',
   PRIMARY KEY (`user_id`, `role_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户和角色关联表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户和角色关联表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_user_role
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES (1, 1);
-INSERT INTO `sys_user_role` VALUES (2, 2);
 INSERT INTO `sys_user_role` VALUES (2230566428, 2);
 
 -- ----------------------------
@@ -1442,8 +1697,8 @@ CREATE TABLE `user`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `user_name`(`user_name` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
+  UNIQUE INDEX `user_name`(`user_name`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user
@@ -1481,9 +1736,9 @@ CREATE TABLE `user_account`  (
   `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
   `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `number`(`number` ASC) USING BTREE,
-  INDEX `user_id`(`number` ASC, `user_id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户账户信息' ROW_FORMAT = Dynamic;
+  UNIQUE INDEX `number`(`number`) USING BTREE,
+  INDEX `user_id`(`number`, `user_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户账户信息' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_account
@@ -1529,7 +1784,7 @@ CREATE TABLE `user_account_detail`  (
   `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
   `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户账户明细记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户账户明细记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_account_detail
@@ -1556,7 +1811,7 @@ CREATE TABLE `user_auth`  (
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户第三方授权表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户第三方授权表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_auth
@@ -1584,8 +1839,8 @@ CREATE TABLE `user_bind`  (
   `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
   `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `user_id`(`user_id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户绑定银行卡或支付宝' ROW_FORMAT = Dynamic;
+  INDEX `user_id`(`user_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户绑定银行卡或支付宝' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_bind
@@ -1608,7 +1863,7 @@ CREATE TABLE `user_mock_data`  (
   `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
   `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户随机信息' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户随机信息' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_mock_data
@@ -1683,7 +1938,7 @@ CREATE TABLE `user_order`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户交易订单' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户交易订单' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_order
@@ -1712,7 +1967,7 @@ CREATE TABLE `user_set`  (
   `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
   `update_time` timestamp NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户设置' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户设置' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_set
@@ -1740,7 +1995,7 @@ CREATE TABLE `user_share`  (
   `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
   `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户分享记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户分享记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_share
@@ -1762,7 +2017,7 @@ CREATE TABLE `user_share_click_log`  (
   `img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '分享图片',
   `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户点击分享记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户点击分享记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_share_click_log
@@ -1788,7 +2043,7 @@ CREATE TABLE `user_vip`  (
   `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
   `update_time` timestamp NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户会员' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户会员' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_vip
@@ -1814,8 +2069,8 @@ CREATE TABLE `user_vip_equity`  (
   `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
   `update_time` timestamp NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `vip_id`(`vip_id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户会员权益' ROW_FORMAT = Dynamic;
+  INDEX `vip_id`(`vip_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户会员权益' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_vip_equity
@@ -1856,7 +2111,7 @@ CREATE TABLE `user_vip_open_log`  (
   `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
   `update_time` timestamp NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户会员开通记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户会员开通记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_vip_open_log
@@ -1898,8 +2153,8 @@ CREATE TABLE `user_withdraw_apply`  (
   `update_by` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人',
   `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `user_id`(`user_id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户提现申请记录' ROW_FORMAT = Dynamic;
+  INDEX `user_id`(`user_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户提现申请记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_withdraw_apply

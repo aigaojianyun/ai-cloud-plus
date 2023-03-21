@@ -70,10 +70,24 @@
             <artifactId>kaptcha</artifactId>
         </dependency>
 
-        <!--  Sa Token -->
+        <!--  Redis -->
         <dependency>
             <groupId>com.cloud</groupId>
-            <artifactId>ai-cloud-satoken</artifactId>
+            <artifactId>ai-cloud-redis</artifactId>
+        </dependency>
+
+        <!-- Sa-Token 权限认证（Reactor响应式集成） -->
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-reactor-spring-boot-starter</artifactId>
+            <version>${spring-boot.sa-token}</version>
+        </dependency>
+
+        <!-- Sa-Token整合redis (使用jackson序列化方式) -->
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-dao-redis-jackson</artifactId>
+            <version>${spring-boot.sa-token}</version>
         </dependency>
 
         <!-- Swagger -->
