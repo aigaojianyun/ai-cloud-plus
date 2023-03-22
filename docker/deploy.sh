@@ -16,11 +16,16 @@ port(){
 	firewall-cmd --add-port=6379/tcp --permanent
 	firewall-cmd --add-port=3306/tcp --permanent
 	firewall-cmd --add-port=9100/tcp --permanent
-	firewall-cmd --add-port=9200/tcp --permanent
 	firewall-cmd --add-port=9201/tcp --permanent
-	firewall-cmd --add-port=9202/tcp --permanent
-	firewall-cmd --add-port=9203/tcp --permanent
-	firewall-cmd --add-port=9300/tcp --permanent
+	firewall-cmd --add-port=9301/tcp --permanent
+	firewall-cmd --add-port=9302/tcp --permanent
+	firewall-cmd --add-port=9303/tcp --permanent
+	firewall-cmd --add-port=9304/tcp --permanent
+	firewall-cmd --add-port=9401/tcp --permanent
+  firewall-cmd --add-port=9402/tcp --permanent
+  firewall-cmd --add-port=9403/tcp --permanent
+  firewall-cmd --add-port=9501/tcp --permanent
+  firewall-cmd --add-port=9502/tcp --permanent
 	service firewalld restart
 }
 
