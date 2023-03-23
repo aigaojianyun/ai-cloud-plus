@@ -11,3 +11,7 @@ export function setToken(token) {
 export function removeToken() {
     return uni.removeStorageSync(TokenKey)
 }
+
+export function getLang() {
+    return uni.getStorageSync('language')
+}

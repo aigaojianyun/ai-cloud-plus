@@ -31,7 +31,7 @@ module.exports = {
             inputPassword: 'Please enter your password',
             username: 'username',
             password: ' password',
-            login: 'Login',
+            login: 'Sign in',
             loginLog: 'Signing in, please wait',
             more: 'More login methods',
             agree: 'By logging in, you have read and agreed',

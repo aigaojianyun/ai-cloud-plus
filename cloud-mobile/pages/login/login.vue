@@ -77,6 +77,9 @@ export default {
     };
   },
   onShow(){
+    uni.setNavigationBarTitle({
+      title: this.i18n.login.login
+    })
     this.langList = [{
       name: this.i18n.common.lang.en,
       lang: 'en_US'

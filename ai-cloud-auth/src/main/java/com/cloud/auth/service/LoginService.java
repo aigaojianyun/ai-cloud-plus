@@ -7,17 +7,17 @@ import com.alibaba.nacos.common.codec.Base64;
 import com.anji.captcha.model.common.ResponseModel;
 import com.anji.captcha.model.vo.CaptchaVO;
 import com.anji.captcha.service.CaptchaService;
-import com.cloud.auth.param.VerifyCodeParam;
 import com.cloud.auth.param.WeiXinLoginParam;
-import com.cloud.common.constant.Constants;
-import com.cloud.common.constant.SecurityConstants;
-import com.cloud.common.constant.UserConstants;
+import com.cloud.common.constant.*;
 import com.cloud.common.domain.R;
 import com.cloud.common.enums.UserStatus;
 import com.cloud.common.exception.CaptchaException;
 import com.cloud.common.exception.ServiceException;
+import com.cloud.common.text.Convert;
 import com.cloud.common.utils.StringUtils;
+import com.cloud.common.utils.ip.IpUtils;
 import com.cloud.common.utils.uuid.IdUtils;
+import com.cloud.redis.service.RedisService;
 import com.cloud.user.api.domain.User;
 import com.cloud.user.api.model.LoginUser;
 import com.cloud.user.api.service.RemoteUserService;
@@ -28,7 +28,6 @@ import org.springframework.stereotype.Component;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 import java.security.spec.AlgorithmParameterSpec;
 import java.util.Objects;
@@ -56,6 +55,9 @@ public class LoginService {
     @Autowired
     private WxMaService wxMaService;
 
+    @Autowired
+    private RedisService redisService;
+
     /**
      * 账号密码登录
      *
@@ -65,36 +67,71 @@ public class LoginService {
      * @param uuid     设备唯一标识
      * @return 登录结果
      */
-    public LoginUser login(String username, String password, String code, String uuid) {
+    public LoginUser login(String username, String password, String code, String uuid, String language) {
         // 检验验证码
         CaptchaVO captchaVO = new CaptchaVO();
         captchaVO.setCaptchaVerification(code);
         ResponseModel response = captchaService.verification(captchaVO);
         if (!response.isSuccess()) {
-            sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "user.jcaptcha.error");
-            throw new CaptchaException("验证失败!");
+            if (language.equals(LangConstants.EN_US)) {
+                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "Validation failed");
+                throw new CaptchaException("Validation failed!");
+            } else if (language.equals(LangConstants.ZH_CN)) {
+                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "验证失败");
+                throw new CaptchaException("验证失败!");
+            }
         }
         // 用户名或密码为空 错误
         if (StringUtils.isAnyBlank(username, password)) {
-            sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "用户/密码必须填写");
-            throw new ServiceException("用户/密码必须填写!");
+            if (language.equals(LangConstants.EN_US)) {
+                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "User/password must be filled in");
+                throw new ServiceException("User/password must be filled in!");
+            } else if (language.equals(LangConstants.ZH_CN)) {
+                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "用户/密码必须填写");
+                throw new ServiceException("用户/密码必须填写!");
+            }
         }
         // 密码如果不在指定范围内 错误
         if (password.length() < UserConstants.PASSWORD_MIN_LENGTH || password.length() > UserConstants.PASSWORD_MAX_LENGTH) {
-            sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "用户密码不在指定范围");
-            throw new ServiceException("用户密码不在指定范围!");
+            if (language.equals(LangConstants.EN_US)) {
+                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "The user password is not within the specified range");
+                throw new ServiceException("The user password is not within the specified range!");
+            } else if (language.equals(LangConstants.ZH_CN)) {
+                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "用户密码不在指定范围");
+                throw new ServiceException("用户密码不在指定范围!");
+            }
         }
         // 用户名不在指定范围内 错误
-        if (username.length() < UserConstants.USERNAME_MIN_LENGTH
-                || username.length() > UserConstants.USERNAME_MAX_LENGTH) {
-            sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "用户名不在指定范围");
-            throw new ServiceException("用户名不在指定范围!");
+        if (username.length() < UserConstants.USERNAME_MIN_LENGTH || username.length() > UserConstants.USERNAME_MAX_LENGTH) {
+            if (language.equals(LangConstants.EN_US)) {
+                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "The user name is not in the specified range");
+                throw new ServiceException("The user name is not in the specified range!");
+            } else if (language.equals(LangConstants.ZH_CN)) {
+                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "用户名不在指定范围");
+                throw new ServiceException("用户名不在指定范围!");
+            }
+        }
+        // IP黑名单校验
+        String blackStr = Convert.toStr(redisService.getCacheObject(CacheConstants.SYS_LOGIN_BLACKIPLIST));
+        if (IpUtils.isMatchedIp(blackStr, IpUtils.getIpAddr())) {
+            if (language.equals(LangConstants.EN_US)) {
+                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "Unfortunately, the access IP has been blacklisted in the system");
+                throw new ServiceException("Unfortunately, the access IP has been blacklisted in the system!");
+            } else if (language.equals(LangConstants.ZH_CN)) {
+                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "很遗憾，访问IP已被列入系统黑名单");
+                throw new ServiceException("很遗憾，访问IP已被列入系统黑名单!");
+            }
         }
         // 查询用户信息
         R<LoginUser> userResult = remoteUserService.getUserInfo(username, SecurityConstants.INNER);
         if (StringUtils.isNull(userResult) || StringUtils.isNull(userResult.getData())) {
-            sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "登录用户不存在");
-            throw new ServiceException("登录用户：" + username + " 不存在!");
+            if (language.equals(LangConstants.EN_US)) {
+                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "The login user does not exist");
+                throw new ServiceException("log on user：" + username + "non-existent!");
+            } else if (language.equals(LangConstants.ZH_CN)) {
+                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "登录用户不存在");
+                throw new ServiceException("登录用户：" + username + "不存在!");
+            }
         }
         if (R.FAIL == userResult.getCode()) {
             throw new ServiceException(userResult.getMsg());
@@ -102,15 +139,29 @@ public class LoginService {
         LoginUser userInfo = userResult.getData();
         User user = userResult.getData().getUser();
         if (UserStatus.DELETED.getCode().equals(user.getDeleteFlag())) {
-            sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "对不起，您的账号已被删除");
-            throw new ServiceException("对不起，您的账号：" + username + " 已被删除");
+            if (language.equals(LangConstants.EN_US)) {
+                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "Sorry, your account has been deleted");
+                throw new ServiceException("Sorry, your account number：" + username + "have been deleted!");
+            } else if (language.equals(LangConstants.ZH_CN)) {
+                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "对不起，您的账号已被删除");
+                throw new ServiceException("对不起，您的账号：" + username + " 已被删除!");
+            }
         }
         if (UserStatus.DISABLE.getCode().equals(user.getStatusFlag())) {
-            sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "用户已停用，请联系管理员");
-            throw new ServiceException("对不起，您的账号：" + username + " 已停用");
+            if (language.equals(LangConstants.EN_US)) {
+                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "The user has been deactivated, please contact the administrator");
+                throw new ServiceException("Sorry, your account number：" + username + "deactivated!");
+            } else if (language.equals(LangConstants.ZH_CN)) {
+                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "用户已停用，请联系管理员");
+                throw new ServiceException("对不起，您的账号：" + username + " 已停用");
+            }
         }
-        passwordService.validate(user, password);
-        sysRecordLogService.recordLogininfor(username, Constants.LOGIN_SUCCESS, "登录成功");
+        passwordService.validate(user, password,language);
+        if (language.equals(LangConstants.EN_US)) {
+            sysRecordLogService.recordLogininfor(username, Constants.LOGIN_SUCCESS, "Login succeeded");
+        }else if (language.equals(LangConstants.ZH_CN)) {
+            sysRecordLogService.recordLogininfor(username, Constants.LOGIN_SUCCESS, "登录成功");
+        }
         return userInfo;
     }
 

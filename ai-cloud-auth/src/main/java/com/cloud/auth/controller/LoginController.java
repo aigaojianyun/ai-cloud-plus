@@ -39,13 +39,13 @@ public class LoginController {
      * @return 登录结果
      */
     @PostMapping("/login")
-    public R<?> login(@RequestBody LoginParam param) throws Exception {
+    public R<?> login(@RequestBody LoginParam param,@RequestHeader(value = "language", required = false, defaultValue = "") String language) throws Exception {
         // 校验用户信息
-        LoginUser userInfo = loginService.login(param.getUsername(), RsaUtils.decryptByPrivateKey(param.getPassword()), param.getCode(), param.getUuid());
+        LoginUser userInfo = loginService.login(param.getUsername(), RsaUtils.decryptByPrivateKey(param.getPassword()), param.getCode(), param.getUuid(),language);
         // 登录
         // SaTokenUtil.login(userInfo);
-        // StpUtil.getTokenValue()
         // 获取登录token
+        // SaTokenInfo token = StpUtil.getTokenInfo();
         return R.ok(webTokenService.createToken(userInfo));
     }
 

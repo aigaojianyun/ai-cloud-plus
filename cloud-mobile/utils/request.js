@@ -1,6 +1,6 @@
 import store from '@/store'
 import config from '@/config'
-import {getToken} from '@/utils/auth'
+import {getToken,getLang} from '@/utils/auth'
 import errorCode from '@/utils/errorCode'
 import {showConfirm, tansParams, toast} from '@/utils/common'
 
@@ -10,10 +10,14 @@ const baseUrl = config.baseUrl
 const request = config => {
     // 是否需要设置 token
     const isToken = (config.headers || {}).isToken === false
+    // 是否需要设置多语言
+    const isLang = (config.headers || {}).isLang === false
     config.header = config.header || {}
     if (getToken() && !isToken) {
         config.header['Authorization'] = 'Bearer ' + getToken()
-        //config.header['Language'] = uni.getStorageSync('language')
+    }
+    if (getLang && !isLang) {
+        config.header['Language'] = getLang()
     }
     // get请求映射params参数
     if (config.params) {
