@@ -26,5 +26,5 @@ export default {
     // 关闭当前页面，返回上一页面或多级页面
     navigateBack() {
         return uni.navigateBack()
-    }
+    },
 }

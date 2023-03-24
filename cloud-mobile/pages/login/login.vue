@@ -115,6 +115,10 @@ export default {
         index: 3,
         text: this.$t('message').tabBar.me
       })
+      // 利用路由，刷新当前页面
+      setTimeout(() => {
+        this.$router.go(0)
+      }, 500)
     },
     // 打开验证码
     async handleLogin() {

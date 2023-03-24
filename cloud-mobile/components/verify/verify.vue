@@ -19,7 +19,7 @@
               :arith="arith"
               :mode="mode"
               :vSpace="vSpace"
-              :explain=this.i18n.login.captcha.verifyFoot
+              :explain= "this.i18n.login.captcha.verifyFoot"
               :imgSize="imgSize"
               :blockSize="blockSize"
               :barSize="barSize"
@@ -36,7 +36,7 @@
               :arith="arith"
               :mode="mode"
               :vSpace="vSpace"
-              :explain=this.i18n.login.captcha.verifyFoot
+              :explain= "this.i18n.login.captcha.verifyFoot"
               :imgSize="imgSize"
               :blockSize="blockSize"
               :barSize="barSize"
