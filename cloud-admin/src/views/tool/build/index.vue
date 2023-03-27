@@ -403,7 +403,7 @@ export default {
     color: #fff;
   }
 
-  .el-icon-edit {
+  .el-icon-edit-outline {
     color: #f1fa8c;
   }
 

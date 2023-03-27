@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.resource.mapper.AiCountryMapper">
+
+    <resultMap type="com.cloud.resource.domain.AiCountry" id="AiCountryResult">
+        <result property="id" column="id"/>
+        <result property="cnName" column="cn_name"/>
+        <result property="enName" column="en_name"/>
+        <result property="countryIcon" column="country_icon"/>
+        <result property="areaCode" column="area_code"/>
+        <result property="language" column="language"/>
+        <result property="localCurrency" column="local_currency"/>
+        <result property="sort" column="sort"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <select id="selectByCountryList" resultType="com.cloud.resource.domain.AiCountry">
+        SELECT id, en_name, cn_name, country_icon, area_code, `language` AS language, local_currency
+        FROM ai_country
+    </select>
+
+</mapper>

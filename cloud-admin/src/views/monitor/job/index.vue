@@ -51,7 +51,7 @@
         <el-button
           v-hasPermi="['monitor:job:edit']"
           :disabled="single"
-          icon="el-icon-edit"
+          icon="el-icon-edit-outline"
           plain
           size="mini"
           type="success"
@@ -121,7 +121,7 @@
         <template slot-scope="scope">
           <el-button
             v-hasPermi="['monitor:job:edit']"
-            icon="el-icon-edit"
+            icon="el-icon-edit-outline"
             size="mini"
             type="text"
             @click="handleUpdate(scope.row)"

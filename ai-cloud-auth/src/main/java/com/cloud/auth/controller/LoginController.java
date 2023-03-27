@@ -12,6 +12,7 @@ import com.cloud.security.service.WebTokenService;
 import com.cloud.security.utils.SecurityUtils;
 import com.cloud.user.api.model.LoginUser;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,13 +36,14 @@ public class LoginController {
     /**
      * 账号密码登录
      *
-     * @param param 登录参数
+     * @param param    登录参数
+     * @param language 语言类型
      * @return 登录结果
      */
     @PostMapping("/login")
-    public R<?> login(@RequestBody LoginParam param,@RequestHeader(value = "language", required = false, defaultValue = "") String language) throws Exception {
+    public R<?> login(@RequestBody LoginParam param, @RequestHeader(value = "Language", required = true) @ApiParam(value = "语言类型") String language) throws Exception {
         // 校验用户信息
-        LoginUser userInfo = loginService.login(param.getUsername(), RsaUtils.decryptByPrivateKey(param.getPassword()), param.getCode(), param.getUuid(),language);
+        LoginUser userInfo = loginService.login(param.getUsername(), RsaUtils.decryptByPrivateKey(param.getPassword()), param.getCode(), param.getUuid(), language);
         // 登录
         // SaTokenUtil.login(userInfo);
         // 获取登录token

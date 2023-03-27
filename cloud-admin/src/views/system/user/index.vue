@@ -97,7 +97,7 @@
             <el-button
               v-hasPermi="['system:user:edit']"
               :disabled="single"
-              icon="el-icon-edit"
+              icon="el-icon-edit-outline"
               plain
               size="mini"
               type="success"
@@ -177,7 +177,7 @@
             <template v-if="scope.row.userId !== 1" slot-scope="scope">
               <el-button
                 v-hasPermi="['system:user:edit']"
-                icon="el-icon-edit"
+                icon="el-icon-edit-outline"
                 size="mini"
                 type="text"
                 @click="handleUpdate(scope.row)"

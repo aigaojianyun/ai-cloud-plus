@@ -61,7 +61,7 @@
         <el-button
           v-hasPermi="['tool:gen:edit']"
           :disabled="single"
-          icon="el-icon-edit"
+          icon="el-icon-edit-outline"
           plain
           size="mini"
           type="success"
@@ -126,7 +126,7 @@
           </el-button>
           <el-button
             v-hasPermi="['tool:gen:edit']"
-            icon="el-icon-edit"
+            icon="el-icon-edit-outline"
             size="small"
             type="text"
             @click="handleEditTable(scope.row)"

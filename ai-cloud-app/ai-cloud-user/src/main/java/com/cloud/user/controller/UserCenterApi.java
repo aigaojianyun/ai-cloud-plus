@@ -24,7 +24,7 @@ import java.util.List;
  */
 @Api(tags = "我的信息")
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/center")
 public class UserCenterApi extends BaseController {
 
     @Autowired

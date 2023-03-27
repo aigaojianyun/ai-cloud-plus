@@ -81,7 +81,7 @@
         <template slot-scope="scope">
           <el-button
             v-hasPermi="['system:menu:edit']"
-            icon="el-icon-edit"
+            icon="el-icon-edit-outline"
             size="mini"
             type="text"
             @click="handleUpdate(scope.row)"

@@ -1,5 +1,7 @@
 package com.cloud.resource;
 
+import com.cloud.mybatis.annotation.EnableCustomConfig;
+import com.cloud.security.annotation.EnableRyFeignClients;
 import com.cloud.swagger.annotation.EnableCustomSwagger2;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,8 +12,10 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
  *
  * @author ai-cloud
  */
+@EnableCustomConfig
 @EnableCustomSwagger2
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+@EnableRyFeignClients
+@SpringBootApplication
 public class CloudResourceApplication {
     public static void main(String[] args) {
         SpringApplication.run(CloudResourceApplication.class, args);

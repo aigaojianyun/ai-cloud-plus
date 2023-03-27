@@ -65,6 +65,7 @@ public class LoginService {
      * @param password 密码
      * @param code     验证码
      * @param uuid     设备唯一标识
+     * @param language 语言类型
      * @return 登录结果
      */
     public LoginUser login(String username, String password, String code, String uuid, String language) {

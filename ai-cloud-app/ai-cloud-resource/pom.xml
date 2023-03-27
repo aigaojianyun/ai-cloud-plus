@@ -41,11 +41,24 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
+        <!-- Mysql Connector -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <!--  Log -->
+        <dependency>
+            <groupId>com.cloud</groupId>
+            <artifactId>ai-cloud-log</artifactId>
+        </dependency>
+
         <!--  Swagger -->
         <dependency>
             <groupId>com.cloud</groupId>
             <artifactId>ai-cloud-swagger</artifactId>
         </dependency>
+
 
         <!-- Mail -->
         <dependency>

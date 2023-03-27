@@ -67,7 +67,7 @@
         <el-button
           v-hasPermi="['system:role:edit']"
           :disabled="single"
-          icon="el-icon-edit"
+          icon="el-icon-edit-outline"
           plain
           size="mini"
           type="success"
@@ -126,7 +126,7 @@
         <template v-if="scope.row.roleId !== 1" slot-scope="scope">
           <el-button
             v-hasPermi="['system:role:edit']"
-            icon="el-icon-edit"
+            icon="el-icon-edit-outline"
             size="mini"
             type="text"
             @click="handleUpdate(scope.row)"

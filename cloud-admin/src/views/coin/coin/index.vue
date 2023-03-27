@@ -47,7 +47,7 @@
         <el-button
           type="success"
           plain
-          icon="el-icon-edit"
+          icon="el-icon-edit-outline"
           size="mini"
           :disabled="single"
           @click="handleUpdate"
@@ -142,7 +142,7 @@
           <el-button
             size="mini"
             type="text"
-            icon="el-icon-edit"
+            icon="el-icon-edit-outline"
             @click="handleUpdate(scope.row)"
             v-hasPermi="['coin:coin:edit']"
           >修改

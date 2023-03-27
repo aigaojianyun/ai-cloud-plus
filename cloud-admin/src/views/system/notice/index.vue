@@ -49,7 +49,7 @@
         <el-button
           v-hasPermi="['system:notice:edit']"
           :disabled="single"
-          icon="el-icon-edit"
+          icon="el-icon-edit-outline"
           plain
           size="mini"
           type="success"
@@ -101,7 +101,7 @@
         <template slot-scope="scope">
           <el-button
             v-hasPermi="['system:notice:edit']"
-            icon="el-icon-edit"
+            icon="el-icon-edit-outline"
             size="mini"
             type="text"
             @click="handleUpdate(scope.row)"
