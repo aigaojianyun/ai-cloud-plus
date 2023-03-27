@@ -46,6 +46,12 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
+        <!--  Swagger -->
+        <dependency>
+            <groupId>com.cloud</groupId>
+            <artifactId>ai-cloud-swagger</artifactId>
+        </dependency>
+
         <!-- Security -->
         <dependency>
             <groupId>com.cloud</groupId>

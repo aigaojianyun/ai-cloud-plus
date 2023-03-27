@@ -1,6 +1,7 @@
 package com.cloud.user.api.factory;
 
 
+import com.cloud.common.constant.LangConstants;
 import com.cloud.common.domain.R;
 import com.cloud.user.api.domain.User;
 import com.cloud.user.api.model.LoginUser;
@@ -24,18 +25,30 @@ public class RemoteUserFallbackFactory implements FallbackFactory<RemoteUserServ
         log.error("用户服务调用失败:{}", throwable.getMessage());
         return new RemoteUserService() {
             @Override
-            public R<LoginUser> getUserInfo(String param, String source) {
-                return R.fail("查询用户失败:" + throwable.getMessage());
+            public R<LoginUser> getUserInfo(String param, String language, String source) {
+                if (language.equals(LangConstants.EN_US)) {
+                    return R.fail("Failed to query user:" + throwable.getMessage());
+                } else {
+                    return R.fail("查询用户失败:" + throwable.getMessage());
+                }
             }
 
             @Override
-            public R<Boolean> registerUserInfo(User user, String source) {
-                return R.fail("注册用户失败:" + throwable.getMessage());
+            public R<Boolean> registerUserInfo(User user, String language, String source) {
+                if (language.equals(LangConstants.EN_US)) {
+                    return R.fail("Failed to register user:" + throwable.getMessage());
+                } else {
+                    return R.fail("注册用户失败:" + throwable.getMessage());
+                }
             }
 
             @Override
-            public R<Integer> updateUserInfo(User user, String source) {
-                return R.fail("更新用户失败:" + throwable.getMessage());
+            public R<Integer> updateUserInfo(User user, String language, String source) {
+                if (language.equals(LangConstants.EN_US)) {
+                    return R.fail("Failed to update user:" + throwable.getMessage());
+                } else {
+                    return R.fail("更新用户失败:" + throwable.getMessage());
+                }
             }
 
         };

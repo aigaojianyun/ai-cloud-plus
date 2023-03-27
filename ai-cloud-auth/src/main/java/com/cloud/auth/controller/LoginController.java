@@ -1,8 +1,11 @@
 package com.cloud.auth.controller;
 
 import com.cloud.auth.param.LoginParam;
+import com.cloud.auth.param.VerifyCodeParam;
+import com.cloud.auth.param.VerifyPhoneParam;
 import com.cloud.auth.param.WeiXinLoginParam;
 import com.cloud.auth.service.LoginService;
+import com.cloud.common.constant.LangConstants;
 import com.cloud.common.domain.R;
 import com.cloud.common.utils.JwtUtils;
 import com.cloud.common.utils.StringUtils;
@@ -12,6 +15,7 @@ import com.cloud.security.service.WebTokenService;
 import com.cloud.security.utils.SecurityUtils;
 import com.cloud.user.api.model.LoginUser;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +45,8 @@ public class LoginController {
      * @return 登录结果
      */
     @PostMapping("/login")
-    public R<?> login(@RequestBody LoginParam param, @RequestHeader(value = "Language", required = true) @ApiParam(value = "语言类型") String language) throws Exception {
+    @ApiOperation(value = "账号密码登录", notes = "账号密码登录")
+    public R<?> login(@RequestBody LoginParam param, @RequestHeader(value = LangConstants.LANGUAGE, required = true) @ApiParam(value = "语言类型",example = "zh_CN") String language) throws Exception {
         // 校验用户信息
         LoginUser userInfo = loginService.login(param.getUsername(), RsaUtils.decryptByPrivateKey(param.getPassword()), param.getCode(), param.getUuid(), language);
         // 登录
@@ -52,15 +57,43 @@ public class LoginController {
     }
 
     /**
+     * 手机快捷登录
+     *
+     * @param param    登录参数
+     * @param language 语言类型
+     * @return 登录结果
+     */
+    @PostMapping("/login/phone")
+    @ApiOperation(value = "手机快捷登录", notes = "手机快捷登录")
+    public String loginPhone(@RequestBody VerifyCodeParam param, @RequestHeader(value = LangConstants.LANGUAGE, required = true) @ApiParam(value = "语言类型",example = "zh_CN") String language) {
+        return null;
+    }
+
+    /**
+     * 一键登录
+     *
+     * @param param    登录参数
+     * @param language 语言类型
+     * @return 登录结果
+     */
+    @PostMapping("/login/ones/tep")
+    @ApiOperation(value = "手机快捷登录", notes = "手机快捷登录")
+    public String loginOnesTep(@RequestBody VerifyPhoneParam param, @RequestHeader(value = LangConstants.LANGUAGE, required = true) @ApiParam(value = "语言类型",example = "zh_CN") String language) {
+        return null;
+    }
+
+    /**
      * 微信授权登录
      *
      * @param param 登录参数
+     * @param language 语言类型
      * @return 登录结果
      */
     @PostMapping("/login/wx")
-    public R<?> weiXinLogin(@RequestBody WeiXinLoginParam param) throws Exception {
+    @ApiOperation(value = "微信授权登录", notes = "微信授权登录")
+    public R<?> loginWeiXin(@RequestBody WeiXinLoginParam param,@RequestHeader(value = LangConstants.LANGUAGE, required = true) @ApiParam(value = "语言类型",example = "zh_CN") String language) throws Exception {
         // 用户登录
-        LoginUser userInfo = loginService.loginWx(param);
+        LoginUser userInfo = loginService.loginWx(param,language);
         // 获取登录token
         return R.ok(webTokenService.createToken(userInfo));
     }
@@ -72,6 +105,7 @@ public class LoginController {
      * @return 结果
      */
     @PostMapping("refresh")
+    @ApiOperation(value = "刷新令牌有效期", notes = "刷新令牌有效期")
     public R<?> refresh(HttpServletRequest request) {
         LoginUser loginUser = webTokenService.getLoginUser(request);
         if (StringUtils.isNotNull(loginUser)) {
@@ -89,6 +123,7 @@ public class LoginController {
      * @return 结果
      */
     @DeleteMapping("logout")
+    @ApiOperation(value = "退出登录", notes = "退出登录")
     public R<?> logout(HttpServletRequest request) {
         String token = SecurityUtils.getToken(request);
         if (StringUtils.isNotEmpty(token)) {

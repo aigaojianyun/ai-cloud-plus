@@ -124,7 +124,7 @@ public class LoginService {
             }
         }
         // 查询用户信息
-        R<LoginUser> userResult = remoteUserService.getUserInfo(username, SecurityConstants.INNER);
+        R<LoginUser> userResult = remoteUserService.getUserInfo(username,language,SecurityConstants.INNER);
         if (StringUtils.isNull(userResult) || StringUtils.isNull(userResult.getData())) {
             if (language.equals(LangConstants.EN_US)) {
                 sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "The login user does not exist");
@@ -170,9 +170,10 @@ public class LoginService {
      * 微信授权登录
      *
      * @param param 授权参数
+     * @param language 语言类型
      * @return 登录结果
      */
-    public LoginUser loginWx(WeiXinLoginParam param) throws WxErrorException {
+    public LoginUser loginWx(WeiXinLoginParam param,String language) throws WxErrorException {
         // 获取微信用户session
         WxMaJscode2SessionResult session = wxMaService.getUserService().getSessionInfo(param.getCode());
         LoginUser userInfo = null;
@@ -195,7 +196,7 @@ public class LoginService {
                 throw new ServiceException("手机号码解密失败!");
             }
             // 根据openId查询是否存在这个用户
-            R<LoginUser> userResult = remoteUserService.getUserInfo(session.getOpenid(), SecurityConstants.INNER);
+            R<LoginUser> userResult = remoteUserService.getUserInfo(session.getOpenid(), language,SecurityConstants.INNER);
             if (StringUtils.isNull(userResult) || StringUtils.isNull(userResult.getData().getUser())) {
                 // 添加新用户
                 User user = new User();
@@ -212,7 +213,7 @@ public class LoginService {
                 } else if (Objects.equals(param.getGender(), 2)) {
                     user.setSex("1");
                 }
-                R<?> registerResult = remoteUserService.registerUserInfo(user, SecurityConstants.INNER);
+                R<?> registerResult = remoteUserService.registerUserInfo(user, language,SecurityConstants.INNER);
                 if (R.FAIL == registerResult.getCode()) {
                     throw new ServiceException(registerResult.getMsg());
                 }
@@ -220,14 +221,14 @@ public class LoginService {
             } else {
                 // 存在就更新用户信息
                 User user = userResult.getData().getUser();
-                R<?> updateResult = remoteUserService.updateUserInfo(user, SecurityConstants.INNER);
+                R<?> updateResult = remoteUserService.updateUserInfo(user, language,SecurityConstants.INNER);
                 if (R.FAIL == updateResult.getCode()) {
                     throw new ServiceException(updateResult.getMsg());
                 }
                 sysRecordLogService.recordLogininfor(session.getOpenid(), Constants.REGISTER, "更新成功");
             }
             // 根据openId查询用户
-            R<LoginUser> userResults = remoteUserService.getUserInfo(session.getOpenid(), SecurityConstants.INNER);
+            R<LoginUser> userResults = remoteUserService.getUserInfo(session.getOpenid(), language,SecurityConstants.INNER);
             userInfo = userResults.getData();
             // 用户信息
             User user = userResults.getData().getUser();

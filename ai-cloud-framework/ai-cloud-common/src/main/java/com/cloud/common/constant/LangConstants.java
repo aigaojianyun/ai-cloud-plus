@@ -9,6 +9,11 @@ package com.cloud.common.constant;
 public class LangConstants {
 
     /**
+     * 语言
+     */
+    public static final String LANGUAGE = "Language";
+
+    /**
      * 英文
      */
     public static final String EN_US = "en_US";

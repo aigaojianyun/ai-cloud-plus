@@ -52,7 +52,7 @@ public class SwaggerProvider implements SwaggerResourcesProvider, WebFluxConfigu
                         .contains(routeDefinition.getId()))
                 .forEach(routeDefinition -> routeDefinition.getPredicates().stream()
                         .filter(predicateDefinition -> "Path".equalsIgnoreCase(predicateDefinition.getName()))
-                        .filter(predicateDefinition -> !"ai-cloud-auth".equalsIgnoreCase(routeDefinition.getId()))
+                        //.filter(predicateDefinition -> !"ai-cloud-auth".equalsIgnoreCase(routeDefinition.getId()))
                         .filter(predicateDefinition -> !"ai-cloud-monitor".equalsIgnoreCase(routeDefinition.getId()))
                         .forEach(predicateDefinition -> resourceList
                                 .add(swaggerResource(routeDefinition.getId(), predicateDefinition.getArgs()
