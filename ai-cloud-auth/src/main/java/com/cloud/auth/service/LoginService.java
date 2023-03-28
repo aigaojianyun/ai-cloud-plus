@@ -7,6 +7,8 @@ import com.alibaba.nacos.common.codec.Base64;
 import com.anji.captcha.model.common.ResponseModel;
 import com.anji.captcha.model.vo.CaptchaVO;
 import com.anji.captcha.service.CaptchaService;
+import com.cloud.auth.param.VerifyCodeParam;
+import com.cloud.auth.param.VerifyPhoneParam;
 import com.cloud.auth.param.WeiXinLoginParam;
 import com.cloud.common.constant.*;
 import com.cloud.common.domain.R;
@@ -167,13 +169,35 @@ public class LoginService {
     }
 
     /**
+     * 验证码登录
+     *
+     * @param param    登录参数
+     * @param language 语言类型
+     * @return 登录结果
+     */
+    public LoginUser loginPhone(VerifyCodeParam param,String language){
+        return null;
+    }
+
+    /**
+     * 一键登录
+     *
+     * @param param    登录参数
+     * @param language 语言类型
+     * @return 登录结果
+     */
+    public LoginUser loginOnesTep(VerifyPhoneParam param, String language){
+        return null;
+    }
+
+    /**
      * 微信授权登录
      *
      * @param param 授权参数
      * @param language 语言类型
      * @return 登录结果
      */
-    public LoginUser loginWx(WeiXinLoginParam param,String language) throws WxErrorException {
+    public LoginUser loginWeiXin(WeiXinLoginParam param,String language) throws WxErrorException {
         // 获取微信用户session
         WxMaJscode2SessionResult session = wxMaService.getUserService().getSessionInfo(param.getCode());
         LoginUser userInfo = null;

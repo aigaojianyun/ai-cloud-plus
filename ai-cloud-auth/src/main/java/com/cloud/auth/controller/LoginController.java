@@ -57,14 +57,14 @@ public class LoginController {
     }
 
     /**
-     * 手机快捷登录
+     * 验证码登录
      *
      * @param param    登录参数
      * @param language 语言类型
      * @return 登录结果
      */
     @PostMapping("/login/phone")
-    @ApiOperation(value = "手机快捷登录", notes = "手机快捷登录")
+    @ApiOperation(value = "验证码登录", notes = "验证码登录")
     public String loginPhone(@RequestBody VerifyCodeParam param, @RequestHeader(value = LangConstants.LANGUAGE, required = true) @ApiParam(value = "语言类型",example = "zh_CN") String language) {
         return null;
     }
@@ -77,7 +77,7 @@ public class LoginController {
      * @return 登录结果
      */
     @PostMapping("/login/ones/tep")
-    @ApiOperation(value = "手机快捷登录", notes = "手机快捷登录")
+    @ApiOperation(value = "手机一键登录", notes = "一键登录")
     public String loginOnesTep(@RequestBody VerifyPhoneParam param, @RequestHeader(value = LangConstants.LANGUAGE, required = true) @ApiParam(value = "语言类型",example = "zh_CN") String language) {
         return null;
     }
@@ -93,7 +93,7 @@ public class LoginController {
     @ApiOperation(value = "微信授权登录", notes = "微信授权登录")
     public R<?> loginWeiXin(@RequestBody WeiXinLoginParam param,@RequestHeader(value = LangConstants.LANGUAGE, required = true) @ApiParam(value = "语言类型",example = "zh_CN") String language) throws Exception {
         // 用户登录
-        LoginUser userInfo = loginService.loginWx(param,language);
+        LoginUser userInfo = loginService.loginWeiXin(param,language);
         // 获取登录token
         return R.ok(webTokenService.createToken(userInfo));
     }

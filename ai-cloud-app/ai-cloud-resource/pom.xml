@@ -59,7 +59,6 @@
             <artifactId>ai-cloud-swagger</artifactId>
         </dependency>
 
-
         <!-- Mail -->
         <dependency>
             <groupId>com.cloud</groupId>

@@ -22,12 +22,12 @@ public class PasswordService {
     @Autowired
     private RedisService redisService;
 
+    @Autowired
+    private SysRecordLogService sysRecordLogService;
+
     private int maxRetryCount = CacheConstants.PASSWORD_MAX_RETRY_COUNT;
 
     private Long lockTime = CacheConstants.PASSWORD_LOCK_TIME;
-
-    @Autowired
-    private SysRecordLogService sysRecordLogService;
 
     /**
      * 登录账户密码错误次数缓存键名

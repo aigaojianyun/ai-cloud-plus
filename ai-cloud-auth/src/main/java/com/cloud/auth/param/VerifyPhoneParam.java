@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Data
 @ApiModel("一键登录请求参数")
-public class VerifyPhoneParam {
+public class VerifyPhoneParam extends BaseParam{
 
     @ApiModelProperty(value = "客户端的token", example = "e1e4c24876514fc999d043ae0f496752")
     private String token;

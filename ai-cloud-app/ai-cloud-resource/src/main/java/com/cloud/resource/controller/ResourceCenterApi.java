@@ -16,7 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
+/**
+ * 公共资源
+ *
+ * @author ai-cloud
+ *
+ */
 @Api(tags = "公共资源")
 @RestController
 @RequestMapping("center")
