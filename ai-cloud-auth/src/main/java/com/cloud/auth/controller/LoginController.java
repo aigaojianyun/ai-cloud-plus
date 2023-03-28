@@ -46,7 +46,9 @@ public class LoginController {
      */
     @PostMapping("/login")
     @ApiOperation(value = "账号密码登录", notes = "账号密码登录")
-    public R<?> login(@RequestBody LoginParam param, @RequestHeader(value = LangConstants.LANGUAGE, required = true) @ApiParam(value = "语言类型",example = "zh_CN") String language) throws Exception {
+    public R<?> login(@RequestBody LoginParam param,
+                      @RequestHeader(value = LangConstants.LANGUAGE, required = true)
+                      @ApiParam(value = "语言类型", example = "zh_CN") String language) throws Exception {
         // 校验用户信息
         LoginUser userInfo = loginService.login(param.getUsername(), RsaUtils.decryptByPrivateKey(param.getPassword()), param.getCode(), param.getUuid(), language);
         // 登录
@@ -65,7 +67,9 @@ public class LoginController {
      */
     @PostMapping("/login/phone")
     @ApiOperation(value = "验证码登录", notes = "验证码登录")
-    public String loginPhone(@RequestBody VerifyCodeParam param, @RequestHeader(value = LangConstants.LANGUAGE, required = true) @ApiParam(value = "语言类型",example = "zh_CN") String language) {
+    public String loginPhone(@RequestBody VerifyCodeParam param,
+                             @RequestHeader(value = LangConstants.LANGUAGE, required = true)
+                             @ApiParam(value = "语言类型", example = "zh_CN") String language) {
         return null;
     }
 
@@ -78,22 +82,27 @@ public class LoginController {
      */
     @PostMapping("/login/ones/tep")
     @ApiOperation(value = "手机一键登录", notes = "一键登录")
-    public String loginOnesTep(@RequestBody VerifyPhoneParam param, @RequestHeader(value = LangConstants.LANGUAGE, required = true) @ApiParam(value = "语言类型",example = "zh_CN") String language) {
+    public String loginOnesTep(@RequestBody VerifyPhoneParam param,
+                               @RequestHeader(value = LangConstants.LANGUAGE, required = true)
+                               @ApiParam(value = "语言类型", example = "zh_CN") String language) {
         return null;
     }
 
     /**
      * 微信授权登录
      *
-     * @param param 登录参数
+     * @param param    登录参数
      * @param language 语言类型
      * @return 登录结果
      */
     @PostMapping("/login/wx")
     @ApiOperation(value = "微信授权登录", notes = "微信授权登录")
-    public R<?> loginWeiXin(@RequestBody WeiXinLoginParam param,@RequestHeader(value = LangConstants.LANGUAGE, required = true) @ApiParam(value = "语言类型",example = "zh_CN") String language) throws Exception {
+    public R<?> loginWeiXin(@RequestBody WeiXinLoginParam param,
+                            @RequestHeader(value = LangConstants.LANGUAGE, required = true)
+
+                            @ApiParam(value = "语言类型", example = "zh_CN") String language) throws Exception {
         // 用户登录
-        LoginUser userInfo = loginService.loginWeiXin(param,language);
+        LoginUser userInfo = loginService.loginWeiXin(param, language);
         // 获取登录token
         return R.ok(webTokenService.createToken(userInfo));
     }

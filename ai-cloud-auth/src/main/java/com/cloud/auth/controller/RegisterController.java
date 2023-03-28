@@ -33,7 +33,9 @@ public class RegisterController {
      */
     @PostMapping("/register")
     @ApiOperation(value = "账号密码注册", notes = "账号密码注册")
-    public R<?> registerUser(@RequestBody RegisterParam param, @RequestHeader(value = LangConstants.LANGUAGE, required = true) @ApiParam(value = "语言类型", example = "zh_CN") String language) {
+    public R<?> registerUser(@RequestBody RegisterParam param,
+                             @RequestHeader(value = LangConstants.LANGUAGE, required = true)
+                             @ApiParam(value = "语言类型", example = "zh_CN") String language) {
         //用户注册
         registerService.registerUser(param.getUsername(), param.getPassword(), param.getPhone(), param.getUuid(),language);
         return R.ok();

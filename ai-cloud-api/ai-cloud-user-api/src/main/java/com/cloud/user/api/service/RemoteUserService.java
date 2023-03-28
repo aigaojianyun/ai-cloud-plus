@@ -27,7 +27,9 @@ public interface RemoteUserService {
      * @return 结果
      */
     @GetMapping("/user/info/{param}")
-    public R<LoginUser> getUserInfo(@PathVariable("param") String param, @RequestHeader(LangConstants.LANGUAGE) String language, @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
+    public R<LoginUser> getUserInfo(@PathVariable("param") String param,
+                                    @RequestHeader(LangConstants.LANGUAGE) String language,
+                                    @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
 
     /**
      * 注册用户信息
@@ -38,7 +40,9 @@ public interface RemoteUserService {
      * @return 结果
      */
     @PostMapping("/user/register")
-    public R<Boolean> registerUserInfo(@RequestBody User user, @RequestHeader(LangConstants.LANGUAGE) String language, @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
+    public R<Boolean> registerUserInfo(@RequestBody User user,
+                                       @RequestHeader(LangConstants.LANGUAGE) String language,
+                                       @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
 
     /**
      * 更新用户信息
@@ -49,6 +53,8 @@ public interface RemoteUserService {
      * @return 结果
      */
     @PostMapping("/user/update")
-    public R<Integer> updateUserInfo(@RequestBody User user, @RequestHeader(LangConstants.LANGUAGE) String language, @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
+    public R<Integer> updateUserInfo(@RequestBody User user,
+                                     @RequestHeader(LangConstants.LANGUAGE) String language,
+                                     @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
 
 }

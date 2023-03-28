@@ -34,7 +34,8 @@ public class UserApi {
     @InnerAuth
     @GetMapping("/info/{param}")
     @ApiOperation("通过用户名/手机号/openId查询用户")
-    public R<LoginUser> selectByUserInfo(@PathVariable("param") String param, @RequestHeader(value = LangConstants.LANGUAGE) String language) {
+    public R<LoginUser> selectByUserInfo(@PathVariable("param") String param,
+                                         @RequestHeader(value = LangConstants.LANGUAGE) String language) {
         //用户信息
         User user = userService.selectByUserNamePhoneOpenId(param);
         LoginUser userVo = new LoginUser();
@@ -53,20 +54,21 @@ public class UserApi {
     @InnerAuth
     @PostMapping("register")
     @ApiOperation("注册用户信息")
-    public R<Boolean> register(@RequestBody User user, @RequestHeader(value = LangConstants.LANGUAGE) String language) {
+    public R<Boolean> register(@RequestBody User user,
+                               @RequestHeader(value = LangConstants.LANGUAGE) String language) {
         String username = user.getUserName();
         String phone = user.getPhone();
         if (!userService.checkUserNameUnique(user)) {
-            if (language.equals(LangConstants.EN_US)){
+            if (language.equals(LangConstants.EN_US)) {
                 return R.fail("Registered Users'" + username + "'Failed, account already exists!");
-            }else if (language.equals(LangConstants.ZH_CN)){
+            } else if (language.equals(LangConstants.ZH_CN)) {
                 return R.fail("注册用户'" + username + "'失败，账号已存在!");
             }
         }
         if (!userService.checkPhoneUnique(user)) {
-            if (language.equals(LangConstants.EN_US)){
+            if (language.equals(LangConstants.EN_US)) {
                 return R.fail("Registered Users'" + username + "'Failed, the phone number already exists!");
-            }else if (language.equals(LangConstants.ZH_CN)){
+            } else if (language.equals(LangConstants.ZH_CN)) {
                 return R.fail("注册用户'" + phone + "'失败，账号已存在!");
             }
         }
@@ -82,7 +84,8 @@ public class UserApi {
     @InnerAuth
     @PostMapping("update")
     @ApiOperation("更新用户信息")
-    public R<Integer> update(@RequestBody User user, @RequestHeader(value = LangConstants.LANGUAGE) String language) {
+    public R<Integer> update(@RequestBody User user,
+                             @RequestHeader(value = LangConstants.LANGUAGE) String language) {
         return R.ok(userService.updateUser(user));
     }
 

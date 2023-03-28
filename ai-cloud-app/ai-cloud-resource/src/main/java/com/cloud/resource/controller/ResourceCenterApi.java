@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
 /**
  * 公共资源
  *
  * @author ai-cloud
- *
  */
 @Api(tags = "公共资源")
 @RestController
@@ -38,7 +38,8 @@ public class ResourceCenterApi {
      */
     @PostMapping("/continent")
     @ApiOperation(value = "查询七大洲", notes = "查询七大洲")
-    public R<List<ContinentDto>> selectByContinentList(@RequestHeader(value = LangConstants.LANGUAGE, required = true) @ApiParam(value = "语言类型",example = "zh_CN") String language) {
+    public R<List<ContinentDto>> selectByContinentList(@RequestHeader(value = LangConstants.LANGUAGE, required = true)
+                                                       @ApiParam(value = "语言类型", example = "zh_CN") String language) {
         return R.ok(resourceCenterService.selectByContinentList(language));
     }
 
@@ -50,7 +51,8 @@ public class ResourceCenterApi {
      */
     @PostMapping("/country")
     @ApiOperation(value = "查询区域国家", notes = "查询区域国家")
-    public R<List<CountryDto>> selectByCountryList(@RequestHeader(value = LangConstants.LANGUAGE, required = true) @ApiParam(value = "语言类型",example = "zh_CN") String language) {
+    public R<List<CountryDto>> selectByCountryList(@RequestHeader(value = LangConstants.LANGUAGE, required = true)
+                                                   @ApiParam(value = "语言类型", example = "zh_CN") String language) {
         return R.ok(resourceCenterService.selectByCountryList(language));
     }
 

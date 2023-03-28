@@ -1,7 +1,6 @@
 package com.cloud.resource.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cloud.resource.domain.AiContinent;
 import com.cloud.resource.domain.AiCountry;
 import org.apache.ibatis.annotations.Mapper;
 

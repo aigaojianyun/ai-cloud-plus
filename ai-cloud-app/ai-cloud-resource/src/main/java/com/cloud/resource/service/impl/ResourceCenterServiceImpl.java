@@ -2,8 +2,6 @@ package com.cloud.resource.service.impl;
 
 
 import com.cloud.common.constant.LangConstants;
-import com.cloud.common.exception.ServiceException;
-import com.cloud.common.utils.StringUtils;
 import com.cloud.resource.domain.AiContinent;
 import com.cloud.resource.domain.AiCountry;
 import com.cloud.resource.dto.ContinentDto;

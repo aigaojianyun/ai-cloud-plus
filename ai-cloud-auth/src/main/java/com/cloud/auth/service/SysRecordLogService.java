@@ -2,7 +2,6 @@ package com.cloud.auth.service;
 
 import com.cloud.common.constant.Constants;
 import com.cloud.common.constant.SecurityConstants;
-import com.cloud.common.utils.ServletUtils;
 import com.cloud.common.utils.StringUtils;
 import com.cloud.common.utils.ip.IpUtils;
 import com.cloud.system.api.domain.SysLogininfor;
