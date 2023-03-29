@@ -57,13 +57,11 @@
 <script>
 
 import Verify from "@/components/verify/verify";
-import lang from '@/common/language/lang'
 import {commonMixin} from '@/common/mixin/mixin.js'
 
 export default {
   components: {
     Verify,
-    lang
   },
   mixins: [commonMixin],
   data() {
@@ -84,10 +82,10 @@ export default {
     })
     this.langList = [{
       name: this.i18n.common.lang.en,
-      lang: lang.EN_US
+      lang: 'en_US'
     }, {
       name: this.i18n.common.lang.zh,
-      lang: lang.ZH_CN
+      lang: 'zh_CN'
     }]
   },
   methods: {

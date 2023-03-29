@@ -3,9 +3,9 @@ package com.cloud.resource.controller;
 import cn.hutool.core.util.RandomUtil;
 import com.cloud.common.constant.CacheConstants;
 import com.cloud.common.constant.Constants;
+import com.cloud.common.constant.LangConstants;
 import com.cloud.common.domain.R;
 import com.cloud.common.utils.SpringUtils;
-import com.cloud.common.utils.uuid.IdUtils;
 import com.cloud.redis.service.RedisService;
 import com.cloud.sms.config.properties.SmsProperties;
 import com.cloud.sms.domain.SmsResult;
@@ -14,6 +14,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -46,7 +47,10 @@ public class ResourceSmsApi {
      * @param phone 手机号
      */
     @GetMapping("/code")
-    public R<Void> smsCaptcha(@NotBlank(message = "{user.phone.not.blank}") @ApiParam(value = "手机号", example = "13888888888") String phone) {
+    public R<Void> smsCaptcha(@NotBlank(message = "{user.phone.not.blank}")
+                              @RequestHeader(value = LangConstants.LANGUAGE, required = true)
+                              @ApiParam(value = "语言类型", example = "zh_CN") String language,
+                              @ApiParam(value = "手机号", example = "13888888888") String phone) {
         if (!smsProperties.getEnabled()) {
             return R.fail("当前系统没有开启短信功能！");
         }
