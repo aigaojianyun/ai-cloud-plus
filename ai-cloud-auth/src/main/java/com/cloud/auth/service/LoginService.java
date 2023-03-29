@@ -126,7 +126,7 @@ public class LoginService {
             }
         }
         // 查询用户信息
-        R<LoginUser> userResult = remoteUserService.getUserInfo(username,language,SecurityConstants.INNER);
+        R<LoginUser> userResult = remoteUserService.getUserInfo(username, language, SecurityConstants.INNER);
         if (StringUtils.isNull(userResult) || StringUtils.isNull(userResult.getData())) {
             if (language.equals(LangConstants.EN_US)) {
                 sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "The login user does not exist");
@@ -140,6 +140,7 @@ public class LoginService {
             throw new ServiceException(userResult.getMsg());
         }
         LoginUser userInfo = userResult.getData();
+        // 用户信息
         User user = userResult.getData().getUser();
         if (UserStatus.DELETED.getCode().equals(user.getDeleteFlag())) {
             if (language.equals(LangConstants.EN_US)) {
@@ -159,10 +160,10 @@ public class LoginService {
                 throw new ServiceException("对不起，您的账号：" + username + " 已停用");
             }
         }
-        passwordService.validate(user, password,language);
+        passwordService.validate(user, password, language);
         if (language.equals(LangConstants.EN_US)) {
             sysRecordLogService.recordLogininfor(username, Constants.LOGIN_SUCCESS, "Login succeeded");
-        }else if (language.equals(LangConstants.ZH_CN)) {
+        } else if (language.equals(LangConstants.ZH_CN)) {
             sysRecordLogService.recordLogininfor(username, Constants.LOGIN_SUCCESS, "登录成功");
         }
         return userInfo;
@@ -175,8 +176,79 @@ public class LoginService {
      * @param language 语言类型
      * @return 登录结果
      */
-    public LoginUser loginPhone(VerifyCodeParam param,String language){
-        return null;
+    public LoginUser loginPhone(VerifyCodeParam param, String language) {
+        LoginUser userInfo = null;
+        // 从缓存中获取验证码
+        String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + param.getPhone();
+        String codeKey = redisService.getCacheObject(verifyKey);
+        // 校验验证码是否过期
+        if (StringUtils.isNull(codeKey)) {
+            if (language.equals(LangConstants.EN_US)) {
+                throw new ServiceException("The verification code has expired!");
+            } else if (language.equals(LangConstants.ZH_CN)) {
+                throw new ServiceException("验证码已过期!");
+            }
+        }
+        // 校验验证码是否正确
+        if (!param.getCode().equals(codeKey)) {
+            if (language.equals(LangConstants.EN_US)) {
+                throw new ServiceException("The verification code is incorrect!");
+            } else if (language.equals(LangConstants.ZH_CN)) {
+                throw new ServiceException("验证码不正确!");
+            }
+        }
+        // 根据手机号查询是否存在这个用户
+        R<LoginUser> userResult = remoteUserService.getUserInfo(param.getPhone(), language, SecurityConstants.INNER);
+        if (StringUtils.isNull(userResult) || StringUtils.isNull(userResult.getData().getUser())) {
+            // 不存在就创建新用户
+            User user = new User();
+            user.setUserName(IdUtils.fastSimpleUUID());
+            user.setPhone(param.getPhone());
+            R<?> registerResult = remoteUserService.registerUserInfo(user, language, SecurityConstants.INNER);
+            if (R.FAIL == registerResult.getCode()) {
+                throw new ServiceException(registerResult.getMsg());
+            }
+            sysRecordLogService.recordLogininfor(param.getPhone(), Constants.REGISTER, "注册成功");
+        } else {
+            // 存在就更新用户信息
+            User user = userResult.getData().getUser();
+            R<?> updateResult = remoteUserService.updateUserInfo(user, language, SecurityConstants.INNER);
+            if (R.FAIL == updateResult.getCode()) {
+                throw new ServiceException(updateResult.getMsg());
+            }
+            sysRecordLogService.recordLogininfor(param.getPhone(), Constants.REGISTER, "更新成功");
+        }
+        // 根据手机号查询查询用户
+        R<LoginUser> userResults = remoteUserService.getUserInfo(param.getPhone(), language, SecurityConstants.INNER);
+        userInfo = userResults.getData();
+        // 用户信息
+        User user = userResults.getData().getUser();
+        if (UserStatus.DELETED.getCode().equals(user.getDeleteFlag())) {
+            if (language.equals(LangConstants.EN_US)) {
+                sysRecordLogService.recordLogininfor(param.getPhone(), Constants.LOGIN_FAIL, "Sorry, your account has been deleted");
+                throw new ServiceException("Sorry, your account number：" + param.getPhone() + "have been deleted!");
+            } else if (language.equals(LangConstants.ZH_CN)) {
+                sysRecordLogService.recordLogininfor(param.getPhone(), Constants.LOGIN_FAIL, "对不起，您的账号已被删除");
+                throw new ServiceException("对不起，您的账号：" + param.getPhone() + " 已被删除!");
+            }
+        }
+        if (UserStatus.DISABLE.getCode().equals(user.getStatusFlag())) {
+            if (language.equals(LangConstants.EN_US)) {
+                sysRecordLogService.recordLogininfor(param.getPhone(), Constants.LOGIN_FAIL, "The user has been deactivated, please contact the administrator");
+                throw new ServiceException("Sorry, your account number：" + param.getPhone() + "deactivated!");
+            } else if (language.equals(LangConstants.ZH_CN)) {
+                sysRecordLogService.recordLogininfor(param.getPhone(), Constants.LOGIN_FAIL, "用户已停用，请联系管理员");
+                throw new ServiceException("对不起，您的账号：" + param.getPhone() + " 已停用");
+            }
+        }
+        if (language.equals(LangConstants.EN_US)) {
+            sysRecordLogService.recordLogininfor(param.getPhone(), Constants.LOGIN_SUCCESS, "Login succeeded");
+        } else if (language.equals(LangConstants.ZH_CN)) {
+            sysRecordLogService.recordLogininfor(param.getPhone(), Constants.LOGIN_SUCCESS, "登录成功");
+        }
+        // 删除验证码
+        redisService.deleteObject(verifyKey);
+        return userInfo;
     }
 
     /**
@@ -186,18 +258,19 @@ public class LoginService {
      * @param language 语言类型
      * @return 登录结果
      */
-    public LoginUser loginOnesTep(VerifyPhoneParam param, String language){
-        return null;
+    public LoginUser loginOnesTep(VerifyPhoneParam param, String language) {
+        LoginUser userInfo = new LoginUser();
+        return userInfo;
     }
 
     /**
      * 微信授权登录
      *
-     * @param param 授权参数
+     * @param param    授权参数
      * @param language 语言类型
      * @return 登录结果
      */
-    public LoginUser loginWeiXin(WeiXinLoginParam param,String language) throws WxErrorException {
+    public LoginUser loginWeiXin(WeiXinLoginParam param, String language) throws WxErrorException {
         // 获取微信用户session
         WxMaJscode2SessionResult session = wxMaService.getUserService().getSessionInfo(param.getCode());
         LoginUser userInfo = null;
@@ -220,9 +293,9 @@ public class LoginService {
                 throw new ServiceException("手机号码解密失败!");
             }
             // 根据openId查询是否存在这个用户
-            R<LoginUser> userResult = remoteUserService.getUserInfo(session.getOpenid(), language,SecurityConstants.INNER);
+            R<LoginUser> userResult = remoteUserService.getUserInfo(session.getOpenid(), language, SecurityConstants.INNER);
             if (StringUtils.isNull(userResult) || StringUtils.isNull(userResult.getData().getUser())) {
-                // 添加新用户
+                // 创建新用户
                 User user = new User();
                 user.setUserName(IdUtils.fastSimpleUUID());
                 user.setNickName(param.getNickName());
@@ -237,7 +310,7 @@ public class LoginService {
                 } else if (Objects.equals(param.getGender(), 2)) {
                     user.setSex("1");
                 }
-                R<?> registerResult = remoteUserService.registerUserInfo(user, language,SecurityConstants.INNER);
+                R<?> registerResult = remoteUserService.registerUserInfo(user, language, SecurityConstants.INNER);
                 if (R.FAIL == registerResult.getCode()) {
                     throw new ServiceException(registerResult.getMsg());
                 }
@@ -245,14 +318,14 @@ public class LoginService {
             } else {
                 // 存在就更新用户信息
                 User user = userResult.getData().getUser();
-                R<?> updateResult = remoteUserService.updateUserInfo(user, language,SecurityConstants.INNER);
+                R<?> updateResult = remoteUserService.updateUserInfo(user, language, SecurityConstants.INNER);
                 if (R.FAIL == updateResult.getCode()) {
                     throw new ServiceException(updateResult.getMsg());
                 }
                 sysRecordLogService.recordLogininfor(session.getOpenid(), Constants.REGISTER, "更新成功");
             }
             // 根据openId查询用户
-            R<LoginUser> userResults = remoteUserService.getUserInfo(session.getOpenid(), language,SecurityConstants.INNER);
+            R<LoginUser> userResults = remoteUserService.getUserInfo(session.getOpenid(), language, SecurityConstants.INNER);
             userInfo = userResults.getData();
             // 用户信息
             User user = userResults.getData().getUser();

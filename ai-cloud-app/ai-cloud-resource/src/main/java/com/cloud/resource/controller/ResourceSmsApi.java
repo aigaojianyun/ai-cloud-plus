@@ -5,6 +5,7 @@ import com.cloud.common.constant.CacheConstants;
 import com.cloud.common.constant.Constants;
 import com.cloud.common.domain.R;
 import com.cloud.common.utils.SpringUtils;
+import com.cloud.common.utils.uuid.IdUtils;
 import com.cloud.redis.service.RedisService;
 import com.cloud.sms.config.properties.SmsProperties;
 import com.cloud.sms.domain.SmsResult;
@@ -49,8 +50,9 @@ public class ResourceSmsApi {
         if (!smsProperties.getEnabled()) {
             return R.fail("当前系统没有开启短信功能！");
         }
-        String key = CacheConstants.CAPTCHA_CODE_KEY + phone;
         String code = RandomUtil.randomNumbers(6);
+        // 保存验证码信息
+        String key = CacheConstants.CAPTCHA_CODE_KEY + phone;
         redisService.setCacheObject(key, code, validTime, TimeUnit.MINUTES);
         // 验证码模板id 自行处理 (查数据库或写死均可)
         String templateId = "1";

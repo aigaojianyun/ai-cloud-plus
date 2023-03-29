@@ -13,7 +13,7 @@ import lombok.Data;
 @ApiModel("手机验证码请求参数")
 public class VerifyCodeParam extends BaseParam {
 
-    @ApiModelProperty(value = "电话号码", example = "13800138000")
+    @ApiModelProperty(value = "电话号码", example = "13888888888")
     private String phone;
 
     @ApiModelProperty(value = "区号", example = "86")

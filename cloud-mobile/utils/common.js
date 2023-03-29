@@ -1,3 +1,6 @@
+import {getLang} from '@/utils/auth'
+import lang from '@/common/language/lang'
+
 /**
  * 显示消息提示框
  * @param content 提示的标题
@@ -15,15 +18,27 @@ export function toast(content) {
  */
 export function showConfirm(content) {
     return new Promise((resolve, reject) => {
-        uni.showModal({
-            title: '提示',
-            content: content,
-            cancelText: '取消',
-            confirmText: '确定',
-            success: function (res) {
-                resolve(res)
-            }
-        })
+        if (getLang() === lang.EN_US) {
+            uni.showModal({
+                title: 'Prompt',
+                content: content,
+                cancelText: 'cancel',
+                confirmText: 'ok',
+                success: function (res) {
+                    resolve(res)
+                }
+            })
+        } else if (getLang() === lang.ZH_CN) {
+            uni.showModal({
+                title: '提示',
+                content: content,
+                cancelText: '取消',
+                confirmText: '确定',
+                success: function (res) {
+                    resolve(res)
+                }
+            })
+        }
     })
 }
 

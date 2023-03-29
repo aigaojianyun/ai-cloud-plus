@@ -14,15 +14,5 @@ module.exports = {
         logo: "/static/logo.png",
         // 官方网站
         site_url: "https://aiclouds.vip",
-        // 政策协议L
-        agreements: [{
-            title: "隐私政策",
-            url: "https://aiclouds.vip/protocol.html"
-        },
-            {
-                title: "用户服务协议",
-                url: "https://aiclouds.vip/protocol.html"
-            }
-        ]
     }
 }

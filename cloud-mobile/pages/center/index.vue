@@ -75,12 +75,14 @@
 <script>
 
 import listCell from '@/components/mix-list-cell';
+import lang from '@/common/language/lang'
 import {commonMixin} from '@/common/mixin/mixin.js'
 import {getUserInfo} from "@/api/center/user"
 
 export default {
   components: {
     listCell,
+    lang
   },
   mixins: [commonMixin],
   data() {
@@ -97,10 +99,10 @@ export default {
     this.getInfo()
     this.langList = [{
       name: this.i18n.common.lang.en,
-      lang: 'en_US'
+      lang: lang.EN_US
     }, {
       name: this.i18n.common.lang.zh,
-      lang: 'zh_CN'
+      lang: lang.ZH_CN
     }]
   },
   methods: {

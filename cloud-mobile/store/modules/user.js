@@ -1,10 +1,7 @@
-import config from '@/config'
 import storage from '@/utils/storage'
-import {login,loginWx, logout } from '@/api/login'
+import {login, loginPhone, loginWx, logout} from '@/api/login'
 import {getToken, removeToken, setToken} from '@/utils/auth'
 import {getUserInfo} from '@/api/center/user'
-
-const baseUrl = config.baseUrl
 
 const user = {
 
@@ -27,6 +24,23 @@ const user = {
             const uuid = userInfo.uuid
             return new Promise((resolve, reject) => {
                 login(username, password, code, uuid).then(res => {
+                    setToken(res.data.access_token)
+                    commit('SET_TOKEN', res.data.access_token)
+                    resolve()
+                }).catch(error => {
+                    reject(error)
+                })
+            })
+        },
+
+        // 验证码登录
+        LoginPhone({commit}, userInfo) {
+            const phone = userInfo.phone.trim()
+            const zone = userInfo.zone
+            const code = userInfo.code
+            const uuid = userInfo.uuid
+            return new Promise((resolve, reject) => {
+                loginPhone(phone, zone, code, uuid).then(res => {
                     setToken(res.data.access_token)
                     commit('SET_TOKEN', res.data.access_token)
                     resolve()

@@ -67,10 +67,13 @@ public class LoginController {
      */
     @PostMapping("/login/phone")
     @ApiOperation(value = "验证码登录", notes = "验证码登录")
-    public String loginPhone(@RequestBody VerifyCodeParam param,
+    public R<?> loginPhone(@RequestBody VerifyCodeParam param,
                              @RequestHeader(value = LangConstants.LANGUAGE, required = true)
                              @ApiParam(value = "语言类型", example = "zh_CN") String language) {
-        return null;
+        // 用户登录
+        LoginUser userInfo = loginService.loginPhone(param, language);
+        // 获取登录token
+        return R.ok(webTokenService.createToken(userInfo));
     }
 
     /**
@@ -82,10 +85,13 @@ public class LoginController {
      */
     @PostMapping("/login/ones/tep")
     @ApiOperation(value = "手机一键登录", notes = "一键登录")
-    public String loginOnesTep(@RequestBody VerifyPhoneParam param,
+    public R<?> loginOnesTep(@RequestBody VerifyPhoneParam param,
                                @RequestHeader(value = LangConstants.LANGUAGE, required = true)
                                @ApiParam(value = "语言类型", example = "zh_CN") String language) {
-        return null;
+        // 用户登录
+        LoginUser userInfo = loginService.loginOnesTep(param, language);
+        // 获取登录token
+        return R.ok(webTokenService.createToken(userInfo));
     }
 
     /**

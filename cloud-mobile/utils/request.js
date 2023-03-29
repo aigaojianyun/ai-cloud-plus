@@ -1,7 +1,7 @@
 import store from '@/store'
 import config from '@/config'
-import {getToken,getLang} from '@/utils/auth'
-import errorCode from '@/utils/errorCode'
+import {getLang, getToken} from '@/utils/auth'
+import lang from '@/common/language/lang'
 import {showConfirm, tansParams, toast} from '@/utils/common'
 
 let timeout = 10000
@@ -16,7 +16,7 @@ const request = config => {
     if (getToken() && !isToken) {
         config.header['Authorization'] = 'Bearer ' + getToken()
     }
-    if (getLang && !isLang) {
+    if (getLang() && !isLang) {
         config.header['Language'] = getLang()
     }
     // get请求映射params参数
@@ -36,21 +36,38 @@ const request = config => {
         }).then(response => {
             let [error, res] = response
             if (error) {
-                toast('服务器连接异常!')
-                reject('服务器连接异常!')
-                return
+                if (getLang() === lang.EN_US) {
+                    toast('The server connection is abnormal!')
+                    reject('The server connection is abnormal!')
+                    return
+                } else if (getLang() === lang.ZH_CN) {
+                    toast('服务器连接异常!')
+                    reject('服务器连接异常!')
+                    return
+                }
             }
             const code = res.data.code || 200
-            const msg = errorCode[code] || res.data.msg || errorCode['default']
+            const msg = res.data.msg
             if (code === 401) {
-                showConfirm('登录状态已过期，您可以继续留在该页面，或者重新登录?').then(res => {
-                    if (res.confirm) {
-                        store.dispatch('LogOut').then(res => {
-                            uni.reLaunch({url: '/pages/login/login'})
-                        })
-                    }
-                })
-                reject('无效的会话，或者会话已过期，请重新登录!')
+                if (getLang() === lang.EN_US) {
+                    showConfirm('The login status has expired. Can you stay on the page or log in again?').then(res => {
+                        if (res.confirm) {
+                            store.dispatch('LogOut').then(res => {
+                                uni.reLaunch({url: '/pages/login/login'})
+                            })
+                        }
+                    })
+                    reject('Invalid session, or the session has expired, please log in again!')
+                } else if (getLang() === lang.ZH_CN) {
+                    showConfirm('登录状态已过期，您可以继续留在该页面，或者重新登录?').then(res => {
+                        if (res.confirm) {
+                            store.dispatch('LogOut').then(res => {
+                                uni.reLaunch({url: '/pages/login/login'})
+                            })
+                        }
+                    })
+                    reject('无效的会话，或者会话已过期，请重新登录!')
+                }
             } else if (code === 500) {
                 toast(msg)
                 reject('500')
@@ -59,19 +76,30 @@ const request = config => {
                 reject(code)
             }
             resolve(res.data)
-        })
-            .catch(error => {
-                let {message} = error
-                if (message === 'Network Error') {
+        }).catch(error => {
+            let {message} = error
+            if (message === 'Network Error') {
+                if (getLang() === lang.EN_US) {
+                    message = 'The server connection is abnormal!'
+                } else if (getLang() === lang.ZH_CN) {
                     message = '服务器连接异常!'
-                } else if (message.includes('timeout')) {
+                }
+            } else if (message.includes('timeout')) {
+                if (getLang() === lang.EN_US) {
+                    message = 'Server request timed out!'
+                } else if (getLang() === lang.ZH_CN) {
                     message = '服务器请求超时!'
-                } else if (message.includes('Request failed with status code')) {
+                }
+            } else if (message.includes('Request failed with status code')) {
+                if (getLang() === lang.EN_US) {
+                    message = 'Server' + message.substr(message.length - 3) + 'Exception!'
+                } else if (getLang() === lang.ZH_CN) {
                     message = '服务器' + message.substr(message.length - 3) + '异常!'
                 }
-                toast(message)
-                reject(error)
-            })
+            }
+            toast(message)
+            reject(error)
+        })
     })
 }
 
