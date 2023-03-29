@@ -1,7 +1,7 @@
 import store from '@/store'
 import config from '@/config'
-import {getLang, getToken} from '@/utils/auth'
 import lang from '@/common/language/lang'
+import {getLang, getToken} from '@/utils/auth'
 import {showConfirm, tansParams, toast} from '@/utils/common'
 
 let timeout = 10000
