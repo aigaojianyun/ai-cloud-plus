@@ -5,6 +5,7 @@ import com.cloud.sms.config.properties.SmsProperties;
 import com.cloud.sms.service.SmsTemplate;
 import com.cloud.sms.service.impl.AliyunSmsTemplate;
 import com.cloud.sms.service.impl.TencentSmsTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -20,6 +21,7 @@ import org.springframework.context.annotation.Configuration;
 @AutoConfiguration
 @EnableConfigurationProperties(SmsProperties.class)
 public class SmsAutoConfiguration {
+
 
     @Configuration
     @ConditionalOnProperty(value = "sms.enabled", havingValue = "true")

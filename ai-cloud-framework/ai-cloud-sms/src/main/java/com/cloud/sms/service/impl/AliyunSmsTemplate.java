@@ -11,6 +11,7 @@ import com.cloud.sms.config.properties.SmsProperties;
 import com.cloud.sms.domain.SmsResult;
 import com.cloud.sms.service.SmsTemplate;
 import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
 
@@ -21,8 +22,10 @@ import java.util.Map;
  */
 public class AliyunSmsTemplate implements SmsTemplate {
 
+    @Autowired
     private SmsProperties properties;
 
+    @Autowired
     private Client client;
 
     @SneakyThrows(Exception.class)

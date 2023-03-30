@@ -9,9 +9,18 @@
       }
     },
     {
-      "path": "pages/login/wxLogin",
+      "path": "pages/login/loginWx",
       "style": {
         "navigationBarTitleText": "微信授权登录",
+        "enablePullDownRefresh": false,
+        "navigationStyle": "custom",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/login/loginPhone",
+      "style": {
+        "navigationBarTitleText": "验证码快捷登录",
         "enablePullDownRefresh": false,
         "navigationStyle": "custom",
         "navigationBarTextStyle": "white"

@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <view class="login">
     <u-navbar :safeAreaInsetTop="true" :placeholder="true" :fixed="true" :autoBack="true" leftText="返回" title="微信授权登录" bgColor="#f3f4f6" ></u-navbar>
     <view class="header">
       <image mode="" src="/static/images/weixin/logo.png">
@@ -106,18 +106,24 @@ export default {
 </script>
 
 <style lang="scss">
+.login {
+  width: 650rpx;
+  margin: 0 auto;
+  font-size: 28rpx;
+  color: #000;
+}
 .header {
-  margin: 90rpx 0 90rpx 50rpx;
+  margin: 90rpx 0 90rpx 0;
   border-bottom: 1px solid #ccc;
   text-align: center;
   width: 650rpx;
-  height: 300rpx;
+  height: 260rpx;
   line-height: 450rpx;
 }
 
 .header image {
-  width: 200rpx;
-  height: 200rpx;
+  width: 160rpx;
+  height: 160rpx;
 }
 
 .content {
@@ -132,7 +138,7 @@ export default {
 }
 
 .bottom {
-  border-radius: 80rpx;
+  border-radius: 20rpx;
   margin: 60rpx 50rpx;
   font-size: 35rpx;
 }

@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 /**
  * JavaMail 配置
  *
- * @author Michelle.Chung
+ * @author ai-cloud
  */
 @AutoConfiguration
 @ConditionalOnProperty(value = "mail.enabled", havingValue = "true")

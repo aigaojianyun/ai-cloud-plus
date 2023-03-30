@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 邮件服务
  *
- * @author Lion Li
+ * @author ai-cloud
  */
 @Service
 public class MailTemplateImpl implements MailTemplate {

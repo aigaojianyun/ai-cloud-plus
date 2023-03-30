@@ -1,28 +1,37 @@
 <!-- 蓝色简洁登录页面 -->
 <template>
-  <view class="t-login">
-    <!-- 页面装饰图片 -->
-    <image class="img-a" src="/../../static/images/background/b-1.png"></image>
-    <image class="img-b" src="/../../static/images/background/b-2.png"></image>
-    <view class="top-right" @click="handleToLang">
+  <view class="login">
+
+    <!-- 切换语言 -->
+    <view class="l-language" @click="handleToLang">
       {{ i18n.login.language }}》
     </view>
+
+    <!-- 页面装饰图片 -->
+    <image class="l-img-a" src="/../../static/images/background/b-1.png"></image>
+    <image class="l-img-b" src="/../../static/images/background/b-2.png"></image>
+
     <!-- 标题 -->
-    <view class="t-b">{{ i18n.login.title }}</view>
-    <view class="t-b2">{{ i18n.login.subTitle }}</view>
-    <form class="cl">
+    <view class="l-b">{{ i18n.login.title }}</view>
+    <view class="l-b2">{{ i18n.login.subTitle }}</view>
+
+    <!-- 登录 -->
+    <form class="login-form">
+
       <!-- 登录账号 -->
       <view class="login-form-item">
         <u-input v-model="loginForm.username" :placeholder="i18n.login.username" maxlength="30">
           <u-icon slot="prefix" name="account" size="35px"></u-icon>
         </u-input>
       </view>
+
       <!-- 登录密码 -->
       <view class="login-form-item">
         <u-input v-model="loginForm.password" type="password" :placeholder="i18n.login.password" maxlength="16">
           <u-icon slot="prefix" name="lock" size="35px"></u-icon>
         </u-input>
       </view>
+
       <!-- 验证码 -->
       <Verify
           @success='success'
@@ -33,23 +42,32 @@
       </Verify>
       <button type="primary" @click="handleLogin">{{ i18n.login.login }}</button>
     </form>
+
+    <!-- 忘记密码/立即注册 -->
+    <view class="reg">
+      <navigator class="reg-left" url="" open-type="navigate">{{ i18n.login.cipher }}</navigator>
+      <navigator class="reg-right" url="" open-type="navigate">{{ i18n.login.logon }}</navigator>
+    </view>
+
     <!-- 更多登录方式 -->
     <view class="login-bottom-box">
-      <u-divider> {{i18n.login.more}}</u-divider>
+      <u-divider :text="i18n.login.more"></u-divider>
       <view class="oauth2">
+        <u-icon class="u-icon" size="40" color="#23a0f0" name="phone-fill" @click="codeLogin"></u-icon>
         <u-icon class="u-icon" size="40" color="#36c956" name="weixin-circle-fill" @click="wxLogin"></u-icon>
-        <u-icon class="u-icon" size="40" color="#23a0f0" name="qq-circle-fill" @click="qqLogin"></u-icon>
-        <u-icon class="u-icon" size="40" color="#23a0f0" name="zhifubao-circle-fill" @click="zhifubaoLogin"></u-icon>
-        <u-icon class="u-icon" size="40" color="" name="github-circle-fill" @click="githubLogin"></u-icon>
+        <u-icon class="u-icon" size="40" color="#23a0f0" name="zhifubao-circle-fill" @click=""></u-icon>
+        <u-icon class="u-icon" size="40" color="#23a0f0" name="twitter-circle-fill" @click=""></u-icon>
+        <u-icon class="u-icon" size="40" color="" name="github-circle-fill" @click=""></u-icon>
       </view>
       <view class="copyright">
         {{i18n.login.agree}}
-        <u-link href="#">{{i18n.login.agreement}}</u-link>
+        <u-link class="link-left" href="#" text="">{{i18n.login.agreement}}</u-link>
         {{i18n.login.and}}
-        <u-link href="#">{{i18n.login.privacy}}</u-link>
+        <u-link class="link-right" href="#" text="">{{i18n.login.privacy}}</u-link>
       </view>
     </view>
 
+    <!-- 语言切换 -->
     <u-action-sheet :actions="langList" :show="showLang" @select="clickLang" :cancelText="i18n.common.cancel" @close="showLang = false"></u-action-sheet>
 
   </view>
@@ -67,8 +85,8 @@ export default {
   data() {
     return {
       loginForm: {
-        username: "ai168",
-        password: "123456",
+        username: "",
+        password: "",
         code: "",
         uuid: ""
       },
@@ -149,20 +167,12 @@ export default {
         this.$tab.reLaunch('/pages/center/index')
       })
     },
+    // 验证码登录
+    codeLogin(){
+      this.$tab.navigateTo('/pages/login/loginPhone')
+    },
     // 微信授权登录
     wxLogin() {
-      this.$modal.showToast(this.i18n.common.coming)
-    },
-    // QQ授权登录
-    qqLogin() {
-      this.$modal.showToast(this.i18n.common.coming)
-    },
-    // 支付宝授权登录
-    zhifubaoLogin() {
-      this.$modal.showToast(this.i18n.common.coming)
-    },
-    // GitHub授权登录
-    githubLogin() {
       this.$modal.showToast(this.i18n.common.coming)
     },
   }
@@ -170,18 +180,49 @@ export default {
 </script>
 
 <style lang="scss">
-.t-login {
+.login {
   width: 650rpx;
   margin: 0 auto;
   font-size: 28rpx;
   color: #000;
 }
 
-.top-right{
+.l-language{
   position: absolute;
   inset: 45rpx 45rpx auto auto;
   font-size: 31rpx;
   color: #aaaaaa;
+}
+
+.l-img-a {
+  position: absolute;
+  width: 100%;
+  top: -150rpx;
+  right: 0;
+  z-index: -999;
+}
+
+.l-img-b {
+  position: absolute;
+  width: 50%;
+  bottom: 0;
+  left: -50rpx;
+  z-index: -999;
+}
+
+.l-b {
+  text-align: left;
+  font-size: 32rpx;
+  color: #aaaaaa;
+  padding: 300rpx 0 20rpx 0;
+  font-weight: bold;
+}
+
+.l-b2 {
+  text-align: left;
+  font-size: 56rpx;
+  color: #000;
+  padding: 0rpx 0 60rpx 0;
 }
 
 /deep/ .login-form-item .u-input {
@@ -195,69 +236,46 @@ export default {
   border-radius: 52rpx;
 }
 
-.t-captcha {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-}
-
-.t-captcha-img {
-  margin-left: 32rpx;
-  width: 204rpx;
-  height: 88rpx;
-}
-
-.img-a {
-  position: absolute;
-  width: 100%;
-  top: -150rpx;
-  right: 0;
-  z-index: -999;
-}
-
-.img-b {
-  position: absolute;
-  width: 50%;
-  bottom: 0;
-  left: -50rpx;
-  z-index: -999;
-}
-
-.t-login button {
-  font-size: 28rpx;
-  background-color: #5677fc;
-  color: #fff;
-  height: 90rpx;
-  line-height: 90rpx;
-  border-radius: 50rpx;
-  box-shadow: 0 10rpx 14rpx 0 rgba(86, 119, 252, 0.2);
-}
-
-.t-login .t-b {
-  text-align: left;
-  font-size: 32rpx;
-  color: #aaaaaa;
-  padding: 300rpx 0 20rpx 0;
-  font-weight: bold;
-}
-
-.t-login .t-b2 {
-  text-align: left;
-  font-size: 56rpx;
-  color: #000;
-  padding: 0rpx 0 60rpx 0;
-}
-
-.t-login .uni-input-placeholder {
+.uni-input-placeholder {
   color: #000 !important;
 }
 
-.t-login .login-bottom-box {
-  bottom: 40rpx;
-  text-align: center;
+.login button {
+  font-size: 28rpx;
+  background-color: #497bff;
+  color: #fff;
+  height: 90rpx;
+  line-height: 90rpx;
+  border-radius: 20rpx;
+  box-shadow: 0 10rpx 14rpx 0 rgba(86, 119, 252, 0.2);
 }
 
-.t-login .oauth2 {
+.reg{
+  display:flex;
+  justify-content: space-between;
+  padding:30rpx 0 0;
+}
+
+.reg-left{
+  display: inline-block;
+  color: #5473e8;
+  text-align: left;
+}
+
+.reg-right{
+  display: inline-block;
+  color: #5473e8;
+  text-align: right;
+}
+
+.login-bottom-box {
+  margin-top: 100rpx;
+  bottom: 40rpx;
+  text-align: center;
+  width: 100%;
+}
+
+.oauth2 {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -269,15 +287,14 @@ export default {
   }
 }
 
-.t-login .copyright {
+.copyright {
   text-align: center;
   color: #939393;
   width: 100%;
   font-size: 24rpx;
-
-  u-link {
+  .u-link{
     margin: 0 10rpx;
-    font-size: 24rpx !important;
+    font-size: 24rpx!important;
   }
 }
 

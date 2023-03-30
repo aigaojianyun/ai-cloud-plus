@@ -16,6 +16,7 @@ import com.tencentcloudapi.sms.v20190711.models.SendSmsRequest;
 import com.tencentcloudapi.sms.v20190711.models.SendSmsResponse;
 import com.tencentcloudapi.sms.v20190711.models.SendStatus;
 import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -29,8 +30,10 @@ import java.util.stream.Collectors;
  */
 public class TencentSmsTemplate implements SmsTemplate {
 
+    @Autowired
     private SmsProperties properties;
 
+    @Autowired
     private SmsClient client;
 
     @SneakyThrows(Exception.class)

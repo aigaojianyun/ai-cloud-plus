@@ -11,6 +11,7 @@ import com.cloud.sms.config.properties.SmsProperties;
 import com.cloud.sms.domain.SmsResult;
 import com.cloud.sms.service.SmsTemplate;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,6 +48,7 @@ public class ResourceSmsApi {
      * @param phone 手机号
      */
     @GetMapping("/code")
+    @ApiOperation(value = "登录验证码", notes = "登录验证码")
     public R<Void> smsCaptcha(@NotBlank(message = "{user.phone.not.blank}")
                               @RequestHeader(value = LangConstants.LANGUAGE, required = true)
                               @ApiParam(value = "语言类型", example = "zh_CN") String language,
