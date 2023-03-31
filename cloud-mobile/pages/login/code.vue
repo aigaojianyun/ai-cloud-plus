@@ -21,6 +21,7 @@
 
 import {commonMixin} from '@/common/mixin/mixin.js'
 import {getCode} from "@/api/resource/resource"
+import phone from "./phone";
 
 export default {
   components: {},
@@ -32,8 +33,8 @@ export default {
       zone: '',
       // 验证码登录参数
       loginCode: {
-        phone: this.phone,
-        zone: this.zone,
+        phone: '',
+        zone: '',
         code: '',
         uuid: ''
       },
@@ -53,6 +54,7 @@ export default {
   methods: {
     codeChange(text) {
       this.tips = text;
+      this.getCode()
     },
     // 发送验证码
     getCode() {
@@ -99,8 +101,10 @@ export default {
       }
     },
     finish(e) {
+      this.loginCode.phone = this.phone,
+      this.loginCode.zone = this.zone
       // 登录校验方法
-      this.$store.dispatch('LoginPone', this.loginCode).then(() => {
+      this.$store.dispatch('LoginPhone', this.loginCode).then(() => {
         this.$modal.showToast(this.i18n.login.loginLog)
         this.loginSuccess()
       }).catch(() => {

@@ -35,7 +35,7 @@ const user = {
 
         // 验证码登录
         LoginPhone({commit}, userInfo) {
-            const phone = userInfo.phone.trim()
+            const phone = userInfo.phone
             const zone = userInfo.zone
             const code = userInfo.code
             const uuid = userInfo.uuid

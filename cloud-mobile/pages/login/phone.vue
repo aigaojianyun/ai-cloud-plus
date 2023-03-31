@@ -6,7 +6,7 @@
     <view class="list">
       <view class="list-call">
         <u-input :placeholder="i18n.login.loginPhone.phone" v-model="loginPhone.phone">
-          <u--text :text="loginPhone.zone" slot="prefix" margin="0 3px 0 0" type="tips"></u--text>
+          <u--text :text=" '+' + loginPhone.zone" slot="prefix" margin="0 3px 0 0" type="tips"></u--text>
         </u-input>
       </view>
     </view>
@@ -30,7 +30,7 @@ export default {
     return {
       loginPhone:{
         phone: '13888888888',
-        zone:'+86',
+        zone:'86',
       },
       countryList:[],
     };
@@ -53,16 +53,16 @@ export default {
         this.$tab.navigateTo('/pages/login/code?phone=' + this.loginPhone.phone +'&zone='+ this.loginPhone.zone)
       }, 500);
       //验证码登录下一步
-      this.$modal.msgLoading(this.i18n.login.loginPhone.nextCode)
-      getCode(this.loginPhone).then(res => {
-        if (res.data.code == '200') {
-          setTimeout(() => {
-            this.$tab.navigateTo('/pages/login/code?phone=' + this.loginPhone.phone +'&zone='+ this.loginPhone.zone)
-          }, 500);
-        } else {
-          this.$modal.showToast(res.msg);
-        }
-      });
+      // this.$modal.msgLoading(this.i18n.login.loginPhone.nextCode)
+      // getCode(this.loginPhone).then(res => {
+      //   if (res.data.code == '200') {
+      //     setTimeout(() => {
+      //       this.$tab.navigateTo('/pages/login/code?phone=' + this.loginPhone.phone +'&zone='+ this.loginPhone.zone)
+      //     }, 500);
+      //   } else {
+      //     this.$modal.showToast(res.msg);
+      //   }
+      // });
     },
     onSelect(index) {
       this.selectedOption = this.options[index]
