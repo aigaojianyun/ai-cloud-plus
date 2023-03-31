@@ -11,6 +11,7 @@ import com.cloud.resource.param.PhoneParam;
 import com.cloud.sms.config.properties.SmsProperties;
 import com.cloud.sms.domain.SmsResult;
 import com.cloud.sms.service.SmsTemplate;
+import com.cloud.sms.service.impl.TencentSmsTemplate;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -64,7 +65,7 @@ public class ResourceSmsApi {
         String templateId = "1";
         Map<String, String> map = new HashMap<>(1);
         map.put("code", code);
-        SmsTemplate smsTemplate = SpringUtils.getBean(SmsTemplate.class);
+        SmsTemplate smsTemplate = SpringUtils.getBean(TencentSmsTemplate.class);
         SmsResult result = smsTemplate.send(param.getPhone(), templateId, map);
         if (!result.getIsSuccess()) {
             return R.fail(result.getMessage());

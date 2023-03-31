@@ -42,8 +42,9 @@ module.exports = {
             privacy: 'Privacy Policy',
             loginPhone: {
                 title: 'Mobile quick login',
+                phone:'Phone',
                 next: 'Next',
-                code: 'Obtaining the verification code!',
+                nextCode: 'Obtaining the verification code!',
                 sendCode: 'The verification code has been sent!',
             },
             loginCode: {
@@ -52,7 +53,7 @@ module.exports = {
                 verifyPhone: 'Verify mobile phone number',
                 star: 'Please enter send to',
                 send: 'Is valid for 10 minutes.  If no, obtain the verification code again ',
-                count: 'count down'
+                count: 'Resend'
             },
             captcha: {
                 verifyTop: 'Complete security verification',

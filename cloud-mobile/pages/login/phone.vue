@@ -5,7 +5,9 @@
               :title="i18n.login.loginPhone.title" bgColor="#f3f4f6" ></u-navbar>
     <view class="list">
       <view class="list-call">
-
+        <u-input :placeholder="i18n.login.loginPhone.phone" v-model="loginPhone.phone">
+          <u--text :text="loginPhone.zone" slot="prefix" margin="0 3px 0 0" type="tips"></u--text>
+        </u-input>
       </view>
     </view>
     <view class="button" @click="nextStep()">
@@ -27,30 +29,15 @@ export default {
   data() {
     return {
       loginPhone:{
-        phone: '15368714206',
-        zone:'86',
+        phone: '13888888888',
+        zone:'+86',
       },
       countryList:[],
-      options: [
-        {
-          label: '选项 1',
-          image: 'https://example.com/image1.png'
-        },
-        {
-          label: '选项 2',
-          image: 'https://example.com/image2.png'
-        },
-        {
-          label: '选项 3',
-          image: 'https://example.com/image3.png'
-        }
-      ],
-      selectedOption: null
     };
   },
   onShow() {
     uni.setNavigationBarTitle({
-      title: this.i18n.login.login
+      title: this.i18n.login.loginPhone.title
     })
     this.getCountry()
   },
@@ -62,18 +49,18 @@ export default {
       })
     },
     nextStep() {
+      setTimeout(() => {
+        this.$tab.navigateTo('/pages/login/code?phone=' + this.loginPhone.phone +'&zone='+ this.loginPhone.zone)
+      }, 500);
       //验证码登录下一步
       this.$modal.msgLoading(this.i18n.login.loginPhone.nextCode)
       getCode(this.loginPhone).then(res => {
-        if (res.code == '200') {
+        if (res.data.code == '200') {
           setTimeout(() => {
-            this.$tab.navigateTo('/pages/login/code?phone=' + this.loginPhone.phone)
+            this.$tab.navigateTo('/pages/login/code?phone=' + this.loginPhone.phone +'&zone='+ this.loginPhone.zone)
           }, 500);
         } else {
-          this.$u.toast(res.msg);
-          setTimeout(() => {
-              this.$tab.navigateTo('/pages/login/code?phone=' + this.loginPhone.phone)
-          }, 500);
+          this.$modal.showToast(res.msg);
         }
       });
     },
@@ -113,7 +100,7 @@ export default {
 .button {
   color: #ffffff;
   font-size: 32rpx;
-  width: 80%;
+  width: 60%;
   height: 80rpx;
   background: #497bff;
   box-shadow: 0rpx 0rpx 13rpx 0rpx rgba(15, 168, 250, 0.4);

@@ -27,7 +27,7 @@ export default {
     msgLoading(content){
         uni.showLoading({
             title: content,
-            mask: true
+            mask: true,
         })
     },
     // 弹出提示
@@ -54,7 +54,7 @@ export default {
             uni.showToast({
                 title: option,
                 icon: "none",
-                duration: 1000
+                duration: 500
             })
         }
     },

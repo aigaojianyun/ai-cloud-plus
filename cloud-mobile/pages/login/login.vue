@@ -37,8 +37,8 @@
     </form>
     <!-- 忘记密码/立即注册 -->
     <view class="reg">
-      <navigator class="reg-left" url="" open-type="navigate">{{ i18n.login.cipher }}</navigator>
-      <navigator class="reg-right" url="" open-type="navigate">{{ i18n.login.logon }}</navigator>
+      <navigator class="reg-left" url="" open-type="navigate">{{ i18n.login.logon }}</navigator>
+      <navigator class="reg-right" url="" open-type="navigate">{{ i18n.login.cipher }}</navigator>
     </view>
     <!-- 更多登录方式 -->
     <view class="login-bottom-box">
@@ -52,9 +52,9 @@
       </view>
       <view class="copyright">
         {{i18n.login.agree}}
-        <u-link class="link-left" href="#" text="">{{i18n.login.agreement}}</u-link>
+        <u-link class="link-left" href="#" >{{i18n.login.agreement}}</u-link>
         {{i18n.login.and}}
-        <u-link class="link-right" href="#" text="">{{i18n.login.privacy}}</u-link>
+        <u-link class="link-right" href="#" >{{i18n.login.privacy}}</u-link>
       </view>
     </view>
     <!-- 语言切换 -->
@@ -158,13 +158,13 @@ export default {
     },
     // 验证码登录
     codeLogin(){
-      //this.$tab.navigateTo('/pages/login/phone')
-      this.$modal.showToast(this.i18n.common.coming)
+      this.$tab.navigateTo('/pages/login/phone')
+      //this.$modal.showToast(this.i18n.common.coming)
     },
     // 微信授权登录
     wxLogin() {
       //this.$tab.navigateTo('/pages/login/code')
-      this.$modal.showToast(this.i18n.common.coming)
+      //this.$modal.showToast(this.i18n.common.coming)
     },
   }
 };

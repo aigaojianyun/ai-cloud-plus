@@ -42,6 +42,7 @@ module.exports = {
             privacy: '隐私政策',
             loginPhone: {
                 title: '手机快捷登录',
+                phone:'手机号',
                 next: '下一步',
                 nextCode: '正在获取验证码!',
                 sendCode: '验证码已发送!',
@@ -52,7 +53,7 @@ module.exports = {
                 verifyPhone: '验证手机号',
                 star: '请输入发送至',
                 send: '的6位验证码,有效期10分钟。如未收到,请重新获取验证码',
-                count: '倒计时'
+                count: '重新发送'
             },
             captcha: {
                 verifyTop: '请完成安全验证',

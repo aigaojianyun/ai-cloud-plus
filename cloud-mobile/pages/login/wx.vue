@@ -58,7 +58,6 @@ export default {
       });
     },
     getPhoneNumber: function (e) {
-      console.log(e);
       that.getCode();
       uni.showLoading({
         title: '登录中...'
