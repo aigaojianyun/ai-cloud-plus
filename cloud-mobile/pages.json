@@ -9,7 +9,7 @@
       }
     },
     {
-      "path": "pages/login/loginWx",
+      "path": "pages/login/wx",
       "style": {
         "navigationBarTitleText": "微信授权登录",
         "enablePullDownRefresh": false,
@@ -18,9 +18,18 @@
       }
     },
     {
-      "path": "pages/login/loginPhone",
+      "path": "pages/login/phone",
       "style": {
         "navigationBarTitleText": "验证码快捷登录",
+        "enablePullDownRefresh": false,
+        "navigationStyle": "custom",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/login/code",
+      "style": {
+        "navigationBarTitleText": "验证码",
         "enablePullDownRefresh": false,
         "navigationStyle": "custom",
         "navigationBarTextStyle": "white"

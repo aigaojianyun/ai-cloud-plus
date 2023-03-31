@@ -5,7 +5,8 @@ export function getWallet() {
     return request({
         'url': '/user/center/wallet',
         headers: {
-            isToken: true
+            isToken: true,
+            isLang:true
         },
         'method': 'post'
     })

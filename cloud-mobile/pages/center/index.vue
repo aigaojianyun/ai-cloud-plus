@@ -74,13 +74,13 @@
 
 <script>
 
-import listCell from '@/components/mix-list-cell';
+import mixCell from '@/components/mix-list-cell';
 import {commonMixin} from '@/common/mixin/mixin.js'
 import {getUserInfo} from "@/api/center/user"
 
 export default {
   components: {
-    listCell,
+    mixCell,
   },
   mixins: [commonMixin],
   data() {

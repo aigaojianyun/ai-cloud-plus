@@ -2,73 +2,84 @@
 <template>
   <view class="login">
     <u-navbar :safeAreaInsetTop="true" :placeholder="true" :fixed="true" :autoBack="true" :leftText="i18n.common.regain"
-              :title="i18n.login.loginPhone" bgColor="#f3f4f6" ></u-navbar>
+              :title="i18n.login.loginPhone.title" bgColor="#f3f4f6" ></u-navbar>
     <view class="list">
       <view class="list-call">
-        <view class="iconfont icon-shouji" style="font-size: 22px;color:#5473e8;"></view>
-<!--        <u-field-->
-<!--            v-model="phone"-->
-<!--            label="+86"-->
-<!--            placeholder="请填写手机号"-->
-<!--            style="width: 100%;"-->
-<!--            :border-bottom="false">-->
-<!--        </u-field>-->
+
       </view>
-      <div class="reg">
-        还没有账号？
-        <navigator class="reg-link" url="reg" open-type="navigate">立即注册</navigator>
-      </div>
     </view>
     <view class="button" @click="nextStep()">
-      <text>下一步</text>
+      <text>{{i18n.login.loginPhone.next}}</text>
     </view>
   </view>
 </template>
 
 <script>
+
 import {commonMixin} from '@/common/mixin/mixin.js'
+import {getCountry,getCode} from "@/api/resource/resource"
 
 export default {
-  components: {},
+  components: {
+
+  },
   mixins: [commonMixin],
   data() {
     return {
-      phone: '',
-      zone:'',
+      loginPhone:{
+        phone: '15368714206',
+        zone:'86',
+      },
+      countryList:[],
+      options: [
+        {
+          label: '选项 1',
+          image: 'https://example.com/image1.png'
+        },
+        {
+          label: '选项 2',
+          image: 'https://example.com/image2.png'
+        },
+        {
+          label: '选项 3',
+          image: 'https://example.com/image3.png'
+        }
+      ],
+      selectedOption: null
     };
   },
   onShow() {
     uni.setNavigationBarTitle({
       title: this.i18n.login.login
     })
+    this.getCountry()
   },
   methods: {
+    // 获取区域国家
+    getCountry() {
+      getCountry().then(response => {
+        this.countryList = response.data
+      })
+    },
     nextStep() {
       //验证码登录下一步
-      uni.showLoading({
-        title: '正在获取验证码',
-        mask: true
-      })
-      this.$u.api.sendCode({
-        phoneNo: this.phoneNo,
-      }).then(res => {
+      this.$modal.msgLoading(this.i18n.login.loginPhone.nextCode)
+      getCode(this.loginPhone).then(res => {
         if (res.code == '200') {
           setTimeout(() => {
-            uni.navigateTo({
-              url: '/pages/login/code?phone=' + this.phone
-            });
+            this.$tab.navigateTo('/pages/login/code?phone=' + this.loginPhone.phone)
           }, 500);
         } else {
           this.$u.toast(res.msg);
           setTimeout(() => {
-            uni.navigateTo({
-              url: '/pages/login/code?phone=' + this.phone
-            });
+              this.$tab.navigateTo('/pages/login/code?phone=' + this.loginPhone.phone)
           }, 500);
         }
       });
+    },
+    onSelect(index) {
+      this.selectedOption = this.options[index]
     }
-
   }
 };
 </script>
@@ -97,28 +108,6 @@ export default {
   font-weight: normal;
   color: #333333;
   border-bottom: 0.5px solid #e2e2e2;
-}
-
-.list-call .u-input {
-  flex: 1;
-  font-size: 39rpx;
-  text-align: left;
-  margin-left: 16rpx;
-}
-
-.list-call .u-icon-right {
-  color: #aaaaaa;
-  width: 50rpx;
-  height: 40rpx;
-}
-
-.reg{
-  padding:25rpx 0 0;
-}
-
-.reg-link{
-  display: inline-block;
-  color: #5473e8;
 }
 
 .button {

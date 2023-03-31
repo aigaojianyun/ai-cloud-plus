@@ -5,7 +5,8 @@ export function getUserInfo() {
     return request({
         'url': '/user/center/info',
         headers: {
-            isToken: true
+            isToken: true,
+            isLang:true
         },
         'method': 'post'
     })
@@ -16,7 +17,8 @@ export function updateUserInfo(data) {
     return request({
         url: '/user/center/save',
         headers: {
-            isToken: true
+            isToken: true,
+            isLang:true
         },
         'method': 'post',
         data: data

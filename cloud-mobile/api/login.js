@@ -17,7 +17,8 @@ export function login(username, password, code, uuid) {
     return request({
         'url': '/auth/app/login',
         headers: {
-            isToken: false
+            isToken: false,
+            isLang:true
         },
         'method': 'post',
         'data': data
@@ -39,7 +40,8 @@ export function loginPhone(phone, zone, code, uuid) {
     return request({
         'url': '/auth/app/login/phone',
         headers: {
-            isToken: false
+            isToken: false,
+            isLang:true
         },
         'method': 'post',
         'data': data
@@ -64,7 +66,8 @@ export function loginWx(code, encryptedData, iv, nickName, avatarUrl, gender) {
     return request({
         'url': '/auth/app/login/wx',
         headers: {
-            isToken: false
+            isToken: false,
+            isLang:true
         },
         'method': 'post',
         'data': data

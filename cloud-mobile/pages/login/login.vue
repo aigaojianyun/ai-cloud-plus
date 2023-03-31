@@ -1,37 +1,30 @@
 <!-- 蓝色简洁登录页面 -->
 <template>
   <view class="login">
-
     <!-- 切换语言 -->
     <view class="l-language" @click="handleToLang">
       {{ i18n.login.language }}》
     </view>
-
     <!-- 页面装饰图片 -->
     <image class="l-img-a" src="/../../static/images/background/b-1.png"></image>
     <image class="l-img-b" src="/../../static/images/background/b-2.png"></image>
-
     <!-- 标题 -->
     <view class="l-b">{{ i18n.login.title }}</view>
     <view class="l-b2">{{ i18n.login.subTitle }}</view>
-
     <!-- 登录 -->
     <form class="login-form">
-
       <!-- 登录账号 -->
       <view class="login-form-item">
         <u-input v-model="loginForm.username" :placeholder="i18n.login.username" maxlength="30">
           <u-icon slot="prefix" name="account" size="35px"></u-icon>
         </u-input>
       </view>
-
       <!-- 登录密码 -->
       <view class="login-form-item">
         <u-input v-model="loginForm.password" type="password" :placeholder="i18n.login.password" maxlength="16">
           <u-icon slot="prefix" name="lock" size="35px"></u-icon>
         </u-input>
       </view>
-
       <!-- 验证码 -->
       <Verify
           @success='success'
@@ -42,18 +35,16 @@
       </Verify>
       <button type="primary" @click="handleLogin">{{ i18n.login.login }}</button>
     </form>
-
     <!-- 忘记密码/立即注册 -->
     <view class="reg">
       <navigator class="reg-left" url="" open-type="navigate">{{ i18n.login.cipher }}</navigator>
       <navigator class="reg-right" url="" open-type="navigate">{{ i18n.login.logon }}</navigator>
     </view>
-
     <!-- 更多登录方式 -->
     <view class="login-bottom-box">
       <u-divider :text="i18n.login.more"></u-divider>
       <view class="oauth2">
-        <u-icon class="u-icon" size="40" color="#23a0f0" name="phone-fill" @click="codeLogin"></u-icon>
+        <u-icon class="u-icon" size="40" color="#939393" name="phone" @click="codeLogin"></u-icon>
         <u-icon class="u-icon" size="40" color="#36c956" name="weixin-circle-fill" @click="wxLogin"></u-icon>
         <u-icon class="u-icon" size="40" color="#23a0f0" name="zhifubao-circle-fill" @click=""></u-icon>
         <u-icon class="u-icon" size="40" color="#23a0f0" name="twitter-circle-fill" @click=""></u-icon>
@@ -66,10 +57,8 @@
         <u-link class="link-right" href="#" text="">{{i18n.login.privacy}}</u-link>
       </view>
     </view>
-
     <!-- 语言切换 -->
     <u-action-sheet :actions="langList" :show="showLang" @select="clickLang" :cancelText="i18n.common.cancel" @close="showLang = false"></u-action-sheet>
-
   </view>
 </template>
 <script>
@@ -85,8 +74,8 @@ export default {
   data() {
     return {
       loginForm: {
-        username: "",
-        password: "",
+        username: "ai168",
+        password: "123456",
         code: "",
         uuid: ""
       },
@@ -135,7 +124,7 @@ export default {
       })
       // 利用路由，刷新当前页面
       setTimeout(() => {
-        this.$router.go(0)
+        this.$tab.reLaunch('/pages/login/login')
       }, 500)
     },
     // 打开验证码
@@ -169,10 +158,12 @@ export default {
     },
     // 验证码登录
     codeLogin(){
-      this.$tab.navigateTo('/pages/login/loginPhone')
+      //this.$tab.navigateTo('/pages/login/phone')
+      this.$modal.showToast(this.i18n.common.coming)
     },
     // 微信授权登录
     wxLogin() {
+      //this.$tab.navigateTo('/pages/login/code')
       this.$modal.showToast(this.i18n.common.coming)
     },
   }

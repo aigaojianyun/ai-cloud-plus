@@ -23,6 +23,13 @@ export default {
             icon: 'error'
         })
     },
+    // 加载提示消息
+    msgLoading(content){
+        uni.showLoading({
+            title: content,
+            mask: true
+        })
+    },
     // 弹出提示
     alert(content) {
         if (getLang() === lang.EN_US){
