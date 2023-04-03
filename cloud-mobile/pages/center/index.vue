@@ -74,8 +74,9 @@
 
 <script>
 
-import listCell from '@/components/mix-list-cell';
+import lang from '@/common/language/lang'
 import {commonMixin} from '@/common/mixin/mixin.js'
+import listCell from '@/components/mix-list-cell';
 import {getUserInfo} from "@/api/center/user"
 
 export default {
@@ -94,14 +95,14 @@ export default {
     uni.setNavigationBarTitle({
       title: this.i18n.tabBar.me
     })
-    this.getInfo()
     this.langList = [{
       name: this.i18n.common.lang.en,
-      lang: 'en_US'
+      lang: lang.EN_US
     }, {
       name: this.i18n.common.lang.zh,
-      lang: 'zh_CN'
+      lang: lang.ZH_CN
     }]
+    this.getInfo()
   },
   methods: {
     // 跳转到公告

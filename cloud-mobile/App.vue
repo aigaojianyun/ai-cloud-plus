@@ -1,6 +1,7 @@
 <script>
-import config from './config'
-import {getToken} from '@/utils/auth'
+import config from '@/config'
+import lang from '@/common/language/lang'
+import {getToken,getLang} from '@/utils/auth'
 
 export default {
   methods: {
@@ -13,6 +14,15 @@ export default {
       this.checkLogin()
       //#endif
     },
+    // 初始化语言
+    initLang(){
+      if (!getLang()){
+        uni.setStorageSync('language',lang.ZH_CN)
+      }else {
+        uni.getStorageSync('language')
+      }
+    },
+    // 初始化请求
     initConfig() {
       this.globalData.config = config
     },
@@ -25,6 +35,8 @@ export default {
   onLaunch: function () {
     // 初始化应用
     this.initApp();
+    // 初始化语言
+    this.initLang();
     // 加载系统信息
     this.$store.dispatch('SystemInfo')
   },

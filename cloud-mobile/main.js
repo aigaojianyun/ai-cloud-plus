@@ -15,6 +15,7 @@ Vue.prototype.store = store;
 // 全局 VueI18n
 import VueI18n from 'vue-i18n'
 Vue.use(VueI18n)
+import lang from './common/language/lang'
 import English from "./common/language/en_US.js"
 import Chinese from "./common/language/zh_CN.js"
 // 注意这里
@@ -22,7 +23,7 @@ import Chinese from "./common/language/zh_CN.js"
 // messages 是自定义的语言包
 const i18n = new VueI18n({
     // 如果缓存中有语言设置就选择缓存中的，否则就设置默认语言zh_CN
-    locale: uni.getStorageSync('language') ? uni.getStorageSync('language') : 'zh_CN',
+    locale: uni.getStorageSync('language') ? uni.getStorageSync('language') : lang.ZH_CN,
     //必须是messages
     messages: {
         'en_US': English,
