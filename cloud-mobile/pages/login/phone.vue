@@ -10,9 +10,9 @@
         </u-input>
       </view>
     </view>
-    <view class="button" @click="nextStep()">
+    <button class="button" type="primary"  @click="nextStep()">
       <text>{{i18n.login.loginPhone.next}}</text>
-    </view>
+    </button>
   </view>
 </template>
 
@@ -48,25 +48,18 @@ export default {
         this.countryList = response.data
       })
     },
+    // 下一步
     nextStep() {
-      setTimeout(() => {
-        this.$tab.navigateTo('/pages/login/code?phone=' + this.loginPhone.phone +'&zone='+ this.loginPhone.zone)
-      }, 500);
-      //验证码登录下一步
-      // this.$modal.msgLoading(this.i18n.login.loginPhone.nextCode)
-      // getCode(this.loginPhone).then(res => {
-      //   if (res.data.code == '200') {
-      //     setTimeout(() => {
-      //       this.$tab.navigateTo('/pages/login/code?phone=' + this.loginPhone.phone +'&zone='+ this.loginPhone.zone)
-      //     }, 500);
-      //   } else {
-      //     this.$modal.showToast(res.msg);
-      //   }
-      // });
+      if (this.loginPhone.zone === ""){
+        this.$modal.msgError(this.i18n.login.inputZone)
+      } else if (this.loginPhone.phone === "") {
+        this.$modal.msgError(this.i18n.login.inputPhone)
+      }else {
+        setTimeout(() => {
+          this.$tab.navigateTo('/pages/login/code?phone=' + this.loginPhone.phone +'&zone='+ this.loginPhone.zone)
+        }, 500);
+      }
     },
-    onSelect(index) {
-      this.selectedOption = this.options[index]
-    }
   }
 };
 </script>
@@ -97,10 +90,10 @@ export default {
   border-bottom: 0.5px solid #e2e2e2;
 }
 
-.button {
+.login button {
   color: #ffffff;
   font-size: 32rpx;
-  width: 60%;
+  width: 70%;
   height: 80rpx;
   background: #497bff;
   box-shadow: 0rpx 0rpx 13rpx 0rpx rgba(15, 168, 250, 0.4);
@@ -108,7 +101,6 @@ export default {
   line-height: 80rpx;
   text-align: center;
   margin: 50rpx auto 0;
-
 }
 
 

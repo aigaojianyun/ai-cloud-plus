@@ -133,6 +133,7 @@ export default {
     handleToLang() {
       this.showLang = true
     },
+    // 语言切换
     clickLang(index) {
       let lang = index.lang
       uni.setStorageSync('language', lang);

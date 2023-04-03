@@ -29,7 +29,6 @@ import java.util.stream.Collectors;
  *
  * @author ai-cloud
  */
-@Service
 public class TencentSmsTemplate implements SmsTemplate {
 
     @Autowired
@@ -49,6 +48,7 @@ public class TencentSmsTemplate implements SmsTemplate {
         this.client = new SmsClient(credential, "", clientProfile);
     }
 
+    @Override
     public SmsResult send(String phones, String templateId, Map<String, String> param) {
         if (StringUtils.isBlank(phones)) {
             throw new SmsException("手机号不能为空");

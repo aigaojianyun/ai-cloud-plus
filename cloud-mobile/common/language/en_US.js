@@ -29,6 +29,7 @@ module.exports = {
             inputPhone: 'Please enter your login account',
             inputEmail: 'Please enter your email',
             inputPassword: 'Please enter your password',
+            inputZone: 'Please select a country or region',
             username: 'Account/phone number',
             password: 'password',
             login: 'Sign in',

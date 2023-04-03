@@ -11,7 +11,6 @@ import com.cloud.resource.param.PhoneParam;
 import com.cloud.sms.config.properties.SmsProperties;
 import com.cloud.sms.domain.SmsResult;
 import com.cloud.sms.service.SmsTemplate;
-import com.cloud.sms.service.impl.TencentSmsTemplate;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -40,13 +39,15 @@ public class ResourceSmsApi {
 
     private Long validTime = Constants.CAPTCHA_EXPIRATION;
 
+
     /**
      * 短信验证码
      *
-     * @param param 发送验证码参数
+     * @param param    发送验证码参数
+     * @param language 语言类型
      */
-    @PostMapping("/code")
-    @ApiOperation(value = "登录验证码", notes = "登录验证码")
+    @PostMapping("/login/code")
+    @ApiOperation(value = "快捷登录验证码", notes = "快捷登录验证码")
     public R<?> smsCaptcha(@RequestBody PhoneParam param,
                            @RequestHeader(value = LangConstants.LANGUAGE, required = true)
                            @ApiParam(value = "语言类型", example = "zh_CN") String language) {
@@ -65,12 +66,13 @@ public class ResourceSmsApi {
         String templateId = "1";
         Map<String, String> map = new HashMap<>(1);
         map.put("code", code);
-        SmsTemplate smsTemplate = SpringUtils.getBean(TencentSmsTemplate.class);
+        SmsTemplate smsTemplate = SpringUtils.getBean(SmsTemplate.class);
         SmsResult result = smsTemplate.send(param.getPhone(), templateId, map);
         if (!result.getIsSuccess()) {
             return R.fail(result.getMessage());
         }
-        return R.ok();
+        //Object result = smsTemplate.send(param.getPhone(), templateId, map);
+        return R.ok(result);
     }
 
 

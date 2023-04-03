@@ -41,4 +41,5 @@ public class SmsProperties {
      */
     private String sdkAppId;
 
+
 }

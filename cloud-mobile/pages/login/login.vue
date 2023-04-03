@@ -46,7 +46,6 @@
       <view class="oauth2">
         <u-icon class="u-icon" size="40" color="#939393" name="phone" @click="codeLogin"></u-icon>
         <u-icon class="u-icon" size="40" color="#36c956" name="weixin-circle-fill" @click="wxLogin"></u-icon>
-        <u-icon class="u-icon" size="40" color="#23a0f0" name="zhifubao-circle-fill" @click=""></u-icon>
         <u-icon class="u-icon" size="40" color="#23a0f0" name="twitter-circle-fill" @click=""></u-icon>
         <u-icon class="u-icon" size="40" color="" name="github-circle-fill" @click=""></u-icon>
       </view>
@@ -101,6 +100,7 @@ export default {
     handleToLang() {
       this.showLang = true
     },
+    // 语言切换
     clickLang(index) {
       let lang = index.lang
       uni.setStorageSync('language', lang);
@@ -144,9 +144,14 @@ export default {
       this.loginForm.code = data.captchaVerification;
       this.$store.dispatch('Login', this.loginForm).then(() => {
         this.$refs.verify.hide();
-        this.$modal.showToast(this.i18n.login.loginLog)
+        // 加载中提示
+        this.$modal.showLoading(this.i18n.login.loginLog)
+        // 登录成功后
         this.loginSuccess()
+        // 关闭加载中
+        this.$modal.hideLoading();
       }).catch(() => {
+        // 登录异常，从新初始化验证码
         this.$refs.verify.hide();
       })
     },
@@ -160,12 +165,12 @@ export default {
     // 验证码登录
     codeLogin(){
       this.$tab.navigateTo('/pages/login/phone')
-      //this.$modal.showToast(this.i18n.common.coming)
+      //this.$modal.showLoading(this.i18n.common.coming)
     },
     // 微信授权登录
     wxLogin() {
-      //this.$tab.navigateTo('/pages/login/code')
-      //this.$modal.showToast(this.i18n.common.coming)
+      //this.$tab.navigateTo('/pages/login/wx')
+      //this.$modal.showLoading(this.i18n.common.coming)
     },
   }
 };

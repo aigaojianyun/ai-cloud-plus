@@ -12,6 +12,8 @@ import com.cloud.sms.domain.SmsResult;
 import com.cloud.sms.service.SmsTemplate;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
@@ -41,6 +43,7 @@ public class AliyunSmsTemplate implements SmsTemplate {
         this.client = new Client(config);
     }
 
+    @Override
     public SmsResult send(String phones, String templateId, Map<String, String> param) {
         if (StringUtils.isBlank(phones)) {
             throw new SmsException("手机号不能为空");

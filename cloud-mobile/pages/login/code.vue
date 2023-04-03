@@ -5,14 +5,14 @@
     <view class="reg-text">{{ i18n.login.loginCode.verifyPhone }}</view>
     <view class="remind-text">{{ i18n.login.loginCode.star }}<em>{{ phone }}</em>{{ i18n.login.loginCode.send }}</view>
     <view class="remind-code">
-      <u-code-input v-model="loginCode.code" :maxlength="6" color="#000" borderColor="#f56c6c"
+      <u-code-input v-model="loginCode.code" :maxlength="6" :size="38" :fontSize="25" color="#000" borderColor="#f56c6c"
                     @finish="finish"></u-code-input>
     </view>
     <view>
       <u-code ref="uCode" @change="codeChange" keep-running :start-text="i18n.login.loginCode.anew"
               :change-text="'XS' + i18n.login.loginCode.count " @start="disabled = true" @end="disabled = false"
       ></u-code>
-      <u-button class="button" @tap="getCode" :text="tips" :disabled="disabled"
+      <u-button class="button" type="primary"  @tap="getCode" :text="tips" :disabled="disabled"
       ></u-button>
     </view>
   </view>
@@ -60,7 +60,7 @@ export default {
     getCode() {
       if (this.$refs.uCode.canGetCode) {
         // 请求验证码
-        this.$modal.showToast(this.i18n.login.loginPhone.nextCode)
+        this.$modal.showLoading(this.i18n.login.loginPhone.nextCode)
         getCode({
           phone: this.phone,
           zone: this.zone
@@ -68,19 +68,20 @@ export default {
           if (res.data.code === 200) {
             setTimeout(() => {
               // 这里此提示会被this.start()方法中的提示覆盖
-              this.$modal.showToast(this.i18n.login.loginPhone.sendCode)
+              this.$modal.msgSuccess(this.i18n.login.loginPhone.sendCode)
               // 通知验证码组件内部开始倒计时
               this.$refs.uCode.start();
             }, 500);
           } else {
             setTimeout(() => {
-              this.$modal.showToast(res.msg);
+              this.$modal.msgError(res.msg);
             }, 500);
           }
         });
+        this.$modal.hideLoading();
       } else {
         // 倒计时结束后再发送
-        this.$modal.showToast(this.i18n.login.loginPhone.nextCode)
+        this.$modal.showLoading(this.i18n.login.loginPhone.nextCode)
         getCode({
           phone: this.phone,
           zone: this.zone
@@ -88,16 +89,17 @@ export default {
           if (res.data.code === 200) {
             setTimeout(() => {
               // 这里此提示会被this.start()方法中的提示覆盖
-              this.$modal.showToast(this.i18n.login.loginPhone.sendCode)
+              this.$modal.msgSuccess(this.i18n.login.loginPhone.sendCode)
               // 通知验证码组件内部开始倒计时
               this.$refs.uCode.start();
             }, 500);
           } else {
             setTimeout(() => {
-              this.$modal.showToast(res.msg);
+              this.$modal.msgError(res.msg);
             }, 500);
           }
         });
+        this.$modal.hideLoading();
       }
     },
     finish(e) {
@@ -105,8 +107,9 @@ export default {
       this.loginCode.zone = this.zone
       // 登录校验方法
       this.$store.dispatch('LoginPhone', this.loginCode).then(() => {
-        this.$modal.showToast(this.i18n.login.loginLog)
+        this.$modal.showLoading(this.i18n.login.loginLog)
         this.loginSuccess()
+        this.$modal.hideLoading();
       }).catch(() => {
       })
     },
@@ -140,13 +143,16 @@ export default {
   }
 }
 .remind-code {
-  text-align: center;
   padding: 30rpx 70rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
-.button {
+.login button {
   color: #ffffff;
   font-size: 32rpx;
-  width: 60%;
+  width: 70%;
   height: 80rpx;
   background: #497bff;
   box-shadow: 0rpx 0rpx 13rpx 0rpx rgba(15, 168, 250, 0.4);

@@ -24,6 +24,8 @@ import java.util.Map;
 
 /**
  * 邮件工具类
+ *
+ * @author ai-cloud
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MailUtils {

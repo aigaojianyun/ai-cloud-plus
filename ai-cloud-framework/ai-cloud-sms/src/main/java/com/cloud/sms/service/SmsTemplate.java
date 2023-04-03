@@ -1,7 +1,6 @@
 package com.cloud.sms.service;
 
 import com.cloud.sms.domain.SmsResult;
-import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
@@ -10,7 +9,6 @@ import java.util.Map;
  *
  * @author ai-cloud
  */
-@Component
 public interface SmsTemplate {
 
     /**

@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * JavaMail 配置
@@ -13,8 +14,8 @@ import org.springframework.context.annotation.Bean;
  * @author ai-cloud
  */
 @AutoConfiguration
-@ConditionalOnProperty(value = "mail.enabled", havingValue = "true")
 @EnableConfigurationProperties(MailProperties.class)
+@ConditionalOnProperty(value = "mail.enabled", havingValue = "true")
 public class MailConfiguration {
 
     @Bean

@@ -29,6 +29,7 @@ module.exports = {
             inputPhone: '请输入您的手机号',
             inputEmail: '请输入您的邮箱',
             inputPassword: '请输入您的密码',
+            inputZone: '请选择国家区域',
             username: '账号/手机号',
             password: '密码',
             login: '登录',

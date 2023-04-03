@@ -20,7 +20,7 @@
     {
       "path": "pages/login/phone",
       "style": {
-        "navigationBarTitleText": "验证码快捷登录",
+        "navigationBarTitleText": "手机快捷登录",
         "enablePullDownRefresh": false,
         "navigationStyle": "custom",
         "navigationBarTextStyle": "white"

@@ -24,11 +24,15 @@ export default {
         })
     },
     // 加载提示消息
-    msgLoading(content){
+    showLoading(content){
         uni.showLoading({
             title: content,
             mask: true,
         })
+    },
+    // 关闭提示消息
+    hideLoading() {
+        uni.hideLoading()
     },
     // 弹出提示
     alert(content) {
@@ -92,15 +96,4 @@ export default {
             }
         })
     },
-    // 打开遮罩层
-    loading(content) {
-        uni.showLoading({
-            title: content,
-            icon: 'none'
-        })
-    },
-    // 关闭遮罩层
-    closeLoading() {
-        uni.hideLoading()
-    }
 }
