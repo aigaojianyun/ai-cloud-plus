@@ -1013,7 +1013,8 @@ public class ExcelUtil<T> {
                     Excels attrs = field.getAnnotation(Excels.class);
                     Excel[] excels = attrs.value();
                     for (Excel attr : excels) {
-                        if (attr != null && (attr.type() == Excel.Type.ALL || attr.type() == type)) {
+                        if (!ArrayUtils.contains(this.excludeFields, field.getName() + "." + attr.targetAttr())
+                                && (attr != null && (attr.type() == Excel.Type.ALL || attr.type() == type))) {
                             field.setAccessible(true);
                             fields.add(new Object[]{field, attr});
                         }

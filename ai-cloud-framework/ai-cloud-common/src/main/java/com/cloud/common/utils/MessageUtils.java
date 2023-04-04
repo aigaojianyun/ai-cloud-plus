@@ -1,11 +1,7 @@
 package com.cloud.common.utils;
 
-import com.cloud.common.utils.SpringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
-
-import java.util.Locale;
 
 /**
  * 获取i18n资源文件

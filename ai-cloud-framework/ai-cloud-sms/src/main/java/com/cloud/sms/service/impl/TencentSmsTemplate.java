@@ -17,7 +17,6 @@ import com.tencentcloudapi.sms.v20190711.models.SendSmsResponse;
 import com.tencentcloudapi.sms.v20190711.models.SendStatus;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.Map;

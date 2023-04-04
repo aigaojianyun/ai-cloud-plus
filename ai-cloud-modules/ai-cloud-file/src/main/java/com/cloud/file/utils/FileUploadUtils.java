@@ -1,5 +1,6 @@
 package com.cloud.file.utils;
 
+import com.cloud.common.exception.file.FileException;
 import com.cloud.common.exception.file.FileNameLengthLimitExceededException;
 import com.cloud.common.exception.file.FileSizeLimitExceededException;
 import com.cloud.common.exception.file.InvalidExtensionException;
@@ -43,6 +44,8 @@ public class FileUploadUtils {
     public static final String upload(String baseDir, MultipartFile file) throws IOException {
         try {
             return upload(baseDir, file, MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION);
+        } catch (FileException fe) {
+            throw new IOException(fe.getDefaultMessage(), fe);
         } catch (Exception e) {
             throw new IOException(e.getMessage(), e);
         }

@@ -12,8 +12,6 @@ import com.cloud.sms.domain.SmsResult;
 import com.cloud.sms.service.SmsTemplate;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.Map;
 

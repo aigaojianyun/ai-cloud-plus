@@ -1,9 +1,7 @@
 package com.cloud.sms.config;
 
 
-import com.cloud.common.domain.R;
 import com.cloud.sms.config.properties.SmsProperties;
-import com.cloud.sms.domain.SmsResult;
 import com.cloud.sms.service.SmsTemplate;
 import com.cloud.sms.service.impl.AliyunSmsTemplate;
 import com.cloud.sms.service.impl.TencentSmsTemplate;
@@ -13,8 +11,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.Map;
 
 /**
  * 短信配置类
