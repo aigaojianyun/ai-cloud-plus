@@ -1,8 +1,8 @@
 package com.cloud.user.api.factory;
 
 
-import com.cloud.common.constant.LangConstants;
 import com.cloud.common.domain.R;
+import com.cloud.common.utils.MessageUtils;
 import com.cloud.user.api.domain.User;
 import com.cloud.user.api.model.LoginUser;
 import com.cloud.user.api.service.RemoteUserService;
@@ -22,33 +22,21 @@ public class RemoteUserFallbackFactory implements FallbackFactory<RemoteUserServ
 
     @Override
     public RemoteUserService create(Throwable throwable) {
-        log.error("用户服务调用失败:{}", throwable.getMessage());
+        log.error(MessageUtils.message("user.service.to"), throwable.getMessage());
         return new RemoteUserService() {
             @Override
             public R<LoginUser> getUserInfo(String param, String language, String source) {
-                if (language.equals(LangConstants.EN_US)) {
-                    return R.fail("Failed to query user:" + throwable.getMessage());
-                } else {
-                    return R.fail("查询用户失败:" + throwable.getMessage());
-                }
+                return R.fail(MessageUtils.message("user.query.to") + throwable.getMessage());
             }
 
             @Override
             public R<Boolean> registerUserInfo(User user, String language, String source) {
-                if (language.equals(LangConstants.EN_US)) {
-                    return R.fail("Failed to register user:" + throwable.getMessage());
-                } else {
-                    return R.fail("注册用户失败:" + throwable.getMessage());
-                }
+                return R.fail(MessageUtils.message("user.register.to") + throwable.getMessage());
             }
 
             @Override
             public R<Integer> updateUserInfo(User user, String language, String source) {
-                if (language.equals(LangConstants.EN_US)) {
-                    return R.fail("Failed to update user:" + throwable.getMessage());
-                } else {
-                    return R.fail("更新用户失败:" + throwable.getMessage());
-                }
+                return R.fail(MessageUtils.message("user.update.to") + throwable.getMessage());
             }
 
         };

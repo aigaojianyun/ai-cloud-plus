@@ -15,7 +15,7 @@ export function getCountry() {
 // 获取验证码
 export function getCode(data) {
     return request({
-        'url': '/resource/sms/code',
+        'url': '/resource/sms/login/code',
         headers: {
             isToken: false,
             isLang:true

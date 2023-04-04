@@ -26,7 +26,7 @@ public class CountryDto {
     @ApiModelProperty(value = "区号", example = "+86")
     private String areaCode;
 
-    @ApiModelProperty(value = "语言", example = "zh_CN")
+    @ApiModelProperty(value = "语言", example = "zh-CN")
     private String language;
 
     @ApiModelProperty(value = "当地货币缩写", example = "CNY")

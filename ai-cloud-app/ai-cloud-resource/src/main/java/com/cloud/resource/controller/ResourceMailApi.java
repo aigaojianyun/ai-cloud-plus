@@ -45,13 +45,9 @@ public class ResourceMailApi {
     @ApiOperation(value = "邮箱登录验证码", notes = "邮箱登录验证码")
     public R<?> sendText(@RequestBody MailParam param,
                          @RequestHeader(value = LangConstants.LANGUAGE, required = true)
-                         @ApiParam(value = "语言类型", example = "zh_CN") String language) {
+                         @ApiParam(value = "语言类型", example = "zh-CN") String language) {
         if (!mailProperties.getEnabled()) {
-            if (language.equals(LangConstants.EN_US)) {
-                return R.fail("The Ma function is not enabled in the system!");
-            } else if (language.equals(LangConstants.ZH_CN)) {
-                return R.fail("The current system does not have the mailbox function enabled!");
-            }
+            return R.fail("当前系统没有开启邮箱功能");
         }
         String code = RandomUtil.randomNumbers(6);
         // 保存验证码信息

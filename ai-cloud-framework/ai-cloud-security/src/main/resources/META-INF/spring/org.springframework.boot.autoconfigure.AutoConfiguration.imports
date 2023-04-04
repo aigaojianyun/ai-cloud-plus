@@ -1,4 +1,5 @@
 com.cloud.security.config.WebMvcConfig
+com.cloud.security.config.I18nConfig
 com.cloud.security.service.SysTokenService
 com.cloud.security.service.WebTokenService
 com.cloud.security.aspect.PreAuthorizeAspect

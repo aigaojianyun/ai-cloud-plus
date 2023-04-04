@@ -10,7 +10,10 @@ import com.anji.captcha.service.CaptchaService;
 import com.cloud.auth.param.VerifyCodeParam;
 import com.cloud.auth.param.VerifyPhoneParam;
 import com.cloud.auth.param.WeiXinLoginParam;
-import com.cloud.common.constant.*;
+import com.cloud.common.constant.CacheConstants;
+import com.cloud.common.constant.Constants;
+import com.cloud.common.constant.SecurityConstants;
+import com.cloud.common.constant.UserConstants;
 import com.cloud.common.domain.R;
 import com.cloud.common.enums.UserStatus;
 import com.cloud.common.exception.CaptchaException;
@@ -20,6 +23,7 @@ import com.cloud.common.utils.StringUtils;
 import com.cloud.common.utils.ip.IpUtils;
 import com.cloud.common.utils.uuid.IdUtils;
 import com.cloud.redis.service.RedisService;
+import com.cloud.common.utils.MessageUtils;
 import com.cloud.user.api.domain.User;
 import com.cloud.user.api.model.LoginUser;
 import com.cloud.user.api.service.RemoteUserService;
@@ -76,65 +80,35 @@ public class LoginService {
         captchaVO.setCaptchaVerification(code);
         ResponseModel response = captchaService.verification(captchaVO);
         if (!response.isSuccess()) {
-            if (language.equals(LangConstants.EN_US)) {
-                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "Validation failed");
-                throw new CaptchaException("Validation failed!");
-            } else if (language.equals(LangConstants.ZH_CN)) {
-                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "验证失败");
-                throw new CaptchaException("验证失败!");
-            }
+            sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.captcha.expire"));
+            throw new CaptchaException(MessageUtils.message("user.captcha.expire"));
         }
         // 用户名或密码为空 错误
         if (StringUtils.isAnyBlank(username, password)) {
-            if (language.equals(LangConstants.EN_US)) {
-                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "User/password must be filled in");
-                throw new ServiceException("User/password must be filled in!");
-            } else if (language.equals(LangConstants.ZH_CN)) {
-                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "用户/密码必须填写");
-                throw new ServiceException("用户/密码必须填写!");
-            }
+            sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.username.password.is.not"));
+            throw new ServiceException(MessageUtils.message("user.username.password.is.not"));
         }
         // 密码如果不在指定范围内 错误
         if (password.length() < UserConstants.PASSWORD_MIN_LENGTH || password.length() > UserConstants.PASSWORD_MAX_LENGTH) {
-            if (language.equals(LangConstants.EN_US)) {
-                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "The user password is not within the specified range");
-                throw new ServiceException("The user password is not within the specified range!");
-            } else if (language.equals(LangConstants.ZH_CN)) {
-                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "用户密码不在指定范围");
-                throw new ServiceException("用户密码不在指定范围!");
-            }
+            sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.password.is.not"));
+            throw new ServiceException(MessageUtils.message("user.password.is.not"));
         }
         // 用户名不在指定范围内 错误
         if (username.length() < UserConstants.USERNAME_MIN_LENGTH || username.length() > UserConstants.USERNAME_MAX_LENGTH) {
-            if (language.equals(LangConstants.EN_US)) {
-                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "The user name is not in the specified range");
-                throw new ServiceException("The user name is not in the specified range!");
-            } else if (language.equals(LangConstants.ZH_CN)) {
-                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "用户名不在指定范围");
-                throw new ServiceException("用户名不在指定范围!");
-            }
+            sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.username.is.not"));
+            throw new ServiceException(MessageUtils.message("user.username.is.not"));
         }
         // IP黑名单校验
         String blackStr = Convert.toStr(redisService.getCacheObject(CacheConstants.SYS_LOGIN_BLACKIPLIST));
         if (IpUtils.isMatchedIp(blackStr, IpUtils.getIpAddr())) {
-            if (language.equals(LangConstants.EN_US)) {
-                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "Unfortunately, the access IP has been blacklisted in the system");
-                throw new ServiceException("Unfortunately, the access IP has been blacklisted in the system!");
-            } else if (language.equals(LangConstants.ZH_CN)) {
-                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "很遗憾，访问IP已被列入系统黑名单");
-                throw new ServiceException("很遗憾，访问IP已被列入系统黑名单!");
-            }
+            sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("login.blocked"));
+            throw new ServiceException(MessageUtils.message("login.blocked"));
         }
         // 查询用户信息
         R<LoginUser> userResult = remoteUserService.getUserInfo(username, language, SecurityConstants.INNER);
         if (StringUtils.isNull(userResult) || StringUtils.isNull(userResult.getData())) {
-            if (language.equals(LangConstants.EN_US)) {
-                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "The login user does not exist");
-                throw new ServiceException("log on user：" + username + "non-existent!");
-            } else if (language.equals(LangConstants.ZH_CN)) {
-                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "登录用户不存在");
-                throw new ServiceException("登录用户：" + username + "不存在!");
-            }
+            sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.login.username") + username + MessageUtils.message("user.login.username.not"));
+            throw new ServiceException(MessageUtils.message("user.login.username") + username + MessageUtils.message("user.login.username.not"));
         }
         if (R.FAIL == userResult.getCode()) {
             throw new ServiceException(userResult.getMsg());
@@ -142,30 +116,18 @@ public class LoginService {
         LoginUser userInfo = userResult.getData();
         // 用户信息
         User user = userResult.getData().getUser();
+        // 是否删除
         if (UserStatus.DELETED.getCode().equals(user.getDeleteFlag())) {
-            if (language.equals(LangConstants.EN_US)) {
-                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "Sorry, your account has been deleted");
-                throw new ServiceException("Sorry, your account number：" + username + "have been deleted!");
-            } else if (language.equals(LangConstants.ZH_CN)) {
-                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "对不起，您的账号已被删除");
-                throw new ServiceException("对不起，您的账号：" + username + " 已被删除!");
-            }
+            sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.delete"));
+            throw new ServiceException(MessageUtils.message("user.login.sorry") + username + MessageUtils.message("user.login.sorry.delete"));
         }
+        // 是否停用
         if (UserStatus.DISABLE.getCode().equals(user.getStatusFlag())) {
-            if (language.equals(LangConstants.EN_US)) {
-                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "The user has been deactivated, please contact the administrator");
-                throw new ServiceException("Sorry, your account number：" + username + "deactivated!");
-            } else if (language.equals(LangConstants.ZH_CN)) {
-                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "用户已停用，请联系管理员");
-                throw new ServiceException("对不起，您的账号：" + username + " 已停用");
-            }
+            sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.blocked"));
+            throw new ServiceException(MessageUtils.message("user.login.sorry") + username + MessageUtils.message("user.login.sorry.blocked"));
         }
         passwordService.validate(user, password, language);
-        if (language.equals(LangConstants.EN_US)) {
-            sysRecordLogService.recordLogininfor(username, Constants.LOGIN_SUCCESS, "Login succeeded");
-        } else if (language.equals(LangConstants.ZH_CN)) {
-            sysRecordLogService.recordLogininfor(username, Constants.LOGIN_SUCCESS, "登录成功");
-        }
+        sysRecordLogService.recordLogininfor(username, Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success"));
         return userInfo;
     }
 
@@ -183,19 +145,11 @@ public class LoginService {
         String codeKey = redisService.getCacheObject(verifyKey);
         // 校验验证码是否过期
         if (StringUtils.isNull(codeKey)) {
-            if (language.equals(LangConstants.EN_US)) {
-                throw new ServiceException("The verification code has expired!");
-            } else if (language.equals(LangConstants.ZH_CN)) {
-                throw new ServiceException("验证码已过期!");
-            }
+            throw new ServiceException(MessageUtils.message("user.captcha.expires"));
         }
         // 校验验证码是否正确
         if (!param.getCode().equals(codeKey)) {
-            if (language.equals(LangConstants.EN_US)) {
-                throw new ServiceException("The verification code is incorrect!");
-            } else if (language.equals(LangConstants.ZH_CN)) {
-                throw new ServiceException("验证码不正确!");
-            }
+            throw new ServiceException(MessageUtils.message("user.captcha.error"));
         }
         // 根据手机号查询是否存在这个用户
         R<LoginUser> userResult = remoteUserService.getUserInfo(param.getPhone(), language, SecurityConstants.INNER);
@@ -208,7 +162,7 @@ public class LoginService {
             if (R.FAIL == registerResult.getCode()) {
                 throw new ServiceException(registerResult.getMsg());
             }
-            sysRecordLogService.recordLogininfor(param.getPhone(), Constants.REGISTER, "注册成功");
+            sysRecordLogService.recordLogininfor(param.getPhone(), Constants.REGISTER, MessageUtils.message("user.register.success"));
         } else {
             // 存在就更新用户信息
             User user = userResult.getData().getUser();
@@ -216,36 +170,24 @@ public class LoginService {
             if (R.FAIL == updateResult.getCode()) {
                 throw new ServiceException(updateResult.getMsg());
             }
-            sysRecordLogService.recordLogininfor(param.getPhone(), Constants.REGISTER, "更新成功");
+            sysRecordLogService.recordLogininfor(param.getPhone(), Constants.REGISTER, MessageUtils.message("user.update.success"));
         }
         // 根据手机号查询查询用户
         R<LoginUser> userResults = remoteUserService.getUserInfo(param.getPhone(), language, SecurityConstants.INNER);
         userInfo = userResults.getData();
         // 用户信息
         User user = userResults.getData().getUser();
+        // 是否删除
         if (UserStatus.DELETED.getCode().equals(user.getDeleteFlag())) {
-            if (language.equals(LangConstants.EN_US)) {
-                sysRecordLogService.recordLogininfor(param.getPhone(), Constants.LOGIN_FAIL, "Sorry, your account has been deleted");
-                throw new ServiceException("Sorry, your account number：" + param.getPhone() + "have been deleted!");
-            } else if (language.equals(LangConstants.ZH_CN)) {
-                sysRecordLogService.recordLogininfor(param.getPhone(), Constants.LOGIN_FAIL, "对不起，您的账号已被删除");
-                throw new ServiceException("对不起，您的账号：" + param.getPhone() + " 已被删除!");
-            }
+            sysRecordLogService.recordLogininfor(param.getPhone(), Constants.LOGIN_FAIL, MessageUtils.message("user.delete"));
+            throw new ServiceException(MessageUtils.message("user.login.sorry") + param.getPhone() + MessageUtils.message("user.login.sorry.delete"));
         }
+        // 是否停用
         if (UserStatus.DISABLE.getCode().equals(user.getStatusFlag())) {
-            if (language.equals(LangConstants.EN_US)) {
-                sysRecordLogService.recordLogininfor(param.getPhone(), Constants.LOGIN_FAIL, "The user has been deactivated, please contact the administrator");
-                throw new ServiceException("Sorry, your account number：" + param.getPhone() + "deactivated!");
-            } else if (language.equals(LangConstants.ZH_CN)) {
-                sysRecordLogService.recordLogininfor(param.getPhone(), Constants.LOGIN_FAIL, "用户已停用，请联系管理员");
-                throw new ServiceException("对不起，您的账号：" + param.getPhone() + " 已停用");
-            }
+            sysRecordLogService.recordLogininfor(param.getPhone(), Constants.LOGIN_FAIL, MessageUtils.message("user.blocked"));
+            throw new ServiceException(MessageUtils.message("user.login.sorry") + param.getPhone() + MessageUtils.message("user.login.sorry.blocked"));
         }
-        if (language.equals(LangConstants.EN_US)) {
-            sysRecordLogService.recordLogininfor(param.getPhone(), Constants.LOGIN_SUCCESS, "Login succeeded");
-        } else if (language.equals(LangConstants.ZH_CN)) {
-            sysRecordLogService.recordLogininfor(param.getPhone(), Constants.LOGIN_SUCCESS, "登录成功");
-        }
+        sysRecordLogService.recordLogininfor(param.getPhone(), Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success"));
         // 删除验证码
         redisService.deleteObject(verifyKey);
         return userInfo;
@@ -290,7 +232,7 @@ public class LoginService {
                 phoneNumber = phoneObject.getString("phoneNumber");
             } catch (Exception e) {
                 e.printStackTrace();
-                throw new ServiceException("手机号码解密失败!");
+                throw new ServiceException(MessageUtils.message("user.phone.number"));
             }
             // 根据openId查询是否存在这个用户
             R<LoginUser> userResult = remoteUserService.getUserInfo(session.getOpenid(), language, SecurityConstants.INNER);
@@ -314,7 +256,7 @@ public class LoginService {
                 if (R.FAIL == registerResult.getCode()) {
                     throw new ServiceException(registerResult.getMsg());
                 }
-                sysRecordLogService.recordLogininfor(session.getOpenid(), Constants.REGISTER, "注册成功");
+                sysRecordLogService.recordLogininfor(session.getOpenid(), Constants.REGISTER, MessageUtils.message("user.register.success"));
             } else {
                 // 存在就更新用户信息
                 User user = userResult.getData().getUser();
@@ -322,7 +264,7 @@ public class LoginService {
                 if (R.FAIL == updateResult.getCode()) {
                     throw new ServiceException(updateResult.getMsg());
                 }
-                sysRecordLogService.recordLogininfor(session.getOpenid(), Constants.REGISTER, "更新成功");
+                sysRecordLogService.recordLogininfor(session.getOpenid(), Constants.REGISTER, MessageUtils.message("user.update.success"));
             }
             // 根据openId查询用户
             R<LoginUser> userResults = remoteUserService.getUserInfo(session.getOpenid(), language, SecurityConstants.INNER);
@@ -330,16 +272,18 @@ public class LoginService {
             // 用户信息
             User user = userResults.getData().getUser();
             if (StringUtils.isNotNull(user)) {
+                // 是否删除
                 if (UserStatus.DELETED.getCode().equals(user.getDeleteFlag())) {
-                    sysRecordLogService.recordLogininfor(phoneNumber, Constants.LOGIN_FAIL, "对不起，您的账号已被删除");
-                    throw new ServiceException("对不起，您的账号：" + phoneNumber + " 已被删除");
+                    sysRecordLogService.recordLogininfor(phoneNumber, Constants.LOGIN_FAIL, MessageUtils.message("user.delete"));
+                    throw new ServiceException(MessageUtils.message("user.login.sorry") + phoneNumber + MessageUtils.message("user.login.sorry.delete"));
                 }
+                // 是否停用
                 if (UserStatus.DISABLE.getCode().equals(user.getStatusFlag())) {
-                    sysRecordLogService.recordLogininfor(phoneNumber, Constants.LOGIN_FAIL, "用户已停用，请联系管理员");
-                    throw new ServiceException("对不起，您的账号：" + phoneNumber + " 已停用");
+                    sysRecordLogService.recordLogininfor(phoneNumber, Constants.LOGIN_FAIL, MessageUtils.message("user.blocked"));
+                    throw new ServiceException(MessageUtils.message("user.login.sorry") + phoneNumber + MessageUtils.message("user.login.sorry.blocked"));
                 }
             }
-            sysRecordLogService.recordLogininfor(session.getOpenid(), Constants.LOGIN_SUCCESS, "登录成功");
+            sysRecordLogService.recordLogininfor(session.getOpenid(), Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success"));
         }
         return userInfo;
     }
@@ -351,7 +295,7 @@ public class LoginService {
      * @return 结果
      */
     public void logout(String loginName) {
-        sysRecordLogService.recordLogininfor(loginName, Constants.LOGOUT, "退出成功");
+        sysRecordLogService.recordLogininfor(loginName, Constants.LOGOUT, MessageUtils.message("user.logout.success"));
     }
 
 }

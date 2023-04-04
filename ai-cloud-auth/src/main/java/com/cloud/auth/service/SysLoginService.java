@@ -59,7 +59,7 @@ public class SysLoginService {
         captchaVO.setCaptchaVerification(code);
         ResponseModel response = captchaService.verification(captchaVO);
         if (!response.isSuccess()) {
-            sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "user.jcaptcha.error");
+            sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "验证失败");
             throw new CaptchaException("验证失败!");
         }
         // 用户名或密码为空 错误

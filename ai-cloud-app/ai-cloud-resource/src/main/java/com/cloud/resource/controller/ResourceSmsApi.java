@@ -50,13 +50,9 @@ public class ResourceSmsApi {
     @ApiOperation(value = "快捷登录验证码", notes = "快捷登录验证码")
     public R<?> smsCaptcha(@RequestBody PhoneParam param,
                            @RequestHeader(value = LangConstants.LANGUAGE, required = true)
-                           @ApiParam(value = "语言类型", example = "zh_CN") String language) {
+                           @ApiParam(value = "语言类型", example = "zh-CN") String language) {
         if (!smsProperties.getEnabled()) {
-            if (language.equals(LangConstants.EN_US)) {
-                return R.fail("The SMS function is not enabled in the system!");
-            } else if (language.equals(LangConstants.ZH_CN)) {
-                return R.fail("当前系统没有开启短信功能!");
-            }
+            return R.fail("当前系统没有开启短信功能");
         }
         String code = RandomUtil.randomNumbers(6);
         // 保存验证码信息

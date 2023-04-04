@@ -3,8 +3,8 @@ const lang = {
     // 语言
     LANGUAGE:'Language',
     // 英文
-    EN_US:'en_US',
+    EN_US:'en-US',
     // 中文
-    ZH_CN:'zh_CN'
+    ZH_CN:'zh-CN'
 }
 export default lang

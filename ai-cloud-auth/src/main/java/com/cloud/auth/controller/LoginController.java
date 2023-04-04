@@ -48,7 +48,7 @@ public class LoginController {
     @ApiOperation(value = "账号密码登录", notes = "账号密码登录")
     public R<?> login(@RequestBody LoginParam param,
                       @RequestHeader(value = LangConstants.LANGUAGE, required = true)
-                      @ApiParam(value = "语言类型", example = "zh_CN") String language) throws Exception {
+                      @ApiParam(value = "语言类型", example = "zh-CN") String language) throws Exception {
         // 校验用户信息
         LoginUser userInfo = loginService.login(param.getUsername(), RsaUtils.decryptByPrivateKey(param.getPassword()), param.getCode(), param.getUuid(), language);
         // 登录
@@ -69,7 +69,7 @@ public class LoginController {
     @ApiOperation(value = "验证码登录", notes = "验证码登录")
     public R<?> loginPhone(@RequestBody VerifyCodeParam param,
                              @RequestHeader(value = LangConstants.LANGUAGE, required = true)
-                             @ApiParam(value = "语言类型", example = "zh_CN") String language) {
+                             @ApiParam(value = "语言类型", example = "zh-CN") String language) {
         // 用户登录
         LoginUser userInfo = loginService.loginPhone(param, language);
         // 获取登录token
@@ -87,7 +87,7 @@ public class LoginController {
     @ApiOperation(value = "手机一键登录", notes = "一键登录")
     public R<?> loginOnesTep(@RequestBody VerifyPhoneParam param,
                                @RequestHeader(value = LangConstants.LANGUAGE, required = true)
-                               @ApiParam(value = "语言类型", example = "zh_CN") String language) {
+                               @ApiParam(value = "语言类型", example = "zh-CN") String language) {
         // 用户登录
         LoginUser userInfo = loginService.loginOnesTep(param, language);
         // 获取登录token
@@ -106,7 +106,7 @@ public class LoginController {
     public R<?> loginWeiXin(@RequestBody WeiXinLoginParam param,
                             @RequestHeader(value = LangConstants.LANGUAGE, required = true)
 
-                            @ApiParam(value = "语言类型", example = "zh_CN") String language) throws Exception {
+                            @ApiParam(value = "语言类型", example = "zh-CN") String language) throws Exception {
         // 用户登录
         LoginUser userInfo = loginService.loginWeiXin(param, language);
         // 获取登录token

@@ -26,8 +26,9 @@ const i18n = new VueI18n({
     locale: uni.getStorageSync('language') ? uni.getStorageSync('language') : lang.ZH_CN,
     //必须是messages
     messages: {
-        'en_US': English,
-        'zh_CN': Chinese
+        'en-US': English,
+        'zh-CN': Chinese
+
     }
 })
 

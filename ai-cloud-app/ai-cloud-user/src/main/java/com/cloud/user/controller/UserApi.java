@@ -4,6 +4,7 @@ import com.cloud.common.constant.LangConstants;
 import com.cloud.common.domain.R;
 import com.cloud.common.utils.StringUtils;
 import com.cloud.security.annotation.InnerAuth;
+import com.cloud.common.utils.MessageUtils;
 import com.cloud.user.api.domain.User;
 import com.cloud.user.api.model.LoginUser;
 import com.cloud.user.service.IUserService;
@@ -59,18 +60,10 @@ public class UserApi {
         String username = user.getUserName();
         String phone = user.getPhone();
         if (!userService.checkUserNameUnique(user)) {
-            if (language.equals(LangConstants.EN_US)) {
-                return R.fail("Registered Users'" + username + "'Failed, account already exists!");
-            } else if (language.equals(LangConstants.ZH_CN)) {
-                return R.fail("注册用户'" + username + "'失败，账号已存在!");
-            }
+            return R.fail(MessageUtils.message("user.register") + username + MessageUtils.message("user.register.failure"));
         }
         if (!userService.checkPhoneUnique(user)) {
-            if (language.equals(LangConstants.EN_US)) {
-                return R.fail("Registered Users'" + username + "'Failed, the phone number already exists!");
-            } else if (language.equals(LangConstants.ZH_CN)) {
-                return R.fail("注册用户'" + phone + "'失败，账号已存在!");
-            }
+            return R.fail(MessageUtils.message("user.register") + username + MessageUtils.message("user.register.failure"));
         }
         return R.ok(userService.registerUser(user));
     }

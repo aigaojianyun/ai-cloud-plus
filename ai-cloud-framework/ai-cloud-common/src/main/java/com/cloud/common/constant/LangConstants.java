@@ -16,11 +16,11 @@ public class LangConstants {
     /**
      * 英文
      */
-    public static final String EN_US = "en_US";
+    public static final String EN_US = "en-US";
 
     /**
      * 中文
      */
-    public static final String ZH_CN = "zh_CN";
+    public static final String ZH_CN = "zh-CN";
 
 }

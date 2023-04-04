@@ -2,12 +2,13 @@ package com.cloud.auth.service;
 
 import com.cloud.common.constant.CacheConstants;
 import com.cloud.common.constant.Constants;
-import com.cloud.common.constant.LangConstants;
 import com.cloud.common.exception.ServiceException;
 import com.cloud.redis.service.RedisService;
+import com.cloud.common.utils.MessageUtils;
 import com.cloud.security.utils.SecurityUtils;
 import com.cloud.user.api.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
@@ -29,6 +30,8 @@ public class PasswordService {
 
     private Long lockTime = CacheConstants.PASSWORD_LOCK_TIME;
 
+    @Autowired
+    private MessageSource messageSource;
     /**
      * 登录账户密码错误次数缓存键名
      *
@@ -49,28 +52,16 @@ public class PasswordService {
         }
 
         if (retryCount >= Integer.valueOf(maxRetryCount).intValue()) {
-            if (language.equals(LangConstants.EN_US)) {
-                String errMsg = String.format("Password input error%s times，Account locked out for%s minutes!", maxRetryCount, lockTime);
-                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, errMsg);
-                throw new ServiceException(errMsg);
-            }else if (language.equals(LangConstants.ZH_CN)){
-                String errMsg = String.format("密码输入错误%s次，帐户锁定%s分钟!", maxRetryCount, lockTime);
-                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, errMsg);
-                throw new ServiceException(errMsg);
-            }
+            String errMsg = String.format(MessageUtils.message("user.password.retry.limit.exceed"), maxRetryCount, lockTime);
+            sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, errMsg);
+            throw new ServiceException(errMsg);
         }
 
         if (!matches(user, password)) {
             retryCount = retryCount + 1;
-            if (language.equals(LangConstants.EN_US)) {
-                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, String.format("Password input error%s times!", retryCount));
-                redisService.setCacheObject(getCacheKey(username), retryCount, lockTime, TimeUnit.MINUTES);
-                throw new ServiceException("User does not exist/password error!");
-            }else if (language.equals(LangConstants.ZH_CN)){
-                sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, String.format("密码输入错误%s次!", retryCount));
-                redisService.setCacheObject(getCacheKey(username), retryCount, lockTime, TimeUnit.MINUTES);
-                throw new ServiceException("用户不存在/密码错误!");
-            }
+            sysRecordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, String.format(MessageUtils.message("user.password.retry.limit.count"), retryCount));
+            redisService.setCacheObject(getCacheKey(username), retryCount, lockTime, TimeUnit.MINUTES);
+            throw new ServiceException(MessageUtils.message("user.password.not.match"));
         } else {
             clearLoginRecordCache(username);
         }
