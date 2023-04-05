@@ -12,7 +12,7 @@
 
 ## 平台简介
 
-* 采用前后端分离的模式，微服务版本前端。
+* 采用前后端分离的模式，微服务版本。
 * 后端采用Spring Boot、Spring Cloud & Alibaba。
 * 注册中心、配置中心选型Nacos，权限认证使用Redis。
 * 流量控制框架选型Sentinel，分布式事务选型Seata。
@@ -117,19 +117,19 @@ ai-cloud-parent
 
 <table>
     <tr>
-        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/khe7ro24g862y95b0baw.jpg"/></td>
-        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/ocmy8qbytrtk2rh32e66.jpg"/></td>
-        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/nzhryd0jv3ga118wma9d.jpg"/></td>
+        <td><img src="https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/images/1.png"/></td>
+        <td><img src="https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/images/2.png"/></td>
+        <td><img src="https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/images/3.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/io3ni5gpofxngtablkw9.jpg"/></td>
-        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/1wt1raqortvj5mnq9812.jpg"/></td>
-        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/8m4b05gnjdb90zolxl9h.jpg"/></td>
+        <td><img src="https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/images/4.png"/></td>
+        <td><img src="https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/images/5.png"/></td>
+        <td><img src="https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/images/6.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/fqht7ghiu5liuhhs91aq.jpg"/></td>
-        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/f5j3tpak3z6f2jlmlm86.jpg"/></td>
-        <td><img src="https://lawcontract.oss-cn-beijing.aliyuncs.com/ngk2nz39duzhi4ufbdv3.jpg"/></td>
+        <td><img src="https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/images/7.png"/></td>
+        <td><img src="https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/images/8.png"/></td>
+        <td><img src="https://aicloud-1311716982.cos.ap-chengdu.myqcloud.com/images/9.png"/></td>
     </tr>
 </table>
 
