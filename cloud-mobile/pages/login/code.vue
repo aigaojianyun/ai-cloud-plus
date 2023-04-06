@@ -105,10 +105,13 @@ export default {
     finish(e) {
       this.loginCode.phone = this.phone,
       this.loginCode.zone = this.zone
-      // 登录校验方法
+      // 加载中提示
+      this.$modal.showLoading(this.i18n.login.loginLog)
+      // 登录校验
       this.$store.dispatch('LoginPhone', this.loginCode).then(() => {
-        this.$modal.showLoading(this.i18n.login.loginLog)
+        // 登录成功后
         this.loginSuccess()
+        // 关闭加载中
         this.$modal.hideLoading();
       }).catch(() => {
       })

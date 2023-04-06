@@ -113,7 +113,7 @@ export default {
       verifyType: undefined,
       // 所用组件类型
       componentType: undefined,
-      defaultImg: require('@/static/images/captcha/default.jpg')
+      defaultImg: require('@/static/images/captcha/default_zh.jpg')
     }
   },
   mounted() {

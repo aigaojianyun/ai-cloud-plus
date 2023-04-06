@@ -6,8 +6,8 @@
       {{ i18n.login.language }}》
     </view>
     <!-- 页面装饰图片 -->
-    <image class="l-img-a" src="/../../static/images/background/b-1.png"></image>
-    <image class="l-img-b" src="/../../static/images/background/b-2.png"></image>
+    <image class="l-img-a" src="@/static/images/background/b-1.png"></image>
+    <image class="l-img-b" src="@/static/images/background/b-2.png"></image>
     <!-- 标题 -->
     <view class="l-b">{{ i18n.login.title }}</view>
     <view class="l-b2">{{ i18n.login.subTitle }}</view>
@@ -128,7 +128,7 @@ export default {
         this.$tab.reLaunch('/pages/login/login')
       }, 500)
     },
-    // 打开验证码
+    // 打开滑块验证码
     async handleLogin() {
       if (this.loginForm.username === "") {
         this.$modal.msgError(this.i18n.login.inputUserName)
@@ -142,17 +142,19 @@ export default {
     async success(data) {
       // params 返回的二次验证参数, 和登录参数一起回传给登录接口，方便后台进行二次验证
       this.loginForm.code = data.captchaVerification;
+      // 关闭滑块验证码
+      this.$refs.verify.hide();
+      // 加载中提示
+      this.$modal.showLoading(this.i18n.login.loginLog)
+      // 登录校验
       this.$store.dispatch('Login', this.loginForm).then(() => {
-        this.$refs.verify.hide();
-        // 加载中提示
-        this.$modal.showLoading(this.i18n.login.loginLog)
         // 登录成功后
         this.loginSuccess()
         // 关闭加载中
         this.$modal.hideLoading();
       }).catch(() => {
         // 登录异常，从新初始化验证码
-        this.$refs.verify.hide();
+        // this.$refs.verify.hide();
       })
     },
     // 登录成功后，处理函数
@@ -185,8 +187,12 @@ export default {
 }
 
 .l-language{
-  position: absolute;
-  inset: 45rpx 45rpx auto auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  position: relative;
+  top: 45rpx;
+  right: 0;
   font-size: 31rpx;
   color: #aaaaaa;
 }
