@@ -1,4 +1,4 @@
-// 简体中文
+// 中文简体
 module.exports = {
     message: {
         common: {
@@ -7,8 +7,9 @@ module.exports = {
             cancel: '取消',
             regain: '返回',
             lang: {
-                en: '英文',
-                zh: '中文'
+                en_US: '英文',
+                zh_CN: '中文简体',
+                zh_TW: '中文繁体'
             },
             nomoreText: '没有更多了',
             loadingText: '正在加载...',
@@ -85,6 +86,8 @@ module.exports = {
             sign: '签到',
             reward: '抽奖',
             recomment: '推荐',
+            vipLv:'会员等级',
+            lv:'新版本',
             balance: '我的余额',
             about: '关于我们',
             lang: '系统语言',

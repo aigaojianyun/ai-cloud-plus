@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cloud.openfeign.FallbackFactory;
 import org.springframework.stereotype.Component;
 
+
+
 /**
  * 用户服务降级处理
  *

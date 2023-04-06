@@ -7,8 +7,9 @@ module.exports = {
             cancel: 'Cancel',
             regain: 'Regain',
             lang: {
-                en: 'English',
-                zh: 'Chinese'
+                en_US: 'English',
+                zh_CN: 'Chinese',
+                zh_TW: 'Chinois',
             },
             nomoreText: 'No more',
             loadingText: 'Loading...',
@@ -85,10 +86,12 @@ module.exports = {
             sign: 'Sign',
             reward: 'Lottery',
             recomment: 'Recomment',
+            vipLv:'Membership level',
+            lv:'New version',
             balance: 'My balance',
             about: 'About',
             lang: 'Language',
-            set: 'Setting',
+            set: 'Settings',
         },
         balance: {
             available: 'Available balance',

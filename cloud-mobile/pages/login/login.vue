@@ -88,11 +88,14 @@ export default {
       title: this.i18n.login.login
     })
     this.langList = [{
-      name: this.i18n.common.lang.en,
+      name: this.i18n.common.lang.en_US,
       lang: lang.EN_US
     }, {
-      name: this.i18n.common.lang.zh,
+      name: this.i18n.common.lang.zh_CN,
       lang: lang.ZH_CN
+    }, {
+        name: this.i18n.common.lang.zh_TW,
+        lang: lang.ZH_TW
     }]
   },
   methods: {
@@ -153,8 +156,7 @@ export default {
         // 关闭加载中
         this.$modal.hideLoading();
       }).catch(() => {
-        // 登录异常，从新初始化验证码
-        // this.$refs.verify.hide();
+        // 登录异常
       })
     },
     // 登录成功后，处理函数

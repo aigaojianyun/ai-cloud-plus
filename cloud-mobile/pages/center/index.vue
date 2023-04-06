@@ -4,6 +4,7 @@
               bgColor="#f3f4f6"></u-navbar>
 
     <view class="user-section">
+      <!-- 我的 -->
       <view class="user-info-box">
         <view>
           <u-avatar :src="user.headImg" size="120rpx"></u-avatar>
@@ -13,6 +14,7 @@
           <text class="user-info-box--account">{{ user.phone == null ? '' : user.phone }}</text>
         </view>
       </view>
+      <!-- 会员 -->
       <view class="vip-section">
         <view class="vip-info-box">
           <u-row>
@@ -32,43 +34,54 @@
     </view>
     <view class="cover-container">
       <view class="order-section">
-        <view class="order-item" hover-class="common-hover" :hover-stay-time="50" @click="handleToNotice">
+        <!-- 公告 -->
+        <view class="order-item" :hover-stay-time="50" @click="handleToNotice">
           <image class="icon" src="/static/images/my/icon-notice.png"></image>
           <text>{{ i18n.my.notice }}</text>
         </view>
-        <view class="order-item" hover-class="common-hover" :hover-stay-time="50" @click="handleToSign">
+        <!-- 签到 -->
+        <view class="order-item"  :hover-stay-time="50" @click="handleToSign">
           <image class="icon" src="/static/images/my/icon-sign.png"></image>
           <text>{{ i18n.my.sign }}</text>
         </view>
-        <view class="order-item" hover-class="common-hover" :hover-stay-time="50" @click="handleToLottery">
+        <!-- 抽奖 -->
+        <view class="order-item"  :hover-stay-time="50" @click="handleToLottery">
           <image class="icon" src="/static/images/my/icon-lottery.png"></image>
           <text>{{ i18n.my.reward }}</text>
         </view>
-        <view class="order-item" hover-class="common-hover" :hover-stay-time="50" @click="handleToRecommend">
+        <!-- 推荐 -->
+        <view class="order-item"  :hover-stay-time="50" @click="handleToRecommend">
           <image class="icon" src="/static/images/my/icon-recommend.png"></image>
           <text>{{ i18n.my.recomment }}</text>
         </view>
       </view>
-      <view class="history-section icon">
-        <view @click="handleToBalance">
-          <list-cell image="/static/images/my/icon-balance.png" iconColor="#e07472"
-                     :title="i18n.my.balance"></list-cell>
-        </view>
-        <view @click="handleToAbout">
-          <list-cell image="/static/images/my/icon-about.png" iconColor="#e07472" :title="i18n.my.about"></list-cell>
-        </view>
-        <view @click="handleToLang">
-          <list-cell image="/static/images/my/icon-language.png" iconColor="#e07472" :title="i18n.my.lang"></list-cell>
-        </view>
-        <view @click="handleToSetting">
-          <list-cell image="/static/images/my/icon-setting.png" iconColor="#e07472" :title="i18n.my.set"></list-cell>
-        </view>
+      <view class="list-cell">
+        <u-cell-group>
+          <!-- 会员等级 -->
+          <view @click="">
+            <u-cell icon="integral-fill" size="large" :title="i18n.my.vipLv"  :value="i18n.my.lv" :isLink="true"></u-cell>
+          </view>
+          <!-- 我的余额 -->
+          <view @click="handleToBalance">
+          <u-cell icon="/static/images/my/icon-balance.png" size="large" :title="i18n.my.balance" :isLink="true"></u-cell>
+          </view>
+          <!-- 关于我们 -->
+          <view @click="handleToAbout">
+            <u-cell icon="/static/images/my/icon-about.png" size="large" :title="i18n.my.about" :isLink="true"></u-cell>
+          </view>
+          <!-- 系统语言 -->
+          <view @click="handleToLang">
+            <u-cell icon="/static/images/my/icon-language.png" size="large" :title="i18n.my.lang" :isLink="true"></u-cell>
+          </view>
+          <!-- 应用设置 -->
+          <view @click="handleToSetting">
+            <u-cell icon="/static/images/my/icon-setting.png" size="large" :title="i18n.my.set" :isLink="true"></u-cell>
+          </view>
+        </u-cell-group>
       </view>
     </view>
-
     <u-action-sheet :actions="langList" :show="showLang" @select="clickLang" :cancelText="i18n.common.cancel"
                     @close="showLang = false"></u-action-sheet>
-
   </view>
 </template>
 
@@ -76,12 +89,10 @@
 
 import lang from '@/common/language/lang'
 import {commonMixin} from '@/common/mixin/mixin.js'
-import listCell from '@/components/mix-list-cell';
 import {getUserInfo} from "@/api/center/user"
 
 export default {
   components: {
-    listCell,
   },
   mixins: [commonMixin],
   data() {
@@ -96,11 +107,14 @@ export default {
       title: this.i18n.tabBar.me
     })
     this.langList = [{
-      name: this.i18n.common.lang.en,
+      name: this.i18n.common.lang.en_US,
       lang: lang.EN_US
     }, {
-      name: this.i18n.common.lang.zh,
+      name: this.i18n.common.lang.zh_CN,
       lang: lang.ZH_CN
+    }, {
+      name: this.i18n.common.lang.zh_TW,
+      lang: lang.ZH_TW
     }]
     this.getInfo()
   },
@@ -262,37 +276,10 @@ export default {
   }
 }
 
-.history-section{
-  padding: 30rpx 0 0;
-  margin-top: 20rpx;
-  margin-bottom: 100rpx;
+.list-cell{
+  margin-top: 30rpx;
   background-color: #fff;
   border-radius:10rpx;
-  .sec-header{
-    display:flex;
-    align-items: center;
-    font-size: 28rpx;
-    color: #14191F;
-    line-height: 40rpx;
-    margin-left: 30rpx;
-    .yticon{
-      font-size: 44rpx;
-      color: #5eba8f;
-      margin-right: 16rpx;
-      line-height: 40rpx;
-    }
-  }
-  .h-list{
-    white-space: nowrap;
-    padding: 30rpx 30rpx 0;
-    image{
-      display:inline-block;
-      width: 160rpx;
-      height: 160rpx;
-      margin-right: 20rpx;
-      border-radius: 10rpx;
-    }
-  }
 }
 
 </style>

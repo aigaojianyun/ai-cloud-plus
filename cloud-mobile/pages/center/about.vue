@@ -5,20 +5,21 @@
     <view class="logo">
       <image src="/static/logo.png" mode="widthFix"></image>
     </view>
-    <view class="list-cell b-b m-t" hover-class="cell-hover" :hover-stay-time="50">
-      <text class="cell-tit">{{ i18n.about.version }}</text>
-      <text class="cell-tip">1.0.0</text>
-      <text class="cell-more yticon icon-you"></text>
-    </view>
-    <view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-      <text class="cell-tit">{{ i18n.about.mailbox }}</text>
-      <text class="cell-tip">aicloud888@163.com</text>
-      <text class="cell-more yticon icon-you"></text>
-    </view>
-    <view class="list-cell b-b" hover-class="cell-hover" :hover-stay-time="50">
-      <text class="cell-tit">{{ i18n.about.serve }}</text>
-      <text class="cell-tip">13888888888</text>
-      <text class="cell-more yticon icon-you"></text>
+    <view class="list-cell">
+      <u-cell-group>
+        <!-- 版本信息 -->
+          <view @click="">
+            <u-cell  icon="" size="large" :title="i18n.about.version" value="1.0.0"></u-cell>
+          </view>
+          <!-- 官方邮箱 -->
+          <view @click="">
+            <u-cell icon="" size="large" :title="i18n.about.mailbox" value="aicloud888@163.com"></u-cell>
+          </view>
+          <!-- 服务热线-->
+          <view @click="">
+            <u-cell icon="" size="large" :title="i18n.about.serve" value="13888888888"></u-cell>
+          </view>
+      </u-cell-group>
     </view>
   </view>
 </template>
@@ -49,6 +50,10 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+.container{
+  background-color: $uni-bg-color;
+}
+
 .logo{
   display: flex;
   flex-direction: column;
@@ -59,52 +64,7 @@ export default {
     width: 200rpx;
   }
 }
-.list-cell{
-  display:flex;
-  align-items:baseline;
-  padding: 20rpx 30rpx;
-  line-height:80rpx;
-  position:relative;
-  background-color: #fff;
-  justify-content: center;
-  border-bottom: 0.5px solid #e6ebee;
-  &.log-out-btn{
-    margin-top: 40rpx;
-    .cell-tit{
-      color: $uni-color-primary;
-      text-align: center;
-      margin-right: 0;
-    }
-  }
-  &.cell-hover{
-    background-color:#fafafa;
-  }
-  &.b-b:after{
-    left: 30rpx;
-  }
-  &.m-t{
-    margin-top: 16rpx;
-  }
-  .cell-more{
-    align-self: baseline;
-    font-size:34rpx;
-    color: #2479a8;
-    margin-left:10rpx;
-  }
-  .cell-tit{
-    flex: 1;
-    font-size: 30rpx + 2rpx;
-    color: #14191f;
-    margin-right:10rpx;
-  }
-  .cell-tip{
-    font-size: 30rpx;
-    color: #8b9Faa;
-  }
-  switch{
-    transform: translateX(16rpx) scale(.84);
-  }
-}
+
 </style>
 
 

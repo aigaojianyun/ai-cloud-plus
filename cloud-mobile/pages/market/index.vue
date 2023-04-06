@@ -142,11 +142,13 @@ export default {
       color: #8b9faa;
       padding: 8rpx 0 10rpx 0;
     }
-    .col r{
+    .col r tag{
       width: 100rpx;
       margin-left: 200rpx !important;
     }
     .u-tag--success {
+      display:flex;
+      align-items:center;
       color: #fff;
       background-color: #00b45a;
       border-width: 0.5px;
@@ -155,11 +157,10 @@ export default {
       width: 160rpx;
       margin-left: 200rpx;
       float: right;
-      .u-tag--medium{
-        width: 100rpx;
-      }
     }
     .u-tag--error {
+      display:flex;
+      align-items:center;
       color: #fff;
       background-color: #ff6059;
       border-width: 0.5px;
