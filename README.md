@@ -37,6 +37,7 @@ ai-cloud-parent
 │       └── ai-cloud-common                              // 通用模块
 │       └── ai-cloud-datascope                           // 权限范围
 │       └── ai-cloud-datasource                          // 多数据源
+│       └── ai-cloud-i18n                                // 国际化模块
 │       └── ai-cloud-kafka                               // 消息队列
 │       └── ai-cloud-log                                 // 日志记录
 │       └── ai-cloud-mail                                // 邮箱模块

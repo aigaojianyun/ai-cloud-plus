@@ -46,22 +46,34 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
-        <!--  Swagger -->
-        <dependency>
-            <groupId>com.cloud</groupId>
-            <artifactId>ai-cloud-swagger</artifactId>
-        </dependency>
-
         <!-- Security -->
         <dependency>
             <groupId>com.cloud</groupId>
             <artifactId>ai-cloud-security</artifactId>
         </dependency>
 
+        <!--  Swagger -->
+        <dependency>
+            <groupId>com.cloud</groupId>
+            <artifactId>ai-cloud-swagger</artifactId>
+        </dependency>
+
         <!-- Weixin -->
         <dependency>
             <groupId>com.cloud</groupId>
             <artifactId>ai-cloud-weixin</artifactId>
+        </dependency>
+
+        <!-- I18n -->
+        <dependency>
+            <groupId>com.cloud</groupId>
+            <artifactId>ai-cloud-i18n</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>

@@ -18,14 +18,14 @@
 
 <script>
 
-import {commonMixin} from '@/common/mixin/mixin.js'
+import {commonI18n} from '@/common/language/mixin.js'
 import {getCountry,getCode} from "@/api/resource/resource"
 
 export default {
   components: {
 
   },
-  mixins: [commonMixin],
+  mixins: [commonI18n],
   data() {
     return {
       loginPhone:{

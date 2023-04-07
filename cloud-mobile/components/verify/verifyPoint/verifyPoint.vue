@@ -46,7 +46,7 @@
     </view>
 </template>
 <script type="text/babel">
-    import {commonMixin} from '@/common/mixin/mixin.js'
+    import {commonI18n} from '@/common/language/mixin.js'
     /**
      * VerifyPoints
      * @description 点选
@@ -54,7 +54,7 @@
     import {aesEncrypt} from "./../utils/ase.js"
 	import {myRequest} from "../utils/request.js"
     export default {
-        mixins: [commonMixin],
+        mixins: [commonI18n],
         name: 'VerifyPoints',
         props: {
             //弹出式pop，固定fixed

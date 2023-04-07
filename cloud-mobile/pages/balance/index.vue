@@ -21,12 +21,12 @@
 
 <script>
 
+import {commonI18n} from '@/common/language/mixin.js'
 import {getWallet} from "@/api/balance/account"
-import {commonMixin} from '@/common/mixin/mixin.js'
 
 export default {
   components: {},
-  mixins: [commonMixin],
+  mixins: [commonI18n],
   data() {
     return {
       data: {},

@@ -59,6 +59,18 @@
             <artifactId>ai-cloud-swagger</artifactId>
         </dependency>
 
+        <!-- I18n -->
+        <dependency>
+            <groupId>com.cloud</groupId>
+            <artifactId>ai-cloud-i18n</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
     </dependencies>
 
     <build>

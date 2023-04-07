@@ -11,7 +11,7 @@
         </view>
         <view>
           <view class="user-info-box--name">{{ user.nickName }}</view>
-          <text class="user-info-box--account">{{ user.phone == null ? '' : user.phone }}</text>
+          <text class="user-info-box--account">{{ user.userName }}</text>
         </view>
       </view>
       <!-- 会员 -->
@@ -88,13 +88,13 @@
 <script>
 
 import lang from '@/common/language/lang'
-import {commonMixin} from '@/common/mixin/mixin.js'
+import {commonI18n} from '@/common/language/mixin.js'
 import {getUserInfo} from "@/api/center/user"
 
 export default {
   components: {
   },
-  mixins: [commonMixin],
+  mixins: [commonI18n],
   data() {
     return {
       user: {},
@@ -207,7 +207,8 @@ export default {
   border-radius: 10rpx;
 }
 .user-section {
-  background-color: #1b66ff;
+  background: url(../../static/images/my/personal-bg.png);
+  background-size: 100% 100%;
   height: 280rpx;
   padding: 0 30rpx 0;
   position: relative;
@@ -223,12 +224,12 @@ export default {
   &--name {
     font-size: 48rpx;
     width: 100%;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 
   &--account {
     font-size: 26rpx;
-    color: #909399;
+    color: #e6ebee;
   }
 
 }

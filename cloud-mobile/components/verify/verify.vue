@@ -49,7 +49,7 @@
   </view>
 </template>
 <script>
-import {commonMixin} from '@/common/mixin/mixin.js'
+import {commonI18n} from '@/common/language/mixin.js'
 /**
  * Verify 验证码组件
  * @description 分发验证码使用
@@ -58,7 +58,7 @@ import VerifySlide from './verifySlider/verifySlider'
 import VerifyPoint from "./verifyPoint/verifyPoint"
 
 export default {
-  mixins: [commonMixin],
+  mixins: [commonI18n],
   name: 'Vue2Verify',
   props: {
     captchaType: {

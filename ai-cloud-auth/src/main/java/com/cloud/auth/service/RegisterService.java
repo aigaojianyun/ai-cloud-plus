@@ -6,7 +6,7 @@ import com.cloud.common.constant.UserConstants;
 import com.cloud.common.domain.R;
 import com.cloud.common.exception.ServiceException;
 import com.cloud.common.utils.StringUtils;
-import com.cloud.common.utils.MessageUtils;
+import com.cloud.i18n.utils.MessageUtils;
 import com.cloud.security.utils.SecurityUtils;
 import com.cloud.user.api.domain.User;
 import com.cloud.user.api.service.RemoteUserService;

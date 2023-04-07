@@ -19,13 +19,12 @@
 </template>
 <script>
 
-import {commonMixin} from '@/common/mixin/mixin.js'
+import {commonI18n} from '@/common/language/mixin.js'
 import {getCode} from "@/api/resource/resource"
-import phone from "./phone";
 
 export default {
   components: {},
-  mixins: [commonMixin],
+  mixins: [commonI18n],
   data() {
     return {
       // 发送验证码参数

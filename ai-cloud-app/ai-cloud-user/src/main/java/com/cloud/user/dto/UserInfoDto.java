@@ -16,6 +16,9 @@ import java.util.Date;
 @ApiModel("用户详细信息")
 public class UserInfoDto {
 
+    @ApiModelProperty(value = "账号", example = "ai888")
+    private String userName;
+
     @ApiModelProperty(value = "昵称", example = "小宝贝")
     private String nickName;
 

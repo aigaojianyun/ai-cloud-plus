@@ -28,14 +28,15 @@
 
 <script>
 
+import {commonI18n} from '@/common/language/mixin.js'
 import {formatUnit} from '../../utils/number'
-import {commonMixin} from '@/common/mixin/mixin.js'
+
 
 export default {
   components: {
 
   },
-  mixins: [commonMixin],
+  mixins: [commonI18n],
   data () {
     return {
       marketList: [],

@@ -16,13 +16,13 @@
       <!-- 登录账号 -->
       <view class="login-form-item">
         <u-input v-model="loginForm.username" :placeholder="i18n.login.username" maxlength="30">
-          <u-icon slot="prefix" name="account" size="35px"></u-icon>
+          <u-icon slot="prefix" name="account-fill" size="35px"></u-icon>
         </u-input>
       </view>
       <!-- 登录密码 -->
       <view class="login-form-item">
         <u-input v-model="loginForm.password" type="password" :placeholder="i18n.login.password" maxlength="16">
-          <u-icon slot="prefix" name="lock" size="35px"></u-icon>
+          <u-icon slot="prefix" name="lock-fill" size="35px"></u-icon>
         </u-input>
       </view>
       <!-- 验证码 -->
@@ -63,14 +63,15 @@
 <script>
 
 import lang from '@/common/language/lang'
+import {commonI18n} from '@/common/language/mixin.js'
 import Verify from "@/components/verify/verify";
-import {commonMixin} from '@/common/mixin/mixin.js'
+
 
 export default {
   components: {
     Verify,
   },
-  mixins: [commonMixin],
+  mixins: [commonI18n],
   data() {
     return {
       loginForm: {

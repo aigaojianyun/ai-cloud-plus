@@ -370,6 +370,13 @@
                 <version>${ai-cloud.version}</version>
             </dependency>
 
+            <!-- 国际化  -->
+            <dependency>
+                <groupId>com.cloud</groupId>
+                <artifactId>ai-cloud-i18n</artifactId>
+                <version>${ai-cloud.version}</version>
+            </dependency>
+
             <!-- 消息队列 -->
             <dependency>
                 <groupId>com.cloud</groupId>

@@ -2,7 +2,7 @@ package com.cloud.user.api.factory;
 
 
 import com.cloud.common.domain.R;
-import com.cloud.common.utils.MessageUtils;
+import com.cloud.i18n.utils.MessageUtils;
 import com.cloud.user.api.domain.User;
 import com.cloud.user.api.model.LoginUser;
 import com.cloud.user.api.service.RemoteUserService;

@@ -12,6 +12,7 @@
         <module>ai-cloud-common</module>
         <module>ai-cloud-datascope</module>
         <module>ai-cloud-datasource</module>
+        <module>ai-cloud-i18n</module>
         <module>ai-cloud-kafka</module>
         <module>ai-cloud-log</module>
         <module>ai-cloud-mail</module>

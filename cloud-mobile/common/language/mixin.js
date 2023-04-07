@@ -1,4 +1,4 @@
-export const commonMixin = {
+export const commonI18n = {
     computed: {
         i18n() {
             return this.$t('message');
@@ -19,9 +19,9 @@ export const commonMixin = {
         }
     },
     filters: {
-        fixed(v, scale) {
-            if (v) {
-                if (!scale) {
+        fixed(v, scale){
+            if(v){
+                if(!scale){
                     scale = 2
                 }
                 return parseFloat(v).toFixed(scale)

@@ -46,15 +46,15 @@
     </view>
 </template>
 <script>
-    import {commonMixin} from '@/common/mixin/mixin.js'
+    import {commonI18n} from '@/common/language/mixin.js'
     /**
      * VerifySlide
      * @description 滑块
      * */
     import {aesEncrypt} from "./../utils/ase.js"
-	import {myRequest} from "../utils/request.js"
+	  import {myRequest} from "../utils/request.js"
     export default {
-        mixins: [commonMixin],
+        mixins: [commonI18n],
         name: 'VerifySlide',
         props: {
             captchaType:{
