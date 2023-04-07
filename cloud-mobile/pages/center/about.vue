@@ -9,15 +9,15 @@
       <u-cell-group>
         <!-- 版本信息 -->
           <view @click="">
-            <u-cell  icon="" size="large" :title="i18n.about.version" value="1.0.0"></u-cell>
+            <u-cell   size="large" :title="i18n.about.version" value="1.0.0"></u-cell>
           </view>
           <!-- 官方邮箱 -->
           <view @click="">
-            <u-cell icon="" size="large" :title="i18n.about.mailbox" value="aicloud888@163.com"></u-cell>
+            <u-cell  size="large" :title="i18n.about.mailbox" value="aicloud888@163.com"></u-cell>
           </view>
           <!-- 服务热线-->
           <view @click="">
-            <u-cell icon="" size="large" :title="i18n.about.serve" value="13888888888"></u-cell>
+            <u-cell  size="large" :title="i18n.about.serve" value="13888888888"></u-cell>
           </view>
       </u-cell-group>
     </view>

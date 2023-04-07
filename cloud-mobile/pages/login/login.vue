@@ -174,7 +174,7 @@ export default {
     },
     // 微信授权登录
     wxLogin() {
-      //this.$tab.navigateTo('/pages/login/wx')
+      this.$tab.navigateTo('/pages/login/wx')
       //this.$modal.showLoading(this.i18n.common.coming)
     },
   }

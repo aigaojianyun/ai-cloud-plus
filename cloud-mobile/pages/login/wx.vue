@@ -40,7 +40,7 @@ export default {
   },
   onLoad() {
     that = this;
-    this.getCode();
+    that.getCode();
   },
   methods: {
     getCode() {
@@ -49,22 +49,18 @@ export default {
           if (res.code) {
             that.loginForm.code = res.code;
           } else {
-            that.$msg('登录失败：' + res.errMsg);
+            that.$modal.msgError('登录失败：' + res.errMsg);
           }
         },
         fail(err) {
-          that.$msg('code获取失败');
+          that.$modal.msgError('code获取失败');
         },
       });
     },
     getPhoneNumber: function (e) {
       that.getCode();
-      uni.showLoading({
-        title: '登录中...'
-      });
       if (e.detail.errMsg != 'getPhoneNumber:ok') {
-        that.$refs.uToast.show({type: 'error', title: '未授权手机号'});
-        uni.hideLoading();
+        that.$modal.msgError('未授权手机号')
         return false;
       }
       that.loginForm.encryptedData = e.detail.encryptedData;
@@ -75,9 +71,14 @@ export default {
           // 用户信息
           wx.getUserInfo({
             success: function (res) {
-              that.$store.dispatch('LoginWx', that.loginForm).then(res => {
-                that.$modal.loading("登录中，请耐心等待...")
+                // 加载中提示
+                that.$modal.showLoading('登录中，请耐心等待...')
+                // 登录校验
+                that.$store.dispatch('LoginWx', that.loginForm).then(res => {
+                // 登录成功后
                 that.loginSuccess()
+                // 关闭加载中
+                that.$modal.hideLoading();
               }).catch(() => {
 
               })
@@ -97,7 +98,7 @@ export default {
     async loginSuccess(result) {
       // 设置用户信息
       that.$store.dispatch('GetUserInfo').then(res => {
-        that.$tab.reLaunch('/pages/home/index')
+        that.$tab.reLaunch('/pages/center/index')
       })
     },
   }
