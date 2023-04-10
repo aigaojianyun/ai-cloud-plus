@@ -48,6 +48,12 @@ export default {
                 content: content,
                 showCancel: false
             })
+        }else if (getLang() === lang.ZH_TW){
+            uni.showModal({
+                title: '系統提示',
+                content: content,
+                showCancel: false
+            })
         }
         },
     // 提示信息
@@ -73,7 +79,7 @@ export default {
                 uni.showModal({
                     title: 'System prompt',
                     content: content,
-                    confirmText: 'ok',
+                    confirmText: 'Confirm',
                     cancelText: 'cancel',
                     success: function (res) {
                         if (res.confirm) {
@@ -86,6 +92,18 @@ export default {
                     title: '系统提示',
                     content: content,
                     confirmText: '确定',
+                    cancelText: '取消',
+                    success: function (res) {
+                        if (res.confirm) {
+                            resolve(res.confirm)
+                        }
+                    }
+                })
+            }else if (getLang() === lang.ZH_TW){
+                uni.showModal({
+                    title: '系統提示',
+                    content: content,
+                    confirmText: '確定',
                     cancelText: '取消',
                     success: function (res) {
                         if (res.confirm) {

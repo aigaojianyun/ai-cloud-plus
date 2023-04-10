@@ -80,7 +80,7 @@ export default {
                 // 关闭加载中
                 that.$modal.hideLoading();
               }).catch(() => {
-
+                // 登录异常
               })
             }
           });

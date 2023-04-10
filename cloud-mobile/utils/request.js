@@ -44,6 +44,10 @@ const request = config => {
                     toast('服务器连接异常!')
                     reject('服务器连接异常!')
                     return
+                } else if (getLang() === lang.ZH_TW) {
+                    toast('服務器連接異常!')
+                    reject('服務器連接異常!')
+                    return
                 }
             }
             const code = res.data.code || 200
@@ -67,6 +71,15 @@ const request = config => {
                         }
                     })
                     reject('无效的会话，或者会话已过期，请重新登录!')
+                } else if (getLang() === lang.ZH_TW) {
+                    showConfirm('登錄狀態已過期，您可以繼續留在該頁面，或者重新登錄?').then(res => {
+                        if (res.confirm) {
+                            store.dispatch('LogOut').then(res => {
+                                uni.reLaunch({url: '/pages/login/login'})
+                            })
+                        }
+                    })
+                    reject('無效的會話，或者會話已過期，請重新登錄!')
                 }
             } else if (code === 500) {
                 toast(msg)
@@ -83,18 +96,24 @@ const request = config => {
                     message = 'The server connection is abnormal!'
                 } else if (getLang() === lang.ZH_CN) {
                     message = '服务器连接异常!'
+                } else if (getLang() === lang.ZH_TW) {
+                    message = '服務器連接異常!'
                 }
             } else if (message.includes('timeout')) {
                 if (getLang() === lang.EN_US) {
                     message = 'Server request timed out!'
                 } else if (getLang() === lang.ZH_CN) {
                     message = '服务器请求超时!'
+                } else if (getLang() === lang.ZH_TW) {
+                    message = '服務器請求超時!'
                 }
             } else if (message.includes('Request failed with status code')) {
                 if (getLang() === lang.EN_US) {
                     message = 'Server' + message.substr(message.length - 3) + 'Exception!'
                 } else if (getLang() === lang.ZH_CN) {
                     message = '服务器' + message.substr(message.length - 3) + '异常!'
+                } else if (getLang() === lang.ZH_TW) {
+                    message = '服務器' + message.substr(message.length - 3) + '異常!'
                 }
             }
             toast(message)

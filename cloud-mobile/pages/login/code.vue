@@ -113,6 +113,7 @@ export default {
         // 关闭加载中
         this.$modal.hideLoading();
       }).catch(() => {
+        // 登录异常
       })
     },
     // 登录成功后，处理函数

@@ -26,7 +26,9 @@ export default {
     },
     checkLogin() {
       if (!getToken()) {
-        this.$tab.reLaunch('/pages/login/lgoin')
+        this.$tab.reLaunch('/pages/login/login')
+      }else {
+        this.$tab.reLaunch('/pages/home/index')
       }
     }
   },
